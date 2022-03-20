@@ -1,0 +1,88 @@
+*
+{
+  box-sizing: border-box;
+}
+
+.hidden
+{
+  display: none;
+}
+
+body
+{
+  background-color: black;
+  color: white;
+  font-family: "Helvetica Neue", Helvetica, sans-serif;
+  margin: 0;
+
+}
+
+.smashRegister
+{
+  height:min-content;
+  display: grid;
+  grid-template-columns: 1fr [form] minmax(240px, 450px) 1fr;
+  grid-template-rows: 20em [form] 20em 20em;
+  justify-content: center;
+  align-items: center;
+  background: #16CF83;
+}
+
+.form--login
+{
+  background-color: #F3F3F3;
+  padding: 1em;
+  color: black;
+  grid-column: form;
+  grid-row: form;
+}
+
+.form__error
+{
+  color: red;
+  font-weight: lighter;
+  padding: 0.3em 1em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+  text-align: left;
+}
+
+.form__field
+{
+  padding-bottom: 1em;
+}
+
+.form__field label
+{
+  display: block;
+  margin-bottom: 0.2em;
+}
+
+.form__field .label__inline
+{
+  display: inline-block;
+}
+
+.form__field input[type=text], 
+.form__field input[type=password] 
+{
+  width: 100%;
+  padding: 0.3em;
+  font-size: 1.4em;
+}
+
+.btn
+{
+  width: 100%;
+  margin: 0.5em auto;
+}
+
+.btn--primary
+{
+  background-color: #E6FF00;
+  color: black;
+  text-align: center;
+  border: none;
+  padding: 0.3em 2em;
+  font-size: 1.4em;
+}

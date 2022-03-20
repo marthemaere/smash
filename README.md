@@ -1,15 +1,15 @@
-# php-project
-## TO DO
+# Connection with Database
+- You can find the database connection in config/config.ini
+- Whenever a connection is required, use: `$conn = Db::getConnection();`
 
-### LEVEL 1
-DEADLINE 25/03
+# Before you start coding:
+- Always pull before write your own code, so you're always up to date
+- Keep master branch intact, every feature should be made on a different branch
+- Only merge branch when it works
+- When contributing, follow standard commit conventions
 
-| Feature | Description | Done | Active |
-| ------ | ----------- | ------ | -------- |
-| Feature 1 | User registration | No | Yanelle |
-| Feature 2 | Login user account | No | Jade |
-| Feature 3 | Password reset with email | No | Ellen |
-| Feature 4 | Logout user account | No | Jade |
-| Feature 5 | Change user profile | No | Fien |
-
-***
+# Working on this project
+- Apers, Jade (Project Management)
+- Van de Berghe, Yanelle (Frontend Lead)
+- de Veth, Ellen (Backend Lead)
+- Gérardi, Fien (Frontend Lead)

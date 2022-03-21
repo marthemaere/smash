@@ -3,25 +3,6 @@
     include_once("bootstrap.php");
 
     if(!empty($_POST)){
-       /* $email= $_POST['email'];
-        $username=$_POST['username'];
-        $options=[
-            'cost' => 12,
-        ];
-        $password= password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
-
-        try{
-            $conn= new PDO('mysql:host=localhost;dbname=smash', "root", "root");
-            $statement= $conn->prepare("INSERT INTO users (email, username, password) VALUES (:email, :username, :password)");
-            $statement->bindValue("email", $email);
-            $statement->bindValue("username", $username);
-            $statement->bindValue("password", $password);
-            
-            $result= $statement->execute();
-        }
-        catch(Throwable $e){
-            echo $e->getMessage();
-        }*/
 
         try{
             $user= new User();
@@ -36,10 +17,13 @@
             $user->save();
             $success= "user saved";
 
+
         } catch (\Throwable $e){
             $error= $e->getMessage();
         }
     }
+
+    header("Location:login.php");
 
 ?>
 <!DOCTYPE html>

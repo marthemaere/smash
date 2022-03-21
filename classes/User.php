@@ -48,6 +48,7 @@ include_once(__DIR__ . "/Db.php");
             return $this->password;
         }
 
+
         public function save(){
             //database connection
             
@@ -69,4 +70,21 @@ include_once(__DIR__ . "/Db.php");
 
             return $result;
         }
+
+        public function login(){
+
+            $conn= Db::getInstance();
+            $statement = $conn->prepare('INSERT INTO users WHERE email = ":email" AND password = ":password');
+           
+            if($statement->num_rows > 0){
+                $row = $statement->fetch_array();
+                return $row['id'];
+            }
+            else{
+                return false;
+            }
+
+        }
+
+
     }

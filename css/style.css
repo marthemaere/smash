@@ -14,7 +14,6 @@ body
   color: white;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   margin: 0;
-
 }
 
 .smashRegister
@@ -26,12 +25,13 @@ body
   justify-content: center;
   align-items: center;
   background: #16CF83;
+  padding: 2em;
 }
 
 .form--login
 {
   background-color: #F3F3F3;
-  padding: 1em;
+  padding: 2em;
   color: black;
   grid-column: form;
   grid-row: form;

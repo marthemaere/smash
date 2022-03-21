@@ -2,6 +2,8 @@
 
 use LDAP\Result;
 
+include_once(__DIR__ . "/Db.php");
+
     class User
     {
         private $email;
@@ -44,7 +46,7 @@ use LDAP\Result;
         public function save(){
             //database connection
             
-            $conn= new PDO('mysql:host=localhost;dbname=smash', "root", "root");
+           $conn= Db::getInstance();
 
             //query to save in database
 

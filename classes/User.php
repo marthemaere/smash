@@ -11,8 +11,9 @@ include_once(__DIR__ . "/Db.php");
         private $password;
 
         public function setEmail($email){
+            $email_input= $_POST['email'];
             if(empty($email)){
-                throw new Exception("email cannot be empty");
+                throw new Exception("email cannot be empty and needs to be a Thomas More email address");
             }
             $this->email= $email;
         }
@@ -33,7 +34,8 @@ include_once(__DIR__ . "/Db.php");
         }
 
         public function setPassword($password){
-            if(empty($password)){
+            $password_input= $_POST['password'];
+            if(empty($password) || strlen($password_input)<6){
                 throw new Exception("password cannot be empty and needs to contain at least 6 characters");
             }
             $this->password= $password;

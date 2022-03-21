@@ -12,7 +12,10 @@ include_once(__DIR__ . "/Db.php");
 
         public function setEmail($email){
             $email_input= $_POST['email'];
-            if(empty($email)){
+            $domains = array('student.thomasmore.be', 'thomasmore.be');
+            $pattern= "/^[a-z0-9._%+-]+@[a-z0-9.-]*(" . implode('|', $domains) . ")$/i";
+
+            if(empty($email) || !preg_match($pattern, $email_input)){
                 throw new Exception("email cannot be empty and needs to be a Thomas More email address");
             }
             $this->email= $email;

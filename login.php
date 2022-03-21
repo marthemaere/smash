@@ -2,34 +2,20 @@
 
 include_once("bootstrap.php");
 if(!empty($_POST)){
-    $user = new User();
-    $user->setEmail($_POST["email"]);
-    $user->setEmail($_POST["password"]);
 
-    $user->login($email, $password);
-
-    session_start();
-    $_SESSION["email"]= $email;
-    header("Location: dashboard.php");
-
-    
-} else{
-    $error = true;
+    try{
+        $user = new User();
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+        if ($user->login()){
+            session_start();
+            header("Location:dashboard.php");
+        }
+} catch (\Throwable $e){
+    $error = $e->getMessage();
+   
 }
-
-
-/*if (!empty($_POST)){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-
-    if(login($username, $password)){
-        session_start();
-        $_SESSION["email"]= $email;
-        header("Location: dashboard.php");
-    } else{
-        $error = true;
-    }
-}*/
+}
 
 ?>
 
@@ -48,17 +34,9 @@ if(!empty($_POST)){
                 <h1>Welcome back smasher!</h1>
 				<h2 form__title>Sign in</h2>
 
-                <?php 
-					if(isset($error)):
-				?>
-
-				<div class="form__error">
-					<p>
-						Oops, something went wrong! Please check if all fields are filled in and you used a Thomas More email address. 
-					</p>
-				</div>
-
-                <?php endif; ?>
+                <?php if(isset($error)):?>
+                <div class="alert alert-danger"><?php echo $error?></div>
+                <?php endif;?>
 
 				<div class="form__field">
 					<label for="Email">Email</label>

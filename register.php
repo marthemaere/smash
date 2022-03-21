@@ -16,6 +16,7 @@
 
             $user->save();
             $success= "user saved";
+            header("Location:login.php");
 
 
         } catch (\Throwable $e){
@@ -23,7 +24,6 @@
         }
     }
 
-    header("Location:login.php");
 
 ?>
 <!DOCTYPE html>

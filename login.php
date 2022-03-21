@@ -2,8 +2,27 @@
 
 include_once("bootstrap.php");
 
+session_start();
+ 
+$user = new User();
+ 
+if(isset($_POST['login'])){
+	$email = $user($_POST['email']);
+	$password = $user($_POST['password']);
+ 
+	$auth = $user->login($email, $password);
+ 
+	if(!$auth){
+		$_SESSION['message'] = 'Invalid username or password';
+	}
+	else{
+		$_SESSION['user'] = $auth;
 
-
+	}
+}
+else{
+	$_SESSION['message'] = 'You need to login first';
+}
 
 ?>
 

@@ -71,10 +71,10 @@ include_once(__DIR__ . "/Db.php");
             return $result;
         }
 
-        public function login(){
+        public function login($email, $password){
 
             $conn= Db::getInstance();
-            $statement = $conn->prepare('INSERT INTO users WHERE email = ":email" AND password = ":password');
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = '$email' AND password = '$password'");
            
             if($statement->num_rows > 0){
                 $row = $statement->fetch_array();

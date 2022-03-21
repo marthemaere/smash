@@ -1,28 +1,35 @@
 <?php
 
 include_once("bootstrap.php");
+if(!empty($_POST)){
+    $user = new User();
+    $user->setEmail($_POST["email"]);
+    $user->setEmail($_POST["password"]);
 
-session_start();
- 
-$user = new User();
- 
-if(isset($_POST['login'])){
-	$email = $user($_POST['email']);
-	$password = $user($_POST['password']);
- 
-	$auth = $user->login($email, $password);
- 
-	if(!$auth){
-		$_SESSION['message'] = 'Invalid username or password';
-	}
-	else{
-		$_SESSION['user'] = $auth;
+    $user->login($email, $password);
 
-	}
+    session_start();
+    $_SESSION["email"]= $email;
+    header("Location: dashboard.php");
+
+    
+} else{
+    $error = true;
 }
-else{
-	$_SESSION['message'] = 'You need to login first';
-}
+
+
+/*if (!empty($_POST)){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if(login($username, $password)){
+        session_start();
+        $_SESSION["email"]= $email;
+        header("Location: dashboard.php");
+    } else{
+        $error = true;
+    }
+}*/
 
 ?>
 

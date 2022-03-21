@@ -71,19 +71,24 @@ include_once(__DIR__ . "/Db.php");
             return $result;
         }
 
-        public function login($email, $password){
+        function login(){
 
             $conn= Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM users WHERE email = '$email' AND password = '$password'");
+            $statement = $conn->prepare("select email, password from users where email = :email");
+            $statement->bindValue(":email", $this->email);
+            $statement->execute();
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            if(!$user){
+                $hash = $user['password'];
+                if(password_verify($this->password, $hash)){
+                    return true;
+                }else{
+                    return false;
+                }
+            } else{
+                throw new Exception("user does not exist, try again");
+            }
            
-            if($statement->num_rows > 0){
-                $row = $statement->fetch_array();
-                return $row['id'];
-            }
-            else{
-                return false;
-            }
-
         }
 
 

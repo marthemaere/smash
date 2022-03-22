@@ -1,6 +1,7 @@
 <?php
 
 include_once("bootstrap.php");
+
 if(!empty($_POST)){
 
     try{
@@ -10,12 +11,15 @@ if(!empty($_POST)){
         if ($user->login()){
             session_start();
             header("Location:dashboard.php");
-        }
+        } else{
+			$error = true;
+		}
 } catch (\Throwable $e){
     $error = $e->getMessage();
    
 }
 }
+
 
 ?>
 
@@ -45,12 +49,13 @@ if(!empty($_POST)){
 
 				<div class="form__field">
 					<label for="Password">Password</label>
-					<input type="password" name="password">
+					<input type="password" name="password" placeholder="Password">
 				</div>
 				<div class="form__field">
-					<input type="submit" value="Sign up" class="btn btn--primary">	
+					<input type="submit" value="Sign up" class="btn btn--primary" value="Log in">	
 				</div>
 			</form>
+			
 		</div>
 	</div>
 </body>

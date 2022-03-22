@@ -12,7 +12,7 @@ include_once(__DIR__ . "/Db.php");
 
         public function setEmail($email){
             $email_input= $_POST['email'];
-            $domains = array('student.thomasmore.be', 'thomasmore.be');
+          $domains = array('student.thomasmore.be', 'thomasmore.be');
             $pattern= "/^[a-z0-9._%+-]+@[a-z0-9.-]*(" . implode('|', $domains) . ")$/i";
 
             if(empty($email) || !preg_match($pattern, $email_input)){
@@ -42,6 +42,7 @@ include_once(__DIR__ . "/Db.php");
                 throw new Exception("password cannot be empty and needs to contain at least 6 characters");
             }
             $this->password= $password;
+            return $this;
         }
 
         public function getPassword(){
@@ -71,17 +72,27 @@ include_once(__DIR__ . "/Db.php");
             return $result;
         }
 
-        function login(){
+        public static function getAll(){
+            $conn= Db::getInstance();
+            $statement = $conn->prepare("select * from users");
+            $statement->execute();
+            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $users;
+        }
+
+
+        public function login(){
 
             $conn= Db::getInstance();
-            $statement = $conn->prepare("select email, password from users where email = :email");
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
             $statement->bindValue(":email", $this->email);
             $statement->execute();
             $user = $statement->fetch(PDO::FETCH_ASSOC);
-            if(!$user){
+            if($user){
                 $hash = $user['password'];
                 if(password_verify($this->password, $hash)){
                     return true;
+    
                 }else{
                     return false;
                 }

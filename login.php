@@ -11,10 +11,8 @@ if(!empty($_POST)){
         if ($user->login()){
             session_start();
             header("Location:dashboard.php");
-        } else{
-			$error = true;
-		}
-} catch (\Throwable $e){
+        } 
+} catch (Throwable $e){
     $error = $e->getMessage();
    
 }

@@ -84,7 +84,7 @@ include_once(__DIR__ . "/Db.php");
         public function login(){
 
             $conn= Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email");
+            $statement = $conn->prepare("select email, password from users where email = :email");
             $statement->bindValue(":email", $this->email);
             $statement->execute();
             $user = $statement->fetch(PDO::FETCH_ASSOC);

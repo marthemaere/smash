@@ -98,8 +98,6 @@ class User
         $statement->execute();
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    
-
         if ($user) {
             $hash = $user['password'];
             if (password_verify($this->password, $hash)) {

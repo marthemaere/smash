@@ -9,6 +9,7 @@ class User
     private $email;
     private $username;
     private $password;
+    private $userId;
 
     public function setEmail($email)
     {
@@ -55,6 +56,16 @@ class User
         return $this->password;
     }
 
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+        return $this;
+    }
+    
+    public function getUserId()
+    {
+        return $this->userId;
+    }
 
     public function save()
     {
@@ -97,8 +108,6 @@ class User
         $statement->execute();
         $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    
-
         if ($user) {
             $hash = $user['password'];
             if (password_verify($this->password, $hash)) {
@@ -110,5 +119,15 @@ class User
         } else {
             throw new Exception("Userdata does not match, try again");
         }
+    }
+
+    public static function getIdByEmail($email)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select id from users where email = :email");
+        $statement->bindValue(":email", $email);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result['id'];
     }
 }

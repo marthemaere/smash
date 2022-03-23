@@ -1,28 +1,23 @@
 <?php
+    include_once("bootstrap.php");
 
-include_once("bootstrap.php");
+    if (!empty($_POST)) {
+        try {
+            $user = new User();
+            $user->setEmail($_POST['email']);
+            $user->setPassword($_POST['password']);
+            if ($user->login()) {
+                $id = User::getIdByEmail($user->getEmail());
+                $user->setUserId($id);
+                session_start();
+                header("Location:dashboard.php");
+            }
+        } catch (\Throwable $e) {
+            $error = $e->getMessage();
+        }
+    }
 
-if(!empty($_POST)){
-
-    try{
-        $user = new User();
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        if ($user->login()){
-            session_start();
-            header("Location:dashboard.php");
-        } 
-} catch (\Throwable $e){
-    $error = $e->getMessage();
-   
-}
-}
-
-
-?>
-
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -36,7 +31,7 @@ if(!empty($_POST)){
                 <h1>Welcome back smasher!</h1>
 				<h2 form__title>Sign in</h2>
 
-                <?php if(isset($error)):?>
+                <?php if (isset($error)):?>
                 <div class="alert alert-danger"><?php echo $error?></div>
                 <?php endif;?>
 

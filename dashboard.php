@@ -10,6 +10,7 @@
 <nav class="navbar">
     <a href="index.php" class="logo">Smasssh</a>
     <a href="logout.php" class="navbar__logout"> logout </a>
+    <a href="usersettings.php" class="">Change profile</a>
 </nav>
     
 </body>

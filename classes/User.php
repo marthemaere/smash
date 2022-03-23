@@ -2,7 +2,7 @@
 
 use LDAP\Result;
 
-include_once(__DIR__ . "/Db.php");
+include_once("bootstrap.php");
 
 class User
 {
@@ -91,7 +91,6 @@ class User
 
     public function login()
     {
-
         $conn = Db::getInstance();
         $statement = $conn->prepare("select email, password from users where email = :email");
         $statement->bindValue(":email", $this->email);
@@ -108,8 +107,7 @@ class User
                 throw new Exception("Password is wrong, try again");
                 return false;
             }
-        }
-        else {
+        } else {
             throw new Exception("Userdata does not match, try again");
         }
     }

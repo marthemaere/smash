@@ -1,6 +1,6 @@
 # Connection with Database
 - You can find the database connection in config/config.ini
-- Whenever a connection is required, use: `$conn = Db::getConnection();`
+- Whenever a connection is required, use: `$conn = Db::getInstance();`
 
 # Before you start coding:
 - Always pull before write your own code, so you're always up to date

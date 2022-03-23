@@ -1,4 +1,5 @@
 <?php
+    include_once("bootstrap.php");
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,15 @@
     <title>Settings</title>
 </head>
 <body>
-    
+    <div class="">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="">
+                <!-- <label for="profilePicture">Profile picture</label> -->
+                <!-- <img src="" class="" alt="profile picture"> -->
+                <input type="file" name="profilePicture" id="profilePicture">
+                <input type="submit" name="submitProfilePicture" value="Upload">
+            </div>
+        </form>
+    </div>
 </body>
 </html>

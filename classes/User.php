@@ -88,16 +88,17 @@ include_once(__DIR__ . "/Db.php");
             $statement->bindValue(":email", $this->email);
             $statement->execute();
             $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        
             if($user){
                 $hash = $user['password'];
                 if(password_verify($this->password, $hash)){
                     return true;
     
                 }else{
+                    throw new Exception("User does not exist, try again");
                     return false;
                 }
-            } else{
-                throw new Exception("user does not exist, try again");
             }
            
         }

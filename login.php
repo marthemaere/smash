@@ -12,7 +12,7 @@ if(!empty($_POST)){
             session_start();
             header("Location:dashboard.php");
         } 
-} catch (Throwable $e){
+} catch (\Throwable $e){
     $error = $e->getMessage();
    
 }

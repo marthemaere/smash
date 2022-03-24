@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<?php
+    include_once("bootstrap.php");
+    session_start();
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,11 +11,10 @@
     <title>Document</title>
 </head>
 <body>
-<nav class="navbar">
-    <a href="index.php" class="logo">Smasssh</a>
-    <a href="logout.php" class="navbar__logout"> logout </a>
-    <a href="usersettings.php" class="">Change profile</a>
-</nav>
-    
+    <nav class="navbar">
+        <a href="index.php" class="logo">Smasssh</a>
+        <a href="logout.php" class="navbar__logout"> logout </a>
+        <a href="usersettings.php" class="">Change profile</a>
+    </nav>    
 </body>
 </html>

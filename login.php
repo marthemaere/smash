@@ -10,6 +10,7 @@
                 $id = User::getIdByEmail($user->getEmail());
                 $user->setUserId($id);
                 session_start();
+                $_SESSION['id'] = $id;
                 header("Location:dashboard.php");
             }
         } catch (\Throwable $e) {

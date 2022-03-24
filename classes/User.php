@@ -2,7 +2,7 @@
 
 use LDAP\Result;
 
-include_once("bootstrap.php");
+include_once(__DIR__ . "/Db.php");
 
 class User
 {

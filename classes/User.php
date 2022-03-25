@@ -1,10 +1,10 @@
 <?php
 
-use LDAP\Result;
 
+include_once(__DIR__ . "../interfaces/iUser.php");
 include_once(__DIR__ . "/Db.php");
 
-class User
+class User implements iUser
 {
     private $email;
     private $username;
@@ -67,7 +67,7 @@ class User
         return $this->userId;
     }
 
-    public function save()
+    public function register()
     {
         //database connection
 
@@ -100,7 +100,7 @@ class User
     }
 
 
-    public function login()
+    public function canLogin()
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("select email, password from users where email = :email");

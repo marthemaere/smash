@@ -6,7 +6,7 @@
             $user = new User();
             $user->setEmail($_POST['email']);
             $user->setPassword($_POST['password']);
-            if ($user->login()) {
+            if ($user->canLogin()) {
                 $id = User::getIdByEmail($user->getEmail());
                 $user->setUserId($id);
                 session_start();

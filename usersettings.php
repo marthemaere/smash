@@ -14,7 +14,7 @@
         <form action="" method="post" enctype="multipart/form-data">
             <div class="">
                 <!-- <label for="profilePicture">Profile picture</label> -->
-                <!-- <img src="" class="" alt="profile picture"> -->
+                <img src="profile_picture/default.png" class="" alt="profile picture">
                 <input type="file" name="profilePicture" id="profilePicture">
                 <input type="submit" name="submitProfilePicture" value="Upload">
             </div>

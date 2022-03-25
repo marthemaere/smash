@@ -1,10 +1,8 @@
-<?php 
-
+<?php
     include_once("bootstrap.php");
 
-    if(!empty($_POST)){
-
-        try{
+    if (!empty($_POST)) {
+        try {
             $user= new User();
             $user->setEmail($_POST['email']);
             $user->setUsername($_POST['username']);
@@ -13,17 +11,13 @@
             ];
             $password= password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
             $user->setPassword($password);
-
             $user->save();
             $success= "user saved";
             header("Location:login.php");
-
-
-        } catch (\Throwable $e){
+        } catch (\Throwable $e) {
             $error= $e->getMessage();
         }
     }
-
 
 ?>
 <!DOCTYPE html>
@@ -42,9 +36,9 @@
 
                 <p>*use your Thomas More email address<br>*don't leave any field empty<br>*your password needs to have at least 6 characters</p>
 
-                <?php 
-					if(isset($error)):
-				?>
+                <?php
+                    if (isset($error)):
+                ?>
 
 				<div class="form__error">
 					<p>

@@ -78,16 +78,6 @@ class User
     {
         return $this->profilePicture;
     }
-    
-    public function uploadPicture($profilePicture, $id)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("UPDATE users SET profile_pic = :profilePicture WHERE id = :id");
-        $statement->bindValue(":profilePicture", $profilePicture);
-        $statement->bindValue(":id", $id);
-        $statement->execute();
-        header('Location: usersettings.php');
-    }
 
     public function save()
     {
@@ -161,5 +151,19 @@ class User
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    public function updatePictureInDatabase($profilePicture, $id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE users SET profile_pic = :profilePicture WHERE id = :id");
+        $statement->bindValue(":profilePicture", $profilePicture);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        // header('Location: usersettings.php');
+    }
+
+    public function canUploadPicture()
+    {
     }
 }

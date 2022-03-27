@@ -10,6 +10,7 @@ class User
     private $username;
     private $password;
     private $userId;
+    private $profilePicture;
 
     public function setEmail($email)
     {
@@ -65,6 +66,27 @@ class User
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    public function setProfilePicture($profilePicture)
+    {
+        $this->profilePicture = $profilePicture;
+        return $this;
+    }
+    
+    public function getProfilePicture()
+    {
+        return $this->profilePicture;
+    }
+    
+    public function uploadPicture($profilePicture, $id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE users SET profile_pic = :profilePicture WHERE id = :id");
+        $statement->bindValue(":profilePicture", $profilePicture);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        header('Location: usersettings.php');
     }
 
     public function save()
@@ -129,5 +151,15 @@ class User
         $statement->execute();
         $result = $statement->fetch();
         return $result['id'];
+    }
+
+    public static function getUserDataFromId($id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
     }
 }

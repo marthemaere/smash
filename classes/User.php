@@ -160,10 +160,52 @@ class User
         $statement->bindValue(":profilePicture", $profilePicture);
         $statement->bindValue(":id", $id);
         $statement->execute();
-        // header('Location: usersettings.php');
+        header('Location: usersettings.php');
     }
 
-    public function canUploadPicture()
+    public function canUploadPicture($sessionId)
     {
+        $fileName = $_FILES['profilePicture']['name'];
+        $fileTmpName = $_FILES['profilePicture']['tmp_name'];
+        $fileSize = $_FILES['profilePicture']['size'];
+        
+        $fileTarget = 'profile_pictures/' . basename($fileName);
+        $fileExtention = strtolower(pathinfo($fileTarget, PATHINFO_EXTENSION));
+        
+        $fileIsImage = getimagesize($fileTmpName);
+
+        // Check if file is an image
+        if ($fileIsImage !== false) {
+            $canUpload = true;
+        } else {
+            $error = 'Uw geupload bestand is geen afbeelding.';
+            $canUpload = false;
+        }
+
+        // Check if file already exists
+        if (file_exists($fileTarget)) {
+            $canUpload = true;
+        }
+
+        // Check if file-size is under 2MB
+        if ($fileSize > 2097152) { // 2097152 bytes
+            $error = 'Je afbeelding mag niet groter zijn dan 2MB, probeer opnieuw.';
+            $canUpload = false;
+        }
+
+        // Check if format is JPG, JPEG or PNG
+        if ($fileExtention != 'jpg' && $fileExtention != 'jpeg' && $fileExtention != 'png' && !empty($fileName)) {
+            $error = 'Dit bestandstype wordt niet ondersteund. Upload een jpg of png bestand.';
+            $canUpload = false;
+        }
+
+        // Upload file when no errors
+        if ($canUpload) {
+            if (move_uploaded_file($fileTmpName, $fileTarget)) {
+                $profilePicture = basename($fileName);
+                $this->setProfilePicture($profilePicture);
+                $this->updatePictureInDatabase($profilePicture, $sessionId);
+            }
+        }
     }
 }

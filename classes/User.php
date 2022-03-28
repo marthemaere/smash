@@ -204,6 +204,35 @@ class User
         };
     }
 
+    public static function getEmailFromCode($code)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select email from reset_password where code = :code");
+        $statement->bindValue(":code", $code);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC); //result[email]
+        return $result['email'];
+    }
+
+    public static function saveNewPassword($email, $password)
+    {
+        $options = [
+            "cost" => 12
+        ];
+        $passwordhash = password_hash($password, PASSWORD_DEFAULT, $options);
+        //update database
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("update users set password = :password where email = :email");
+        $statement->bindValue(":password", $passwordhash);
+        $statement->bindValue(":email", $email);
+        $update = $statement->execute();
+        if ($update) {
+            return true;
+        } else {
+            throw new Exception("Something went wrong");
+        }
+    }
+
     public static function getIdByEmail($email)
     {
         $conn = Db::getInstance();

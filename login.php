@@ -30,7 +30,7 @@
 		<div class="form form--login">
 			<form action="" method="post">
                 <h1>Welcome back smasher!</h1>
-				<h2 form__title>Sign in</h2>
+				<h2 form__title>Log in</h2>
 
                 <?php if (isset($error)):?>
                 <div class="alert alert-danger"><?php echo $error?></div>
@@ -46,7 +46,7 @@
 					<input type="password" name="password" placeholder="Password">
 				</div>
 				<div class="form__field">
-					<input type="submit" value="Sign up" class="btn btn--primary" value="Log in">	
+					<input type="submit" value="Log in" class="btn btn--primary" value="Log in">	
 				</div>
 			</form>
 			

@@ -4,7 +4,7 @@
 include_once(__DIR__ . "../interfaces/iUser.php");
 include_once(__DIR__ . "/Db.php");
 
-class User implements iUser
+class User
 {
     private $email;
     private $username;

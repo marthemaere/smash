@@ -133,6 +133,20 @@ class User implements iUser
         }
     }
 
+    public static function hasAccount($email)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from users where email = :email");
+        $statement->bindValue(":email", $email);
+        $statement->execute();
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($user) {
+            return true;
+        } else {
+            throw new Exception("user doesn't exist");
+        }
+    }
+
     public static function getIdByEmail($email)
     {
         $conn = Db::getInstance();

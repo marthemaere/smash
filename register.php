@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> upload_profile_picture
     include_once("bootstrap.php");
 
     if (!empty($_POST)) {
@@ -12,15 +15,18 @@
             ];
             $password= password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
             $user->setPassword($password);
+<<<<<<< HEAD
 
             $user->register();
+=======
+            $user->save();
+>>>>>>> upload_profile_picture
             $success= "user saved";
             header("Location:login.php");
         } catch (\Throwable $e) {
             $error= $e->getMessage();
         }
     }
-
 
 ?>
 <!DOCTYPE html>

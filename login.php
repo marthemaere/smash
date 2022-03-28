@@ -11,7 +11,7 @@
                 $user->setUserId($id);
                 session_start();
                 $_SESSION['id'] = $id;
-                header("Location:dashboard.php");
+                header("Location: index.php");
             }
         } catch (\Throwable $e) {
             $error = $e->getMessage();

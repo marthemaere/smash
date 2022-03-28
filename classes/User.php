@@ -195,9 +195,13 @@ class User
             $mail->send();
 
             //save random code for link to database
-            $statement = $conn->prepare("insert into reset_password (email, code) values (:email, :code);");
+            $now = time();
+            $date = date('Y/m/d H:i:s', $now);
+            $expiry_date = (new DateTime($date))->modify('+26 hours')->format('Y-m-d H:i:s');
+            $statement = $conn->prepare("insert into reset_password (email, code, datetime) values (:email, :code, :date);");
             $statement->bindValue(':email', $emailTo);
             $statement->bindValue(':code', $code);
+            $statement->bindValue(':date', $expiry_date);
             return $statement->execute();
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

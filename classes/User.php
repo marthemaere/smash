@@ -193,6 +193,12 @@ class User
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
+
+            //save random code for link to database
+            $statement = $conn->prepare("insert into reset_password (email, code) values (:email, :code);");
+            $statement->bindValue(':email', $emailTo);
+            $statement->bindValue(':code', $code);
+            return $statement->execute();
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         };

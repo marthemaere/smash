@@ -204,8 +204,25 @@ class User
         };
     }
 
+    public static function getCode($code)
+    {
+        //check if code exists
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from reset_password where code = :code");
+        $statement->bindValue(":code", $code);
+        $statement->execute();
+        $link = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($link) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function getEmailFromCode($code)
     {
+        //get the email from the code: code is unique for mail that is sent
+        //this email wants to update password
         $conn = Db::getInstance();
         $statement = $conn->prepare("select email from reset_password where code = :code");
         $statement->bindValue(":code", $code);
@@ -231,6 +248,14 @@ class User
         } else {
             throw new Exception("Something went wrong");
         }
+    }
+
+    public static function deleteCode($code)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("delete from reset_password where code = :code");
+        $statement->bindValue(":code", $code);
+        return $statement->execute();
     }
 
     public static function getIdByEmail($email)

@@ -1,19 +1,22 @@
 <?php
     include_once(__DIR__ . "/bootstrap.php");
-
-    if (!isset($_GET["code"])) {
+    $code = $_GET['code'];
+    $link = User::getCode($code);
+    if ($link === false) {
         exit("Can't find page");
     } else {
         try {
             // er is een nieuw wachtwoord ingevuld
             if (!empty($_POST['save_password'])) {
-                $user = User::getEmailFromCode($_GET['code']);
+                $user = User::getEmailFromCode($code);
                 //er bestaat een email met die code
                 if (!empty($user)) {
                     $updatePassword = User::saveNewPassword($user, $_POST['password']);
+                    $deleteCode = User::deleteCode($code);
+                    header("Location: login.php");
+                } else {
+                    exit("Can't find page");
                 }
-               
-                header("Location: login.php");
             }
         } catch (\Throwable $e) {
             $error = $e->getMessage();

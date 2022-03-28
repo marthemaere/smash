@@ -1,4 +1,26 @@
-<!DOCTYPE html>
+<?php
+    include_once(__DIR__ . "/bootstrap.php");
+
+    if (!isset($_GET["code"])) {
+        exit("Can't find page");
+    } else {
+        try {
+            // er is een nieuw wachtwoord ingevuld
+            if (!empty($_POST['save_password'])) {
+                $user = User::getEmailFromCode($_GET['code']);
+                //er bestaat een email met die code
+                if (!empty($user)) {
+                    $updatePassword = User::saveNewPassword($user, $_POST['password']);
+                }
+               
+                header("Location: login.php");
+            }
+        } catch (\Throwable $e) {
+            $error = $e->getMessage();
+        }
+    }
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +36,7 @@
     <div class="form form--login">
       <label for="password">New password</label>
       <input type="text" id="password" name="password">
-      <input type="submit" class="btn" id="btnSubmit" value="Save password">
+      <input type="submit" class="btn" id="btnSubmit" value="Save password" name="save_password">
     </div>
 </body>
 </html>

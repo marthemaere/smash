@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand">Logo</a>
+        <a class="navbar-brand">Smasssh</a>
         <div class="d-flex align-items-center">
             <form class="d-flex"> <!--class="d-none"-->
                 <a href="login.php" class="btn btn-outline-primary me-2">Login</a>

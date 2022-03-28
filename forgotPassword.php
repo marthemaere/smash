@@ -7,6 +7,7 @@
             $user = User::hasAccount($email);
             if (!empty($_POST['forgot_password'])) {
                 $user = User::sendPasswordResetEmail($email);
+                header("Location: passwordMessage.php");
             }
         } catch (Throwable $e) {
             $error = $e->getMessage();

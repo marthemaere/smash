@@ -45,6 +45,9 @@
 					<label for="Password">Password</label>
 					<input type="password" name="password" placeholder="Password">
 				</div>
+                <div>
+                    <a href="resetPassword.php">Forgot password?</a>
+                </div>
 				<div class="form__field">
 					<input type="submit" value="Log in" class="btn btn--primary" value="Log in">	
 				</div>

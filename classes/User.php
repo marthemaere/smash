@@ -223,6 +223,19 @@ class User
         }
     }
 
+    public static function linkExpired()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from reset_password where datetime < now()");
+        $statement->execute();
+        $link = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($link) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function getEmailFromCode($code)
     {
         //get the email from the code: code is unique for mail that is sent

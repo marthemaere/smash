@@ -1,8 +1,9 @@
 <?php
     include_once(__DIR__ . "/bootstrap.php");
     $code = $_GET['code'];
-    $link = User::getCode($code);
-    if ($link === false) {
+    $link = User::getCode($code); //check if code exists in database
+    $expired = User::linkExpired(); //check if link is expired
+    if ($link === false || $expired === true) {
         exit("Can't find page");
     } else {
         try {

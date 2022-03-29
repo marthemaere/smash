@@ -36,20 +36,20 @@
             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
         </div>
 
-        <div class="row" role="tabpanel">
+        <div class="row">
             <div class="col-3">
-                <div class="list-group" id="myList" role="tablist">
-                    <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#account" role="tab">Account</a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile" role="tab">Edit profile</a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password" role="tab">Change password</a>
-                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#socials" role="tab">Social profiles</a>
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#account" role="tab" aria-controls="account">Account</a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile" role="tab" aria-controls="profile">Edit profile</a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password" role="tab" aria-controls="password">Change password</a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#socials" role="tab" aria-controls="socials">Social profiles</a>
                     <a class="list-group-item list-group-item-action" href="#">Remove account</a>
                 </div>
             </div>
 
             <div class="col-9">
-                <div class="tab-content">
-                    <div class="tab-pane active" id="account" role="tabpanel">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade active show" id="account" role="tabpanel" aria-labelledby="account-list">
                         <form action="">
                             <fieldset>
                                 <label for="username" class="form-label">Username</label>
@@ -67,9 +67,7 @@
                             </fieldset>
                         </form>
                     </div>
-
-                    </div>
-                    <div class="tab-pane" id="profile" role="tabpanel">
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-list">
                         <div class="profile-picture">
                             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
                             <a href="#" class="btn btn-primary">Upload new picture</a>
@@ -116,7 +114,7 @@
                         </div>
                     </div>
 
-                    <div class="tab-pane" id="password" role="tabpanel">
+                    <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-list">
                         <div class="display-error">
                             <p class="">Serve error</p>
                         </div>
@@ -136,7 +134,7 @@
                         </form>
                     </div>
 
-                    <div class="tab-pane" id="socials" role="tabpanel">
+                    <div class="tab-pane fade" id="socials" role="tabpanel" aria-labelledby="socials-list">
                         <form action="" method="post">
                             <div class="social-link-item">
                                 <label for="linkedin" class="form-label">LinkedIn</label>
@@ -171,6 +169,6 @@
         </div>
     </div>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

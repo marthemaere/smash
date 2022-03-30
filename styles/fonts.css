@@ -1,0 +1,21 @@
+@font-face {
+    font-family: Spectral;
+    src: url('/assets/fonts/Spectral/Spectral-ExtraBold.ttf');
+    font-weight: bolder;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Pacifico;
+    src: url('/assets/fonts/Pacifico/Pacifico-Regular.ttf');
+}
+
+a.navbar-brand {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Spectral', serif;
+    font-weight: 900;
+}

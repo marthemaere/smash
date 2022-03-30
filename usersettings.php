@@ -24,15 +24,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/custom.scss">
+    <link rel="stylesheet" href="styles/custom.css">
     <title>Settings</title>
 </head>
 <body>
     <?php include_once('header.php'); ?>
     <div class="container">
         <div class="header">
-            <h1 class="text-primary">Settings</h1>
+            <h1 class="">Settings</h1>
             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
         </div>
 
@@ -50,28 +53,33 @@
             <div class="col-9">
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade active show" id="account" role="tabpanel" aria-labelledby="account-list">
+                        <h2 class="mb-4">Account info</h2>
                         <form action="">
                             <fieldset>
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" name="name" value="" id="name" readonly>
-                            </fieldset>
-
-                            <fieldset>
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" name="name" value="" id="name" readonly>
+                                <input type="text" class="form-control" name="name" value="<?php echo $userDataFromId['username'];?>" id="name" readonly>
+                                <div class="form-text">Used on feed when posting projects.</div>
                             </fieldset>
 
                             <fieldset>
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" name="email" value="" id="email" readonly>
+                                <input type="text" class="form-control" name="email" value="<?php echo $userDataFromId['email'];?>" id="email" readonly>
+                                <div class="form-text">Registration email from school.</div>
+                            </fieldset>
+
+                            <fieldset>
+                                <label for="email" class="form-label">Second email</label>
+                                <input type="text" class="form-control" name="email" value="<?php echo $userDataFromId['second_email'];?>" id="email" readonly>
+                                <div class="form-text">Additional email to login with when losing your school account.</div>
                             </fieldset>
                         </form>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-list">
+                        <h2 class="mb-4">Edit profile</h2>
                         <div class="profile-picture">
                             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
-                            <a href="#" class="btn btn-primary">Upload new picture</a>
-                            <div class="">
+                            <a href="#" class="btn btn-primary" id="upload-new-picture">Upload new picture</a>
+                            <div id="upload-file">
                                 <?php if (isset($error)): ?>
                                 <div class="formError"><?php echo $error; ?></div>
                                 <?php endif; ?>
@@ -86,7 +94,7 @@
                                     </fieldset>
                                 </form>
                             </div>
-                            <a href="#" class="btn btn-primary">Delete</a>
+                            <a href="#" class="btn btn-outline-primary">Delete</a>
                         </div>
 
                         <div class="profile-info">
@@ -99,8 +107,8 @@
 
                                 <fieldset>
                                     <label for="education" class="form-label">Second email</label>
-                                    <input type="text" class="form-control" name="secondEmail" id="secondEmail">
-                                    <div class="form-text">When you lose access from your school account</div>
+                                    <input type="text" class="form-control" name="secondEmail" id="secondEmail" placeholder="<?php echo $userDataFromId['second_email'];?>">
+                                    <div class="form-text">When you lose access from your school account.</div>
                                 </fieldset>
 
                                 <fieldset>
@@ -109,12 +117,13 @@
                                     <div class="form-text">Add your education to complete your profile.</div>
                                 </fieldset>
 
-                                <input type="submit" class="btn btn-primary" name="updateProfile" value="Save profile">
+                                <input type="submit" class="btn btn-primary mt-4" name="updateProfile" value="Save profile">
                             </form>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-list">
+                        <h2 class="mb-4">Change password</h2>
                         <div class="display-error">
                             <p class="">Serve error</p>
                         </div>
@@ -130,11 +139,12 @@
                                 <input type="password" class="form-control" id="password" name="password" minlength="8" required>
                                 <div class="form-text">Minimum 6 characters</div>
                             </fieldset>
-                            <input type="submit" class="btn btn-primary" name="updatePassword" value="Change password">
+                            <input type="submit" class="btn btn-primary mt-4" name="updatePassword" value="Change password">
                         </form>
                     </div>
 
                     <div class="tab-pane fade" id="socials" role="tabpanel" aria-labelledby="socials-list">
+                        <h2 class="mb-4">Share social links</h2>
                         <form action="" method="post">
                             <div class="social-link-item">
                                 <label for="linkedin" class="form-label">LinkedIn</label>
@@ -161,7 +171,7 @@
                                 <input type="text" class="form-control" name="behance" id="behance">
                             </div>
 
-                            <input type="submit" class="btn btn-primary" name="updateSocialProfiles" value="Update social profiles">
+                            <input type="submit" class="btn btn-primary mt-4" name="updateSocialProfiles" value="Update social profiles">
                         </form>
                     </div>
                 </div>
@@ -170,5 +180,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="javascript/usersettings.js"></script>
 </body>
 </html>

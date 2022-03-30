@@ -1,0 +1,26 @@
+.btn {
+    border-radius: 50px;
+    padding: 6px 20px;
+}
+
+.btn-primary {
+    color: black;
+    background-color: #16CF83;
+    border: none;
+}
+
+.btn-primary:hover {
+    color: black;
+    background-color: #0dac6a;
+}
+
+.btn-outline-primary {
+    color: black;
+    border: 1.5px solid black;
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-color: black;
+    border-color: black;
+}

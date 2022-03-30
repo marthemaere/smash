@@ -1,0 +1,51 @@
+@import url("fonts.css");
+@import url("button.css");
+
+nav .container {
+    border-bottom: 1px solid black;
+}
+
+.display-error {
+    display: none;
+}
+
+.img-thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid black;
+    margin: 1rem 0 2rem 0;
+}
+
+/* ------ListItems------ */
+
+.list-group-item {
+    border: 1px solid black;
+}
+
+.list-group-item.active {
+    color: black;
+    background-color: #C3B7FF;
+    border: 1px solid black;
+}
+
+/* ------UserSettings------ */
+
+#upload-file {
+    display: none;
+}
+
+fieldset {
+    margin: 20px 0;
+}
+
+.form-control, .input-group-text {
+    border-color: black;
+}

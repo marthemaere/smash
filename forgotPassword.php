@@ -34,6 +34,8 @@
         </div>
         <div class="reset--form col">
             <div class="form form--reset">
+                <a href="login.php" class="link-dark">Go back</a>
+
                 <form action="" method="post">
                     <h1>Reset your password</h1>
                     <p class="alert alert-info">An email will be send to reset your password</p>
@@ -52,9 +54,6 @@
                         <input type="submit" class="btn btn-dark" id="btnSubmit" value="Send email" name="forgot_password">
                     </div>
                 </form>
-                <div class="text-center my-2">
-                    <a href="login.php" class="link-dark">Go back to login page</a>
-                </div>
             </div>
         </div>
     </div>

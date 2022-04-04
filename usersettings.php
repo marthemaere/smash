@@ -33,6 +33,13 @@
         }
     }
 
+    if (!empty($_POST['updatePassword'])) {
+        $email = $_SESSION['email'];
+        $oldpassword = $_POST['currentPassword'];
+        $newpassword = $_POST['newPassword'];
+        $confirmation = $_POST['confirmPassword'];
+    }
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -159,13 +166,17 @@
                         <form action="" method="post">
                             <fieldset>
                                 <label for="password" class="form-label">Current password</label>
-                                <input type="password" class="form-control" id="password" name="password" minlength="8" required>
+                                <input type="password" class="form-control" id="password" name="currentPassword" minlength="6" required>
                             </fieldset>
                             
                             <fieldset>
                                 <label for="password" class="form-label">New password</label>
-                                <input type="password" class="form-control" id="password" name="password" minlength="8" required>
+                                <input type="password" class="form-control" id="password" name="newPassword" minlength="6" required>
                                 <div class="form-text">Minimum 6 characters</div>
+                            </fieldset>
+                            <fieldset>
+                                <label for="password" class="form-label">Confirm new password</label>
+                                <input type="password" class="form-control" id="password" name="confrimPassword" minlength="6" required>
                             </fieldset>
                             <input type="submit" class="btn btn-dark mt-4" name="updatePassword" value="Change password">
                         </form>

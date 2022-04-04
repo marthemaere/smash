@@ -1,17 +1,18 @@
 /* ------Buttons------ */
 .btn {
-    padding: 6px 20px;
+    padding: 10px 20px;
 }
 
 .btn-primary {
     color: black;
     background-color: #16CF83;
-    border: none;
+    border: 1.5px solid #16CF83;
 }
 
 .btn-primary:hover {
     color: black;
     background-color: #0dac6a;
+    border: 1.5px solid #0dac6a;
 }
 
 .btn-outline-primary {
@@ -26,7 +27,6 @@
 }
 
 .btn-dark {
-    padding: 12px 20px;
     border: none;
 }
 

@@ -18,6 +18,21 @@
         $user->canUploadPicture($sessionId);
     }
 
+    if (!empty($_POST['updateProfile'])) {
+        try {
+            $biography = $user->setBiography($_POST['biography']);
+            $secondEmail = $user->setSecondEmail($_POST['secondEmail']);
+            $education = $user->setEducation($_POST['education']);
+            $userId = $user->setUserId($sessionId);
+            $user->updateProfile();
+
+            $userDataFromId = User::getUserDataFromId($sessionId);
+            $success = "Profile changes successfully saved.";
+        } catch (\Throwable $e) {
+            $error = $e->getMessage();
+        }
+    }
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,6 +53,10 @@
             <h1 class="">Settings</h1>
             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
         </div>
+
+        <?php if (isset($success)): ?>
+            <p class="alert alert-success"><?php echo $success; ?></p>
+        <?php endif; ?>
 
         <div class="row">
             <div class="col-3">
@@ -79,6 +98,10 @@
                     <!-- EditProfile -->
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-list">
                         <h2 class="mb-4">Edit profile</h2>
+                        <?php if (isset($error)): ?>
+                            <p><?php echo $error; ?></p>
+                        <?php endif; ?>
+                        <!-- EditProfile > ProfilePicture -->
                         <div class="profile-picture">
                             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
                             <a href="#" class="btn btn-primary" id="upload-new-picture">Upload new picture</a>
@@ -100,27 +123,28 @@
                             <a href="#" class="btn btn-outline-primary">Delete</a>
                         </div>
 
+                        <!-- EditProfile > ProfileInfo -->
                         <div class="profile-info">
                             <form action="" method="post">
                                 <fieldset>
                                     <label for="biography" class="form-label">Biography</label>
-                                    <textarea name="biography" class="form-control" id="biography" cols="50" rows="3" placeholder=""></textarea>
+                                    <textarea name="biography" class="form-control" id="biography" cols="50" rows="3"><?php echo $userDataFromId['bio']; ?></textarea>
                                     <div class="form-text">Brief description for your profile.</div>
                                 </fieldset>
 
                                 <fieldset>
                                     <label for="education" class="form-label">Second email</label>
-                                    <input type="text" class="form-control" name="secondEmail" id="secondEmail" placeholder="<?php echo $userDataFromId['second_email'];?>">
+                                    <input type="text" class="form-control" name="secondEmail" id="secondEmail" value="<?php echo $userDataFromId['second_email'];?>">
                                     <div class="form-text">When you lose access from your school account.</div>
                                 </fieldset>
 
                                 <fieldset>
                                     <label for="education" class="form-label">Education</label>
-                                    <input type="text" class="form-control" name="education" id="education">
+                                    <input type="text" class="form-control" name="education" id="education" value="<?php echo $userDataFromId['education'];?>">
                                     <div class="form-text">Add your education to complete your profile.</div>
                                 </fieldset>
 
-                                <input type="submit" class="btn btn-primary mt-4" name="updateProfile" value="Save profile">
+                                <input type="submit" class="btn btn-dark mt-4" name="updateProfile" value="Save profile">
                             </form>
                         </div>
                     </div>
@@ -143,7 +167,7 @@
                                 <input type="password" class="form-control" id="password" name="password" minlength="8" required>
                                 <div class="form-text">Minimum 6 characters</div>
                             </fieldset>
-                            <input type="submit" class="btn btn-primary mt-4" name="updatePassword" value="Change password">
+                            <input type="submit" class="btn btn-dark mt-4" name="updatePassword" value="Change password">
                         </form>
                     </div>
 
@@ -151,32 +175,32 @@
                     <div class="tab-pane fade" id="socials" role="tabpanel" aria-labelledby="socials-list">
                         <h2 class="mb-4">Share social links</h2>
                         <form action="" method="post">
-                            <div class="social-link-item">
+                            <div class="social-link-item my-3">
                                 <label for="linkedin" class="form-label">LinkedIn</label>
                                 <input type="text" class="form-control" name="linkedin" id="linkedin">
                             </div>
 
-                            <div class="social-link-item">
+                            <div class="social-link-item my-3">
                                 <label for="instagram" class="form-label">Instagram</label>
                                 <input type="text" class="form-control" name="instagram" id="instagram">
                             </div>
 
-                            <div class="social-link-item">
+                            <div class="social-link-item my-3">
                                 <label for="github" class="form-label">GitHub</label>
                                 <input type="text" class="form-control" name="github" id="github">
                             </div>
 
-                            <div class="social-link-item">
+                            <div class="social-link-item my-3">
                                 <label for="codepen" class="form-label">CodePen</label>
                                 <input type="text" class="form-control" name="codepen" id="codepen">
                             </div>
                             
-                            <div class="social-link-item">
+                            <div class="social-link-item my-3">
                                 <label for="behance" class="form-label">Behance</label>
                                 <input type="text" class="form-control" name="behance" id="behance">
                             </div>
 
-                            <input type="submit" class="btn btn-primary mt-4" name="updateSocialProfiles" value="Update social profiles">
+                            <input type="submit" class="btn btn-dark mt-4" name="updateSocialProfiles" value="Update social profiles">
                         </form>
                     </div>
                 </div>

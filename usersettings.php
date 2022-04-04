@@ -38,6 +38,11 @@
         $oldpassword = $_POST['currentPassword'];
         $newpassword = $_POST['newPassword'];
         $confirmation = $_POST['confirmPassword'];
+        try {
+            $checkPassword = User::checkPassword($email, $oldpassword);
+        } catch (\Throwable $e) {
+            $error =  $e->getMessage();
+        }
     }
 
 ?><!DOCTYPE html>
@@ -176,7 +181,7 @@
                             </fieldset>
                             <fieldset>
                                 <label for="password" class="form-label">Confirm new password</label>
-                                <input type="password" class="form-control" id="password" name="confrimPassword" minlength="6" required>
+                                <input type="password" class="form-control" id="password" name="confirmPassword" minlength="6" required>
                             </fieldset>
                             <input type="submit" class="btn btn-dark mt-4" name="updatePassword" value="Change password">
                         </form>

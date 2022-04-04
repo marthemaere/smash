@@ -398,4 +398,23 @@
 
             $statement->execute();
         }
+
+        public static function checkPassword($email, $password)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("select * from users where email = :email");
+            $statement->bindValue(":email", $email);
+            $statement->execute();
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+            if ($user) {
+                $hash = $user['password'];
+                if (password_verify($password, $hash)) {
+                    return true;
+                } else {
+                    throw new Exception('current password is wrong');
+                }
+            } else {
+                throw new Exception("user does not exist");
+            }
+        }
     }

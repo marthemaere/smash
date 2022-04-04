@@ -52,6 +52,7 @@
 
             <div class="col-9">
                 <div class="tab-content" id="nav-tabContent">
+                    <!-- AccountInfo -->
                     <div class="tab-pane fade active show" id="account" role="tabpanel" aria-labelledby="account-list">
                         <h2 class="mb-4">Account info</h2>
                         <form action="">
@@ -74,6 +75,8 @@
                             </fieldset>
                         </form>
                     </div>
+
+                    <!-- EditProfile -->
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-list">
                         <h2 class="mb-4">Edit profile</h2>
                         <div class="profile-picture">
@@ -122,6 +125,7 @@
                         </div>
                     </div>
 
+                    <!-- ChangePassword -->
                     <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-list">
                         <h2 class="mb-4">Change password</h2>
                         <div class="display-error">
@@ -143,6 +147,7 @@
                         </form>
                     </div>
 
+                    <!-- AddSocialAccounts -->
                     <div class="tab-pane fade" id="socials" role="tabpanel" aria-labelledby="socials-list">
                         <h2 class="mb-4">Share social links</h2>
                         <form action="" method="post">

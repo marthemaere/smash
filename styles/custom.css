@@ -5,8 +5,17 @@ body {
     box-sizing: border-box;
 }
 
-nav .container {
-    border-bottom: 1px solid black;
+.container {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.border-bottom {
+    border-bottom: 1.5px solid black !important;
+}
+
+.border-top {
+    border-top: 1.5px solid black !important;
 }
 
 .display-error {

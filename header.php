@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light">
-    <div class="container">
+    <div class="container border-bottom">
         <a class="navbar-brand">Smasssh</a>
         <div class="d-flex align-items-center">
             <form class="d-flex"> <!--class="d-none"-->

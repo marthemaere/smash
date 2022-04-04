@@ -40,6 +40,12 @@
         $confirmation = $_POST['confirmPassword'];
         try {
             $checkPassword = User::checkPassword($email, $oldpassword);
+            if ($newpassword == $confirmation) {
+                User::changePassword($email, $newpassword);
+                $success = "Password successfully changed.";
+            } else {
+                echo "Passwords don't match.";
+            }
         } catch (\Throwable $e) {
             $error =  $e->getMessage();
         }

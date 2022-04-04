@@ -417,4 +417,17 @@
                 throw new Exception("user does not exist");
             }
         }
+
+        public static function changePassword($email, $password)
+        {
+            $options = [
+                'cost' => 12
+            ];
+            $password = password_hash($password, PASSWORD_DEFAULT, $options);
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("update users set password = :password where email = :email");
+            $statement->bindValue(":email", $email);
+            $statement->bindValue(":password", $password);
+            return $statement->execute();
+        }
     }

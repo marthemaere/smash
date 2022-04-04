@@ -41,7 +41,7 @@
                     <h1 class="mb-6">Welcome back,<br> Smasher!</h1>
 
                     <?php if (isset($error)):?>
-                    <div class="alert alert-danger"><?php echo $error?></div>
+                    <div class="alert alert-danger"><?php echo $error; ?></div>
                     <?php endif;?>
 
                     <div class="form-floating mb-3">

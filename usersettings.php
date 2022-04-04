@@ -44,7 +44,7 @@
                 User::changePassword($email, $newpassword);
                 $success = "Password successfully changed.";
             } else {
-                echo "Passwords don't match.";
+                $error = "Passwords don't match.";
             }
         } catch (\Throwable $e) {
             $error =  $e->getMessage();
@@ -171,7 +171,9 @@
                     <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-list">
                         <h2 class="mb-4">Change password</h2>
                         <div class="display-error">
-                            <p class="">Serve error</p>
+                            <?php if (isset($error)): ?>
+                                <div class="formError"><?php echo $error; ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <form action="" method="post">

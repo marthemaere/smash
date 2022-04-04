@@ -1,6 +1,10 @@
 @import url("fonts.css");
 @import url("button.css");
 
+body {
+    box-sizing: border-box;
+}
+
 nav .container {
     border-bottom: 1px solid black;
 }
@@ -22,6 +26,39 @@ nav .container {
     align-items: flex-end;
     border-bottom: 1px solid black;
     margin: 1rem 0 2rem 0;
+}
+
+/* ------UserRegistration------ */
+.register, .login, .resetPassword {
+    height: 100vh;
+}
+
+.row>* {
+    padding: 20px 30px;
+}
+
+.register--image .navbar-brand, .login--image .navbar-brand, .reset--image .navbar-brand {
+    padding: 1.5rem;
+}
+
+.register--image, .login--image, .reset--image {
+    background-color: #C3B7FF;
+}
+
+.register--form, .login--form, .reset--form {
+    display: flex;
+    justify-content: center;
+}
+
+.form--register, .form--login, .form--reset {
+    width: 100%;
+    max-width: 360px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form--register h1, .form--login h1, .form--reset h1 {
+    padding-bottom: 2rem;
 }
 
 /* ------ListItems------ */

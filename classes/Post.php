@@ -15,6 +15,9 @@ class Post
 
     public function setTitle($title)
     {
+        if (empty($title)) {
+            throw new Exception("title cannot be empty");
+        }
         $this->title = $title;
         return $this;
     }
@@ -42,7 +45,6 @@ class Post
     public function setFreetags($freetags)
     {
         $this->freetags = $freetags;
-
         return $this;
     }
 
@@ -108,8 +110,7 @@ class Post
                 $this->setProjectToUpload($projectToUpload);
                 $this->updateProjectInDatabase($projectToUpload, $sessionId);
         }
-
-        
+  
     }
 }
 }

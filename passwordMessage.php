@@ -15,14 +15,9 @@ $conn = Db::getInstance();
     <title>Document</title>
 </head>
 <body>
-<nav class="navbar">
-    <a href="index.php" class="logo">Smasssh</a>
-    <a href="logout.php" class="navbar__logout"> logout </a>
-</nav>
-
-<h1> Welcome to the smash platform,  <?php echo $_SESSION['username'];?> </h1>
-
-
+   
+      <p>An email has been sent to reset your password</p>
     
+     
 </body>
 </html>

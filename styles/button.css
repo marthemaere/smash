@@ -1,0 +1,53 @@
+/* ------Buttons------ */
+.btn {
+    padding: 10px 20px;
+}
+
+.btn-primary {
+    color: black;
+    background-color: #16CF83;
+    border: 1.5px solid #16CF83;
+}
+
+.btn-primary:hover {
+    color: black;
+    background-color: #0dac6a;
+    border: 1.5px solid #0dac6a;
+}
+
+.btn-outline-primary {
+    color: black;
+    border: 1.5px solid black;
+}
+
+.btn-outline-primary:hover {
+    color: white;
+    background-color: black;
+    border-color: black;
+}
+
+.btn-dark {
+    border: none;
+}
+
+.btn-dark:hover {
+    color: black;
+    background-color: #C3B7FF;
+}
+
+/* ------Links------ */
+.link-primary {
+    color: #7B61FF;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.link-primary:hover {
+    color: #3a23ad;
+    font-weight: 500;
+}
+
+.link-dark {
+    font-weight: 500;
+    text-decoration: none;
+}

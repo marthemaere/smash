@@ -76,7 +76,7 @@ class Post
         $statement->bindValue(":projectToUpload", $projectToUpload);
         $statement->bindValue(":id", $id);
         $statement->execute();
-        //header('Location: usersettings.php#');
+        header('Location: projectSettings.php#');
     }
 
 

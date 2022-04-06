@@ -21,11 +21,9 @@
     <?php require_once("header.php"); ?>
     <?php 
     if(empty($_POST)) 
-        echo '
-        <div class = "empty-state">
+        echo '<div class = "empty-state">
         <img class="empty-state-picture" src="assets\images\empty-box.svg" alt="emptystate">
-        <p> No projects were found. </p>
-        </div>'
+        <p> No projects were found. </p> </div>'
     ?>
     <?php require_once("footer.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

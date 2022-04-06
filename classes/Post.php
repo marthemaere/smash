@@ -1,93 +1,115 @@
 <?php
-    class Post
-    {
-        private $title;
-        private $image;
-        private $freetags;
-        private $upload;
+class Post
+{
+    private $title;
+    private $image;
+    private $freetags;
+    private $upload;
 
-        public static function getAll(){
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+        return $this;
+    }
+
+
+    public function getFreetags()
+    {
+        return $this->freetags;
+    }
+
+
+    public function setFreetags($freetags)
+    {
+        $this->freetags = $freetags;
+
+        return $this;
+    }
+
+
+    public function getProjectToUpload()
+    {
+        return $this->upload;
+    }
+
+
+    public function setProjectToUpload($upload)
+    {
+        $this->upload = $upload;
+        return $this;
+    }
+
+
+    public static function getAll()
+    {
         $conn = Db::getInstance();
         $result = $conn->query("select * from posts");
         return $result->fetchAll();
-
-        /**
-         * Get the value of title
-         */ 
-        public function getTitle()
-        {
-                return $this->title;
-        }
-
-        /**
-         * Set the value of title
-         *
-         * @return  self
-         */ 
-        public function setTitle($title)
-        {
-                $this->title = $title;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of image
-         */ 
-        public function getImage()
-        {
-                return $this->image;
-        }
-
-        /**
-         * Set the value of image
-         *
-         * @return  self
-         */ 
-        public function setImage($image)
-        {
-                $this->image = $image;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of freetags
-         */ 
-        public function getFreetags()
-        {
-                return $this->freetags;
-        }
-
-        /**
-         * Set the value of freetags
-         *
-         * @return  self
-         */ 
-        public function setFreetags($freetags)
-        {
-                $this->freetags = $freetags;
-
-                return $this;
-        }
-
-        /**
-         * Get the value of upload
-         */ 
-        public function getUpload()
-        {
-                return $this->upload;
-        }
-
-        /**
-         * Set the value of upload
-         *
-         * @return  self
-         */ 
-        public function setUpload($upload)
-        {
-                $this->upload = $upload;
-
-                return $this;
-        }
     }
+
+    public function updateProjectInDatabase($projectToUpload, $id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE users SET image = :projectToUpload WHERE id = :id");
+        $statement->bindValue(":projectToUpload", $projectToUpload);
+        $statement->bindValue(":id", $id);
+        $statement->execute();
+        //header('Location: usersettings.php#');
+    }
+
+
+    public function canUploadProject($sessionId)
+    {
+        $fileName = $_FILES['projectToUpload']['name'];
+        $fileTmpName = $_FILES['projectToUpload']['tmp_name'];
+        $fileSize = $_FILES['projectToUpload']['size'];
+
+        $fileTarget = 'uploaded_projects/' . basename($fileName);
+        $fileIsImage = getimagesize($fileTmpName);
+
+        // Check file size
+        if ($fileSize > 500000) {
+            $canUpload = false;
+            throw new Exception('Image size can not be larger than 5MB, try again.');
+        }
+
+         // Check if file is an image
+         if ($fileIsImage !== false) {
+            $canUpload = true;
+        } else {
+            $canUpload = false;
+            throw new Exception("Your uploaded file is not an image.");
+        }
+
+        // Upload file when no errors
+        if ($canUpload) {
+            if (move_uploaded_file($fileTmpName, $fileTarget)) {
+                $projectToUpload = basename($fileName);
+                $this->setProjectToUpload($projectToUpload);
+                $this->updateProjectInDatabase($projectToUpload, $sessionId);
+        }
+
+        
+    }
+}
+}

@@ -1,6 +1,7 @@
 <?php
 include_once("bootstrap.php");
 
+
 ?>
 
 <!DOCTYPE html>
@@ -22,14 +23,18 @@ include_once("bootstrap.php");
         <h1> What are you working on? Show us all of it! #excited 🤩 </h1> 
         <p> Upload your project. </p>
     </div>
+    <form class="uploadzone" action="project.php" method ="POST" enctype="multipart/form-data">
+        <label for="title">Give your project a name</label>
+        <input type="text" id="title" name="title" placeholder="Enter projectname"> <br>
 
-    <form class="uploadzone" action="projectSettings.php" method = "POST" enctype="multipart/form-data">
-        <label for="myfile">Select a file:</label>
-        <input type="file" id="projectToUpload" name="myProject">
+        <label for="freeTags">Add tags to your project</label>
+        <input type="text" id="freeTags" name="freeTags" placeholder="Enter tags to your project"> <br>
+
+        <label for="image">Select a file:</label>
+        <input type="file" id="file" name="file"> <br>
+
         <input type="submit" value="Upload project" name="submit">
     </div>
-    
     <?php require_once("footer.php"); ?>
-
 </body>
 </html>

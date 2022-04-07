@@ -1,3 +1,11 @@
+<?php
+include_once("bootstrap.php");
+
+$conn = Db::getInstance();
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

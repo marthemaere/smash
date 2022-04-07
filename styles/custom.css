@@ -95,3 +95,18 @@ fieldset {
 .form-control, .input-group-text {
     border-color: black;
 }
+
+/* ------EmptyStates------ */
+.empty-state{
+    display: flex;
+    justify-content: center;
+}
+
+.empty-state p{
+    margin-top: 1em;
+    position: absolute;
+    text-align: center;
+}
+
+
+

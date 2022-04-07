@@ -2,18 +2,22 @@
     include_once("bootstrap.php");
 
     if (!empty($_POST)) {
-        try {
-            $user= new User();
-            $user->setEmail($_POST['email']);
-            $user->setUsername($_POST['username']);
-            $user->setPassword($_POST['password']);
 
-            $user->register();
-            $success= "user saved";
-            header("Location:login.php");
-        } catch (\Throwable $e) {
-            $error= $e->getMessage();
-        }
+            try {
+		
+                $user= new User();
+                $user->setEmail($_POST['email']);
+                $user->setUsername($_POST['username']);
+                $user->setPassword($_POST['password']);
+    
+                $user->register();
+                $success= "user saved";
+                header("Location:login.php");
+                
+            } catch (\Throwable $e) {
+                $error= $e->getMessage();
+            }
+       
     }
 
 ?>
@@ -43,7 +47,7 @@
                     <?php if (isset($error)): ?>
                     <div class="alert alert-danger">
                         <p>
-                            Oops, something went wrong! Please check if all fields are filled in and you used a Thomas More email address. 
+                            Oops, something went wrong! Please check if all fields are filled in and you used a unique Thomas More email address. 
                         </p>
                     </div>
                     <?php endif; ?>

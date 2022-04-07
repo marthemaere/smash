@@ -131,7 +131,12 @@
             $domains = array('student.thomasmore.be', 'thomasmore.be');
             $pattern = "/^[a-z0-9._%+-]+@[a-z0-9.-]*(" . implode('|', $domains) . ")$/i";
 
-            if (!empty($email) || preg_match($pattern, $email_input)) {
+            $conn = Db::getInstance();
+            $query= $conn->prepare("SELECT * from users WHERE email=?");
+            $query->execute([$email_input]);
+            $result= $query->rowCount();
+
+            if (((!empty($email) || preg_match($pattern, $email_input)) && $result <= 0)) {
 
                 $conn = Db::getInstance();
                 $statement = $conn->prepare("INSERT INTO users (email, username, password) VALUES (:email, :username, :password)");
@@ -192,6 +197,20 @@
                 throw new Exception("user doesn't exist");
             }
         }
+
+     /*   public static function emailExists($email){
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = '". $_POST['email']."'");
+            $statement->bindValue($_POST['email'], $email);
+            $statement->execute();
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            if ($user) {
+                return true;
+            }else {
+                throw new Exception("user doesn't exist");
+            }
+        }*/
 
         public static function sendPasswordResetEmail($emailTo)
         {

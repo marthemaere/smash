@@ -24,12 +24,8 @@
 
         public function setEmail($email)
         {
-            $email_input = $_POST['email'];
-            $domains = array('student.thomasmore.be', 'thomasmore.be');
-            $pattern = "/^[a-z0-9._%+-]+@[a-z0-9.-]*(" . implode('|', $domains) . ")$/i";
-
-            if (empty($email) || !preg_match($pattern, $email_input)) {
-                throw new Exception("email cannot be empty and needs to be a Thomas More email address");
+            if (empty($email)) {
+                throw new Exception("email cannot be empty");
             }
             $this->email = $email;
         }
@@ -122,21 +118,34 @@
             return $this->education;
         }
 
+        //registreren
+
         public function register()
         {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("INSERT INTO users (email, username, password) VALUES (:email, :username, :password)");
+            $options=[
+                'cost' => 12,
+            ];
+            $password= password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
 
-            $email = $this->getEmail();
-            $username = $this->getUsername();
-            $password = $this->getPassword();
+            $email_input = $_POST['email'];
+            $domains = array('student.thomasmore.be', 'thomasmore.be');
+            $pattern = "/^[a-z0-9._%+-]+@[a-z0-9.-]*(" . implode('|', $domains) . ")$/i";
 
-            $statement->bindValue(":email", $email);
-            $statement->bindValue(":username", $username);
-            $statement->bindValue(":password", $password);
+            if (!empty($email) || preg_match($pattern, $email_input)) {
 
-            $result = $statement->execute();
-            return $result;
+                $conn = Db::getInstance();
+                $statement = $conn->prepare("INSERT INTO users (email, username, password) VALUES (:email, :username, :password)");
+
+                $statement->bindValue(":email", $this->email);
+                $statement->bindValue(":username", $this->username);
+                $statement->bindValue(":password", $password);
+
+                $result = $statement->execute();
+                return $result;
+
+            } else{ 
+                throw new Exception("email cannot be empty and needs to be a Thomas More email address");
+            }
         }
 
         public static function getAll()

@@ -6,11 +6,7 @@
             $user= new User();
             $user->setEmail($_POST['email']);
             $user->setUsername($_POST['username']);
-            $options=[
-                'cost' => 12,
-            ];
-            $password= password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
-            $user->setPassword($password);
+            $user->setPassword($_POST['password']);
 
             $user->register();
             $success= "user saved";

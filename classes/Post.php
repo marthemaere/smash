@@ -4,7 +4,7 @@ class Post
     private $title;
     private $image;
     private $freetags;
-    private $upload;
+    private $projectToUpload;
 
 
     public function getTitle()
@@ -51,13 +51,13 @@ class Post
 
     public function getProjectToUpload()
     {
-        return $this->upload;
+        return $this->projectToUpload;
     }
 
 
-    public function setProjectToUpload($upload)
+    public function setProjectToUpload($projectToUpload)
     {
-        $this->upload = $upload;
+        $this->projectToUpload = $projectToUpload;
         return $this;
     }
 
@@ -69,34 +69,34 @@ class Post
         return $result->fetchAll();
     }
 
-    public function updateProjectInDatabase($projectToUpload, $id)
+   /* public function updateProjectInDatabase($projectToUpload, $id)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("UPDATE users SET image = :projectToUpload WHERE id = :id");
+        $statement = $conn->prepare("UPDATE posts SET image = :projectToUpload WHERE id = :id");
         $statement->bindValue(":projectToUpload", $projectToUpload);
         $statement->bindValue(":id", $id);
         $statement->execute();
         header('Location: projectSettings.php#');
-    }
+    }*/
 
 
-    public function canUploadProject($sessionId)
+    public function canUploadProject($projectToUpload)
     {
-        $fileName = $_FILES['projectToUpload']['name'];
-        $fileTmpName = $_FILES['projectToUpload']['tmp_name'];
-        $fileSize = $_FILES['projectToUpload']['size'];
+        $projectName = $_FILES['projectToUpload']['name']; //getting user uploaded name
+        $projectTmpName = $_FILES['projectToUpload']['tmp_name']; //getting user uploaded img type
+        $projectSize = $_FILES['projectToUpload']['size']; //this temporary name is used to save/move file in our folder
 
-        $fileTarget = 'uploaded_projects/' . basename($fileName);
-        $fileIsImage = getimagesize($fileTmpName);
+        $projectTarget = 'uploaded_projects/' . basename($projectName);
+        $projectIsImage = getimagesize($projectTmpName);
 
         // Check file size
-        if ($fileSize > 500000) {
+        if ($projectSize > 500000) {
             $canUpload = false;
             throw new Exception('Image size can not be larger than 5MB, try again.');
         }
 
          // Check if file is an image
-         if ($fileIsImage !== false) {
+         if ($projectIsImage !== false) {
             $canUpload = true;
         } else {
             $canUpload = false;
@@ -105,10 +105,10 @@ class Post
 
         // Upload file when no errors
         if ($canUpload) {
-            if (move_uploaded_file($fileTmpName, $fileTarget)) {
-                $projectToUpload = basename($fileName);
+            if (move_uploaded_file($projectTmpName, $projectTarget)) {
+                $projectToUpload = basename($projectName);
                 $this->setProjectToUpload($projectToUpload);
-                $this->updateProjectInDatabase($projectToUpload, $sessionId);
+                header('Location: projectSettings.php');
         }
   
     }

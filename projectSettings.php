@@ -1,30 +1,30 @@
 <?php
 
-/*if (isset($_POST['submit']) && isset($_FILES['myProject'])) {
- 
-    $project = $_FILES['myProject'];
-    print_r($project);
-    $projectName = $_FILES['myProject']['name'];
-    $projectTmpName = $_FILES['myProject']['tmp_name'];
-    $projectSize = $_FILES['myProject']['size'];
-    $projectError = $_FILES['myProject']['error'];
-    $projectType = $_FILES['myProject']['type'];
+if (isset($_POST['submit'])) {
 
-    $projectExt = explode('.', $projectName);
-    $projectActualExt = strtolower(end($projectExt)); //check in lowercase
+    $file = $_FILES['file'];
+    print_r($file);
+    $fileName = $_FILES['file']['name'];
+    $fileTmpName = $_FILES['file']['tmp_name'];
+    $pfileSize = $_FILES['file']['size'];
+    $fileError = $_FILES['file']['error'];
+    $fileType = $_FILES['file']['type'];
+
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt)); //check in lowercase
 
     $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'svg');
 
-    if (in_array($projectActualExt, $allowed)) {
-        if ($projectError === 0) {
-            if ($projectSize < 500000) {
-                $projectNameNew = uniqid('', true) . "." . $projectActualExt;
-                $projectDestination = 'uploaded_projects/' . $projectNameNew;
-                move_uploaded_file($projectTmpName, $projectDestination);
+    if (in_array($fileActualExt, $allowed)) {
+        if ($fileError === 0) {
+            if ($fileSize < 500000) {
+                $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                $fileDestination = 'uploaded_projects/' . $fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);
 
-                //insert into database
-
-
+                //$this->setImage($image);
+            //$this->setProjectInDatabase($image);
+                
             } else {
                 echo  "Your file is too large!";
             }
@@ -34,7 +34,8 @@
     } else {
         echo  "You cannot upload files of this type";
     }
-}*/
+
+}
 
 ?>
 

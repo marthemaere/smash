@@ -72,7 +72,7 @@ class Post
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("inster into posts (title, image) values (:title, :image)");
+        $statement = $conn->prepare("insert into posts (title, image) values (:title, :image)");
         $title = $this->getTitle();
         $image = $this->getImage();
         $statement->bindValue(":title", $title);
@@ -81,8 +81,6 @@ class Post
         return $result;
 
     }
-
-
 
     public function canUploadProject($file)
     {

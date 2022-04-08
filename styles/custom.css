@@ -108,5 +108,19 @@ fieldset {
     text-align: center;
 }
 
+/* ------UploadProjects------ */
+
+.upload-intro{
+    justify-content: center;
+}
+
+.upload-intro p, h1{
+    text-align: center;
+}
+.uploadzone{
+    text-align: center;
+}
+
+
 
 

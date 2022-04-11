@@ -9,7 +9,7 @@
 - When contributing, follow standard commit conventions
 
 # Example of a git commit message
-`git commit -m "Feat: add margin to list items to prevent them from overlapping"`
+`git commit -m "feat: add margin to list items to prevent them from overlapping"`
 
 # Working on this project
 - Apers, Jade (Project Management)

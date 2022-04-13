@@ -7,7 +7,8 @@
             $user = User::hasAccount($email);
             if (!empty($_POST['forgot_password'])) {
                 $user = User::sendPasswordResetEmail($email);
-                header("Location: passwordMessage.php");
+                $success = true;
+                // header("Location: passwordMessage.php");
             }
         } catch (Throwable $e) {
             $error = $e->getMessage();
@@ -45,6 +46,12 @@
                         <p><?php echo $error; ?></p>
                     </div>
                     <?php endif;?>
+
+                    <?php if (isset($success)):?>
+                    <div class="alert alert-success">
+                        <p>An email has been sent to reset your password</p>
+                    </div>
+                    <?php endif; ?>
 
                     <div class="form-floating my-3">
                         <input type="text" class="form-control" id="email" placeholder="Email"  name="email">

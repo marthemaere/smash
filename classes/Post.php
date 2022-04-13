@@ -7,16 +7,16 @@ class Post
     private $title;
     private $image;
     private $freetags;
-    private $user_id;
+    private $userId;
 
-    public function getUser_id()
+    public function getUserId()
     {
-        return $this->user_id;
+        return $this->userId;
     }
 
-    public function setUser_id($user_id)
+    public function setUser_id($userId)
     {
-        $this->user_id = $user_id;
+        $this->user_id = $userId;
         return $this;
     }
 
@@ -82,7 +82,7 @@ class Post
 
     }
 
-    public function canUploadProject($file)
+    public function canUploadProject()
     {
         $file = $_FILES['file'];
         print_r($file);
@@ -103,9 +103,9 @@ class Post
                     $fileNameNew = uniqid('', true) . "." . $fileActualExt;
                     $fileDestination = 'uploaded_projects/' . $fileNameNew;
                     move_uploaded_file($fileTmpName, $fileDestination);
-    
-                    //$this->setImage($image);
-                //$this->setProjectInDatabase($image);
+                    $image = basename($fileName);
+                    $this->setImage($image);
+                    $this->setProjectInDatabase($image);
                     
                 } else {
                     echo  "Your file is too large!";
@@ -116,7 +116,9 @@ class Post
         } else {
             echo  "You cannot upload files of this type";
         }
-    
+        
+
+
     }
     }
 

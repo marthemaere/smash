@@ -3,41 +3,12 @@
 
     if (isset($_POST['submit'])) {
         try {
-            //upload projects
-            $file = $_FILES['file'];
-            print_r($file);
-            $fileName = $_FILES['file']['name'];
-            $fileTmpName = $_FILES['file']['tmp_name'];
-            $fileSize = $_FILES['file']['size'];
-            $fileError = $_FILES['file']['error'];
-            $fileType = $_FILES['file']['type'];
-        
-            $fileExt = explode('.', $fileName);
-            $fileActualExt = strtolower(end($fileExt)); //check in lowercase
-        
-            $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'svg');
-        
-            if (in_array($fileActualExt, $allowed)) {
-                if ($fileError === 0) {
-                    if ($fileSize < 500000) {
-                        $fileNameNew = uniqid('', true) . "." . $fileActualExt;
-                        $fileDestination = 'uploaded_projects/' . $fileNameNew;
-                        move_uploaded_file($fileTmpName, $fileDestination);
-        
-                        
-                    } else {
-                        echo("Your file is too large!");
-                    }
-                } else {
-                    echo("There was an error uploading your file");
-                }
-            } else {
-                echo("You cannot upload files of this type");
-            }
         
             $post = new Post();
             $post->setTitle($_POST['title']);
+            $post->setImage($_POST['image']);
             $post->setProjectInDatabase();
+            $post->canUploadProject($file);
             
         } catch (\Throwable $e) {
             $error = $e->getMessage();

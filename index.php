@@ -1,7 +1,14 @@
 <?php
     include_once("bootstrap.php");
-    session_start();
-    $conn = Db::getInstance();
+	
+	
+        $id = session_create_id();	
+        session_id($id);
+        print("\n"."Id: ".$id);
+        session_start();    
+        session_commit();  
+
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -15,6 +22,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/custom.css">
     <title>Feed</title>
+    <a href="/php/smash/uploadProject.php">Upload Project</a>
+
+
 
 </head>
 <body>

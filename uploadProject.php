@@ -1,5 +1,15 @@
 <?php
 include_once("bootstrap.php");
+
+
+
+
+session_start();
+print("Values from the session with id: ".session_id());
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +34,9 @@ include_once("bootstrap.php");
     <form class="uploadzone" action="project.php" method ="POST" enctype="multipart/form-data">
         <label for="title">Give your project a name</label>
         <input type="text" id="title" name="title" placeholder="Enter projectname"> <br>
+
+        <label for="title">Tell us more about your project</label>
+        <input type="text" id="description" name="description" placeholder="Enter description"> <br>
 
         <label for="freeTags">Add tags to your project</label>
         <input type="text" id="freeTags" name="freeTags" placeholder="Enter tags to your project"> <br>

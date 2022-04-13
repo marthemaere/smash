@@ -8,6 +8,7 @@ class Post
     private $image;
     private $freetags;
     private $userId;
+    private $description;
 
     public function getUserId()
     {
@@ -61,6 +62,19 @@ class Post
         return $this;
     }
 
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+ 
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    
 
     public static function getAll()
     {
@@ -69,14 +83,17 @@ class Post
         return $result->fetchAll();
     }
 
+
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image) values (:title, :image)");
+        $statement = $conn->prepare("insert into posts (title, image, description, date) values (:title, :image, :description, now())");
         $title = $this->getTitle();
         $image = $this->getImage();
+        $description = $this->getDescription();
         $statement->bindValue(":title", $title);
         $statement->bindValue(":image", $image);
+        $statement->bindValue(":description", $description);
         $result = $statement->execute();
         return $result;
 
@@ -116,20 +133,9 @@ class Post
         } else {
             echo  "You cannot upload files of this type";
         }
-        
-
 
     }
     }
 
-      /* public function updateProjectInDatabase($projectToUpload, $id)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("UPDATE posts SET image = :projectToUpload WHERE id = :id");
-        $statement->bindValue(":projectToUpload", $projectToUpload);
-        $statement->bindValue(":id", $id);
-        $statement->execute();
-        header('Location: projectSettings.php#');
-    }*/
 
    

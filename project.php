@@ -1,14 +1,14 @@
 <?php
     include_once("bootstrap.php");
-
+    
     if (isset($_POST['submit'])) {
-        try {
         
+        try {
             $post = new Post();
             $post->setTitle($_POST['title']);
             $post->setImage($_POST['image']);
-            $post->setProjectInDatabase();
-            $post->canUploadProject($file);
+            $post->setDescription($_POST['description']);
+            $post->canUploadProject();
             
         } catch (\Throwable $e) {
             $error = $e->getMessage();

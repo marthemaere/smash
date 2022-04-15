@@ -8,7 +8,7 @@
             $post->setTitle($_POST['title']);
             $post->setImage($_POST['image']);
             $post->setDescription($_POST['description']);
-            $post->setFreetags($_POST['freeTags']);
+            $post->setTags($_POST['tags']);
             $post->canUploadProject();
             $sessionId = $_SESSION['id'];
             $userDataFromId = User::getUserDataFromId($sessionId);

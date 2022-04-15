@@ -6,9 +6,9 @@ class Post
 {
     private $title;
     private $image;
-    private $freetags;
     private $userId;
     private $description;
+    private $tags;
 
     public function getUserId()
     {
@@ -51,14 +51,14 @@ class Post
     }
 
 
-    public function getFreetags()
+    public function getTags()
     {
-        return $this->freetags;
+        return $this->tags;
     }
 
-    public function setFreetags($freetags)
+    public function setTags($tags)
     {
-        $this->freetags = $freetags;
+        $this->tags = $tags;
         return $this;
     }
 
@@ -87,13 +87,15 @@ class Post
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image, description, date) values (:title, :image, :description, now())");
+        $statement = $conn->prepare("insert into posts (title, image, description, date, tags) values (:title, :image, :description, now(), :tags)");
         $title = $this->getTitle();
         $image = $this->getImage();
         $description = $this->getDescription();
+        $tags = $this->getTags();
         $statement->bindValue(":title", $title);
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
+        $statement->bindValue(":tags", $tags);
         $result = $statement->execute();
         return $result;
 

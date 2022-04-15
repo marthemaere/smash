@@ -1,13 +1,8 @@
 <?php
 include_once("bootstrap.php");
 
-
-
-
 session_start();
-print("Values from the session with id: ".session_id());
-
-
+/*print("Values from the session with id: ".session_id());*/
 
 
 ?>
@@ -38,8 +33,8 @@ print("Values from the session with id: ".session_id());
         <label for="title">Tell us more about your project</label>
         <input type="text" id="description" name="description" placeholder="Enter description"> <br>
 
-        <label for="freeTags">Add tags to your project</label>
-        <input type="text" id="freeTags" name="freeTags" placeholder="Enter tags to your project"> <br>
+        <label for="tags">Add tags to your project</label>
+        <input type="text" id="tags" name="tags" placeholder="Enter tags to your project"> <br>
 
         <label for="image">Select a file:</label>
         <input type="file" id="file" name="file"> <br>

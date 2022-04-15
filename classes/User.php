@@ -160,6 +160,7 @@
             $statement->execute();
             $users = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $users;
+            print_r($users);
         }
 
 

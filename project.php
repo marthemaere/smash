@@ -8,7 +8,10 @@
             $post->setTitle($_POST['title']);
             $post->setImage($_POST['image']);
             $post->setDescription($_POST['description']);
+            $post->setFreetags($_POST['freeTags']);
             $post->canUploadProject();
+            $sessionId = $_SESSION['id'];
+            $userDataFromId = User::getUserDataFromId($sessionId);
             
         } catch (\Throwable $e) {
             $error = $e->getMessage();

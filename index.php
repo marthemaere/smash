@@ -1,13 +1,12 @@
 <?php
     include_once("bootstrap.php");
 	
-	
-        $id = session_create_id();	
+      /*  $id = session_create_id();	
         session_id($id);
         print("\n"."Id: ".$id);
         session_start();    
         session_commit();  
-
+*/
 
 
 ?><!DOCTYPE html>

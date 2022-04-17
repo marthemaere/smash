@@ -10,13 +10,11 @@ class Post
     private $description;
     private $tags;
 
-    public function getUserId()
-    {
-        return $this->userId;
-    }
+
 
     public function setUser_id($userId)
     {
+        
         $this->user_id = $userId;
         return $this;
     }
@@ -31,7 +29,7 @@ class Post
     public function setTitle($title)
     {
         if (empty($title)) {
-            throw new Exception("title cannot be empty");
+            throw new Exception("Title cannot be empty");
         }
         $this->title = $title;
         return $this;
@@ -46,6 +44,7 @@ class Post
 
     public function setImage($image)
     {
+    
         $this->image = $image;
         return $this;
     }
@@ -70,6 +69,9 @@ class Post
  
     public function setDescription($description)
     {
+        if (empty($description)) {
+            throw new Exception("description cannot be empty");
+        }
         $this->description = $description;
         return $this;
     }
@@ -101,6 +103,15 @@ class Post
 
     }
 
+    /*public static function getUserId(int $userId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select users.`id` from users inner join users on posts.`user_id` = users.`id`");
+        $statement->bindValue('userId', $userId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }*/
+
     public function canUploadProject()
     {
         $file = $_FILES['file'];
@@ -127,13 +138,13 @@ class Post
                     $this->setProjectInDatabase($image);
                     
                 } else {
-                    echo  "Your file is too large!";
+                    throw new Exception("Your file is too large!");
                 }
             } else {
-                echo  "There was an error uploading your file";
+                throw new Exception("There was an error uploading your file");
             }
         } else {
-            echo  "You cannot upload files of this type";
+            throw new Exception("You cannot upload files of this type");
         }
 
     }

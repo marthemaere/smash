@@ -26,21 +26,37 @@ session_start();
         <h1> What are you working on? Show us all of it! #excited 🤩 </h1> 
         <p> Upload your project. </p>
     </div>
+
+
+    <div class="login--form col">
+    <div class="form form--login">
     <form class="uploadzone" action="project.php" method ="POST" enctype="multipart/form-data">
-        <label for="title">Give your project a name</label>
-        <input type="text" id="title" name="title" placeholder="Enter projectname"> <br>
 
+        <fieldset>  
+        <label for="floatingInput">Give your project a name</label>
+        <input type="text" class="form-control" id="floatingInput" name="title" > <br>
+        </fieldset>
+
+        <fieldset>
         <label for="title">Tell us more about your project</label>
-        <input type="text" id="description" name="description" placeholder="Enter description"> <br>
+        <textarea name="description" class="form-control" id="description" cols="50" rows="3" ></textarea>
+        </fieldset>
 
+
+        <fieldset>
         <label for="tags">Add tags to your project</label>
-        <input type="text" id="tags" name="tags" placeholder="Enter tags to your project"> <br>
+        <input type="text" class="form-control" id="floatingInput" name="tags" > <br>
+        </fieldset>
 
-        <label for="image">Select a file:</label>
-        <input type="file" id="file" name="file"> <br>
+        <fieldset>
+        <label class="form-label" for="image"></label>
+        <input type="file" class="form-control" id="customFile" name="file"> <br>
+        </fieldset>
 
-        <input type="submit" value="Upload project" name="submit">
-    </div>
+        <input class="btn btn-dark" type="submit" value="Upload project" name="submit">
+        </div>
+        </div>
+
     <?php require_once("footer.php"); ?>
 </body>
 </html>

@@ -54,12 +54,12 @@ body {
     background-color: #C3B7FF;
 }
 
-.register--form, .login--form, .reset--form {
+.register--form, .login--form, .reset--form, .upload--form {
     display: flex;
     justify-content: center;
 }
 
-.form--register, .form--login, .form--reset {
+.form--register, .form--login, .form--upload, .form--reset {
     width: 100%;
     max-width: 360px;
     padding: 15px;
@@ -119,6 +119,22 @@ fieldset {
 }
 .uploadzone{
     text-align: center;
+
+}
+
+.upload--form {
+    display: flex;
+    justify-content: center;
+}
+
+.description{
+    max-width: 500px;}
+
+.form--upload {
+    width: 100%;
+    max-width: 360px;
+    padding: 15px;
+    margin: auto;
 }
 
 

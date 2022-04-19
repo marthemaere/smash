@@ -1,9 +1,25 @@
 <?php
 include_once("bootstrap.php");
-
-session_start();
 /*print("Values from the session with id: ".session_id());*/
 
+if (!empty($_POST)) {
+    try {
+        $post = new Post();
+        $post->setTitle($_POST['title']);
+        $post->setImage($_POST['image']);
+        $post->setDescription($_POST['description']);
+        $post->setTags($_POST['tags']);
+        $post->canUploadProject();
+        $sessionId = $_SESSION['id'];
+        $userDataFromId = User::getUserDataFromId($sessionId);
+
+        header("Location: project.php");
+        session_start();
+        
+    } catch (\Throwable $e) {
+        $error = $e->getMessage();
+    }
+}
 
 ?>
 
@@ -26,11 +42,14 @@ session_start();
         <h1> What are you working on? Show us all of it! #excited 🤩 </h1> 
         <p> Upload your project. </p>
     </div>
-
+    <?php if (isset($error)):?>
+        <div class="alert alert-danger"><?php echo $error; ?></div>
+    <?php endif;?>
+  
 
     <div class="login--form col">
     <div class="form form--login">
-    <form class="uploadzone" action="project.php" method ="POST" enctype="multipart/form-data">
+    <form class="uploadzone" action="" method ="POST" enctype="multipart/form-data">
 
         <fieldset>  
         <label for="floatingInput">Give your project a name</label>
@@ -51,6 +70,7 @@ session_start();
         <fieldset>
         <label class="form-label" for="image"></label>
         <input type="file" class="form-control" id="customFile" name="file"> <br>
+        <div class="form-text">JPG or PNG. Max size of 2MB</div>
         </fieldset>
 
         <input class="btn btn-dark" type="submit" value="Upload project" name="submit">

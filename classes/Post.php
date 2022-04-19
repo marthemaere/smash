@@ -8,14 +8,13 @@ class Post
     private $image;
     private $userId;
     private $description;
-    private $tags;
+    private $tags = array();
 
 
 
-    public function setUser_id($userId)
-    {
-        
-        $this->user_id = $userId;
+    public function setUserId($userId)
+    { 
+        $this->userId = $userId;
         return $this;
     }
 
@@ -44,7 +43,6 @@ class Post
 
     public function setImage($image)
     {
-    
         $this->image = $image;
         return $this;
     }
@@ -52,12 +50,20 @@ class Post
 
     public function getTags()
     {
+        
+        foreach ($_POST['tags'] as $tag) {
+            if ($tag) {
+                $tag->setTags(trim($tag));
+            }
+        }
+
         return $this->tags;
+        
     }
 
     public function setTags($tags)
     {
-        $this->tags = $tags;
+        $this->tags[] = $tags;
         return $this;
     }
 
@@ -90,6 +96,7 @@ class Post
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into posts (title, image, description, date, tags) values (:title, :image, :description, now(), :tags)");
+        
         $title = $this->getTitle();
         $image = $this->getImage();
         $description = $this->getDescription();

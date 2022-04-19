@@ -74,6 +74,7 @@ CREATE TABLE `posts` (
   `date` date DEFAULT NULL,
   `image` varchar(300) DEFAULT NULL,
   `description` varchar(300) DEFAULT NULL,
+  `tags` varchar(300) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

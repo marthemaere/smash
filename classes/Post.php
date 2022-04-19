@@ -8,7 +8,7 @@ class Post
     private $image;
     private $userId;
     private $description;
-    private $tags = array();
+    private $tags;
 
 
 
@@ -51,19 +51,13 @@ class Post
     public function getTags()
     {
         
-        foreach ($_POST['tags'] as $tag) {
-            if ($tag) {
-                $tag->setTags(trim($tag));
-            }
-        }
-
         return $this->tags;
         
     }
 
     public function setTags($tags)
     {
-        $this->tags[] = $tags;
+        $this->tags = $tags;
         return $this;
     }
 

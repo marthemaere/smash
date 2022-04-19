@@ -83,7 +83,7 @@
                     <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile" role="tab" aria-controls="profile">Edit profile</a>
                     <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password" role="tab" aria-controls="password">Change password</a>
                     <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#socials" role="tab" aria-controls="socials">Social profiles</a>
-                    <a class="list-group-item list-group-item-action text-danger" href="#">Remove account</a>
+                    <a class="list-group-item list-group-item-action text-danger" href="deleteAccount.php">Remove account</a>
                 </div>
             </div>
 

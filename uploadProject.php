@@ -1,21 +1,28 @@
 <?php
 include_once("bootstrap.php");
-/*print("Values from the session with id: ".session_id());*/
 
 if (!empty($_POST)) {
     try {
+
+        //post aanmaken
         $post = new Post();
         $post->setTitle($_POST['title']);
         $post->setImage($_POST['image']);
         $post->setDescription($_POST['description']);
-        $post->setTags($_POST['tags']);
         $post->canUploadProject();
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
 
-        header("Location: project.php");
-        session_start();
+   
+        //tags toevoegen
+        $tags = new Tag();
+        $tags->setTag($_POST['tags']);
+        $tags->addTagsToDatabase();
+
         
+        header("Location: index.php");
+
+
     } catch (\Throwable $e) {
         $error = $e->getMessage();
     }
@@ -49,7 +56,7 @@ if (!empty($_POST)) {
 
     <div class="login--form col">
     <div class="form form--login">
-    <form class="uploadzone" action="" method ="POST" enctype="multipart/form-data">
+    <form class="uploadzone" action="#" method ="POST" enctype="multipart/form-data">
 
         <fieldset>  
         <label for="floatingInput">Give your project a name</label>
@@ -64,7 +71,7 @@ if (!empty($_POST)) {
 
         <fieldset>
         <label for="tags">Add tags to your project</label>
-        <input type="text" class="form-control" id="floatingInput" name="tags" > <br>
+        <input type="text" class="form-control" id="tags" name="tags" > <br>
         </fieldset>
 
         <fieldset>

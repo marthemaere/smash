@@ -1,12 +1,5 @@
 <?php
     include_once("bootstrap.php");
-	
-      /*  $id = session_create_id();	
-        session_id($id);
-        print("\n"."Id: ".$id);
-        session_start();    
-        session_commit();  
-*/
 
 
 ?><!DOCTYPE html>
@@ -27,12 +20,12 @@
 </head>
 <body>
     <?php require_once("header.php"); ?>
-    <?php 
-    if(empty($_POST)) 
-        echo '<div class = "empty-state">
+    <?php if(empty($_POST)):?>
+        <div class = "empty-state">
         <img class="empty-state-picture" src="assets\images\empty-box.svg" alt="emptystate">
-        <p> No projects were found. </p> </div>'
-    ?>
+        <p> No projects were found. </p> </div>
+    <?php endif;?>
+
     <div class="d-flex justify-content-center"><a class="btn btn-primary" href="/php/smash/uploadProject.php">Upload Project</a></div>
     
     <?php require_once("footer.php"); ?>

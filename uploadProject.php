@@ -13,7 +13,7 @@ if (!empty($_POST)) {
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
 
-        header("Location: project.php");
+        header("Location: index.php");
         session_start();
         
     } catch (\Throwable $e) {

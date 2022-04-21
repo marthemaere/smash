@@ -8,14 +8,16 @@ class Post
     private $image;
     private $userId;
     private $description;
-    private $tags = array();
-
-
+    private $tags;
 
     public function setUserId($userId)
     { 
         $this->userId = $userId;
         return $this;
+    }
+
+    public function getUserId(){
+        return $this->userId;
     }
 
 
@@ -50,12 +52,6 @@ class Post
 
     public function getTags()
     {
-        
-        foreach ($_POST['tags'] as $tag) {
-            if ($tag) {
-                $tag->setTags(trim($tag));
-            }
-        }
 
         return $this->tags;
         
@@ -63,7 +59,7 @@ class Post
 
     public function setTags($tags)
     {
-        $this->tags[] = $tags;
+        $this->tags = $tags;
         return $this;
     }
 
@@ -86,16 +82,35 @@ class Post
 
     public static function getAll()
     {
+        $limit=3;
+        $page= isset( $_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
+        $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
+
         $conn = Db::getInstance();
-        $result = $conn->query("select * from posts");
+        $result = $conn->query("select * from posts ORDER BY date DESC LIMIT $start, $limit");
         return $result->fetchAll();
+
+    /*    $conn = Db::getInstance();
+        $result = $conn->query("select count(id) AS id from posts");
+        $postCount= $result->fetchAll();
+        $total= $postCount[0]['id'];
+        $pages= ceil($total / $limit);*/
     }
+
+    /*public static function getPages(){
+        $limit=3;
+        $conn = Db::getInstance();
+        $result = $conn->query("select count()id AS id from posts");
+        $postCount= $result->fetchAll();
+        $total= $postCount[0]['id'];
+        $pages= ceil($total / $limit);
+    }*/
 
 
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image, description, date, tags) values (:title, :image, :description, now(), :tags)");
+        $statement = $conn->prepare("insert into posts (title, image, description, date, tags, user_id) values (:title, :image, :description, now(), :tags, :user_id)");
         
         $title = $this->getTitle();
         $image = $this->getImage();
@@ -107,7 +122,6 @@ class Post
         $statement->bindValue(":tags", $tags);
         $result = $statement->execute();
         return $result;
-
     }
 
     /*public static function getUserId(int $userId)

@@ -1,6 +1,7 @@
 <nav class="navbar navbar-light">
     <div class="container border-bottom">
         <a class="navbar-brand">Smasssh</a>
+        <a href="/php/smash/uploadProject.php" class="btn btn-primary">Upload Project</a>
         <div class="d-flex align-items-center">
             <form class="d-flex"> <!--class="d-none"-->
                 <a href="login.php" class="btn btn-outline-primary me-2">Login</a>

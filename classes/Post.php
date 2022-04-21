@@ -6,9 +6,8 @@ class Post
 {
     private $title;
     private $image;
-    private $userId;
     private $description;
-    private $tags;
+    //private $tags;
 
 
 
@@ -48,18 +47,16 @@ class Post
     }
 
 
-    public function getTags()
-    {
-        
+   /* public function getTags()
+    {        
         return $this->tags;
-        
     }
 
     public function setTags($tags)
     {
         $this->tags = $tags;
         return $this;
-    }
+    }*/
 
     public function getDescription()
     {
@@ -89,19 +86,18 @@ class Post
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image, description, date, tags) values (:title, :image, :description, now(), :tags)");
+        $statement = $conn->prepare("insert into posts (title, image, description, date) values (:title, :image, :description, now())");
         
         $title = $this->getTitle();
         $image = $this->getImage();
         $description = $this->getDescription();
-        $tags = $this->getTags();
+        //$tags = $this->getTags();
         $statement->bindValue(":title", $title);
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
-        $statement->bindValue(":tags", $tags);
+       // $statement->bindValue(":tags", $tags);
         $result = $statement->execute();
         return $result;
-
     }
 
     /*public static function getUserId(int $userId)
@@ -116,7 +112,6 @@ class Post
     public function canUploadProject()
     {
         $file = $_FILES['file'];
-        print_r($file);
         $fileName = $_FILES['file']['name'];
         $fileTmpName = $_FILES['file']['tmp_name'];
         $fileSize = $_FILES['file']['size'];

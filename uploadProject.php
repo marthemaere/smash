@@ -18,6 +18,7 @@ if (!empty($_POST)) {
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase();
+        $tags->getPostId();
 
         
         header("Location: index.php");

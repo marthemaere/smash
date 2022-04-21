@@ -23,7 +23,12 @@ class Tag
 
     public function getPostId()
     {
-        return $this->postId;
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select id from posts where id = :postId");
+        $statement->bindValue(":postId", $this->postId);
+        $statement->execute();
+        $postId = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $postId;
     }
 
 

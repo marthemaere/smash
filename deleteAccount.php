@@ -35,13 +35,16 @@
 </head>
 <body>
     <?php include_once('header.php'); ?>
-    <form action="" method="post">
-        <h1 class="header">Are you sure you want to delete your account?</h1>
-        <div class="d-flex justify-content-center">
-            <input class="btn btn-outline-primary m-2" type="submit" value="No" name="disprove">
-            <input class="btn btn-dark m-2"  type="submit" value="Yes" name="confirm">
-        </div>
-       
-    </form>
+    <div class="container">
+        <form action="" method="post">
+            <h1 class="header">Are you sure you want to delete your account?</h1>
+            <div class="d-flex justify-content-center">
+                <input class="btn btn-outline-primary m-2" type="submit" value="No" name="disprove">
+                <input class="btn btn-dark m-2"  type="submit" value="Yes" name="confirm">
+            </div>
+        
+        </form>
+    </div>
+    
 </body>
 </html>

@@ -50,7 +50,6 @@
     $postCount= $result->fetchAll();
     $total= $postCount[0]['id'];
     $pages= ceil($total / $limit); 
-
    }
 
 
@@ -129,17 +128,11 @@
         <div class="col-md-10">
             <nav class="page-navigation" aria-label="page navigation">
                 <ul class="pagination">
-                    <li>
-                        <a href="" aria-label="previous"><span aria-hidden="true">&laquo; Previous</span></a>
-                    </li>
                     <?php for($i=1; $i<= $pages; $i++): ?>
                     <li>
                         <a href="index.php?page=<?= $i; ?>"><?= $i; ?></a>
                     </li>
                     <?php endfor; ?>
-                    <li>
-                        <a href="" aria-label="next"><span aria-hidden="true">Next &raquo;</span></a>
-                    </li>
                 </ul>
             </nav>
         </div>

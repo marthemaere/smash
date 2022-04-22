@@ -46,10 +46,6 @@
             <h1 class="">Settings</h1>
             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
         </div>
-
-        <?php if (isset($success)): ?>
-            <p class="alert alert-success"><?php echo $success; ?></p>
-        <?php endif; ?>
         
         <div class="row">
             <div class="col-3">
@@ -68,6 +64,9 @@
                         <h2 class="mb-4">Change password</h2>
                         <?php if (isset($error)): ?>
                             <p class="alert alert-danger"><?php echo $error; ?></p>
+                        <?php endif; ?>
+                        <?php if (isset($success)): ?>
+                            <p class="alert alert-success"><?php echo $success; ?></p>
                         <?php endif; ?>
 
                         <form action="" method="post">

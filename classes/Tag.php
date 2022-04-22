@@ -24,7 +24,7 @@ class Tag
     public function getPostId()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select id from posts where id = :postId");
+        $statement = $conn->prepare("select id from posts inner join users on users.id = posts.user_id");
         $statement->bindValue(":postId", $this->postId);
         $statement->execute();
         $postId = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -41,7 +41,7 @@ class Tag
     public function addTagsToDatabase(){
 
         $tags = $_POST["tags"];
-        $tags = explode(",", $tags);
+        $tags = explode(", ", $tags);
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into tags (tag) values (:tag)");
       

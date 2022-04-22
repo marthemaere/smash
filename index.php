@@ -44,12 +44,17 @@
 
     $posts = Post::getAll();
 
-    $limit= 3;
+    $limit= 20;
     $conn = Db::getInstance();
     $result = $conn->query("select count(id) AS id from posts");
     $postCount= $result->fetchAll();
     $total= $postCount[0]['id'];
     $pages= ceil($total / $limit); 
+
+    $sessionId = $_SESSION['id'];
+    $userDataFromId = User::getUserDataFromId($sessionId);
+
+
    }
 
 
@@ -74,63 +79,54 @@
         <img class="empty-state-picture" src="assets\images\empty-box.svg" alt="emptystate">
         <p> No projects were found. </p> </div>'
     ?>
+
+    <div class="container">
+       <div class="row justify-content-center">
+
     <?php   
         foreach($posts as $p): 
     ?>
+
     <?php if (!isset($_SESSION['id'])) :?>
 
-    <div class="container">
-        <div class="row-fluid">
-            <div class="col">
-                <div class="m-5" style = "width: 22rem;" > 
-                    <img src="<?php echo $p['image'];?>" width="100%" class="img-rounded">
-                    <div>
-                        <h2><?php echo $p['title']; ?></h2>
-                    </div>
-                    <div>
-                        <a href="" class="link-dark">View comments</a>
-                        <a href="" class="btn btn-outline-primary me-2">Smash</a>
-                    </div>
+            <div class="col-md-3">
+                <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="200px" class="rounded" style="object-fit:cover" >
+                <h2><?php echo $p['title']; ?></h2>
+                <div>
+                    <a href="/login.php" class="link-dark">View comments</a>
+                    <a href="/login.php" class="btn btn-outline-primary me-2">Smash</a>
                 </div>
             </div>
-        </div>
-    </div>
-
+      
     <?php else: ?>
 
-    <div class="container">
-        <div class="row-fluid">
-            <div class="col">
-                <div class="m-5" style = "width: 22rem; " > 
-
-                    <p><?php echo $p['date']; ?></p>
-
-                    <img src="<?php echo $p['image'];?>" width="100%" height= "200px" class="img-rounded">
-                    <div>
-                        <h2><?php echo $p['title']; ?></h2>
-                        <h4><?php echo $p['user_id'];?></h4>
-                        <p><?php echo $p['description']; ?></p>
-                        <p class="link-primary"><?php echo $p['tags']; ?></p>
+            <div class="col-md-3">
+                <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="200px" class="rounded" style="object-fit:cover" >
+                <div>
+                    <div class="d-flex justify-content-start align-items-center">
+                        <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="p-2 rounded-circle" width="50px">
+                        <h4>Username</h4>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <a href="" class="link-dark">View comments</a>
-                        <a href="" class="btn btn-outline-primary me-2">Smash</a>
-                    </div>
+                    <h2><?php echo $p['title']; ?></h2>
+                    <p><?php echo $p['description']; ?></p>
+                    <p class="link-primary"><?php echo $p['tags']; ?></p>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <a href="" class="link-dark">View comments</a>
+                    <a href="" class="btn btn-outline-primary">Smash</a>
                 </div>
             </div>
-        </div>
-    </div>
 
     <?php endif; ?>
     <?php endforeach; ?>
 
-    <div class="row">
-        <div class="col-md-10">
+    <div class="row justify-content-center">
+        <div class="col-md-10 d-flex justify-content-center">
             <nav class="page-navigation" aria-label="page navigation">
                 <ul class="pagination">
                     <?php for($i=1; $i<= $pages; $i++): ?>
                     <li>
-                        <a href="index.php?page=<?= $i; ?>"><?= $i; ?></a>
+                        <a href="index.php?page=<?= $i; ?>" class="link-dark p-3"><?= $i; ?></a>
                     </li>
                     <?php endfor; ?>
                 </ul>

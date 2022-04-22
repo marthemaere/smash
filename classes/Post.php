@@ -82,7 +82,7 @@ class Post
 
     public static function getAll()
     {
-        $limit=3;
+        $limit=20;
         $page= isset( $_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
         $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
 
@@ -110,7 +110,7 @@ class Post
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image, description, date, tags, user_id) values (:title, :image, :description, now(), :tags, :user_id)");
+        $statement = $conn->prepare("insert into posts (title, image, description, date, tags) values (:title, :image, :description, now(), :tags)");
         
         $title = $this->getTitle();
         $image = $this->getImage();
@@ -151,8 +151,8 @@ class Post
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 500000) {
-                    $fileNameNew = uniqid('', true) . "." . $fileActualExt;
-                    $fileDestination = 'uploaded_projects/' . $fileNameNew;
+                   // $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                    $fileDestination = 'uploaded_projects/' . $fileName;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $image = basename($fileName);
                     $this->setImage($image);

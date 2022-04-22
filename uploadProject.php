@@ -13,13 +13,15 @@ if (!empty($_POST)) {
         $post->getUsernameById($username);
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
+        
 
    
         //tags toevoegen
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase();
-        $tags->getPostId();
+        $tags->getIdFromPosts($postId);
+
 
         
         header("Location: index.php");

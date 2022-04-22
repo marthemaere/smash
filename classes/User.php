@@ -137,7 +137,6 @@
             $result= $query->rowCount();
 
             if (((!empty($email) || preg_match($pattern, $email_input)) && $result <= 0)) {
-
                 $conn = Db::getInstance();
                 $statement = $conn->prepare("INSERT INTO users (email, username, password) VALUES (:email, :username, :password)");
 
@@ -147,8 +146,7 @@
 
                 $result = $statement->execute();
                 return $result;
-
-            } else{ 
+            } else {
                 throw new Exception("email cannot be empty and needs to be a Thomas More email address");
             }
         }
@@ -199,19 +197,19 @@
             }
         }
 
-     /*   public static function emailExists($email){
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM users WHERE email = '". $_POST['email']."'");
-            $statement->bindValue($_POST['email'], $email);
-            $statement->execute();
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
+        /*   public static function emailExists($email){
+               $conn = Db::getInstance();
+               $statement = $conn->prepare("SELECT * FROM users WHERE email = '". $_POST['email']."'");
+               $statement->bindValue($_POST['email'], $email);
+               $statement->execute();
+               $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-            if ($user) {
-                return true;
-            }else {
-                throw new Exception("user doesn't exist");
-            }
-        }*/
+               if ($user) {
+                   return true;
+               }else {
+                   throw new Exception("user doesn't exist");
+               }
+           }*/
 
         public static function sendPasswordResetEmail($emailTo)
         {
@@ -457,6 +455,22 @@
             $statement = $conn->prepare("update users set password = :password where email = :email");
             $statement->bindValue(":email", $email);
             $statement->bindValue(":password", $password);
+            return $statement->execute();
+        }
+        
+        public static function deleteAccount($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("delete users, posts, comments, likes, followers from users 
+                                            inner join posts on users.`id` = posts.`user_id`
+                                            inner join comments on users.`id` = comments.`user_id`
+                                            inner join likes on users.`id` = likes.`user_id`
+                                            inner join followers on users.`id` = followers.`follower_id` OR followers.`following_id`
+                                            where users.`id` = :id");
+                                            
+                                            
+                                           
+            $statement->bindValue(":id", $id);
             return $statement->execute();
         }
     }

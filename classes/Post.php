@@ -7,6 +7,7 @@ class Post
     private $title;
     private $image;
     private $description;
+    private $username;
     //private $tags;
 
 
@@ -47,17 +48,6 @@ class Post
     }
 
 
-   /* public function getTags()
-    {        
-        return $this->tags;
-    }
-
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-        return $this;
-    }*/
-
     public function getDescription()
     {
         return $this->description;
@@ -73,6 +63,17 @@ class Post
         return $this;
     }
 
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+ 
+    public function setUsername($username)
+    {
+        $this->username = $username;
+        return $this;
+    }
     
 
     public static function getAll()
@@ -82,12 +83,17 @@ class Post
         return $result->fetchAll();
     }
 
-
+    public function getUsernameById($username){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select username from posts inner join users on user_id = posts.user_id");
+        $username = $statement->execute();
+        return $username;
+    }
+    
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into posts (title, image, description, date) values (:title, :image, :description, now())");
-        
         $title = $this->getTitle();
         $image = $this->getImage();
         $description = $this->getDescription();
@@ -100,11 +106,11 @@ class Post
         return $result;
     }
 
-    /*public static function getUserId(int $userId)
+    /*public static function getUsername(int $userId)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select users.`id` from users inner join users on posts.`user_id` = users.`id`");
-        $statement->bindValue('userId', $userId);
+        $statement = $conn->prepare("select username from posts inner join users on users.id = :posts.user_id");
+        $statement->bindValue('posts.user_id', $username);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }*/
@@ -126,8 +132,7 @@ class Post
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 500000) {
-                    $fileNameNew = uniqid('', true) . "." . $fileActualExt;
-                    $fileDestination = 'uploaded_projects/' . $fileNameNew;
+                    $fileDestination = 'uploaded_projects/' . $fileName;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $image = basename($fileName);
                     $this->setImage($image);
@@ -144,6 +149,7 @@ class Post
         }
 
     }
+
     }
 
 

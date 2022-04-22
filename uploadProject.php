@@ -10,6 +10,7 @@ if (!empty($_POST)) {
         $post->setImage($_POST['image']);
         $post->setDescription($_POST['description']);
         $post->canUploadProject();
+        $post->getUsernameById($username);
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
 

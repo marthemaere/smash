@@ -1,11 +1,13 @@
 <?php
 
+use LDAP\Result;
+
 include_once(__DIR__ . "/Db.php");
 
 class Tag
 {
     private $tags;
-    private $postId;
+    private $post;
 
 
     public function getTags()
@@ -20,23 +22,28 @@ class Tag
         return $this;
     }
 
+    
+    public function getPost()
+    {
+        return $this->post;
+    }
 
-    public function getPostId()
+    public function setPost($post)
+    {
+        $this->post = $post;
+        return $this;
+    }
+
+
+    public function setPostId()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select id from posts inner join users on users.id = posts.user_id");
-        $statement->bindValue(":postId", $this->postId);
+        $statement = $conn->prepare("SELECT posts.id from posts inner join tags on posts.id = tags.post_id");
         $statement->execute();
         $postId = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $postId;
     }
 
-
-    public function setPostId($postId)
-    {
-        $this->postId = $postId;
-        return $this;
-    }
 
     public function addTagsToDatabase(){
 
@@ -61,4 +68,8 @@ class Tag
 
 
     
+
+   
+   
+
 }

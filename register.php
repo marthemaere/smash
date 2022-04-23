@@ -2,22 +2,18 @@
     include_once("bootstrap.php");
 
     if (!empty($_POST)) {
-
-            try {
-		
-                $user= new User();
-                $user->setEmail($_POST['email']);
-                $user->setUsername($_POST['username']);
-                $user->setPassword($_POST['password']);
+        try {
+            $user= new User();
+            $user->setEmail($_POST['email']);
+            $user->setUsername($_POST['username']);
+            $user->setPassword($_POST['password']);
     
-                $user->register();
-                $success= "user saved";
-                header("Location:login.php");
-                
-            } catch (\Throwable $e) {
-                $error= $e->getMessage();
-            }
-       
+            $user->register();
+            $success= "user saved";
+            header("Location:login.php");
+        } catch (\Throwable $e) {
+            $error= $e->getMessage();
+        }
     }
 
 ?>

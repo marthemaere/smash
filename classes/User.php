@@ -179,12 +179,20 @@
                 $statement->bindValue(":email", $this->email);
                 $statement->bindValue(":username", $this->username);
                 $statement->bindValue(":password", $password);
-
                 $result = $statement->execute();
                 return $result;
             } else {
                 throw new Exception("email cannot be empty and needs to be a Thomas More email address");
             }
+        }
+
+        public function insertSocials()
+        {
+            $userId = $this->getUserId();
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("INSERT INTO socials (`user_id`) VALUES (:userId)");
+            $statement->bindValue(":userId", $userId);
+            $statement->execute();
         }
 
         public static function getAll()
@@ -382,6 +390,16 @@
         {
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT * FROM users WHERE id = :id");
+            $statement->bindValue(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
+        public static function getSocialDataFromId($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT * FROM socials WHERE id = :id");
             $statement->bindValue(':id', $id);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);

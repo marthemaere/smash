@@ -5,8 +5,30 @@
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
+        try {
+            $user = new User();
+            $sessionId = $_SESSION['id'];
+            $userDataFromId = User::getUserDataFromId($sessionId);
+            $socialDataFromId = User::getSocialDataFromId($sessionId);
+        } catch (\Throwable $e) {
+            $error = $e->getMessage();
+        }
     }
 
+    if (!empty($_POST['updateSocialProfiles'])) {
+        try {
+            $linkedin = $user->setLinkedIn($_POST['linkedin']);
+            $instagram = $user->setInstagram($_POST['instagram']);
+            $github = $user->setGitHub($_POST['github']);
+            $userId = $user->setUserId($sessionId);
+            $user1 = $user->updateSocials();
+
+            $socialDataFromId = User::getSocialDataFromId($sessionId);
+            $success = "Social links successfully saved.";
+        } catch (\Throwable $e) {
+            $error = $e->getMessage();
+        }
+    }
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -49,27 +71,17 @@
                         <form action="" method="post">
                             <div class="social-link-item my-3">
                                 <label for="linkedin" class="form-label">LinkedIn</label>
-                                <input type="text" class="form-control" name="linkedin" id="linkedin">
+                                <input type="text" class="form-control" name="linkedin" id="linkedin" value="<?php echo $socialDataFromId['linkedIn']; ?>">
                             </div>
 
                             <div class="social-link-item my-3">
                                 <label for="instagram" class="form-label">Instagram</label>
-                                <input type="text" class="form-control" name="instagram" id="instagram">
+                                <input type="text" class="form-control" name="instagram" id="instagram" value="<?php echo $socialDataFromId['instagram']; ?>">
                             </div>
 
                             <div class="social-link-item my-3">
                                 <label for="github" class="form-label">GitHub</label>
-                                <input type="text" class="form-control" name="github" id="github">
-                            </div>
-
-                            <div class="social-link-item my-3">
-                                <label for="codepen" class="form-label">CodePen</label>
-                                <input type="text" class="form-control" name="codepen" id="codepen">
-                            </div>
-                            
-                            <div class="social-link-item my-3">
-                                <label for="behance" class="form-label">Behance</label>
-                                <input type="text" class="form-control" name="behance" id="behance">
+                                <input type="text" class="form-control" name="github" id="github" value="<?php echo $socialDataFromId['gitHub']; ?>">
                             </div>
 
                             <input type="submit" class="btn btn-dark mt-4" name="updateSocialProfiles" value="Update social profiles">

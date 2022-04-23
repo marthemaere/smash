@@ -21,6 +21,9 @@
         private $biography;
         private $secondEmail;
         private $education;
+        private $linkedIn;
+        private $instagram;
+        private $gitHub;
 
         public function setEmail($email)
         {
@@ -116,6 +119,39 @@
         public function getEducation()
         {
             return $this->education;
+        }
+
+        public function setLinkedIn($linkedIn)
+        {
+            $this->linkedIn = $linkedIn;
+            return $this;
+        }
+        
+        public function getLinkedIn()
+        {
+            return $this->linkedIn;
+        }
+
+        public function setInstagram($instagram)
+        {
+            $this->instagram = $instagram;
+            return $this;
+        }
+        
+        public function getInstagram()
+        {
+            return $this->instagram;
+        }
+
+        public function setGitHub($gitHub)
+        {
+            $this->gitHub = $gitHub;
+            return $this;
+        }
+        
+        public function getGitHub()
+        {
+            return $this->gitHub;
         }
 
         //registreren
@@ -421,6 +457,24 @@
             $statement->bindValue(":biography", $biography);
             $statement->bindValue(":secondEmail", $secondEmail);
             $statement->bindValue(":education", $education);
+            $statement->bindValue(":userId", $userId);
+
+            $statement->execute();
+        }
+
+        public function updateSocials()
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("UPDATE socials SET linkedIn = :linkedIn, instagram = :instagram, gitHub = :gitHub WHERE id = :userId");
+
+            $linkedIn = $this->getLinkedIn();
+            $instagram = $this->getInstagram();
+            $gitHub = $this->getGitHub();
+            $userId = $this->getUserId();
+
+            $statement->bindValue(":linkedIn", $linkedIn);
+            $statement->bindValue(":instagram", $instagram);
+            $statement->bindValue(":gitHub", $gitHub);
             $statement->bindValue(":userId", $userId);
 
             $statement->execute();

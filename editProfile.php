@@ -112,7 +112,7 @@
         </div>
     </div>
 
-    
+    <script src="javascript/usersettings.js"></script>
 
 </body>
 </html>

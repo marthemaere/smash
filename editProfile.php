@@ -17,6 +17,21 @@
     if (!empty($_POST['submitProfilePicture'])) {
         $user->canUploadPicture($sessionId);
     }
+    
+    if (!empty($_POST['updateProfile'])) {
+        try {
+            $biography = $user->setBiography($_POST['biography']);
+            $secondEmail = $user->setSecondEmail($_POST['secondEmail']);
+            $education = $user->setEducation($_POST['education']);
+            $userId = $user->setUserId($sessionId);
+            $user->updateProfile();
+
+            $userDataFromId = User::getUserDataFromId($sessionId);
+            $success = "Profile changes successfully saved.";
+        } catch (\Throwable $e) {
+            $error = $e->getMessage();
+        }
+    }
 
 ?><!DOCTYPE html>
 <html lang="en">

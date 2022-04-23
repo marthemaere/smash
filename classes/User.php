@@ -359,7 +359,7 @@
             $statement->bindValue(":profilePicture", $profilePicture);
             $statement->bindValue(":id", $id);
             $statement->execute();
-            header('Location: usersettings.php#');
+            header('Location: editProfile.php');
         }
 
         public function canUploadPicture($sessionId)

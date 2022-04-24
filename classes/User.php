@@ -209,8 +209,9 @@
         public function canLogin()
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("select email, password from users where email = :email");
+            $statement = $conn->prepare("select email, password from users where email = :email or second_email = :secondEmail");
             $statement->bindValue(":email", $this->email);
+            $statement->bindValue(":secondEmail", $this->email);
             $statement->execute();
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -379,8 +380,9 @@
         public static function getIdByEmail($email)
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("select id from users where email = :email");
+            $statement = $conn->prepare("select id from users where email = :email or second_email = :secondEmail");
             $statement->bindValue(":email", $email);
+            $statement->bindValue(":secondEmail", $email);
             $statement->execute();
             $result = $statement->fetch();
             return $result['id'];

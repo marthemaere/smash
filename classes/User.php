@@ -21,9 +21,7 @@
         private $biography;
         private $secondEmail;
         private $education;
-        private $linkedIn;
-        private $instagram;
-        private $gitHub;
+        private $socialLink;
 
         public function setEmail($email)
         {
@@ -121,37 +119,15 @@
             return $this->education;
         }
 
-        public function setLinkedIn($linkedIn)
+        public function setSocialLink($socialLink)
         {
-            $this->linkedIn = $linkedIn;
+            $this->socialLink = $socialLink;
             return $this;
         }
         
-        public function getLinkedIn()
+        public function getSocialLink()
         {
-            return $this->linkedIn;
-        }
-
-        public function setInstagram($instagram)
-        {
-            $this->instagram = $instagram;
-            return $this;
-        }
-        
-        public function getInstagram()
-        {
-            return $this->instagram;
-        }
-
-        public function setGitHub($gitHub)
-        {
-            $this->gitHub = $gitHub;
-            return $this;
-        }
-        
-        public function getGitHub()
-        {
-            return $this->gitHub;
+            return $this->socialLink;
         }
 
         //registreren
@@ -189,6 +165,7 @@
         public function insertSocials()
         {
             $userId = $this->getUserId();
+            
             $conn = Db::getInstance();
             $statement = $conn->prepare("INSERT INTO socials (`user_id`) VALUES (:userId)");
             $statement->bindValue(":userId", $userId);
@@ -401,10 +378,9 @@
         public static function getSocialDataFromId($id)
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT * FROM socials WHERE id = :id");
-            $statement->bindValue(':id', $id);
+            $statement = $conn->prepare("SELECT s.`link` FROM users u INNER JOIN socials s ON s.`user_id` = u.`id`");
             $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -476,24 +452,6 @@
             $statement->bindValue(":biography", $biography);
             $statement->bindValue(":secondEmail", $secondEmail);
             $statement->bindValue(":education", $education);
-            $statement->bindValue(":userId", $userId);
-
-            $statement->execute();
-        }
-
-        public function updateSocials()
-        {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("UPDATE socials SET linkedIn = :linkedIn, instagram = :instagram, gitHub = :gitHub WHERE id = :userId");
-
-            $linkedIn = $this->getLinkedIn();
-            $instagram = $this->getInstagram();
-            $gitHub = $this->getGitHub();
-            $userId = $this->getUserId();
-
-            $statement->bindValue(":linkedIn", $linkedIn);
-            $statement->bindValue(":instagram", $instagram);
-            $statement->bindValue(":gitHub", $gitHub);
             $statement->bindValue(":userId", $userId);
 
             $statement->execute();

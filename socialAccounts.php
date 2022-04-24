@@ -16,18 +16,6 @@
     }
 
     if (!empty($_POST['updateSocialProfiles'])) {
-        try {
-            $linkedin = $user->setLinkedIn($_POST['linkedin']);
-            $instagram = $user->setInstagram($_POST['instagram']);
-            $github = $user->setGitHub($_POST['github']);
-            $userId = $user->setUserId($sessionId);
-            $user1 = $user->updateSocials();
-
-            $socialDataFromId = User::getSocialDataFromId($sessionId);
-            $success = "Social links successfully saved.";
-        } catch (\Throwable $e) {
-            $error = $e->getMessage();
-        }
     }
 
 ?><!DOCTYPE html>

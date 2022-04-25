@@ -21,6 +21,8 @@
         private $biography;
         private $secondEmail;
         private $education;
+        
+        private $socialType;
         private $socialLink;
 
         public function setEmail($email)
@@ -119,6 +121,17 @@
             return $this->education;
         }
 
+        public function setSocialType($socialType)
+        {
+            $this->socialType = $socialType;
+            return $this;
+        }
+        
+        public function getSocialType()
+        {
+            return $this->socialType;
+        }
+
         public function setSocialLink($socialLink)
         {
             $this->socialLink = $socialLink;
@@ -160,16 +173,6 @@
             } else {
                 throw new Exception("email cannot be empty and needs to be a Thomas More email address");
             }
-        }
-
-        public function insertSocials()
-        {
-            $userId = $this->getUserId();
-            
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("INSERT INTO socials (`user_id`) VALUES (:userId)");
-            $statement->bindValue(":userId", $userId);
-            $statement->execute();
         }
 
         public static function getAll()
@@ -375,15 +378,6 @@
             return $result;
         }
 
-        public static function getSocialDataFromId($id)
-        {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT s.`link` FROM users u INNER JOIN socials s ON s.`user_id` = u.`id`");
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
-        }
-
         public function updatePictureInDatabase($profilePicture, $id)
         {
             $conn = Db::getInstance();
@@ -502,6 +496,56 @@
                                             
                                            
             $statement->bindValue(":id", $id);
+            return $statement->execute();
+        }
+
+        public static function getSocialDataFromId($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT DISTINCT s.link, t.name, t.icon FROM socials s INNER JOIN `social_type` t WHERE s.user_id = :id");
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            var_dump($result);
+            return $result;
+        }
+
+        public function insertSocialDataFromId($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("INSERT INTO socials (`user_id`, `social_type`, `link`) VALUES (:id, :stype, :slink)");
+            $statement->bindValue(":id", $id);
+
+            $type = $this->getSocialType();
+            $link = $this->getSocialLink();
+
+            $statement->bindValue(":stype", $type);
+            $statement->bindValue(":slink", $link);
+            $result = $statement->execute();
+            return $result;
+        }
+
+        public function updateSocialDataFromId($id)
+        {
+            $conn = DB::getInstance();
+            $statement = $conn->prepare("UPDATE socials SET link = :slink WHERE `user_id` = :id AND `social_type` = :stype");
+            $statement->bindValue(":id", $id);
+
+            $type = $this->getSocialType();
+            $link = $this->getSocialLink();
+
+            $statement->bindValue(":slink", $link);
+            $statement->bindValue(":stype", $type);
+            $statement->execute();
+        }
+
+        public function deleteSocialDataFromId($id)
+        {
+            $conn = DB::getInstance();
+            $statement = $conn->prepare("DELETE FROM socials WHERE `user_id` = :id AND `social_type` = :stype;");
+            $type = $this->getSocialType();
+            $statement->bindValue(":id", $id);
+            $statement->bindValue(":stype", $type);
             return $statement->execute();
         }
     }

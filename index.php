@@ -1,33 +1,30 @@
 <?php
     include_once("bootstrap.php");
     session_start();
-	
-      /*  $id = session_create_id();	
+    
+      /*  $id = session_create_id();
         session_id($id);
         print("\n"."Id: ".$id);
-        session_start();    
-        session_commit();  
+        session_start();
+        session_commit();
 */
 
     $conn = Db::getInstance();
 
     if (!isset($_SESSION['id'])) {
-        if(!empty($_POST)){
+        if (!empty($_POST)) {
             try {
                 $post->getTitle($_POST['title']);
                 $post->getImage($_POST['image']);
                 $post->save();
                 echo $post;
-            }
-            catch ( Throwable $e ) {
+            } catch (Throwable $e) {
                 $error = $e->getMessage();
             }
         }
         $posts = Post::getAll();
-
     } else {
-        if(!empty($_POST)){
-
+        if (!empty($_POST)) {
             try {
                 $post->getTitle($_POST['title']);
                 $post->getImage($_POST['image']);
@@ -36,26 +33,23 @@
                 $post->getUserId($_SESSION['id']);
                 $post->save();
                 echo $post;
-            }
-            catch ( Throwable $e ) {
+            } catch (Throwable $e) {
                 $error = $e->getMessage();
             }
         }
 
-    $posts = Post::getAll();
+        $posts = Post::getAll();
 
-    $limit= 20;
-    $conn = Db::getInstance();
-    $result = $conn->query("select count(id) AS id from posts");
-    $postCount= $result->fetchAll();
-    $total= $postCount[0]['id'];
-    $pages= ceil($total / $limit); 
+        $limit= 20;
+        $conn = Db::getInstance();
+        $result = $conn->query("select count(id) AS id from posts");
+        $postCount= $result->fetchAll();
+        $total= $postCount[0]['id'];
+        $pages= ceil($total / $limit);
 
-    $sessionId = $_SESSION['id'];
-    $userDataFromId = User::getUserDataFromId($sessionId);
-
-
-   }
+        $sessionId = $_SESSION['id'];
+        $userDataFromId = User::getUserDataFromId($sessionId);
+    }
 
 
 ?><!DOCTYPE html>
@@ -72,9 +66,9 @@
     <title>Feed</title>
 </head>
 <body>
-    <?php require_once("header-feed.php"); ?>
-    <?php 
-    if(!empty($_POST)): ?>
+    <?php require_once("header.php"); ?>
+    <?php
+    if (!empty($_POST)): ?>
         <div class= "empty-state">
             <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">
             <p> No projects were found. </p> 
@@ -84,8 +78,8 @@
     <div class="container mt-5">
        <div class="row justify-content-center">
 
-    <?php   
-        foreach($posts as $p): 
+    <?php
+        foreach ($posts as $p):
     ?>
 
     <?php if (!isset($_SESSION['id'])) :?>
@@ -130,7 +124,7 @@
         <div class="col-md-10 d-flex justify-content-center">
             <nav class="page-navigation" aria-label="page navigation">
                 <ul class="pagination">
-                    <?php for($i=1; $i<= $pages; $i++): ?>
+                    <?php for ($i=1; $i<= $pages; $i++): ?>
                     <li>
                         <a href="index.php?page=<?= $i; ?>" class="link-dark p-3"><?= $i; ?></a>
                     </li>

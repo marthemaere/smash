@@ -1,6 +1,8 @@
 <?php
     include_once("bootstrap.php");
     session_start();
+    $sessionId = $_SESSION['id'];
+    $userDataFromId = User::getUserDataFromId($sessionId);
     
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');

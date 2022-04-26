@@ -1,5 +1,6 @@
 <?php
 include_once("bootstrap.php");
+session_start();
 
 if (!empty($_POST)) {
     try {
@@ -23,8 +24,6 @@ if (!empty($_POST)) {
         session_start();
         
         header("Location: index.php");
-
-
     } catch (\Throwable $e) {
         $error = $e->getMessage();
     }

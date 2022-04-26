@@ -80,7 +80,7 @@ class Post
 
     public static function getAll()
     {
-        $limit=20;
+        $limit=15;
         $page= isset( $_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
         $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
 

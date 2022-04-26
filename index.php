@@ -44,7 +44,7 @@
 
     $posts = Post::getAll();
 
-    $limit= 20;
+    $limit= 15;
     $conn = Db::getInstance();
     $result = $conn->query("select count(id) AS id from posts");
     $postCount= $result->fetchAll();

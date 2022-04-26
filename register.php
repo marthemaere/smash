@@ -10,7 +10,8 @@
     
             $user->register();
             $success= "user saved";
-            header("Location:login.php");
+            session_start();
+            header("Location:index.php");
         } catch (\Throwable $e) {
             $error= $e->getMessage();
         }

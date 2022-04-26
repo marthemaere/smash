@@ -27,6 +27,8 @@ body {
     height: 100px;
     object-fit: cover;
     border: none;
+    max-width: 75px;
+    max-height: 75px;
 }
 
 .header {

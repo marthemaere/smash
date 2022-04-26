@@ -19,7 +19,7 @@
                 <a href="/php/smash/uploadProject.php" class="btn btn-primary m-3">Upload Project</a>
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="p-2 rounded-circle" width="65px">
+                    <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="p-2 rounded-circle img-thumbnail" >
                 </a>
                 <ul class="dropdown-menu text-small shadow"  style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 34px, 0px);" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Personal feed</a></li>

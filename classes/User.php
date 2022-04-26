@@ -469,10 +469,10 @@
                 if (password_verify($password, $hash)) {
                     return true;
                 } else {
-                    throw new Exception('current password is wrong');
+                    throw new Exception('Current password is wrong. Please try again.');
                 }
             } else {
-                throw new Exception("user does not exist");
+                throw new Exception("User does not exist.");
             }
         }
 

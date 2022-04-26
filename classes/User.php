@@ -502,7 +502,7 @@
         public static function getSocialDataFromId($id)
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT DISTINCT s.link, t.name, t.icon FROM socials s INNER JOIN `social_type` t WHERE s.user_id = :id");
+            $statement = $conn->prepare("SELECT DISTINCT s.id, s.link, t.name, t.icon FROM socials s INNER JOIN `social_type` t WHERE s.user_id = :id");
             $statement->bindValue(":id", $id);
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);

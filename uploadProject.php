@@ -19,6 +19,8 @@ if (!empty($_POST)) {
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase();
 
+        header("Location: index.php");
+        session_start();
         
         header("Location: index.php");
 

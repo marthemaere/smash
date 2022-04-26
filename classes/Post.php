@@ -16,9 +16,9 @@ class Post
         return $this;
     }
 
-    public function getUserId(){
+    /*public function getUserId(){
         return $this->userId;
-    }
+    }*/
 
 
     public function getTitle()
@@ -78,8 +78,6 @@ class Post
         return $this;
     }
 
-    
-
     public static function getAll()
     {
         $limit=20;
@@ -87,25 +85,18 @@ class Post
         $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
 
         $conn = Db::getInstance();
-        $result = $conn->query("select * from posts ORDER BY date DESC LIMIT $start, $limit");
+        $result = $conn->query("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY date DESC LIMIT $start, $limit");
         return $result->fetchAll();
-
-    /*    $conn = Db::getInstance();
-        $result = $conn->query("select count(id) AS id from posts");
-        $postCount= $result->fetchAll();
-        $total= $postCount[0]['id'];
-        $pages= ceil($total / $limit);*/
     }
 
-    /*public static function getPages(){
-        $limit=3;
+   /* public static function getUserId()
+    {
         $conn = Db::getInstance();
-        $result = $conn->query("select count()id AS id from posts");
-        $postCount= $result->fetchAll();
-        $total= $postCount[0]['id'];
-        $pages= ceil($total / $limit);
+        $statement = $conn->prepare("SELECT posts.user_id, users.username FROM posts INNER JOIN users ON posts.user_id = users.id;");
+     //   $statement->bindValue('user_id', $userId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }*/
-
 
     public function setProjectInDatabase()
     {
@@ -123,15 +114,6 @@ class Post
         $result = $statement->execute();
         return $result;
     }
-
-    /*public static function getUserId(int $userId)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("select users.`id` from users inner join users on posts.`user_id` = users.`id`");
-        $statement->bindValue('userId', $userId);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }*/
 
     public function canUploadProject()
     {

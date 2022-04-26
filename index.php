@@ -72,15 +72,16 @@
     <title>Feed</title>
 </head>
 <body>
-    <?php require_once("header.php"); ?>
+    <?php require_once("header-feed.php"); ?>
     <?php 
-    if(empty($_POST)) 
-        echo '<div class = "empty-state">
-        <img class="empty-state-picture" src="assets\images\empty-box.svg" alt="emptystate">
-        <p> No projects were found. </p> </div>'
-    ?>
+    if(!empty($_POST)): ?>
+        <div class= "empty-state">
+            <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">
+            <p> No projects were found. </p> 
+        </div>
+    <?php endif; ?>
 
-    <div class="container">
+    <div class="container mt-5">
        <div class="row justify-content-center">
 
     <?php   
@@ -103,9 +104,14 @@
             <div class="col-md-3">
                 <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="200px" class="rounded" style="object-fit:cover" >
                 <div>
-                    <div class="d-flex justify-content-start align-items-center">
-                        <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="p-2 rounded-circle" width="50px">
-                        <h4>Username</h4>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="d-flex justify-content-start">
+                            <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="p-2 rounded-circle" width="45px">
+                            <h4 class="pt-2"><?php echo $p['username'];?></h4>
+                        </div>
+                        <div>
+                            <img src="assets/images/empty-heart.svg" width="18px">
+                        </div>
                     </div>
                     <h2><?php echo $p['title']; ?></h2>
                     <p><?php echo $p['description']; ?></p>

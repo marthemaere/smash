@@ -90,8 +90,7 @@ class Post
         $statement->bindValue(":description", $description);
         $statement->bindValue(":userId", $userId);
         return $conn->lastInsertId();
-
-      //  return $result;
+        //return $result;
         
     }
 

@@ -6,16 +6,17 @@ session_start();
 if (!empty($_POST)) {
     try {
 
-
-
         //post aanmaken
-    
         $post = new Post();
         $post->setTitle($_POST['title']);
         $post->setDescription($_POST['description']);
         $userId= $_SESSION['id'];
         $post->setUserId($userId);
         $id = $post->canUploadProject();
+       
+        $userId = $_SESSION['id'];
+        $post->setUserId($userId);
+
 
         //tags toevoegen
         $tags = new Tag();

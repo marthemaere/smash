@@ -2,6 +2,7 @@
     include_once("bootstrap.php");
     session_start();
 	
+
     $conn = Db::getInstance();
 
     if (!isset($_SESSION['id'])) {

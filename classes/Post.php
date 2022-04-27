@@ -122,6 +122,7 @@ class Post
                     $fileDestination = 'uploaded_projects/' . $fileNameNew;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $image = basename($fileName);
+                    $this->setImage($image);
                     $this->setProjectInDatabase($image);
                     
                 } else {

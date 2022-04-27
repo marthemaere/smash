@@ -7,7 +7,6 @@ if (!empty($_POST)) {
         //post aanmaken
         $post = new Post();
         $post->setTitle($_POST['title']);
-       // $post->setImage($_POST['image']);
         $post->setDescription($_POST['description']);
         $post->canUploadProject();
 
@@ -16,7 +15,7 @@ if (!empty($_POST)) {
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase();
-
+        $tags->addPostId();
         
         header("Location: index.php");
 

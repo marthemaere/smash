@@ -10,6 +10,7 @@ class Tag
     private $post;
 
 
+
     public function getTags()
     {
         return $this->tags;
@@ -21,7 +22,6 @@ class Tag
         $this->tags = $tags;
         return $this;
     }
-
     
     public function getPost()
     {
@@ -34,11 +34,10 @@ class Tag
         return $this;
     }
 
-
-    public function setPostId()
+    public function addPostId()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT posts.id from posts inner join tags on posts.id = tags.post_id");
+        $statement = $conn->prepare("SELECT posts.id from posts INSERT inner join tags on posts.id = tags.post_id");
         $statement->execute();
         $postId = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $postId;

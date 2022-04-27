@@ -21,6 +21,7 @@
         private $biography;
         private $secondEmail;
         private $education;
+        private $socialLink;
 
         public function setEmail($email)
         {
@@ -118,6 +119,17 @@
             return $this->education;
         }
 
+        public function setSocialLink($socialLink)
+        {
+            $this->socialLink = $socialLink;
+            return $this;
+        }
+        
+        public function getSocialLink()
+        {
+            return $this->socialLink;
+        }
+
         //registreren
 
         public function register()
@@ -143,12 +155,21 @@
                 $statement->bindValue(":email", $this->email);
                 $statement->bindValue(":username", $this->username);
                 $statement->bindValue(":password", $password);
-
                 $result = $statement->execute();
                 return $result;
             } else {
                 throw new Exception("email cannot be empty and needs to be a Thomas More email address");
             }
+        }
+
+        public function insertSocials()
+        {
+            $userId = $this->getUserId();
+            
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("INSERT INTO socials (`user_id`) VALUES (:userId)");
+            $statement->bindValue(":userId", $userId);
+            $statement->execute();
         }
 
         public static function getAll()
@@ -165,8 +186,9 @@
         public function canLogin()
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("select email, password from users where email = :email");
+            $statement = $conn->prepare("select email, password from users where email = :email or second_email = :secondEmail");
             $statement->bindValue(":email", $this->email);
+            $statement->bindValue(":secondEmail", $this->email);
             $statement->execute();
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
@@ -335,8 +357,9 @@
         public static function getIdByEmail($email)
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("select id from users where email = :email");
+            $statement = $conn->prepare("select id from users where email = :email or second_email = :secondEmail");
             $statement->bindValue(":email", $email);
+            $statement->bindValue(":secondEmail", $email);
             $statement->execute();
             $result = $statement->fetch();
             return $result['id'];
@@ -352,6 +375,15 @@
             return $result;
         }
 
+        public static function getSocialDataFromId($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT s.`link` FROM users u INNER JOIN socials s ON s.`user_id` = u.`id`");
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
+
         public function updatePictureInDatabase($profilePicture, $id)
         {
             $conn = Db::getInstance();
@@ -359,7 +391,6 @@
             $statement->bindValue(":profilePicture", $profilePicture);
             $statement->bindValue(":id", $id);
             $statement->execute();
-            header('Location: usersettings.php#');
         }
 
         public function canUploadPicture($sessionId)
@@ -438,10 +469,10 @@
                 if (password_verify($password, $hash)) {
                     return true;
                 } else {
-                    throw new Exception('current password is wrong');
+                    throw new Exception('Current password is wrong. Please try again.');
                 }
             } else {
-                throw new Exception("user does not exist");
+                throw new Exception("User does not exist.");
             }
         }
 

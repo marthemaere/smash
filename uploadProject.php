@@ -10,17 +10,14 @@ if (!empty($_POST)) {
         $post->setImage($_POST['image']);
         $post->setDescription($_POST['description']);
         $post->canUploadProject();
-        //$sessionId = $_SESSION['id'];
-        //$userDataFromId = User::getUserDataFromId($sessionId);
-        
+        $sessionId = $_SESSION['id'];
+        $userDataFromId = User::getUserDataFromId($sessionId);
 
+   
         //tags toevoegen
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase();
-        $tags->setPostId();
-
-
 
         
         header("Location: index.php");

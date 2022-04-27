@@ -15,7 +15,27 @@
     }
 
     if (!empty($_POST['submitProfilePicture'])) {
-        $user->canUploadPicture($sessionId);
+        try {
+            $user->canUploadPicture($sessionId);
+            $success = "Profile picture saved. Refresh to see changes.";
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+        }
+    }
+    
+    if (!empty($_POST['updateProfile'])) {
+        try {
+            $biography = $user->setBiography($_POST['biography']);
+            $secondEmail = $user->setSecondEmail($_POST['secondEmail']);
+            $education = $user->setEducation($_POST['education']);
+            $userId = $user->setUserId($sessionId);
+            $user->updateProfile();
+
+            $userDataFromId = User::getUserDataFromId($sessionId);
+            $success = "Profile changes successfully saved.";
+        } catch (\Throwable $e) {
+            $error = $e->getMessage();
+        }
     }
 
 ?><!DOCTYPE html>
@@ -39,10 +59,6 @@
             <h1 class="">Settings</h1>
             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
         </div>
-
-        <?php if (isset($success)): ?>
-            <p class="alert alert-success"><?php echo $success; ?></p>
-        <?php endif; ?>
         
         <div class="row">
             <div class="col-3">
@@ -62,15 +78,14 @@
                         <?php if (isset($error)): ?>
                             <p class="alert alert-danger"><?php echo $error; ?></p>
                         <?php endif; ?>
+                        <?php if (isset($success)): ?>
+                            <p class="alert alert-success"><?php echo $success; ?></p>
+                        <?php endif; ?>
                         <!-- EditProfile > ProfilePicture -->
                         <div class="profile-picture">
                             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
                             <a href="#" class="btn btn-primary" id="upload-new-picture">Upload new picture</a>
                             <div id="upload-file">
-                                <?php if (isset($error)): ?>
-                                <div class="formError"><?php echo $error; ?></div>
-                                <?php endif; ?>
-
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <fieldset class="">
                                         <div class="input-group">
@@ -113,7 +128,7 @@
         </div>
     </div>
 
-    
+    <script src="javascript/usersettings.js"></script>
 
 </body>
 </html>

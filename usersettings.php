@@ -14,21 +14,6 @@
         }
     }
 
-    if (!empty($_POST['updateProfile'])) {
-        try {
-            $biography = $user->setBiography($_POST['biography']);
-            $secondEmail = $user->setSecondEmail($_POST['secondEmail']);
-            $education = $user->setEducation($_POST['education']);
-            $userId = $user->setUserId($sessionId);
-            $user->updateProfile();
-
-            $userDataFromId = User::getUserDataFromId($sessionId);
-            $success = "Profile changes successfully saved.";
-        } catch (\Throwable $e) {
-            $error = $e->getMessage();
-        }
-    }
-
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,10 +34,6 @@
             <h1 class="">Settings</h1>
             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
         </div>
-
-        <?php if (isset($success)): ?>
-            <p class="alert alert-success"><?php echo $success; ?></p>
-        <?php endif; ?>
 
         <div class="row">
             <div class="col-3">
@@ -96,6 +77,5 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="javascript/usersettings.js"></script>
 </body>
 </html>

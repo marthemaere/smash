@@ -8,7 +8,7 @@ if (!empty($_POST)) {
         //post aanmaken
         $post = new Post();
         $post->setTitle($_POST['title']);
-        $post->setImage($_POST['image']);
+        //$post->setImage($_POST['image']);
         $post->setDescription($_POST['description']);
         $post->canUploadProject();
         $sessionId = $_SESSION['id'];
@@ -19,11 +19,12 @@ if (!empty($_POST)) {
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase();
+        //$tags->setPostId();
 
-        header("Location: index.php");
-        session_start();
         
         header("Location: index.php");
+
+
     } catch (\Throwable $e) {
         $error = $e->getMessage();
     }

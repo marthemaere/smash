@@ -1,6 +1,8 @@
 <?php
 include_once("bootstrap.php");
 
+session_start();
+
 if (!empty($_POST)) {
     try {
 
@@ -15,6 +17,10 @@ if (!empty($_POST)) {
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase($id);
+
+        $userId= $_SESSION['id'];
+        $post->setUserId($userId);
+        //$post->canUploadProject();
         
         header("Location: index.php");
 

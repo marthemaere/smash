@@ -10,16 +10,16 @@ class Post
     private $username;
 
 
+    public function getUserId()
+    {
+        return $this->userId;   
+    }
+
     public function setUserId($userId)
-    { 
+    {
         $this->userId = $userId;
         return $this;
     }
-
-    public function getUserId(){
-        return $this->userId;
-    }
-
 
     public function getTitle()
     {
@@ -76,18 +76,19 @@ class Post
         return $result->fetchAll();
     }
 
-
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image, description, date) values (:title, :image, :description, now())");
+        $statement = $conn->prepare("insert into posts (title, image, description, date, user_id) values (:title, :image, :description, now(), :userId)");
         
         $title = $this->getTitle();
         $image = $this->getImage();
+        $userId = $this->getUserId();
         $description = $this->getDescription();
         $statement->bindValue(":title", $title);
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
+        $statement->bindValue(":userId", $userId);
         $result = $statement->execute();
         return $conn->lastInsertId();
     }
@@ -135,7 +136,6 @@ class Post
         } else {
             throw new Exception("You cannot upload files of this type");
         }
-
     }
     }
 

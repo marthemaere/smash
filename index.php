@@ -1,21 +1,14 @@
 <?php
     include_once("bootstrap.php");
     session_start();
-    
-      /*  $id = session_create_id();
-        session_id($id);
-        print("\n"."Id: ".$id);
-        session_start();
-        session_commit();
-*/
-
+	
     $conn = Db::getInstance();
 
     if (!isset($_SESSION['id'])) {
         if (!empty($_POST)) {
             try {
                 $post->getTitle($_POST['title']);
-                $post->getImage($_POST['image']);
+               // $post->getImage($_POST['image']);
                 $post->save();
                 echo $post;
             } catch (Throwable $e) {
@@ -27,10 +20,10 @@
         if (!empty($_POST)) {
             try {
                 $post->getTitle($_POST['title']);
-                $post->getImage($_POST['image']);
                 $post->getDescription($_POST['description']);
                 $post->getTags($_POST['tags']);
-                $post->getUserId($_SESSION['id']);
+                $post->setUserId($_SESSION['id']);
+                
                 $post->save();
                 echo $post;
             } catch (Throwable $e) {
@@ -38,18 +31,18 @@
             }
         }
 
-        $posts = Post::getAll();
+    $posts = Post::getAll();
 
-        $limit= 20;
-        $conn = Db::getInstance();
-        $result = $conn->query("select count(id) AS id from posts");
-        $postCount= $result->fetchAll();
-        $total= $postCount[0]['id'];
-        $pages= ceil($total / $limit);
+    $limit= 15;
+    $conn = Db::getInstance();
+    $result = $conn->query("select count(id) AS id from posts");
+    $postCount= $result->fetchAll();
+    $total= $postCount[0]['id'];
+    $pages= ceil($total / $limit); 
 
-        $sessionId = $_SESSION['id'];
-        $userDataFromId = User::getUserDataFromId($sessionId);
-    }
+    $sessionId = $_SESSION['id'];
+    $userDataFromId = User::getUserDataFromId($sessionId);
+   }
 
 
 ?><!DOCTYPE html>
@@ -75,7 +68,7 @@
         </div>
     <?php endif; ?>
 
-    <div class="container mt-5">
+    <div class="container mt-5 mb-5">
        <div class="row justify-content-center">
 
     <?php
@@ -84,19 +77,19 @@
 
     <?php if (!isset($_SESSION['id'])) :?>
 
-            <div class="col-md-3">
+            <div class="col-4 p-5">
                 <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="200px" class="rounded" style="object-fit:cover" >
                 <h2><?php echo $p['title']; ?></h2>
-                <div>
+                <div class="d-flex justify-content-between align-items-center"v>
                     <a href="/login.php" class="link-dark">View comments</a>
-                    <a href="/login.php" class="btn btn-outline-primary me-2">Smash</a>
+                    <a href="/login.php" class="btn btn-outline-primary">Smash</a>
                 </div>
             </div>
       
     <?php else: ?>
 
-            <div class="col-md-3">
-                <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="200px" class="rounded" style="object-fit:cover" >
+            <div class="col-4 p-5">
+                <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="220px" class="rounded" style="object-fit:cover" >
                 <div>
                     <div class="d-flex align-items-center justify-content-between">
                         <div class="d-flex justify-content-start">
@@ -104,7 +97,7 @@
                             <h4 class="pt-2"><?php echo $p['username'];?></h4>
                         </div>
                         <div>
-                            <img src="assets/images/empty-heart.svg" width="18px">
+                            <img src="assets/images/empty-heart.svg" width="18px" class="like">
                         </div>
                     </div>
                     <h2><?php echo $p['title']; ?></h2>
@@ -136,5 +129,6 @@
    
     <?php require_once("footer.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="/javascript/like.js"></script>
 </body>
 </html>

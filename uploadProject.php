@@ -6,21 +6,21 @@ session_start();
 if (!empty($_POST)) {
     try {
 
+
+
         //post aanmaken
     
         $post = new Post();
         $post->setTitle($_POST['title']);
         $post->setDescription($_POST['description']);
+        $userId= $_SESSION['id'];
+        $post->setUserId($userId);
         $id = $post->canUploadProject();
 
         //tags toevoegen
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase($id);
-
-        $userId= $_SESSION['id'];
-        $post->setUserId($userId);
-        //$post->canUploadProject();
         
         header("Location: index.php");
 

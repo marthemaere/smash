@@ -10,16 +10,16 @@ class Post
     private $description;
     private $tags;
 
+    public function getUserId()
+    {
+        return $this->userId;   
+    }
+
     public function setUserId($userId)
-    { 
+    {
         $this->userId = $userId;
         return $this;
     }
-
-    /*public function getUserId(){
-        return $this->userId;
-    }*/
-
 
     public function getTitle()
     {
@@ -52,9 +52,7 @@ class Post
 
     public function getTags()
     {
-
-        return $this->tags;
-        
+        return $this->tags;   
     }
 
     public function setTags($tags)
@@ -89,28 +87,19 @@ class Post
         return $result->fetchAll();
     }
 
-   /* public static function getUserId()
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT posts.user_id, users.username FROM posts INNER JOIN users ON posts.user_id = users.id;");
-     //   $statement->bindValue('user_id', $userId);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }*/
-
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image, description, date, tags) values (:title, :image, :description, now(), :tags)");
+        $statement = $conn->prepare("insert into posts (title, image, description, date, user_id) values (:title, :image, :description, now(), :userId)");
         
         $title = $this->getTitle();
         $image = $this->getImage();
+        $userId = $this->getUserId();
         $description = $this->getDescription();
-        $tags = $this->getTags();
         $statement->bindValue(":title", $title);
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
-        $statement->bindValue(":tags", $tags);
+        $statement->bindValue(":userId", $userId);
         $result = $statement->execute();
         return $result;
     }
@@ -118,7 +107,6 @@ class Post
     public function canUploadProject()
     {
         $file = $_FILES['file'];
-        print_r($file);
         $fileName = $_FILES['file']['name'];
         $fileTmpName = $_FILES['file']['tmp_name'];
         $fileSize = $_FILES['file']['size'];
@@ -149,7 +137,6 @@ class Post
         } else {
             throw new Exception("You cannot upload files of this type");
         }
-
     }
     }
 

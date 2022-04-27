@@ -1,4 +1,5 @@
 <?php
+session_start();
     $sessionId = $_SESSION['id'];
     $userDataFromId = User::getUserDataFromId($sessionId);
 ?>

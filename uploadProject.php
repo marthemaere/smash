@@ -2,19 +2,19 @@
 include_once("bootstrap.php");
 /*print("Values from the session with id: ".session_id());*/
 
+session_start();
+
 if (!empty($_POST)) {
     try {
         $post = new Post();
         $post->setTitle($_POST['title']);
-        $post->setImage($_POST['image']);
         $post->setDescription($_POST['description']);
-        $post->setTags($_POST['tags']);
+
+        $userId= $_SESSION['id'];
+        $post->setUserId($userId);
         $post->canUploadProject();
-        $sessionId = $_SESSION['id'];
-        $userDataFromId = User::getUserDataFromId($sessionId);
 
         header("Location: index.php");
-        session_start();
         
     } catch (\Throwable $e) {
         $error = $e->getMessage();

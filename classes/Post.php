@@ -7,19 +7,19 @@ class Post
     private $title;
     private $image;
     private $description;
-    private $username;
+    private $userId;
 
+
+    public function getUserId()
+    {
+        return $this->userId;   
+    }
 
     public function setUserId($userId)
-    { 
+    {
         $this->userId = $userId;
         return $this;
     }
-
-    public function getUserId(){
-        return $this->userId;
-    }
-
 
     public function getTitle()
     {
@@ -76,30 +76,27 @@ class Post
         return $result->fetchAll();
     }
 
-
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image, description, date) values (:title, :image, :description, now())");
+        $statement = $conn->prepare("insert into posts (title, image, description, date, user_id) values (:title, :image, :description, now(), :userId)");
         
         $title = $this->getTitle();
         $image = $this->getImage();
+        $userId = $this->getUserId();
         $description = $this->getDescription();
         $statement->bindValue(":title", $title);
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
+        $statement->bindValue(":userId", $userId);
+        
         $result = $statement->execute();
         return $conn->lastInsertId();
+        return $result;
+     
+        
     }
 
-    /*public static function getUserId(int $userId)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("select users.`id` from users inner join users on posts.`user_id` = users.`id`");
-        $statement->bindValue('userId', $userId);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }*/
 
     public function canUploadProject()
     {
@@ -118,14 +115,13 @@ class Post
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 500000) {
-                    $fileNameNew = uniqid('', true) . "." . $fileActualExt;
-                    $fileDestination = 'uploaded_projects/' . $fileNameNew;
+                    //$fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                    $fileDestination = 'uploaded_projects/' . $fileName;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $image = basename($fileName);
                     $this->setImage($image);
                     $result = $this->setProjectInDatabase();
-                    var_dump($result);
-                   return $result;
+                    return $result;
                     
                 } else {
                     throw new Exception("Your file is too large!");
@@ -136,7 +132,6 @@ class Post
         } else {
             throw new Exception("You cannot upload files of this type");
         }
-
     }
     }
 

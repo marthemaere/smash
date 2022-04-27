@@ -31,14 +31,14 @@ class Tag
         return $this;
     }
 
-    public function addPostId()
+    /*public function addPostId()
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("INSERT INTO tags(post_id) SELECT posts.id from posts inner join tags on posts.id = tags.post_id");
         $statement->execute();
         $postId = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $postId;
-    }
+    }*/
 
     public function addTagsToDatabase($post_id){
         $tags = $_POST["tags"];
@@ -57,14 +57,5 @@ class Tag
         return $result;
         
     }
-
-
-
-
-
-    
-
-   
-   
 
 }

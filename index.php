@@ -1,13 +1,6 @@
 <?php
     include_once("bootstrap.php");
     session_start();
-    
-      /*  $id = session_create_id();
-        session_id($id);
-        print("\n"."Id: ".$id);
-        session_start();
-        session_commit();
-*/
 
     $conn = Db::getInstance();
 

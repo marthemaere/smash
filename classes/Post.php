@@ -7,24 +7,14 @@ class Post
     private $title;
     private $image;
     private $description;
-<<<<<<< HEAD
     private $username;
-    //private $tags;
 
-
-=======
-    private $tags;
->>>>>>> main
 
     public function setUserId($userId)
     { 
         $this->userId = $userId;
         return $this;
     }
-
-    /*public function getUserId(){
-        return $this->userId;
-    }*/
 
 
     public function getTitle()
@@ -43,7 +33,7 @@ class Post
     }
 
 
-    public function getImage()
+   /* public function getImage()
     {
         return $this->image;
     }
@@ -53,24 +43,8 @@ class Post
     {
         $this->image = $image;
         return $this;
-    }
+    }*/
 
-
-<<<<<<< HEAD
-=======
-    public function getTags()
-    {
-
-        return $this->tags;
-    }
-
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-        return $this;
-    }
-
->>>>>>> main
     public function getDescription()
     {
         return $this->description;
@@ -86,80 +60,38 @@ class Post
         return $this;
     }
 
-<<<<<<< HEAD
-    public function getUsername()
-    {
-        return $this->username;
-    }
-
- 
-    public function setUsername($username)
-    {
-        $this->username = $username;
-        return $this;
-    }
     
 
-=======
->>>>>>> main
     public static function getAll()
     {
-        $limit=20;
-        $page= isset( $_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
-        $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
-
         $conn = Db::getInstance();
-        $result = $conn->query("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY date DESC LIMIT $start, $limit");
+        $result = $conn->query("select * from posts");
         return $result->fetchAll();
     }
 
-<<<<<<< HEAD
-    public function getUsernameById($username){
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("select username from posts inner join users on user_id = posts.user_id");
-        $username = $statement->execute();
-        return $username;
-    }
-    
-=======
-   /* public static function getUserId()
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT posts.user_id, users.username FROM posts INNER JOIN users ON posts.user_id = users.id;");
-     //   $statement->bindValue('user_id', $userId);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }*/
 
->>>>>>> main
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into posts (title, image, description, date) values (:title, :image, :description, now())");
+        
         $title = $this->getTitle();
-        $image = $this->getImage();
         $description = $this->getDescription();
-        //$tags = $this->getTags();
         $statement->bindValue(":title", $title);
-        $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
-       // $statement->bindValue(":tags", $tags);
         $result = $statement->execute();
         return $result;
     }
 
-<<<<<<< HEAD
-    /*public static function getUsername(int $userId)
+    /*public static function getUserId(int $userId)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select username from posts inner join users on users.id = :posts.user_id");
-        $statement->bindValue('posts.user_id', $username);
+        $statement = $conn->prepare("select users.`id` from users inner join users on posts.`user_id` = users.`id`");
+        $statement->bindValue('userId', $userId);
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }*/
 
-=======
->>>>>>> main
     public function canUploadProject()
     {
         $file = $_FILES['file'];
@@ -177,14 +109,10 @@ class Post
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 500000) {
-<<<<<<< HEAD
-=======
-                   // $fileNameNew = uniqid('', true) . "." . $fileActualExt;
->>>>>>> main
-                    $fileDestination = 'uploaded_projects/' . $fileName;
+                    $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                    $fileDestination = 'uploaded_projects/' . $fileNameNew;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $image = basename($fileName);
-                    $this->setImage($image);
                     $this->setProjectInDatabase($image);
                     
                 } else {
@@ -198,7 +126,6 @@ class Post
         }
 
     }
-
     }
 
 

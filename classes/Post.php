@@ -89,9 +89,9 @@ class Post
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
         $statement->bindValue(":userId", $userId);
+        $result = $statement->execute();
         return $conn->lastInsertId();
-
-      //  return $result;
+        return $result;
         
     }
 

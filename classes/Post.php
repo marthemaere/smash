@@ -93,15 +93,6 @@ class Post
         return $conn->lastInsertId();
     }
 
-    /*public static function getUserId(int $userId)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("select users.`id` from users inner join users on posts.`user_id` = users.`id`");
-        $statement->bindValue('userId', $userId);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }*/
-
     public function canUploadProject()
     {
         $file = $_FILES['file'];

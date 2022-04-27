@@ -7,7 +7,7 @@ class Post
     private $title;
     private $image;
     private $description;
-    private $username;
+    private $userId;
 
 
     public function getUserId()
@@ -89,8 +89,10 @@ class Post
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
         $statement->bindValue(":userId", $userId);
-        $result = $statement->execute();
         return $conn->lastInsertId();
+
+      //  return $result;
+        
     }
 
     /*public static function getUserId(int $userId)
@@ -119,13 +121,13 @@ class Post
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 500000) {
-                    $fileNameNew = uniqid('', true) . "." . $fileActualExt;
-                    $fileDestination = 'uploaded_projects/' . $fileNameNew;
+                    //$fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                    $fileDestination = 'uploaded_projects/' . $fileName;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $image = basename($fileName);
                     $this->setImage($image);
                     $result = $this->setProjectInDatabase();
-                   return $result;
+                    return $result;
                     
                 } else {
                     throw new Exception("Your file is too large!");

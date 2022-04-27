@@ -10,7 +10,6 @@ if (!empty($_POST)) {
         $post->setTitle($_POST['title']);
         $post->setDescription($_POST['description']);
         $id = $post->canUploadProject();
-        var_dump($id . "hallo");
 
         //tags toevoegen
         $tags = new Tag();

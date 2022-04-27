@@ -124,7 +124,6 @@ class Post
                     $image = basename($fileName);
                     $this->setImage($image);
                     $result = $this->setProjectInDatabase();
-                    var_dump($result);
                    return $result;
                     
                 } else {

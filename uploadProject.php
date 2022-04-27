@@ -5,19 +5,19 @@ if (!empty($_POST)) {
     try {
 
         //post aanmaken
+    
         $post = new Post();
         $post->setTitle($_POST['title']);
         $post->setDescription($_POST['description']);
-        $post->canUploadProject();
+        $id = $post->canUploadProject();
+        var_dump($id . "hallo");
 
-   
         //tags toevoegen
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
-        $tags->addTagsToDatabase();
-        $tags->addPostId();
+        $tags->addTagsToDatabase($id);
         
-        header("Location: index.php");
+        //header("Location: index.php");
 
 
     } catch (\Throwable $e) {

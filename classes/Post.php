@@ -7,7 +7,8 @@ class Post
     private $title;
     private $image;
     private $description;
-    private $tags;
+    private $username;
+
 
     public function setUserId($userId)
     { 
@@ -36,7 +37,7 @@ class Post
     }
 
 
-    public function getImage()
+   public function getImage()
     {
         return $this->image;
     }
@@ -45,19 +46,6 @@ class Post
     public function setImage($image)
     {
         $this->image = $image;
-        return $this;
-    }
-
-
-    public function getTags()
-    {
-
-        return $this->tags;
-    }
-
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
         return $this;
     }
 
@@ -76,9 +64,10 @@ class Post
         return $this;
     }
 
+    
     public static function getAll()
     {
-        $limit=20;
+        $limit=15;
         $page= isset( $_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
         $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
 
@@ -87,14 +76,6 @@ class Post
         return $result->fetchAll();
     }
 
-   /* public static function getUserId()
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT posts.user_id, users.username FROM posts INNER JOIN users ON posts.user_id = users.id;");
-     //   $statement->bindValue('user_id', $userId);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }*/
 
     public function setProjectInDatabase()
     {
@@ -104,14 +85,21 @@ class Post
         $title = $this->getTitle();
         $image = $this->getImage();
         $description = $this->getDescription();
-        //$tags = $this->getTags();
         $statement->bindValue(":title", $title);
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
-       // $statement->bindValue(":tags", $tags);
         $result = $statement->execute();
         return $result;
     }
+
+    /*public static function getUserId(int $userId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select users.`id` from users inner join users on posts.`user_id` = users.`id`");
+        $statement->bindValue('userId', $userId);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }*/
 
     public function canUploadProject()
     {
@@ -130,8 +118,8 @@ class Post
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 500000) {
-                   // $fileNameNew = uniqid('', true) . "." . $fileActualExt;
-                    $fileDestination = 'uploaded_projects/' . $fileName;
+                    $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+                    $fileDestination = 'uploaded_projects/' . $fileNameNew;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $image = basename($fileName);
                     $this->setImage($image);

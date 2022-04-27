@@ -34,18 +34,17 @@ class Tag
         return $this;
     }
 
-    public function addPostId()
+    /*public function addPostId()
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("SELECT posts.id from posts INSERT inner join tags on posts.id = tags.post_id");
         $statement->execute();
         $postId = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $postId;
-    }
+    }*/
 
 
     public function addTagsToDatabase(){
-
         $tags = $_POST["tags"];
         $tags = explode(", ", $tags);
         $conn = Db::getInstance();

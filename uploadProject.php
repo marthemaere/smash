@@ -16,7 +16,7 @@ if (!empty($_POST)) {
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase($id);
         
-        //header("Location: index.php");
+        header("Location: index.php");
 
 
     } catch (\Throwable $e) {

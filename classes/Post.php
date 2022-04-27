@@ -89,7 +89,7 @@ class Post
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
         $result = $statement->execute();
-        return $result;
+        return $conn->lastInsertId();
     }
 
     /*public static function getUserId(int $userId)
@@ -123,7 +123,9 @@ class Post
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $image = basename($fileName);
                     $this->setImage($image);
-                    $this->setProjectInDatabase($image);
+                    $result = $this->setProjectInDatabase();
+                    var_dump($result);
+                   return $result;
                     
                 } else {
                     throw new Exception("Your file is too large!");

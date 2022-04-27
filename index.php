@@ -8,7 +8,6 @@
         if (!empty($_POST)) {
             try {
                 $post->getTitle($_POST['title']);
-               // $post->getImage($_POST['image']);
                 $post->save();
                 echo $post;
             } catch (Throwable $e) {

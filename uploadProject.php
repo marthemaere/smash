@@ -7,18 +7,15 @@ if (!empty($_POST)) {
         //post aanmaken
         $post = new Post();
         $post->setTitle($_POST['title']);
-        $post->setImage($_POST['image']);
+       // $post->setImage($_POST['image']);
         $post->setDescription($_POST['description']);
         $post->canUploadProject();
-        $sessionId = $_SESSION['id'];
-        $userDataFromId = User::getUserDataFromId($sessionId);
 
    
         //tags toevoegen
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
         $tags->addTagsToDatabase();
-        $tags->addPostId();
 
         
         header("Location: index.php");

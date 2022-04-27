@@ -15,9 +15,9 @@ class Post
         return $this;
     }
 
-    /*public function getUserId(){
+    public function getUserId(){
         return $this->userId;
-    }*/
+    }
 
 
     public function getTitle()

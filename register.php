@@ -10,7 +10,11 @@
     
             $user->register();
             $success= "user saved";
+            $id = User::getIdByEmail($user->getEmail());
+            $user->setUserId($id);
             session_start();
+            $_SESSION['id'] = $id;
+            $_SESSION['email']= $user->getEmail();
             header("Location:index.php");
         } catch (\Throwable $e) {
             $error= $e->getMessage();

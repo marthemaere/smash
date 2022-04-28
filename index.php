@@ -107,6 +107,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="" class="link-dark">View comments</a>
                     <a href="" class="btn btn-outline-primary">Smash</a>
+                    <a href="deleteProject.php" class="btndelete btn-link">Delete project</a>
                 </div>
             </div>
 

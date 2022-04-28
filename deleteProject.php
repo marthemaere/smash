@@ -13,8 +13,8 @@
     //verwijder het account
     if (!empty($_POST['confirm'])) {
         try {
-            $post = Post::deleteProject($id);
-            header('Location: index.php');
+            $post = Post::deleteProject($postId);
+           // header('Location: index.php');
         } catch (Throwable $e) {
             $error = $e->getMessage();
         }

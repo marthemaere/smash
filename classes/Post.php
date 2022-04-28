@@ -95,14 +95,6 @@ class Post
         
     }
 
-    /*public static function getUserId(int $userId)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("select users.`id` from users inner join users on posts.`user_id` = users.`id`");
-        $statement->bindValue('userId', $userId);
-        $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }*/
 
     public function canUploadProject()
     {
@@ -139,6 +131,17 @@ class Post
             throw new Exception("You cannot upload files of this type");
         }
     }
+
+    public static function deleteProject($id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE FROM `smash`.`posts` INNER JOIN tags ON tags.`id` = posts.`user_id` WHERE `id`= :id");                            
+        $statement->bindValue(":id", $id);
+        return $statement->execute();
+
+    }
+
+
     }
 
 

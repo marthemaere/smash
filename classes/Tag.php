@@ -42,7 +42,7 @@ class Tag
 
     public function addTagsToDatabase($post_id)
     {
-        $tags = $this->tags;
+        $tags = $this->getTags();
         $tags = explode(", ", $tags);
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into tags (tag, post_id) values (:tag, :post_id)");

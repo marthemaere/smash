@@ -16,7 +16,7 @@
             </form>
             <?php else: ?>
             <div class="flex-shrink-0 dropdown d-flex"> <!--class="d-flex"-->
-                <a href="/php/smash/uploadProject.php" class="btn btn-primary m-3">Upload Project</a>
+                <a href="uploadProject.php" class="btn btn-primary m-3">Upload Project</a>
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="p-2 rounded-circle img-thumbnail" >

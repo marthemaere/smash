@@ -40,7 +40,7 @@
 <body>
 <div class="resetPassword row">
         <div class="reset--image col">
-            <a class="navbar-brand">Smasssh</a>
+            <a href="index.php" class="navbar-brand">Smasssh</a>
         </div>
         <div class="reset--form col">
             <div class="form form--reset">

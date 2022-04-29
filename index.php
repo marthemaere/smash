@@ -1,49 +1,35 @@
 <?php
     include_once("bootstrap.php");
     session_start();
-	
+    
 
     $conn = Db::getInstance();
 
-    if (!isset($_SESSION['id'])) {
-        if (!empty($_POST)) {
-            try {
-                $post->getTitle($_POST['title']);
-                $post->save();
-                echo $post;
-            } catch (Throwable $e) {
-                $error = $e->getMessage();
-            }
-        }
+   
         $posts = Post::getAll();
-    } else {
-        if (!empty($_POST)) {
-            try {
-                $post->getTitle($_POST['title']);
-                $post->getDescription($_POST['description']);
-                $post->getTags($_POST['tags']);
-                $post->setUserId($_SESSION['id']);
-                
-                $post->save();
-                echo $post;
-            } catch (Throwable $e) {
-                $error = $e->getMessage();
-            }
+        if (empty($posts)) {
+            $emptystate = true;
         }
 
-    $posts = Post::getAll();
+        $limit= 15;
+        $conn = Db::getInstance();
+        $result = $conn->query("select count(id) AS id from posts");
+        $postCount= $result->fetchAll();
+        $total= $postCount[0]['id'];
+        $pages= ceil($total / $limit);
 
-    $limit= 15;
-    $conn = Db::getInstance();
-    $result = $conn->query("select count(id) AS id from posts");
-    $postCount= $result->fetchAll();
-    $total= $postCount[0]['id'];
-    $pages= ceil($total / $limit); 
-
-    $sessionId = $_SESSION['id'];
-    $userDataFromId = User::getUserDataFromId($sessionId);
-   }
-
+        if (isset($_SESSION['id'])) {
+            $sessionId = $_SESSION['id'];
+            $userDataFromId = User::getUserDataFromId($sessionId);
+        }
+        
+    if (!empty($_POST['submit-search'])) {
+        $search = $_POST['search'];
+        $posts = Post::search($search);
+        if (empty($posts)) {
+            $emptystate = true;
+        }
+    }
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -60,17 +46,28 @@
 </head>
 <body>
     <?php require_once("header.php"); ?>
+
+    <div class="justify-content-center container">
+        <form class="form" action="" method="post">
+            <div class="form-group d-flex justify-content-center">
+                <input class="form-control col-2 col-lg-0 mb-3 mb-lg-0 me-lg-3" type="text" name="search" placeholder="Search for projects">
+                <input class="btn btn-dark mt-4" type="submit" name="submit-search" value="Search">
+            </div>    
+        </form>
+    </div>
+
     <?php
-    if (!empty($_POST)): ?>
+    if (isset($emptystate)): ?>
         <div class= "empty-state">
             <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">
             <p> No projects were found. </p> 
         </div>
     <?php endif; ?>
 
+
     <div class="container mt-5 mb-5">
        <div class="row justify-content-center">
-
+        
     <?php
         foreach ($posts as $p):
     ?>
@@ -102,7 +99,7 @@
                     </div>
                     <h2><?php echo $p['title']; ?></h2>
                     <p><?php echo $p['description']; ?></p>
-                    <p class="link-primary"><?php echo $p['tags']; ?></p>
+                    <p class="link-primary"><?php echo $p['tag']; ?></p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="" class="link-dark">View comments</a>

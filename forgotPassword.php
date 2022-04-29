@@ -4,9 +4,11 @@
     if (!empty($_POST)) {
         $email = $_POST['email'];
         try {
-            $user = User::hasAccount($email);
+            $mailer = new Mailer();
+            $mailer->setEmail($_POST['email']);
+            $mailer->hasAccount();
             if (!empty($_POST['forgot_password'])) {
-                $user = User::sendPasswordResetEmail($email);
+                $mailer->sendPasswordResetEmail();
                 $success = true;
                 // header("Location: passwordMessage.php");
             }

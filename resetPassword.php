@@ -1,19 +1,19 @@
 <?php
     include_once(__DIR__ . "/bootstrap.php");
     $code = $_GET['code'];
-    $link = User::getCode($code); //check if code exists in database
-    $expired = User::linkExpired(); //check if link is expired
+    $link = Mailer::getCode($code); //check if code exists in database
+    $expired = Mailer::linkExpired(); //check if link is expired
     if ($link === false || $expired === true) {
         exit("Can't find page");
     } else {
         try {
             // er is een nieuw wachtwoord ingevuld
             if (!empty($_POST['save_password'])) {
-                $user = User::getEmailFromCode($code);
+                $user = Mailer::getEmailFromCode($code);
                 //er bestaat een email met die code
                 if (!empty($user)) {
-                    $updatePassword = User::saveNewPassword($user, $_POST['password']);
-                    $deleteCode = User::deleteCode($code);
+                    $updatePassword = Mailer::saveNewPassword($user, $_POST['password']);
+                    $deleteCode = Mailer::deleteCode($code);
                     $success = true;
                 } else {
                     exit("Can't find page");

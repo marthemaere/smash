@@ -5,15 +5,7 @@
 
     $conn = Db::getInstance();
 
-    if (!isset($_SESSION['id'])) {
-        $posts = Post::getAll();
-        $limit= 15;
-        $conn = Db::getInstance();
-        $result = $conn->query("select count(id) AS id from posts");
-        $postCount= $result->fetchAll();
-        $total= $postCount[0]['id'];
-        $pages= ceil($total / $limit);
-    } else {
+   
         $posts = Post::getAll();
         if (empty($posts)) {
             $emptystate = true;
@@ -26,10 +18,11 @@
         $total= $postCount[0]['id'];
         $pages= ceil($total / $limit);
 
-        $sessionId = $_SESSION['id'];
-        $userDataFromId = User::getUserDataFromId($sessionId);
-    }
-
+        if (isset($_SESSION['id'])) {
+            $sessionId = $_SESSION['id'];
+            $userDataFromId = User::getUserDataFromId($sessionId);
+        }
+        
     if (!empty($_POST['submit-search'])) {
         $search = $_POST['search'];
         $posts = Post::search($search);

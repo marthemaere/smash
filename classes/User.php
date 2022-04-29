@@ -137,9 +137,9 @@
             $options=[
                 'cost' => 12,
             ];
-            $password= password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
+            $password= password_hash($this->getPassword(), PASSWORD_DEFAULT, $options);
 
-            $email_input = $_POST['email'];
+            $email_input = $this->getEmail();
             $domains = array('student.thomasmore.be', 'thomasmore.be');
             $pattern = "/^[a-z0-9._%+-]+@[a-z0-9.-]*(" . implode('|', $domains) . ")$/i";
 

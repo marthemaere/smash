@@ -16,7 +16,16 @@ a.navbar-brand {
     color: black;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, p.username, p.biography {
     font-family: 'Spectral', serif;
     font-weight: 900;
+}
+
+p.username {
+    font-size: 1.3rem;
+}
+
+p.biography {
+    font-size: 2.7rem;
+    line-height: 1.25;
 }

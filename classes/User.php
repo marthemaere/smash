@@ -22,8 +22,9 @@
         private $secondEmail;
         private $education;
         
-        private $socialType;
-        private $socialLink;
+        private $socialLinkedIn;
+        private $socialInstagram;
+        private $socialGitHub;
 
         public function setEmail($email)
         {
@@ -127,20 +128,37 @@
             return $this;
         }
         
-        public function getSocialType()
+        public function setSocialLinkedIn($socialLinkedIn)
         {
-            return $this->socialType;
-        }
-
-        public function setSocialLink($socialLink)
-        {
-            $this->socialLink = $socialLink;
+            $this->socialLinkedIn = $socialLinkedIn;
             return $this;
         }
         
-        public function getSocialLink()
+        public function getSocialLinkedIn()
         {
-            return $this->socialLink;
+            return $this->socialLinkedIn;
+        }
+
+        public function setSocialInstagram($socialInstagram)
+        {
+            $this->socialInstagram = $socialInstagram;
+            return $this;
+        }
+        
+        public function getSocialInstagram()
+        {
+            return $this->socialInstagram;
+        }
+
+        public function setSocialGitHub($socialGitHub)
+        {
+            $this->socialGitHub = $socialGitHub;
+            return $this;
+        }
+        
+        public function getSocialGitHub()
+        {
+            return $this->socialGitHub;
         }
 
         //registreren
@@ -436,7 +454,11 @@
         public function updateProfile()
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("UPDATE users SET bio = :biography, second_email = :secondEmail, education = :education WHERE id = :userId");
+            $statement = $conn->prepare(
+                "UPDATE users 
+                SET bio = :biography, second_email = :secondEmail, education = :education
+                WHERE id = :userId"
+            );
 
             $biography = $this->getBiography();
             $secondEmail = $this->getSecondEmail();
@@ -446,6 +468,28 @@
             $statement->bindValue(":biography", $biography);
             $statement->bindValue(":secondEmail", $secondEmail);
             $statement->bindValue(":education", $education);
+            $statement->bindValue(":userId", $userId);
+
+            $statement->execute();
+        }
+
+        public function updateSocials()
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare(
+                "UPDATE users
+                SET social_linkedin = :linkedin, social_instagram = :instagram, social_github = :github
+                WHERE id = :userId"
+            );
+
+            $linkedIn = $this->getSocialLinkedIn();
+            $instagram = $this->getSocialInstagram();
+            $gitHub = $this->getSocialGitHub();
+            $userId = $this->getUserId();
+
+            $statement->bindValue(":linkedin", $linkedIn);
+            $statement->bindValue(":instagram", $instagram);
+            $statement->bindValue(":github", $gitHub);
             $statement->bindValue(":userId", $userId);
 
             $statement->execute();
@@ -496,56 +540,6 @@
                                             
                                            
             $statement->bindValue(":id", $id);
-            return $statement->execute();
-        }
-
-        public static function getSocialDataFromId($id)
-        {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT DISTINCT s.id, s.link, t.name, t.icon FROM socials s INNER JOIN `social_type` t WHERE s.user_id = :id");
-            $statement->bindValue(":id", $id);
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            var_dump($result);
-            return $result;
-        }
-
-        public function insertSocialDataFromId($id)
-        {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("INSERT INTO socials (`user_id`, `social_type`, `link`) VALUES (:id, :stype, :slink)");
-            $statement->bindValue(":id", $id);
-
-            $type = $this->getSocialType();
-            $link = $this->getSocialLink();
-
-            $statement->bindValue(":stype", $type);
-            $statement->bindValue(":slink", $link);
-            $result = $statement->execute();
-            return $result;
-        }
-
-        public function updateSocialDataFromId($id)
-        {
-            $conn = DB::getInstance();
-            $statement = $conn->prepare("UPDATE socials SET link = :slink WHERE `user_id` = :id AND `social_type` = :stype");
-            $statement->bindValue(":id", $id);
-
-            $type = $this->getSocialType();
-            $link = $this->getSocialLink();
-
-            $statement->bindValue(":slink", $link);
-            $statement->bindValue(":stype", $type);
-            $statement->execute();
-        }
-
-        public function deleteSocialDataFromId($id)
-        {
-            $conn = DB::getInstance();
-            $statement = $conn->prepare("DELETE FROM socials WHERE `user_id` = :id AND `social_type` = :stype;");
-            $type = $this->getSocialType();
-            $statement->bindValue(":id", $id);
-            $statement->bindValue(":stype", $type);
             return $statement->execute();
         }
     }

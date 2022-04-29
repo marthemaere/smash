@@ -9,13 +9,24 @@
             $user = new User();
             $sessionId = $_SESSION['id'];
             $userDataFromId = User::getUserDataFromId($sessionId);
-            $socialAccounts = User::getSocialDataFromId($sessionId);
         } catch (\Throwable $e) {
             $error = $e->getMessage();
         }
     }
 
     if (!empty($_POST['updateSocialProfiles'])) {
+        try {
+            $linkedIn = $user->setSocialLinkedIn($_POST['linkedin']);
+            $instagram = $user->setSocialInstagram($_POST['instagram']);
+            $gitHub = $user->setSocialGitHub($_POST['github']);
+            $userId = $user->setUserId($sessionId);
+            $user->updateSocials();
+
+            $userDataFromId = User::getUserDataFromId($sessionId);
+            $success = "Social profiles successfully saved.";
+        } catch (\Throwable $e) {
+            $error = $e->getMessage();
+        }
     }
 
 ?><!DOCTYPE html>
@@ -51,21 +62,37 @@
                 </div>
             </div>
 
-             <!-- ChangePassword -->
-             <div class="col-9">
-             <!-- AddSocialAccounts -->
-             <div class="tab-pane fade active show" id="socials" role="tabpanel" aria-labelledby="socials-list">
-                        <h2 class="mb-4">Share social links</h2>
-                        <form action="" method="post">
-                            <?php foreach ($socialAccounts as $key => $socialAccount): ?>
+            <div class="col-9">
+                <div class="" id="socials" role="tabpanel" aria-labelledby="socials-list">
+                    <h2 class="mb-4">Share social links</h2>
+                    <p>
+                        Add links of your other social media accounts to your profile to share your work.
+                    </p>
+                    <?php if (isset($error)): ?>
+                        <p class="alert alert-danger"><?php echo $error; ?></p>
+                    <?php endif; ?>
+                    <?php if (isset($success)): ?>
+                        <p class="alert alert-success"><?php echo $success; ?></p>
+                    <?php endif; ?>
+                    <form action="" method="post">
                             <div class="social-link-item my-3">
-                                <label for="<?php echo $socialAccount[$key]['name']; ?>" class="form-label"><?php echo $socialAccount[$key]['name']; ?></label>
-                                <input type="text" class="form-control" name="<?php echo $socialAccount[$key]['name']; ?>" id="<?php echo $socialAccount[$key]['name']; ?>" value="<?php echo $socialAccount[$key]['link']; ?>">
+                                <label for="linkedin" class="form-label">LinkedIn</label>
+                                <input type="url" class="form-control" name="linkedin" id="linkedin" value="<?php echo $userDataFromId['social_linkedin']; ?>">
                             </div>
-                            <?php endforeach; ?>
-                            <input type="submit" class="btn btn-dark mt-4" name="updateSocialProfiles" value="Update social profiles">
-                        </form>
-                    </div>
+
+                            <div class="social-link-item my-3">
+                                <label for="instagram" class="form-label">Instagram</label>
+                                <input type="url" class="form-control" name="instagram" id="instagram" value="<?php echo $userDataFromId['social_instagram']; ?>">
+                            </div>
+
+                            <div class="social-link-item my-3">
+                                <label for="github" class="form-label">GitHub</label>
+                                <input type="url" class="form-control" name="github" id="github" value="<?php echo $userDataFromId['social_github']; ?>">
+                            </div>
+
+                        <input type="submit" class="btn btn-dark mt-4" name="updateSocialProfiles" value="Update social profiles">
+                    </form>
+                </div>
             </div>
         </div>
     </div>

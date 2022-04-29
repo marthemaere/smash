@@ -49,9 +49,9 @@
 
     <div class="justify-content-center container">
         <form class="form" action="" method="post">
-            <div class="form-group d-flex justify-content-center">
-                <input class="form-control col-2 col-lg-0 mb-3 mb-lg-0 me-lg-3" type="text" name="search" placeholder="Search for projects">
-                <input class="btn btn-dark mt-4" type="submit" name="submit-search" value="Search">
+            <div class="form-group d-flex justify-content-center align-items-center">
+                <input class="form-control w-25 mb-lg-0 me-lg-3" type="text" name="search" placeholder="Search for projects">
+                <input class="btn btn-dark" type="submit" name="submit-search" value="Search">
             </div>    
         </form>
     </div>

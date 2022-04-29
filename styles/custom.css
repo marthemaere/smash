@@ -27,6 +27,9 @@ body {
     height: 100px;
     object-fit: cover;
     border: none;
+}
+
+nav .img-thumbnail {
     max-width: 75px;
     max-height: 75px;
 }

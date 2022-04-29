@@ -12,7 +12,7 @@ class Post
 
     public function getUserId()
     {
-        return $this->userId;   
+        return $this->userId;
     }
 
     public function setUserId($userId)
@@ -37,7 +37,7 @@ class Post
     }
 
 
-   public function getImage()
+    public function getImage()
     {
         return $this->image;
     }
@@ -68,11 +68,11 @@ class Post
     public static function getAll()
     {
         $limit=15;
-        $page= isset( $_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
+        $page= isset($_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
         $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
 
         $conn = Db::getInstance();
-        $result = $conn->query("select * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY date DESC LIMIT $start, $limit");
+        $result = $conn->query("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id ORDER BY date DESC LIMIT $start, $limit");
         return $result->fetchAll();
     }
 
@@ -92,7 +92,6 @@ class Post
         $result = $statement->execute();
         return $conn->lastInsertId();
         return $result;
-        
     }
 
     /*public static function getUserId(int $userId)
@@ -128,7 +127,6 @@ class Post
                     $this->setImage($image);
                     $result = $this->setProjectInDatabase();
                     return $result;
-                    
                 } else {
                     throw new Exception("Your file is too large!");
                 }
@@ -139,7 +137,13 @@ class Post
             throw new Exception("You cannot upload files of this type");
         }
     }
+
+    public static function search($search)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id  where title OR tag like :search");
+        $statement->bindValue(":search", "%$search%");
+        $statement->execute();
+        return $statement->fetchAll();
     }
-
-
-   
+}

@@ -1,5 +1,4 @@
 <?php
-
 include_once(__DIR__ . "/Db.php");
 
 class Post
@@ -8,7 +7,6 @@ class Post
     private $image;
     private $description;
     private $userId;
-
 
     public function getUserId()
     {
@@ -119,7 +117,7 @@ class Post
     
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
-                if ($fileSize < 500000) {
+                if ($fileSize < 2097152) {
                     //$fileNameNew = uniqid('', true) . "." . $fileActualExt;
                     $fileDestination = 'uploaded_projects/' . $fileName;
                     move_uploaded_file($fileTmpName, $fileDestination);

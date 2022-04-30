@@ -384,4 +384,20 @@
             $statement->bindValue(":id", $id);
             return $statement->execute();
         }
+
+        public function getUserPostsFromId($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare(
+                "SELECT u.username, u.profile_pic, p.title, p.image, p.description, t.tag 
+                FROM users u 
+                INNER JOIN posts p ON u.id = p.user_id
+                INNER JOIN tags t ON p.id = t.post_id
+                WHERE u.id = :id;"
+            );
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        }
     }

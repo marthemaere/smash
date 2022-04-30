@@ -13,6 +13,17 @@
         if (empty($userPosts)) {
             $emptyState;
         }
+
+        if (!empty($_POST['report'])) {
+            try {
+                $report = new Report();
+                $report->setUserId($key);
+                $report->reportUser();
+                $success = "User reported. Thank you for your feedback.";
+            } catch (Exception $e) {
+                $error = $e->getMessage();
+            }
+        }
     }
 
 ?><!DOCTYPE html>
@@ -38,11 +49,42 @@
                 <p class="username mt-3 mb-1"><?php echo $userData['username']; ?> • <span>16 followers</span></p>
                 <p class="biography"><?php echo $userData['bio']; ?></p>
                 <p class="education"><?php echo $userData['education']; ?></p>
+                <form action="" method="post">
                 <div class="my-4">
+                    <?php if (isset($success)): ?>
+                        <div class="alert alert-success" role="alert">
+                            <?php echo $success; ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php if (isset($error)): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo $error; ?>
+                        </div>
+                    <?php endif; ?>
+                    <!-- are you sure alert -->
+                    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalToggleLabel">Are you sure you want to report this user?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <form action="" method="post">
+                            <div class="modal-footer">
+                            <button class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">No</button>
+                                <input type="submit" value="yes" name="report" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                            </div>
+                            </form>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <!-- are you sure alert -->
                     <a href="#" class="btn btn-primary">Follow</a>
-                    <a href="#" class="btn btn-outline-primary">Report user</a>
+                    <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report user</a>
                     <a href="#" class="btn btn-outline-primary">...</a> <!--link to socials-->
                 </div>
+                </form>
             </div>
             <div class="project--item--latest col m-3">
                 <img class="img-fluid" src="uploaded_projects/<?php echo $userPosts[0]['image'];?>" alt="latest posts">

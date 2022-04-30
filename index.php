@@ -91,7 +91,7 @@
                 <div>
                     <div class="d-flex justify-content-between py-2">
                         <div class="d-flex align-items-center justify-content-start">
-                            <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-profile-post">
+                            <img src="profile_pictures/<?php echo $p['profile_pic']; ?>" class="img-profile-post">
                             <a href="profile.php?p=<?php echo $p['user_id'];?>">
                                 <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
                             </a>
@@ -101,7 +101,10 @@
                             <p class="num-of-likes">1</p>
                         </div>
                     </div>
-                    <h2><?php echo $p['title']; ?></h2>
+                    <a href="post.php?p=<?php echo $p[0]?>">
+                        <h2><?php echo $p['title']; ?></h2>
+                    </a>
+                   
                     <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">

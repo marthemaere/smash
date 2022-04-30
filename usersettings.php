@@ -12,6 +12,15 @@
         } catch (\Throwable $e) {
             $error = $e->getMessage();
         }
+        if (!empty($_POST['delete'])) {
+            try {
+                $user = User::deleteAccount($sessionId);
+                header('Location: index.php');
+                session_destroy();
+            } catch (Throwable $e) {
+                $error = $e->getMessage();
+            }
+        }
     }
 
 ?><!DOCTYPE html>
@@ -35,6 +44,26 @@
             <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
         </div>
 
+        <!-- are you sure alert -->
+        <div class="modal fade" id="deleteAccount" aria-hidden="true" aria-labelledby="deleteAccountLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAccountLabel">Are you sure you want to delete your account?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="" method="post">
+                <div class="modal-footer">
+                <button class="btn btn-outline-primary" data-bs-toggle="modal">No</button>
+                    <input type="submit" value="Yes" name="delete" class="btn btn-primary" data-bs-toggle="modal">
+                </div>
+                </form>
+                            
+                </div>
+            </div>
+        </div>
+        <!-- are you sure alert -->
+
         <div class="row">
             <div class="col-3">
                 <div class="list-group">
@@ -42,7 +71,7 @@
                     <a class="list-group-item list-group-item-action" href="editProfile.php">Edit profile</a>
                     <a class="list-group-item list-group-item-action" href="changePassword.php">Change password</a>
                     <a class="list-group-item list-group-item-action" href="socialAccounts.php">Social profiles</a>
-                    <a class="list-group-item list-group-item-action text-danger" href="deleteAccount.php">Remove account</a>
+                    <a class="list-group-item list-group-item-action text-danger" data-bs-toggle="modal" role="button" href="#deleteAccount">Remove account</a>
                 </div>
             </div>
 

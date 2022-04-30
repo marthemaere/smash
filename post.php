@@ -13,7 +13,14 @@
             $emptystate = true;
         }
         if (!empty($_POST['report'])) {
-            //echo "report";
+            try {
+                $report = new Report();
+                $report->setPostId($key);
+                $report->reportPost();
+                $success = "Post reported. Thank you for your feedback.";
+            } catch (Exception $e) {
+                $error = $e->getMessage();
+            }
         }
     }
 
@@ -38,6 +45,35 @@
             <div class="col">
                     <img src="uploaded_projects/<?php echo $projectData['image'];?>" width="100%" height="75%" class="img-project-post" style="object-fit:cover" >
                     <div>
+                        <?php if (isset($success)): ?>
+                            <div class="alert alert-success m-2" role="alert">
+                                <?php echo $success; ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php if (isset($error)): ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?php echo $error; ?>
+                            </div>
+                        <?php endif; ?>
+                        <!-- are you sure alert -->
+                        <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalToggleLabel">Are you sure you want to report this post?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form action="" method="post">
+                                <div class="modal-footer">
+                                <button class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">No</button>
+                                    <input type="submit" value="yes" name="report" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                                </div>
+                                </form>
+                                
+                                </div>
+                            </div>
+                        </div>
+                        <!-- are you sure alert -->
                         <div class="row">
                             <div class="d-flex align-items-center col p-3">
                                 <img src="profile_pictures/<?php echo $projectData['profile_pic']; ?>" class="img-profile-post">
@@ -61,7 +97,7 @@
                                     </a>
                                     <ul class="dropdown-menu text-small shadow" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-100px, 34px, 0px);">
                                         <li class="dropdown-item">
-                                            <form class="mb-0" action="" method="post"> <input style="background:none; border:none;" type="submit" value="Report post" name="report"></form>
+                                            <a class="" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report user</a>
                                         </li>
                                     </ul>
                                 </div>

@@ -56,4 +56,16 @@
                 throw new Exception("Something went wrong while reporting user.");
             }
         }
+
+        public function reportPost()
+        {
+            $db = Db::getInstance();
+            $stmt = $db->prepare("INSERT INTO reports (post_id) VALUES (:post_id)");
+            $stmt->bindValue(":post_id", $this->postId);
+            $result = $stmt->execute();
+            return $result;
+            if (!$result) {
+                throw new Exception("Something went wrong while reporting post.");
+            }
+        }
     }

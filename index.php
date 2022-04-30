@@ -40,6 +40,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/custom.css">
     <title>Feed</title>
@@ -69,7 +70,7 @@
        <div class="row justify-content-center">
         
     <?php
-        foreach ($posts as $p):
+        foreach ($posts as $key => $p):
     ?>
 
     <?php if (!isset($_SESSION['id'])) :?>
@@ -86,24 +87,26 @@
     <?php else: ?>
 
             <div class="col-4 p-5">
-                <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="220px" class="rounded" style="object-fit:cover" >
+                <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="220px" class="img-project-post" style="object-fit:cover" >
                 <div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex justify-content-start">
-                            <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="p-2 rounded-circle" width="45px">
-                            <h4 class="pt-2"><?php echo $p['username'];?></h4>
+                    <div class="d-flex justify-content-between py-2">
+                        <div class="d-flex align-items-center justify-content-start">
+                            <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-profile-post">
+                            <a href="profile.php?p=<?php echo $p['user_id'];?>">
+                                <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
+                            </a>
                         </div>
-                        <div>
-                            <img src="assets/images/empty-heart.svg" width="18px" class="like">
+                        <div class="d-flex align-items-center">
+                            <img src="assets/images/empty-heart.svg" class="like">
+                            <p class="num-of-likes">1</p>
                         </div>
                     </div>
                     <h2><?php echo $p['title']; ?></h2>
-                    <p><?php echo $p['description']; ?></p>
-                    <p class="link-primary"><?php echo $p['tag']; ?></p>
+                    <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
                     <a href="" class="link-dark">View comments</a>
-                    <a href="" class="btn btn-outline-primary">Smash</a>
+                    <a href="" class="btn btn-smash">Smash</a>
                 </div>
             </div>
 
@@ -116,7 +119,7 @@
                 <ul class="pagination">
                     <?php for ($i=1; $i<= $pages; $i++): ?>
                     <li>
-                        <a href="index.php?page=<?= $i; ?>" class="link-dark p-3"><?= $i; ?></a>
+                        Page <a href="index.php?page=<?= $i; ?>" class="link-dark p-2"><?= $i; ?></a>
                     </li>
                     <?php endfor; ?>
                 </ul>

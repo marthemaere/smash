@@ -1,12 +1,20 @@
 <?php
     include_once("bootstrap.php");
     session_start();
+
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
-        $sessionId = $_SESSION['id'];
-        $userDataFromId = User::getUserDataFromId($sessionId);
+        $user = new User();
+        $key = $_GET['p'];
+        $userData = User::getUserDataFromId($key);
+        $userPosts = $user->getUserPostsFromId($key);
+
+        if (empty($userPosts)) {
+            $emptyState;
+        }
     }
+
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,28 +34,60 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
-                <p class="username mt-3 mb-1">Fien Gérardi • <span>16 followers</span></p>
-                <p class="biography">Ready to ace all of my designs and code.</p>
-                <p class="education">Interactive Multimedia Design</p>
+                <img src="profile_pictures/<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
+                <p class="username mt-3 mb-1"><?php echo $userData['username']; ?> • <span>16 followers</span></p>
+                <p class="biography"><?php echo $userData['bio']; ?></p>
+                <p class="education"><?php echo $userData['education']; ?></p>
                 <div class="my-4">
                     <a href="#" class="btn btn-primary">Follow</a>
                     <a href="#" class="btn btn-outline-primary">Report user</a>
                     <a href="#" class="btn btn-outline-primary">...</a> <!--link to socials-->
                 </div>
             </div>
-            <div class="project--item--latest col m-3" style="background-color: lightgrey;"></div>
+            <div class="project--item--latest col m-3">
+                <img class="img-fluid" src="uploaded_projects/<?php echo $userPosts[0]['image'];?>" alt="latest posts">
+            </div>
         </div>
         <div class="">
             <h4 class="header py-1">All projects</h4>
-            <div class="row">
-                <div class="project--item col-12 mb-5" style="background-color: lightgrey; height: 300px" ></div>
-                <div class="project--item col-12 mb-5" style="background-color: lightgrey; height: 300px" ></div>
-                <div class="project--item col-12 mb-5" style="background-color: lightgrey; height: 300px" ></div>
-            </div>
-            <div class="d-grid col-4 mx-auto">
-                <a href="#" class="btn btn-primary text-center">More projects</a>
-            </div>
+            <?php if (isset($emptyState)): ?>
+                <div class= "empty-state">
+                    <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">
+                    <p>Username hasn't uploaded any projects.</p> 
+                </div>
+            <?php else: ?>
+                <div class="row">
+                    <?php foreach ($userPosts as $post): ?>
+                        <div class="col-4 p-5">
+                            <img src="uploaded_projects/<?php echo $post['image'];?>" width="100%" height="220px"
+                                class="img-project-post" style="object-fit:cover">
+                            <div>
+                                <div class="d-flex justify-content-between py-2">
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <img src="profile_pictures/<?php echo $post['profile_pic']; ?>"
+                                            class="img-profile-post">
+                                        <a href="profile.php?p=<?php echo $post['user_id'];?>">
+                                            <h4 class="pt-2 ps-2"><?php echo $post['username'];?></h4>
+                                        </a>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="assets/images/empty-heart.svg" class="like">
+                                        <p class="num-of-likes">1</p>
+                                    </div>
+                                </div>
+                                <h2><?php echo $post['title']; ?></h2>
+                                <p class="pe-4"><?php echo $post['description']; ?> <span
+                                        class="link-primary"><?php echo $post['tag']; ?></span></p>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a href="" class="link-dark">View comments</a>
+                                <a href="" class="btn btn-smash">Smash</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
         </div>
     </div>
 

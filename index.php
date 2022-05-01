@@ -107,10 +107,10 @@
                    
                     <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
+                <!-- <div class="d-flex justify-content-between align-items-center">
                     <a href="" class="link-dark">View comments</a>
                     <a href="" class="btn btn-smash">Smash</a>
-                </div>
+                </div> -->
             </div>
 
     <?php endif; ?>

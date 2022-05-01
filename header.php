@@ -3,6 +3,14 @@
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
     }
+
+    if (!empty($_POST['submit-search'])) {
+        $search = $_POST['search'];
+        $posts = Post::search($search);
+        if (empty($posts)) {
+            $emptystate = true;
+        }
+    }
     
 ?><nav class="navbar navbar-light border-bottom">
     <div class="container">

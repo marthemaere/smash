@@ -5,19 +5,6 @@ body {
     box-sizing: border-box;
 }
 
-.container {
-    /* padding-left: 0; */
-    /* padding-right: 0; */
-}
-
-.border-bottom {
-    /* border-bottom: 1.5px solid black !important; */
-}
-
-.border-top {
-    border-top: 1.5px solid black !important;
-}
-
 .display-error {
     display: none;
 }

@@ -139,7 +139,7 @@ class Post
     public static function search($search)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id  where title OR tag like :search");
+        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id where posts.title like :search OR tag like :search");
         $statement->bindValue(":search", "%$search%");
         $statement->execute();
         return $statement->fetchAll();

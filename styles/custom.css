@@ -6,12 +6,12 @@ body {
 }
 
 .container {
-    padding-left: 0;
-    padding-right: 0;
+    /* padding-left: 0; */
+    /* padding-right: 0; */
 }
 
 .border-bottom {
-    border-bottom: 1.5px solid black !important;
+    /* border-bottom: 1.5px solid black !important; */
 }
 
 .border-top {
@@ -27,11 +27,12 @@ body {
     height: 100px;
     object-fit: cover;
     border: none;
+    background-color: transparent;
 }
 
 nav .img-thumbnail {
-    max-width: 75px;
-    max-height: 75px;
+    max-width: 60px;
+    max-height: 60px;
 }
 
 .header {

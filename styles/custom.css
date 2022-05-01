@@ -17,6 +17,14 @@ body {
     background-color: transparent;
 }
 
+.img-thumbnail-small {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: none;
+    background-color: transparent;
+}
+
 nav .img-thumbnail {
     max-width: 60px;
     max-height: 60px;
@@ -82,7 +90,7 @@ nav .img-thumbnail {
 }
 
 fieldset {
-    margin: 20px 0;
+    margin: 0 0 20px 0;
 }
 
 .form-control, .input-group-text {
@@ -107,7 +115,7 @@ fieldset {
     justify-content: center;
 }
 
-.upload-intro p, h1{
+.upload-intro p, .login h1, .register h1 {
     text-align: center;
 }
 .uploadzone{

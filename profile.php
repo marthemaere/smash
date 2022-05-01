@@ -9,6 +9,7 @@
         $key = $_GET['p'];
         $userData = User::getUserDataFromId($key);
         $userPosts = $user->getUserPostsFromId($key);
+        //var_dump($userPosts);
 
         if (empty($userPosts)) {
             $emptyState;
@@ -75,9 +76,19 @@
                         </div>
                     </div>
                     <!-- are you sure alert -->
-                    <a href="#" class="btn btn-primary">Follow</a>
-                    <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report user</a>
-                    <a href="#" class="btn btn-outline-primary">...</a> <!--link to socials-->
+                    <div class="profile-btn">
+                        <a href="#" class="btn btn-primary mb-2">Follow</a>
+                        <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report user</a>
+                        <?php if (!empty($userPosts[0]['social_linkedin'])): ?>
+                            <a href="<?php echo $userPosts[0]['social_linkedin']; ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
+                        <?php endif; ?>
+                        <?php if (!empty($userPosts[0]['social_github'])): ?>
+                            <a href="<?php echo $userPosts[0]['social_github']; ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_github.png" alt="github"></a>
+                        <?php endif; ?>
+                        <?php if (!empty($userPosts[0]['social_instagram'])): ?>
+                            <a href="<?php echo $userPosts[0]['social_instagram']; ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_instagram.png" alt="instagram"></a>
+                        <?php endif; ?>
+                    </div>
                 </div>
                 </form>
             </div>

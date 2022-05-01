@@ -154,12 +154,13 @@ fieldset {
 
 .project--item--latest {
     width: 100%;
-    max-height: 60%;
+    height: 50%;
     border-radius: 18px;
 }
 
 .project--item--latest img {
-    height: 100%;
+    height: auto;
+    max-height: 400px;
     width: 100%;
     object-fit: cover;
     border-radius: 18px;

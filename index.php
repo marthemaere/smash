@@ -48,15 +48,6 @@
 <body>
     <?php require_once("header.php"); ?>
 
-    <div class="justify-content-center container">
-        <form class="form row gx-3 gy-2 align-items-center col-4" action="" method="post">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" name="search" placeholder="Search for projects" aria-label="Search for projects" aria-describedby="button-addon2">
-                <input class="btn btn-outline-primary btn-icon-search" type="submit" name="submit-search" id="button-addon2" value="Search">
-            </div>
-        </form>
-    </div>
-
     <?php
     if (isset($emptystate)): ?>
         <div class= "empty-state">

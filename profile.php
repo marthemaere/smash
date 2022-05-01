@@ -38,7 +38,7 @@
 <body>
     <?php include_once('header.php'); ?>
     <div class="container">
-        <div class="row">
+        <div class="row d-flex align-items-center">
             <div class="col">
                 <img src="profile_pictures/<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
                 <p class="username mt-3 mb-1"><?php echo $userData['username']; ?> • <span>16 followers</span></p>
@@ -81,8 +81,8 @@
                 </div>
                 </form>
             </div>
-            <div class="project--item--latest col m-3">
-                <img class="img-fluid" src="uploaded_projects/<?php echo $userPosts[0]['image'];?>" alt="latest posts">
+            <div class="col project--item--latest">
+                <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image'];?>" alt="latest posts">
             </div>
         </div>
         <div class="">

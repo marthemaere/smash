@@ -369,18 +369,10 @@
             return $statement->execute();
         }
         
-        public static function deleteAccount($id)
+        public static function deleteUser($id)
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("delete users, posts, comments, likes, followers from users 
-                                            inner join posts on users.`id` = posts.`user_id`
-                                            inner join comments on users.`id` = comments.`user_id`
-                                            inner join likes on users.`id` = likes.`user_id`
-                                            inner join followers on users.`id` = followers.`follower_id` OR followers.`following_id`
-                                            where users.`id` = :id");
-                                            
-                                            
-                                           
+            $statement = $conn->prepare("delete from users where id = :id");
             $statement->bindValue(":id", $id);
             return $statement->execute();
         }

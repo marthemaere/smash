@@ -154,4 +154,12 @@ class Post
         $result = $statement->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public static function deletePosts($id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE FROM posts WHERE user_id = :id");
+        $statement->bindValue(':id', $id);
+        return $statement->execute();
+    }
 }

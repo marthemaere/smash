@@ -10,4 +10,12 @@
             $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
             return $comments;
         }
+
+        public static function deleteComments($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("DELETE FROM comments WHERE user_id = :id");
+            $statement->bindValue(":id", $id);
+            return $statement->execute();
+        }
     }

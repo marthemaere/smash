@@ -14,7 +14,11 @@
         }
         if (!empty($_POST['delete'])) {
             try {
-                $user = User::deleteAccount($sessionId);
+                User::deleteUser($sessionId);
+                Post::deletePosts($sessionId);
+                Comment::deleteComments($sessionId);
+                Like::deleteLikes($sessionId);
+                Follower::deleteFollowers($sessionId);
                 header('Location: index.php');
                 session_destroy();
             } catch (Throwable $e) {

@@ -1,22 +1,22 @@
 # ************************************************************
-# Sequel Ace SQL dump
-# Version 20033
+# Sequel Pro SQL dump
+# Version 4541
 #
-# https://sequel-ace.com/
-# https://github.com/Sequel-Ace/Sequel-Ace
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
 #
-# Host: localhost (MySQL 5.7.32)
+# Host: 127.0.0.1 (MySQL 5.7.34)
 # Database: smash
-# Generation Time: 2022-05-03 09:38:27 +0000
+# Generation Time: 2022-05-03 15:19:22 +0000
 # ************************************************************
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-SET NAMES utf8mb4;
+/*!40101 SET NAMES utf8 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE='NO_AUTO_VALUE_ON_ZERO', SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
@@ -87,7 +87,11 @@ VALUES
 	(9,'Smash: branding and mobile app','2022-04-30','project-smash.png','Mobile web application built for the course php',NULL,2),
 	(11,'Hoppin: mobility mobile app','2022-05-03','project-hoppin-fien-gerardi.png','Hoppin is made to make travelling easy with every vehicle.',NULL,2),
 	(12,'Tingels: education app for children','2022-05-03','project-tingels-fien-gerardi.png','Desktop app for children to make learning fun and accessible.',NULL,2),
-	(13,'Sweet 16: branding for event weareimd','2022-05-03','project-sweet16-fien-gerardi.jpg','Branding and website for celebrating 16 years of IMD!',NULL,2);
+	(13,'Sweet 16: branding for event weareimd','2022-05-03','project-sweet16-fien-gerardi.jpg','Branding and website for celebrating 16 years of IMD!',NULL,2),
+	(15,'Tingels: learning platform','2022-05-03','tingels dribbble.png','A fun platform with educational videos for children',NULL,1),
+	(18,'Connec: reconnect students','2022-05-03','mockup connec.png','An idea to reconnect students through activities',NULL,1),
+	(19,'Hoppin: transport app','2022-05-03','hoppin-min.png','Transportation with much possibilities',NULL,1),
+	(20,'SLAM: reconnect teachers','2022-05-03','Screenshot 2022-05-03 at 12.40.20.png','A platform where students can reconnect through projects for organisations',NULL,1);
 
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -144,7 +148,14 @@ VALUES
 	(8,'#design #branding #webapp',10),
 	(9,'#design #ux #ui',11),
 	(10,'#branding #ux #ui',12),
-	(11,'#branding #website #development',13);
+	(11,'#branding #website #development',13),
+	(12,'#design #development #branding',14),
+	(13,'#ux #ui #design',15),
+	(14,'#logo #design',16),
+	(15,'#design #ui #development',17),
+	(16,'#ux #branding',18),
+	(17,'#ui #ux',19),
+	(18,'#design #branding #development',20);
 
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -176,7 +187,7 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `is_admin`, `profile_pic`, `bio`, `education`, `second_email`, `social_linkedin`, `social_github`, `social_instagram`)
 VALUES
-	(1,'r0786673@student.thomasmore.be','ellendeveth','$2y$12$uvFCVOYl8ptMDd3Tb/5EN.hEGbohUfb9sGh8C6A.pNWRbuAASycS6',NULL,'default.png',NULL,NULL,NULL,NULL,NULL,NULL),
+	(1,'r0786673@student.thomasmore.be','ellendeveth','$2y$12$uvFCVOYl8ptMDd3Tb/5EN.hEGbohUfb9sGh8C6A.pNWRbuAASycS6',NULL,'me.jpeg','Ready to explore fun designs','Interactive multimedia design','ellen.deveth@hotmail.com','https://www.linkedin.com/in/ellendeveth/','https://github.com/ellendeveth','https://www.instagram.com/ellendeveth/'),
 	(2,'r0857158@student.thomasmore.be','fiengerardi','$2y$12$uruF6vSBstHyjixiXf4Jke6YTQIk6o2cfGMpPglegmOgvCm1kCXbK',NULL,'juri-gianfrancesco-UCEtRnp8qR0-unsplash.jpg','Ready to ace designs and code.','Interactive Multimedia Design','fien.gerardi@gmail.com','https://www.linkedin.com/in/fien-gérardi-035003151/','https://github.com/fgrardi','https://www.instagram.com/fiengerardi/');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;

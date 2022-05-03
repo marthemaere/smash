@@ -139,7 +139,7 @@ class Post
     public static function getPostDataFromId($id)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id WHERE posts.id = :id");
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id WHERE posts.id = :id ");
         $statement->bindValue(':id', $id);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);

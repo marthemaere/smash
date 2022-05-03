@@ -61,20 +61,33 @@
     <?php endif; ?>
 
     <div class="container mt-5 mb-5">
-        <div class="row justify-content-center">
+        <div class="row justify-content-start">
 
             <?php foreach ($posts as $key => $p): ?>
                 <?php if (!isset($_SESSION['id'])) :?>
 
-                <div class="col-4 p-5">
-                    <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="200px" class="rounded"
-                        style="object-fit:cover">
-                    <h2><?php echo $p['title']; ?></h2>
-                    <div class="d-flex justify-content-between align-items-center" v>
-                        <a href="/login.php" class="link-dark">View comments</a>
-                        <a href="/login.php" class="btn btn-outline-primary">Smash</a>
+                    <div class="col-4 p-5">
+                        <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="220px"
+                            class="img-project-post" style="object-fit:cover">
+                        <div>
+                            <div class="d-flex justify-content-between py-2">
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <img src="profile_pictures/<?php echo $p['profile_pic']; ?>" class="img-profile-post">
+                                    <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/empty-heart.svg" class="like">
+                                    <p class="num-of-likes">1</p>
+                                </div>
+                            </div>
+                            <h2><?php echo $p['title']; ?></h2>
+                            <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
+                        </div>
+                        <!-- <div class="d-flex justify-content-between align-items-center">
+                            <a href="" class="link-dark">View comments</a>
+                            <a href="" class="btn btn-smash">Smash</a>
+                        </div> -->
                     </div>
-                </div>
 
                 <?php else: ?>
 
@@ -110,12 +123,12 @@
             <?php endforeach; ?>
 
             <div class="row justify-content-center">
-                <div class="col-md-10 d-flex justify-content-center">
+                <div class="d-flex justify-content-center">
                     <nav class="page-navigation" aria-label="page navigation">
                         <ul class="pagination">
                             <?php for ($i=1; $i<= $pages; $i++): ?>
                             <li>
-                                Page <a href="index.php?page=<?= $i; ?>" class="link-dark p-2"><?= $i; ?></a>
+                                Page <a href="index.php?page=<?= $i; ?>" class="link-dark"><?= $i; ?></a>
                             </li>
                             <?php endfor; ?>
                         </ul>

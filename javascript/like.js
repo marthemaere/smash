@@ -2,8 +2,7 @@ document.querySelector(".like").addEventListener("click", e =>{
     console.log("we are liking");
     e.preventDefault();
 
-   // e.preventDefault();
-    /*let postId= e.target.dataset.post;
+    let postId= e.target.dataset.post;
     console.log(postId);
 
     let data= new FormData();
@@ -23,5 +22,4 @@ document.querySelector(".like").addEventListener("click", e =>{
         .catch((error) => {
         console.error('Error:', error);
         });
-    */
 })

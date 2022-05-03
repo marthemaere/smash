@@ -37,7 +37,9 @@
 
         public function countLike()
         {
-
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT COUNT(user_id) FROM likes");
+            return $statement->execute();
         }
 
         public static function deleteLikes($id)

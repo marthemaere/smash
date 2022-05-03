@@ -90,7 +90,7 @@
                                 </a>
                             </div>
                             <div class="d-flex align-items-center">
-                                <img src="assets/images/empty-heart.svg" class="like">
+                                <img src="assets/images/empty-heart.svg" class="like" data-post="1">
                                 <p class="num-of-likes">1</p>
                             </div>
                         </div>

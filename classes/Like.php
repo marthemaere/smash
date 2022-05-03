@@ -26,13 +26,18 @@
                 return $this;
         }
 
-        public function saveLike(){
-
+        public function saveLike()
+        {
             $conn = Db::getInstance();
             $statement = $conn->prepare("insert into likes (post_id, user_id) values (:postid, :userid)");
             $statement->bindValue(":postid", $this->getPostId());
             $statement->bindValue(":userid", $this->getUserId());
             return $statement->execute();
+        }
+
+        public function countLike()
+        {
+
         }
 
         public static function deleteLikes($id)

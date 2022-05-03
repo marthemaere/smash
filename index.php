@@ -52,22 +52,47 @@
 <body>
     <?php require_once("header.php"); ?>
 
-    <?php
-    if (isset($emptystate)): ?>
-    <div class="empty-state">
-        <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">
-        <p> No projects were found. </p>
-    </div>
-    <?php endif; ?>
-
     <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center m-3">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary">Latest</button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">A-Z</a></li>
+                    <li><a class="dropdown-item" href="#">Following</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <a href="#" class="px-2 btn btn-light">All</a>
+                <a href="#" class="px-2 text-muted">Branding</a>
+                <a href="#" class="px-2 text-muted">Development</a>
+                <a href="#" class="px-2 text-muted">Mobile</a>
+                <a href="#" class="px-2 text-muted">Typography</a>
+            </div>
+
+            <div>
+                <a href="#" class="px-2 btn btn-outline-primary">Projects</a>
+            </div>
+        </div>
+
+        <?php if (isset($emptystate)): ?>
+        <div class="empty-state">
+            <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">
+            <p> No projects were found. </p>
+        </div>
+        <?php endif; ?>
+
         <div class="row justify-content-start">
 
             <?php foreach ($posts as $key => $p): ?>
                 <?php if (!isset($_SESSION['id'])) :?>
 
-                    <div class="col-4 p-5">
-                        <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="220px"
+                    <div class="col-4 p-4">
+                        <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                             class="img-project-post" style="object-fit:cover">
                         <div>
                             <div class="d-flex justify-content-between py-2">
@@ -91,8 +116,8 @@
 
                 <?php else: ?>
 
-                <div class="col-4 p-5">
-                    <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="220px"
+                <div class="col-4 p-4">
+                    <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                         class="img-project-post" style="object-fit:cover">
                     <div>
                         <div class="d-flex justify-content-between py-2">

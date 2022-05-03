@@ -4,9 +4,11 @@
     if (!empty($_POST)) {
         $email = $_POST['email'];
         try {
-            $user = User::hasAccount($email);
+            $mailer = new Mailer();
+            $mailer->setEmail($_POST['email']);
+            $mailer->hasAccount();
             if (!empty($_POST['forgot_password'])) {
-                $user = User::sendPasswordResetEmail($email);
+                $mailer->sendPasswordResetEmail();
                 $success = true;
                 // header("Location: passwordMessage.php");
             }
@@ -21,17 +23,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/custom.css">
+    <?php include_once('style.php'); ?>
     <title>Forgot password</title>
 </head>
 <body>
     <div class="resetPassword row">
         <div class="reset--image col">
-            <a class="navbar-brand">Smasssh</a>
+            <a href="index.php" class="navbar-brand">Smasssh</a>
         </div>
         <div class="reset--form col">
             <div class="form form--reset">

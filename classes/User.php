@@ -2,15 +2,6 @@
     //include_once(__DIR__ . "../interfaces/iUser.php");
     include_once(__DIR__ . "/Db.php");
 
-    // Php Mailer
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\SMTP;
-    use PHPMailer\PHPMailer\Exception;
-
-    require 'PHPMailer/src/Exception.php';
-    require 'PHPMailer/src/PHPMailer.php';
-    require 'PHPMailer/src/SMTP.php';
-
     class User
     {
         private $email;
@@ -21,7 +12,10 @@
         private $biography;
         private $secondEmail;
         private $education;
-        private $socialLink;
+        
+        private $socialLinkedIn;
+        private $socialInstagram;
+        private $socialGitHub;
 
         public function setEmail($email)
         {
@@ -119,15 +113,43 @@
             return $this->education;
         }
 
-        public function setSocialLink($socialLink)
+        public function setSocialType($socialType)
         {
-            $this->socialLink = $socialLink;
+            $this->socialType = $socialType;
             return $this;
         }
         
-        public function getSocialLink()
+        public function setSocialLinkedIn($socialLinkedIn)
         {
-            return $this->socialLink;
+            $this->socialLinkedIn = $socialLinkedIn;
+            return $this;
+        }
+        
+        public function getSocialLinkedIn()
+        {
+            return $this->socialLinkedIn;
+        }
+
+        public function setSocialInstagram($socialInstagram)
+        {
+            $this->socialInstagram = $socialInstagram;
+            return $this;
+        }
+        
+        public function getSocialInstagram()
+        {
+            return $this->socialInstagram;
+        }
+
+        public function setSocialGitHub($socialGitHub)
+        {
+            $this->socialGitHub = $socialGitHub;
+            return $this;
+        }
+        
+        public function getSocialGitHub()
+        {
+            return $this->socialGitHub;
         }
 
         //registreren
@@ -137,9 +159,9 @@
             $options=[
                 'cost' => 12,
             ];
-            $password= password_hash($_POST['password'], PASSWORD_DEFAULT, $options);
+            $password= password_hash($this->getPassword(), PASSWORD_DEFAULT, $options);
 
-            $email_input = $_POST['email'];
+            $email_input = $this->getEmail();
             $domains = array('student.thomasmore.be', 'thomasmore.be');
             $pattern = "/^[a-z0-9._%+-]+@[a-z0-9.-]*(" . implode('|', $domains) . ")$/i";
 
@@ -160,16 +182,6 @@
             } else {
                 throw new Exception("email cannot be empty and needs to be a Thomas More email address");
             }
-        }
-
-        public function insertSocials()
-        {
-            $userId = $this->getUserId();
-            
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("INSERT INTO socials (`user_id`) VALUES (:userId)");
-            $statement->bindValue(":userId", $userId);
-            $statement->execute();
         }
 
         public static function getAll()
@@ -205,155 +217,6 @@
             }
         }
 
-        public static function hasAccount($email)
-        {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("select * from users where email = :email");
-            $statement->bindValue(":email", $email);
-            $statement->execute();
-            $user = $statement->fetch(PDO::FETCH_ASSOC);
-            if ($user) {
-                return true;
-            } else {
-                throw new Exception("user doesn't exist");
-            }
-        }
-
-        /*   public static function emailExists($email){
-               $conn = Db::getInstance();
-               $statement = $conn->prepare("SELECT * FROM users WHERE email = '". $_POST['email']."'");
-               $statement->bindValue($_POST['email'], $email);
-               $statement->execute();
-               $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-               if ($user) {
-                   return true;
-               }else {
-                   throw new Exception("user doesn't exist");
-               }
-           }*/
-
-        public static function sendPasswordResetEmail($emailTo)
-        {
-            // Get random code
-            $code = uniqid(true);
-
-            // Get connection
-            $conn = Db::getInstance();
-
-            // Send email from email to user
-            $mail = new PHPMailer(true);
-
-            try {
-                // Server settings
-                // $mail->SMTPDebug = 2;
-                $mail->isSMTP();                                            // Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                       // Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                $mail->Username   = 'smash.weareimd@gmail.com';             // SMTP username
-                $mail->Password   = '4p7h*LN2j4WYj^';                       // SMTP password
-                $mail->SMTPSecure = 'tls';                                  // Enable implicit TLS encryption
-                $mail->Port       = 587;                                    // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                    
-                // Recipients
-                $mail->setFrom('smash.weareimd@gmail.com', 'Smash');
-                $mail->addAddress($emailTo);     //Add a recipient
-                $mail->addReplyTo('no-reply@gmail.com', 'No reply');
-                    
-
-                // Content
-                // Get url where user is on + add token
-                $url = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']) . "/resetPassword.php?code=$code";
-                $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = "Password reset link ";
-                $mail->Body    = "<h1> You requested to reset your password </h1>
-                                        click <a href='$url' > this link </a> to do so";
-                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-                $mail->send();
-
-                // Save random code
-                $now = time();
-                $date = date('Y/m/d H:i:s', $now);
-                $expiry_date = (new DateTime($date))->modify('+26 hours')->format('Y-m-d H:i:s');
-                $statement = $conn->prepare("insert into reset_password (email, code, datetime) values (:email, :code, :date);");
-                $statement->bindValue(':email', $emailTo);
-                $statement->bindValue(':code', $code);
-                $statement->bindValue(':date', $expiry_date);
-                return $statement->execute();
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            };
-        }
-
-        public static function getCode($code)
-        {
-            // Check if code exists
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("select * from reset_password where code = :code");
-            $statement->bindValue(":code", $code);
-            $statement->execute();
-            $link = $statement->fetch(PDO::FETCH_ASSOC);
-            if ($link) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        public static function linkExpired()
-        {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("select * from reset_password where datetime < now()");
-            $statement->execute();
-            $link = $statement->fetch(PDO::FETCH_ASSOC);
-            if ($link) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-
-        public static function getEmailFromCode($code)
-        {
-            // Get email from unique code that updates password
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("select email from reset_password where code = :code");
-            $statement->bindValue(":code", $code);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC); //result[email]
-            return $result['email'];
-        }
-
-        public static function saveNewPassword($email, $password)
-        {
-            $options = [
-                "cost" => 12
-            ];
-            $passwordhash = password_hash($password, PASSWORD_DEFAULT, $options);
-            
-            // Update database
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("update users set password = :password where email = :email");
-            $statement->bindValue(":password", $passwordhash);
-            $statement->bindValue(":email", $email);
-            $update = $statement->execute();
-            if ($update) {
-                return true;
-            } else {
-                throw new Exception("Something went wrong");
-            }
-        }
-
-        public static function deleteCode($code)
-        {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("delete from reset_password where code = :code");
-            $statement->bindValue(":code", $code);
-            return $statement->execute();
-        }
-
         public static function getIdByEmail($email)
         {
             $conn = Db::getInstance();
@@ -372,15 +235,6 @@
             $statement->bindValue(':id', $id);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $result;
-        }
-
-        public static function getSocialDataFromId($id)
-        {
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT s.`link` FROM users u INNER JOIN socials s ON s.`user_id` = u.`id`");
-            $statement->execute();
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;
         }
 
@@ -442,7 +296,11 @@
         public function updateProfile()
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("UPDATE users SET bio = :biography, second_email = :secondEmail, education = :education WHERE id = :userId");
+            $statement = $conn->prepare(
+                "UPDATE users 
+                SET bio = :biography, second_email = :secondEmail, education = :education
+                WHERE id = :userId"
+            );
 
             $biography = $this->getBiography();
             $secondEmail = $this->getSecondEmail();
@@ -452,6 +310,28 @@
             $statement->bindValue(":biography", $biography);
             $statement->bindValue(":secondEmail", $secondEmail);
             $statement->bindValue(":education", $education);
+            $statement->bindValue(":userId", $userId);
+
+            $statement->execute();
+        }
+
+        public function updateSocials()
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare(
+                "UPDATE users
+                SET social_linkedin = :linkedin, social_instagram = :instagram, social_github = :github
+                WHERE id = :userId"
+            );
+
+            $linkedIn = $this->getSocialLinkedIn();
+            $instagram = $this->getSocialInstagram();
+            $gitHub = $this->getSocialGitHub();
+            $userId = $this->getUserId();
+
+            $statement->bindValue(":linkedin", $linkedIn);
+            $statement->bindValue(":instagram", $instagram);
+            $statement->bindValue(":github", $gitHub);
             $statement->bindValue(":userId", $userId);
 
             $statement->execute();
@@ -489,19 +369,27 @@
             return $statement->execute();
         }
         
-        public static function deleteAccount($id)
+        public static function deleteUser($id)
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("delete users, posts, comments, likes, followers from users 
-                                            inner join posts on users.`id` = posts.`user_id`
-                                            inner join comments on users.`id` = comments.`user_id`
-                                            inner join likes on users.`id` = likes.`user_id`
-                                            inner join followers on users.`id` = followers.`follower_id` OR followers.`following_id`
-                                            where users.`id` = :id");
-                                            
-                                            
-                                           
+            $statement = $conn->prepare("delete from users where id = :id");
             $statement->bindValue(":id", $id);
             return $statement->execute();
+        }
+
+        public function getUserPostsFromId($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare(
+                "SELECT u.username, u.profile_pic, u.social_github, u.social_linkedin, u.social_instagram, p.title, p.image, p.description, t.tag 
+                FROM users u 
+                INNER JOIN posts p ON u.id = p.user_id
+                INNER JOIN tags t ON p.id = t.post_id
+                WHERE u.id = :id;"
+            );
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
         }
     }

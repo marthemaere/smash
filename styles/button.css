@@ -1,23 +1,23 @@
 /* ------Buttons------ */
-.btn {
-    padding: 10px 20px;
+nav .btn {
+    padding: 8px 18px;
 }
 
 .btn-primary {
     color: black;
     background-color: #16CF83;
-    border: 1.5px solid #16CF83;
+    border: 1px solid #16CF83;
 }
 
 .btn-primary:hover {
     color: black;
     background-color: #0dac6a;
-    border: 1.5px solid #0dac6a;
+    border: 1px solid #0dac6a;
 }
 
 .btn-outline-primary {
     color: black;
-    border: 1.5px solid black;
+    border: 1px solid black;
 }
 
 .btn-outline-primary:hover {
@@ -35,6 +35,20 @@
     background-color: #C3B7FF;
 }
 
+.btn-smash {
+    border: 1px solid black;
+    border-radius: 0 30px 30px 0;
+    /* padding-right: 22px; */
+    /* margin-right: 4px; */
+}
+
+.btn-smash:hover {
+    background-color: #C3B7FF;
+    border-color: #C3B7FF;
+    border-radius: 0 30px 30px 0;
+    /* padding-right: 22px; */
+}
+
 /* ------Links------ */
 .link-primary {
     color: #7B61FF;
@@ -50,4 +64,22 @@
 .link-dark {
     font-weight: 500;
     text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: #7B61FF;
+}
+
+.profile-btn img {
+    width: 20px;
+    padding: 2px 2px 3px 2px;
+}
+
+.btn-icon-search img {
+    width: 15px;
 }

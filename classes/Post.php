@@ -1,5 +1,4 @@
 <?php
-
 include_once(__DIR__ . "/Db.php");
 
 class Post
@@ -8,7 +7,6 @@ class Post
     private $image;
     private $description;
     private $userId;
-
 
     public function getUserId()
     {
@@ -110,7 +108,7 @@ class Post
     
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
-                if ($fileSize < 500000) {
+                if ($fileSize < 2097152) {
                     //$fileNameNew = uniqid('', true) . "." . $fileActualExt;
                     $fileDestination = 'uploaded_projects/' . $fileName;
                     move_uploaded_file($fileTmpName, $fileDestination);
@@ -132,9 +130,27 @@ class Post
     public static function search($search)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id  where title OR tag like :search");
+        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id where posts.title like :search OR tag like :search");
         $statement->bindValue(":search", "%$search%");
         $statement->execute();
         return $statement->fetchAll();
+    }
+
+    public static function getPostDataFromId($id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id WHERE posts.id = :id");
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public static function deletePosts($id)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE FROM posts WHERE user_id = :id");
+        $statement->bindValue(':id', $id);
+        return $statement->execute();
     }
 }

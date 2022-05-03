@@ -40,14 +40,15 @@ class Tag
         return $postId;
     }*/
 
-    public function addTagsToDatabase($post_id){
-        $tags = $_POST["tags"];
+    public function addTagsToDatabase($post_id)
+    {
+        $tags = $this->getTags();
         $tags = explode(", ", $tags);
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into tags (tag, post_id) values (:tag, :post_id)");
       
 
-        for($i=0; $i<count($tags); $i++){
+        for ($i=0; $i<count($tags); $i++) {
             $statement->bindValue(":tag", $tags[$i]);
             $statement->bindValue(":post_id", $post_id);
             $result = $statement->execute();
@@ -55,7 +56,5 @@ class Tag
 
         unset($tags);
         return $result;
-        
     }
-
 }

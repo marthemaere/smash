@@ -67,16 +67,16 @@
                 <!-- are you sure alert -->
                 
                 <div class="d-flex align-items-center p-3">
-                    <img src="profile_pictures/<?php echo $projectData['profile_pic']; ?>" class="img-profile-post">
-                    <a href="profile.php?p=<?php echo $projectData['user_id'];?>">
-                        <h4 class="pt-2 ps-2"><?php echo $projectData['username'];?></h4>
+                    <img src="profile_pictures/<?php echo htmlspecialchars($projectData['profile_pic']); ?>" class="img-profile-post">
+                    <a href="profile.php?p=<?php echo htmlspecialchars($projectData['user_id']);?>">
+                        <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($projectData['username']);?></h4>
                     </a>
                 </div>   
                 
                 <div class="col-9">
-                        <h2><?php echo $projectData['title']; ?></h2>
+                        <h2><?php echo htmlspecialchars($projectData['title']); ?></h2>
                         <div class="d-flex align-items-center justify-content-between">
-                            <p class="pe-4"><?php echo $projectData['description']; ?> <span class="link-primary"><?php echo $projectData['tags']; ?></span></p>
+                            <p class="pe-4"><?php echo htmlspecialchars($projectData['description']); ?> <span class="link-primary"><?php echo htmlspecialchars($projectData['tags']); ?></span></p>
                             <div class="d-flex justify-content-between align-items-center">   
                                 <form  class="d-flex align-items-center" action="" method="post">
                                     <div class="btn btn-primary d-flex">
@@ -94,7 +94,7 @@
 
             <div class="row">
                 <div class="col-9">
-                    <img src="uploaded_projects/<?php echo $projectData['image'];?>" width="100%" height="75%" class="img-project-post" style="object-fit:cover" >
+                    <img src="uploaded_projects/<?php echo htmlspecialchars($projectData['image']);?>" width="100%" height="75%" class="img-project-post" style="object-fit:cover" >
                 </div>     
 
                 <div class="col-3 col-lg-3">
@@ -104,7 +104,7 @@
                     <?php else: ?>
                     <ul class="">
                         <?php foreach ($comments as $c): ?>
-                            <li class=""><?php echo $c['text']; ?></li>
+                            <li class=""><?php echo htmlspecialchars($c['text']); ?></li>
                         <?php endforeach; ?>
                     </ul>
                     <?php endif; ?>

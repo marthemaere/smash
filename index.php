@@ -5,7 +5,6 @@
 
     $conn = Db::getInstance();
 
-   
         $posts = Post::getAll();
         if (empty($posts)) {
             $emptystate = true;
@@ -136,9 +135,7 @@
                             <h2><?php echo $p['title']; ?></h2>
                         </a>
 
-                        <p class="pe-4"><?php echo $p['description']; ?> <span
-                                class="link-primary"><?php echo $p['tag']; ?></span></p>
-                    </div>
+                        <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>  </div>
                     <!-- <div class="d-flex justify-content-between align-items-center">
                         <a href="" class="link-dark">View comments</a>
                         <a href="" class="btn btn-smash">Smash</a>
@@ -147,7 +144,6 @@
                     <div class="d-flex justify-content-between align-items-center">
                     <a href="" class="link-dark">View comments</a>
                     <a href="" class="btn btn-outline-primary">Smash</a>
-                    <a href="deleteProject.php" class="btndelete btn-link">Delete project</a>
                 </div>
                 </div>
                 <?php endif; ?>

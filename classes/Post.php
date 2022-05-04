@@ -143,11 +143,10 @@ class Post
     public static function deleteProject($postId)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("DELETE FROM `smash`.`posts` WHERE  posts.`id`= :id;");                            
+        $statement = $conn->prepare("delete from posts where id = :postId");       
+        $statement->bindValue(":postId", $postId);                     
         return $statement->execute();
-        var_dump($postId);
     }
-
 
 
     public static function search($search)

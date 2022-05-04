@@ -110,8 +110,8 @@
                     <?php endif; ?>
                     <div class="row d-flex justify-content-between">
                         <form class="form" action="" method="post">
-                            <input class="form-control col" type="text" placeholder="make a comment">
-                            <input type="submit" value="Send" class="btn btn-primary col col-lg-3" name="comment">
+                            <input class="form-control col" type="text" placeholder="make a comment" id="commentText">
+                            <input type="submit" value="Send" class="btn btn-primary col col-lg-3" data-postid="3" name="comment" id="btnAddComment">
                         </form>
                     </div>
                 </div>
@@ -122,5 +122,6 @@
 
     <?php require_once("footer.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="javascript/comment.js"></script>
 </body>
 </html>

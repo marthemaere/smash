@@ -75,7 +75,7 @@
             </div>
 
             <div>
-                <a href="#" class="px-2 btn btn-outline-primary">Projects</a>
+                <a href="#" class="px-2 btn btn-outline-primary">Filters</a>
             </div>
         </div>
 

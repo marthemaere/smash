@@ -5,10 +5,8 @@ session_start();
 if (!isset($_SESSION['id'])) {
     header('Location: login.php');
 } else {
-
     $key = $_GET['p'];
     $projectData = Post::getPostDataFromId($key);
-    //var_dump($projectData);
     $comments = Comment::getCommentsFromPostId($key);
     if (empty($comments)) {
         $emptystate = true;
@@ -25,6 +23,7 @@ if (!isset($_SESSION['id'])) {
     if (!empty($_POST['deleteProject'])) {
         try {
             Post::deleteProject($postId);
+            header('Location: index.php');
         } catch (Throwable $e) {
             $error = $e->getMessage();
         }

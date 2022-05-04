@@ -49,6 +49,18 @@ class Post
         return $this;
     }
 
+
+    public function setPostId($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT id FROM posts WHERE id = :postId");
+        $statement->bindValue(":postId", $postId);
+        $postId = $statement->execute();
+        return $postId;
+        
+    }
+
+
     public function getDescription()
     {
         return $this->description;
@@ -132,14 +144,14 @@ class Post
         }
     }
 
-    public static function deleteProject($id)
+    public static function deleteProject($postId)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("DELETE FROM `smash`.`posts` INNER JOIN tags ON tags.`id` = posts.`user_id` WHERE `id`= :id");                            
-        $statement->bindValue(":id", $id);
+        $statement = $conn->prepare("DELETE FROM `smash`.`posts` WHERE  posts.`id`= :id;");                            
         return $statement->execute();
-
+        var_dump($postId);
     }
+
 
 
     }

@@ -118,7 +118,7 @@ fieldset {
 .upload-intro p, .login h1, .register h1 {
     text-align: center;
 }
- .uploadzone input, .uploadzone textarea {
+ .uploadzone input[type="text"], .uploadzone input[type="file"], .uploadzone textarea {
     border-color: #DEE2E6;
 }
 

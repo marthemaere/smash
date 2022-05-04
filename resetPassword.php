@@ -1,19 +1,19 @@
 <?php
     include_once(__DIR__ . "/bootstrap.php");
     $code = $_GET['code'];
-    $link = User::getCode($code); //check if code exists in database
-    $expired = User::linkExpired(); //check if link is expired
+    $link = Mailer::getCode($code); //check if code exists in database
+    $expired = Mailer::linkExpired(); //check if link is expired
     if ($link === false || $expired === true) {
         exit("Can't find page");
     } else {
         try {
             // er is een nieuw wachtwoord ingevuld
             if (!empty($_POST['save_password'])) {
-                $user = User::getEmailFromCode($code);
+                $user = Mailer::getEmailFromCode($code);
                 //er bestaat een email met die code
                 if (!empty($user)) {
-                    $updatePassword = User::saveNewPassword($user, $_POST['password']);
-                    $deleteCode = User::deleteCode($code);
+                    $updatePassword = Mailer::saveNewPassword($user, $_POST['password']);
+                    $deleteCode = Mailer::deleteCode($code);
                     $success = true;
                 } else {
                     exit("Can't find page");
@@ -30,17 +30,13 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/custom.css">
+    <?php include_once('style.php'); ?>
     <title>Reset password</title>
 </head>
 <body>
 <div class="resetPassword row">
         <div class="reset--image col">
-            <a class="navbar-brand">Smasssh</a>
+            <a href="index.php" class="navbar-brand">Smasssh</a>
         </div>
         <div class="reset--form col">
             <div class="form form--reset">

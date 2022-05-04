@@ -53,60 +53,6 @@
     <?php require_once("header.php"); ?>
 
     <div class="container mt-5 mb-5">
-       <div class="row justify-content-center">
-
-    <?php
-        foreach ($posts as $p):
-    ?>
-
-    <?php if (!isset($_SESSION['id'])) :?>
-
-            <div class="col-4 p-5">
-                <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="200px" class="rounded" style="object-fit:cover" >
-                <h2><?php echo $p['title']; ?></h2>
-                <div class="d-flex justify-content-between align-items-center"v>
-                    <a href="/login.php" class="link-dark">View comments</a>
-                    <a href="/login.php" class="btn btn-outline-primary">Smash</a>
-                </div>
-            </div>
-      
-    <?php else: ?>
-
-            <div class="col-4 p-5">
-                <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="220px" class="rounded" style="object-fit:cover" >
-                <div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <div class="d-flex justify-content-start">
-                            <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="p-2 rounded-circle" width="45px">
-                            <h4 class="pt-2"><?php echo $p['username'];?></h4>
-                        </div>
-                        <div>
-                            <img src="assets/images/empty-heart.svg" width="18px" class="like">
-                        </div>
-                    </div>
-                    <h2><?php echo $p['title']; ?></h2>
-                    <p><?php echo $p['description']; ?></p>
-                    <p class="link-primary"><?php echo $p['tags']; ?></p>
-                </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <a href="" class="link-dark">View comments</a>
-                    <a href="" class="btn btn-outline-primary">Smash</a>
-                    <a href="deleteProject.php" class="btndelete btn-link">Delete project</a>
-                </div>
-            </div>
-
-    <?php endif; ?>
-    <?php endforeach; ?>
-
-    <div class="row justify-content-center">
-        <div class="col-md-10 d-flex justify-content-center">
-            <nav class="page-navigation" aria-label="page navigation">
-                <ul class="pagination">
-                    <?php for ($i=1; $i<= $pages; $i++): ?>
-                    <li>
-                        <a href="index.php?page=<?= $i; ?>" class="link-dark p-3"><?= $i; ?></a>
-                    </li>
-                    <?php endfor; ?>
         <div class="d-flex justify-content-between align-items-center m-3">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary">Latest</button>
@@ -197,6 +143,12 @@
                         <a href="" class="link-dark">View comments</a>
                         <a href="" class="btn btn-smash">Smash</a>
                     </div> -->
+
+                    <div class="d-flex justify-content-between align-items-center">
+                    <a href="" class="link-dark">View comments</a>
+                    <a href="" class="btn btn-outline-primary">Smash</a>
+                    <a href="deleteProject.php" class="btndelete btn-link">Delete project</a>
+                </div>
                 </div>
                 <?php endif; ?>
             <?php endforeach; ?>

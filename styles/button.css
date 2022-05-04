@@ -80,6 +80,10 @@ a:hover {
     padding: 2px 2px 3px 2px;
 }
 
-.btn-icon-search img, .btn-icon-like img {
+.btn-icon-search img {
     width: 15px;
+}
+
+img.btn-icon-like {
+    height: 18px;
 }

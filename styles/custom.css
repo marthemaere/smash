@@ -111,16 +111,15 @@ fieldset {
 
 /* ------UploadProjects------ */
 
-.upload-intro{
+.upload-intro {
     justify-content: center;
 }
 
 .upload-intro p, .login h1, .register h1 {
     text-align: center;
 }
-.uploadzone{
-    text-align: center;
-
+ .uploadzone input, .uploadzone textarea {
+    border-color: #DEE2E6;
 }
 
 .upload--form {

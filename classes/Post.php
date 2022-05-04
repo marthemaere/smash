@@ -153,4 +153,18 @@ class Post
         $statement->bindValue(':id', $id);
         return $statement->execute();
     }
+
+    public function editTitle($postId, $title)
+        {     
+            $this->title = $title;
+
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("UPDATE posts SET title= :title where id= :post_id)");
+            $statement->bindValue(":post_id", $this->postId);
+            $result = $statement->execute();
+            return $result;
+            if (!$result) {
+                throw new Exception("Something went wrong.");
+            }
+        }
 }

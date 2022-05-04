@@ -57,4 +57,16 @@ class Tag
         unset($tags);
         return $result;
     }
+
+    public function editTags()
+    {
+        $db = Db::getInstance();
+        $stmt = $db->prepare("UPDATE posts (tags) VALUES (:user_id)");
+        $stmt->bindValue(":user_id", $this->userId);
+        $result = $stmt->execute();
+        return $result;
+        if (!$result) {
+            throw new Exception("Something went wrong while reporting user.");
+        }
+    }
 }

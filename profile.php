@@ -42,9 +42,9 @@
         <div class="row d-flex align-items-center">
             <div class="col">
                 <img src="profile_pictures/<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
-                <p class="username mt-3 mb-1"><?php echo $userData['username']; ?> • <span>16 followers</span></p>
-                <p class="biography"><?php echo $userData['bio']; ?></p>
-                <p class="education"><?php echo $userData['education']; ?></p>
+                <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • <span>16 followers</span></p>
+                <p class="biography"><?php echo htmlspecialchars($userData['bio']); ?></p>
+                <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
                 <form action="" method="post">
                 <div class="my-4">
                     <?php if (isset($success)): ?>
@@ -80,13 +80,13 @@
                         <a href="#" class="btn btn-primary mb-2">Follow</a>
                         <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report user</a>
                         <?php if (!empty($userPosts[0]['social_linkedin'])): ?>
-                            <a href="<?php echo $userPosts[0]['social_linkedin']; ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
+                            <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
                         <?php endif; ?>
                         <?php if (!empty($userPosts[0]['social_github'])): ?>
-                            <a href="<?php echo $userPosts[0]['social_github']; ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_github.png" alt="github"></a>
+                            <a href="<?php echo htmlspecialchars($userPosts[0]['social_github']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_github.png" alt="github"></a>
                         <?php endif; ?>
                         <?php if (!empty($userPosts[0]['social_instagram'])): ?>
-                            <a href="<?php echo $userPosts[0]['social_instagram']; ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_instagram.png" alt="instagram"></a>
+                            <a href="<?php echo htmlspecialchars($userPosts[0]['social_instagram']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_instagram.png" alt="instagram"></a>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -107,15 +107,15 @@
                 <div class="row">
                     <?php foreach ($userPosts as $post): ?>
                         <div class="col-4 p-5">
-                            <img src="uploaded_projects/<?php echo $post['image'];?>" width="100%" height="220px"
+                            <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']);?>" width="100%" height="220px"
                                 class="img-project-post" style="object-fit:cover">
                             <div>
                                 <div class="d-flex justify-content-between py-2">
                                     <div class="d-flex align-items-center justify-content-start">
-                                        <img src="profile_pictures/<?php echo $post['profile_pic']; ?>"
+                                        <img src="profile_pictures/<?php echo htmlspecialchars($post['profile_pic']); ?>"
                                             class="img-profile-post">
-                                        <a href="profile.php?p=<?php echo $post['user_id'];?>">
-                                            <h4 class="pt-2 ps-2"><?php echo $post['username'];?></h4>
+                                        <a href="profile.php?p=<?php echo htmlspecialchars($post['user_id']);?>">
+                                            <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($post['username']);?></h4>
                                         </a>
                                     </div>
                                     <div class="d-flex align-items-center">
@@ -123,9 +123,9 @@
                                         <p class="num-of-likes">1</p>
                                     </div>
                                 </div>
-                                <h2><?php echo $post['title']; ?></h2>
-                                <p class="pe-4"><?php echo $post['description']; ?> <span
-                                        class="link-primary"><?php echo $post['tag']; ?></span></p>
+                                <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+                                <p class="pe-4"><?php echo htmlspecialchars($post['description']); ?> <span
+                                        class="link-primary"><?php echo htmlspecialchars($post['tag']); ?></span></p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="" class="link-dark">View comments</a>

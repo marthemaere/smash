@@ -51,7 +51,7 @@
 <body>
     <?php include_once('header.php'); ?>
     <div class="container">
-        <p class="ps-3 pt-5 text-muted"><?php echo $userDataFromId['username']; ?> / Settings / Profile</p>
+        <p class="ps-3 pt-5 text-muted"><?php echo htmlspecialchars($userDataFromId['username']); ?> / Settings / Profile</p>
         <h1 class="ps-3">Edit profile</h1>
         
         <div class="row">
@@ -76,7 +76,7 @@
                         <?php endif; ?>
                         <!-- EditProfile > ProfilePicture -->
                         <div class="profile-picture pb-3">
-                            <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="img-thumbnail rounded-circle" alt="profile picture">
+                            <img src="profile_pictures/<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-thumbnail rounded-circle" alt="profile picture">
                             <a href="#" class="btn btn-primary" id="upload-new-picture">Upload new picture</a>
                             <div id="upload-file">
                                 <form action="" method="post" enctype="multipart/form-data">
@@ -97,19 +97,19 @@
                             <form action="" method="post">
                                 <fieldset>
                                     <label for="biography" class="form-label">Biography</label>
-                                    <textarea name="biography" class="form-control" id="biography" cols="50" rows="3"><?php echo $userDataFromId['bio']; ?></textarea>
+                                    <textarea name="biography" class="form-control" id="biography" cols="50" rows="3"><?php echo htmlspecialchars($userDataFromId['bio']); ?></textarea>
                                     <div class="form-text">Brief description for your profile.</div>
                                 </fieldset>
 
                                 <fieldset>
                                     <label for="education" class="form-label">Second email</label>
-                                    <input type="text" class="form-control" name="secondEmail" id="secondEmail" value="<?php echo $userDataFromId['second_email'];?>">
+                                    <input type="text" class="form-control" name="secondEmail" id="secondEmail" value="<?php echo htmlspecialchars($userDataFromId['second_email']);?>">
                                     <div class="form-text">When you lose access from your school account.</div>
                                 </fieldset>
 
                                 <fieldset>
                                     <label for="education" class="form-label">Education</label>
-                                    <input type="text" class="form-control" name="education" id="education" value="<?php echo $userDataFromId['education'];?>">
+                                    <input type="text" class="form-control" name="education" id="education" value="<?php echo htmlspecialchars($userDataFromId['education']);?>">
                                     <div class="form-text">Add your education to complete your profile.</div>
                                 </fieldset>
 

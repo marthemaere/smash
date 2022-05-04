@@ -7,6 +7,7 @@ class Post
     private $image;
     private $description;
     private $userId;
+    private $postId;
 
     public function getUserId()
     {
@@ -55,7 +56,19 @@ class Post
         $statement->bindValue(":postId", $postId);
         $postId = $statement->execute();
         return $postId;
-        
+    }
+
+    public function getPostId()
+    {
+        return $this->postId;
+    }
+
+    public static function deleteProject($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("delete from posts where id = :postId");
+        $statement->bindValue(":postId", $postId);  
+        return $statement->execute();
     }
 
 
@@ -140,14 +153,7 @@ class Post
         }
     }
 
-    public static function deleteProject($postId)
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("delete from posts where id = :postId");       
-        $statement->bindValue(":postId", $postId);                     
-        return $statement->execute();
-    }
-
+   
 
     public static function search($search)
     {

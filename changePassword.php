@@ -40,7 +40,7 @@
 <body>
     <?php include_once('header.php'); ?>
     <div class="container">
-        <p class="ps-3 pt-5 text-muted"><?php echo $userDataFromId['username']; ?> / Settings / Password</p>
+        <p class="ps-3 pt-5 text-muted"><?php echo htmlspecialchars($userDataFromId['username']); ?> / Settings / Password</p>
         <h1 class="ps-3">Change password</h1>
 
         <div class="row">

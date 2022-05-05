@@ -106,8 +106,8 @@
             <?php else: ?>
                 <div class="row">
                     <?php foreach ($userPosts as $post): ?>
-                        <div class="col-4 p-5">
-                            <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']);?>" width="100%" height="220px"
+                        <div class="col-4 p-4">
+                            <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']);?>" width="100%" height="250px"
                                 class="img-project-post" style="object-fit:cover">
                             <div>
                                 <div class="d-flex justify-content-between py-2">

@@ -1,18 +1,23 @@
 <?php
-	include_once('../bootstrap.php');
+include_once('../bootstrap.php');
 
-	if(!$con){
-       die("Failed to connect:" . mysqli_connect_error());
-    } 
-	if(isset($_POST['type']) == 1){
-		$username =$_POST['username'];
-		 $query ="SELECT * FROM users where user_name ='".$username."' ";
-		$result =mysqli_query($con, $query);
-		$rowcount=mysqli_num_rows($result);
-		if($rowcount >0){
-			echo "<span class='status-not-available'> Username Not Available.</span>";
-		}else{
-			 echo "<span class='status-available'> Username Available.</span>";
-		}
-	}
-?>
+if(isset($_POST['username'])){
+	$db = Db::getInstance();
+	$stmt = $db->prepare("select * from users where username = :username");
+	$stmt->bindValue(":username", $this->username);
+	$result = $stmt->execute();
+	$response = "<span style='color: green;'>Available.</span>";
+	return $response;
+
+    if(mysqli_num_rows($result)){
+        $row = mysqli_fetch_array($result);
+        $count = $row['users'];
+        
+        if($count > 0){
+            $response = "<span style='color: red;'>Not Available.</span>";
+        }
+    }
+    
+    echo $response;
+    die;
+}

@@ -1,17 +1,28 @@
-function checkAvailability(){
-	$("#loaderIcon").show();
-	
-	$.ajax({
-		type:"POST",
-		url:"check_availability.php",
-		cache:false,
-		data:{
-			type:1,
-			username:$("#username").val(),
-		},
-		success:function(data){
-			$("#user-availability-status").html(data);
-			$("#loaderIcon").hide(1000);
-		}
-	});
-}
+
+            $(document).ready(function(){
+
+                $("#username").keyup(function(){
+
+                    var username = $(this).val().trim();
+            
+                    if(username != ''){
+            
+                       
+            
+                        $.ajax({
+                            url: 'ajaxfile.php',
+                            type: 'post',
+                            data: {username: username},
+                            success: function(response){
+                
+                                $('#uname_response').html(response);
+                
+                             }
+                        });
+                    }else{
+                        $("#uname_response").html("");
+                    }
+            
+                });
+
+            });

@@ -83,7 +83,7 @@
             </div>
             <!-- are you sure alert -->
 
-             <!-- are you sure alert -->
+             <!-- are you sure alert for deleting a post -->
              <div class="modal fade" id="deleteProject" aria-hidden="true" aria-labelledby="deleteProjectLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -101,7 +101,7 @@
                     </div>
                 </div>
             </div>
-            <!-- are you sure alert -->
+            <!-- are you sure alert for deleting a post -->
 
             <div class="d-flex align-items-center py-2">
                 <img src="profile_pictures/<?php echo $projectData['profile_pic']; ?>" class="img-profile-post">

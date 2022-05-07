@@ -120,12 +120,12 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <form class="d-flex align-items-center" action="" method="post">
-                            <div class="btn btn-primary d-flex align-items-center">
+                            <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
                                 <img src="assets/images/empty-heart.svg" class="btn-icon-like">
                                 <input type="submit" value="Like" class="btn p-0 ps-1" name="like">
                                 <p class="num-of-likes"> 1</p>
                             </div>
-                            <a class="btn btn-outline-primary ms-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report</a>
+                            <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report</a>
                             <a class="btn btn-outline-primary text-danger" data-bs-toggle="modal" href="#deleteProject" role="button">Delete project</a>
                         </form>
                         </div>

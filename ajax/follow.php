@@ -12,11 +12,13 @@
             $follow->setFollowingId($followingId);
 
             if ($follow->followExists()) {
+                $follow->unfollowUser();
+
                 $response = [
-                    'status' => 'duplicate',
+                    'status' => 'success',
                     'followerid' => $followerId,
                     'followingid' => $followingId,
-                    'message' => 'User already followed.'
+                    'message' => 'User unfollowed.'
                 ];
             } else {
                 $follow->followUser();

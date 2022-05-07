@@ -19,8 +19,12 @@ btn.addEventListener("click", (e) => {
     })
     .then(response => response.json())
     .then(result => {
-        if(btn.innerHTML === "Follow"){
+        if(result.isFollowed === true){
             btn.innerHTML = "Following";
+            btn.classList.add("active");
+        } else {
+            btn.innerHTML = "Follow";
+            btn.classList.remove("active");
         }
         console.log('Success:', result);
     })

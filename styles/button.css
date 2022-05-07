@@ -9,12 +9,16 @@ nav .btn {
     border: 1px solid #16CF83;
 }
 
-
-
 .btn-primary:hover {
     color: black;
     background-color: #0dac6a;
     border: 1px solid #0dac6a;
+}
+
+.active {
+    color: black !important;
+    background-color: #C3B7FF !important;
+    border: 1px solid #C3B7FF !important;
 }
 
 

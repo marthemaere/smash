@@ -18,7 +18,8 @@
                     'status' => 'success',
                     'followerid' => $followerId,
                     'followingid' => $followingId,
-                    'message' => 'User unfollowed.'
+                    'message' => 'User unfollowed.',
+                    'isFollowed' => false
                 ];
             } else {
                 $follow->followUser();
@@ -27,7 +28,8 @@
                     'status' => 'success',
                     'followerid' => $followerId,
                     'followingid' => $followingId,
-                    'message' => 'User followed.'
+                    'message' => 'User followed.',
+                    'isFollowed' => true
                 ];
             }
         } catch (Exception $e) {

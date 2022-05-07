@@ -93,18 +93,18 @@
             <!-- are you sure alert for deleting a post -->
 
             <div class="d-flex align-items-center py-2">
-                <img src="profile_pictures/<?php echo $projectData['profile_pic']; ?>" class="img-profile-post">
-                <a href="profile.php?p=<?php echo $projectData['user_id'];?>">
-                    <h4 class="pt-2 ps-2"><?php echo $projectData['username'];?></h4>
+                <img src="profile_pictures/<?php echo htmlspecialchars($projectData['profile_pic']); ?>" class="img-profile-post">
+                <a href="profile.php?p=<?php echo htmlspecialchars($projectData['user_id']);?>">
+                    <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($projectData['username']);?></h4>
                 </a>
             </div>
 
             <div class="col-8 py-0">
                 <div class="d-flex align-items-start justify-content-between">
                     <div>
-                        <h2><?php echo $projectData['title']; ?></h2>
-                        <p class="pe-4"><?php echo $projectData['description']; ?> <span
-                                class="link-primary"><?php echo $projectData['tags']; ?></span></p>
+                        <h2><?php echo htmlspecialchars($projectData['title']); ?></h2>
+                        <p class="pe-4"><?php echo htmlspecialchars($projectData['description']); ?> <span
+                                class="link-primary"><?php echo htmlspecialchars($projectData['tags']); ?></span></p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <form class="d-flex align-items-center" action="" method="post">
@@ -123,7 +123,7 @@
 
         <div class="row">
             <div class="col-8">
-                <img src="uploaded_projects/<?php echo $projectData['image'];?>" width="100%" height="100%"
+                <img src="uploaded_projects/<?php echo htmlspecialchars($projectData['image']);?>" width="100%" height="100%"
                     class="img-project-post" style="object-fit:cover">
             </div>
 

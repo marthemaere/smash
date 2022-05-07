@@ -10,6 +10,7 @@ if (!empty($_POST)) {
         $post = new Post();
         $post->setTitle($_POST['title']);
         $post->setDescription($_POST['description']);
+        $post->setPostId($_POST['id']);
         $userId= $_SESSION['id'];
         $post->setUserId($userId);
         $id = $post->canUploadProject();

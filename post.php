@@ -1,5 +1,6 @@
 <?php
     include_once("bootstrap.php");
+    $postId =  $_GET['p'];
     session_start();
 
     if (!isset($_SESSION['id'])) {
@@ -7,7 +8,6 @@
     } else {
         $key = $_GET['p'];
         $projectData = Post::getPostDataFromId($key);
-        //var_dump($projectData);
         $comments = Comment::getCommentsFromPostId($key);
         if (empty($comments)) {
             $emptystate = true;
@@ -22,9 +22,18 @@
                 $error = $e->getMessage();
             }
         }
-    }
 
+        if (!empty($_POST['deleteProject'])) {
+            try {
+                Post::deleteProject($postId);
+                header('Location: index.php');
+            } catch (Throwable $e) {
+                $error = $e->getMessage();
+            }
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,6 +84,26 @@
             </div>
             <!-- are you sure alert -->
 
+             <!-- are you sure alert for deleting a post -->
+             <div class="modal fade" id="deleteProject" aria-hidden="true" aria-labelledby="deleteProjectLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteProjectLabel">Are you sure you want to delete this post?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="" method="post">
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-primary" data-bs-toggle="modal">No</button>
+                                <input type="submit" value="Yes" name="deleteProject" class="btn btn-primary" data-bs-toggle="modal">
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- are you sure alert for deleting a post -->
+
             <div class="d-flex align-items-center py-2">
                 <img src="profile_pictures/<?php echo $projectData['profile_pic']; ?>" class="img-profile-post">
                 <a href="profile.php?p=<?php echo $projectData['user_id'];?>">
@@ -91,17 +120,17 @@
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <form class="d-flex align-items-center" action="" method="post">
-                            <div class="btn btn-primary d-flex align-items-center">
+                            <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
                                 <img src="assets/images/empty-heart.svg" class="btn-icon-like">
                                 <input type="submit" value="Like" class="btn p-0 ps-1" name="like">
                                 <p class="num-of-likes"> 1</p>
                             </div>
+                            <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report</a>
+                            <a class="btn btn-outline-primary text-danger" data-bs-toggle="modal" href="#deleteProject" role="button">Delete project</a>
                         </form>
-                        <a class="btn btn-outline-primary ms-2" data-bs-toggle="modal" href="#exampleModalToggle"
-                            role="button">Report</a>
-                    </div>
-                </div>
-            </div>
+                        </div>
+                        </div>
+                        </div>
         </div>
 
         <div class="row">

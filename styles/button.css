@@ -9,11 +9,14 @@ nav .btn {
     border: 1px solid #16CF83;
 }
 
+
+
 .btn-primary:hover {
     color: black;
     background-color: #0dac6a;
     border: 1px solid #0dac6a;
 }
+
 
 .btn-outline-primary {
     color: black;
@@ -49,6 +52,11 @@ nav .btn {
     /* padding-right: 22px; */
 }
 
+.spacing{
+    padding: 43px;
+}
+
+
 /* ------Links------ */
 .link-primary {
     color: #7B61FF;
@@ -65,6 +73,8 @@ nav .btn {
     font-weight: 500;
     text-decoration: none;
 }
+
+
 
 a {
     text-decoration: none;

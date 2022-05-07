@@ -7,6 +7,7 @@ class Post
     private $image;
     private $description;
     private $userId;
+    private $postId;
 
     public function getUserId()
     {
@@ -46,6 +47,32 @@ class Post
         $this->image = $image;
         return $this;
     }
+
+
+    public function setPostId($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT id FROM posts WHERE id = :postId");
+        $statement->bindValue(":postId", $postId);
+        $postId = $statement->execute();
+        return $postId;
+    }
+
+    public function getPostId()
+    {
+        return $this->postId;
+    }
+
+    public static function deleteProject($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("delete from posts where id = :postId");
+        $statement->bindValue(":postId", $postId); 
+        $postId =  $_GET['p'];
+        print_r($postId);
+        return $statement->execute();
+    }
+
 
     public function getDescription()
     {
@@ -92,6 +119,7 @@ class Post
         return $result;
     }
 
+
     public function canUploadProject()
     {
         $file = $_FILES['file'];
@@ -126,6 +154,8 @@ class Post
             throw new Exception("You cannot upload files of this type");
         }
     }
+
+   
 
     public static function search($search)
     {

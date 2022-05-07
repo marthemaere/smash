@@ -55,6 +55,16 @@
             $result = $statement->execute();
             return $result;
         }
+
+
+        public function unfollowUser()
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("DELETE FROM followers WHERE follower_id = :followerId AND following_id = :followingId");
+            $statement->bindValue(":followerId", $this->getFollowerId());
+            $statement->bindValue(":followingId", $this->getFollowingId());
+            return $statement->execute();
+        }
         
         public static function deleteFollowers($userId)
         {

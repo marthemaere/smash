@@ -1,7 +1,7 @@
 <?php
     include_once("bootstrap.php");
     session_start();
-
+    $userId = $_GET['p'];
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
@@ -28,11 +28,9 @@
     <?php include_once('header.php'); ?>
     <div class="container">
         <div class="row p-3">
-            <?php if (isset($success)): ?>
-                <div class="alert alert-success" role="alert">
-                    <?php echo $success; ?>
-                </div>
-            <?php endif; ?>
+            <div id="report-success" class="invisible" role="alert">
+                      
+            </div>
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger" role="alert">
                     <?php echo $error; ?>
@@ -48,22 +46,22 @@
                 <form action="" method="post">
                 <div class="my-4">
                     <!-- are you sure alert -->
-                    <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
-                        aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                    <div class="modal fade" id="report-user" aria-hidden="true"
+                        aria-labelledby="report-userLabel" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalToggleLabel">Are you sure you want to report
+                                    <h5 class="modal-title" id="report-userLabel">Are you sure you want to report
                                         this user?</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                         aria-label="Close"></button>
                                 </div>
                                 <form action="" method="post">
                                     <div class="modal-footer">
-                                        <button class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2"
+                                        <button class="btn btn-outline-primary"
                                             data-bs-toggle="modal">No</button>
-                                        <input type="submit" value="yes" name="report" class="btn btn-primary"
-                                            data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                                        <input id="report-user" data-userid="<?php echo $userId ?>"  type="submit" value="Yes" name="report" class="btn btn-primary"
+                                            data-bs-toggle="modal">
                                     </div>
                                 </form>
                             </div>
@@ -72,7 +70,7 @@
                     <!-- are you sure alert -->
                     <div class="profile-btn">
                         <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Follow</a>
-                        <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report user</a>
+                        <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#report-user" id="report-btn" role="button">Report user</a>
                         <?php if (!empty($userPosts[0]['social_linkedin'])): ?>
                             <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
                         <?php endif; ?>
@@ -135,6 +133,7 @@
 
     <?php echo include_once('footer.php'); ?>
     <script src="javascript/follow.js"></script>
+    <script src="javascript/report-user.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

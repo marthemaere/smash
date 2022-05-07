@@ -9,7 +9,6 @@
         $key = $_GET['p'];
         $userData = User::getUserDataFromId($key);
         $userPosts = $user->getUserPostsFromId($key);
-        //var_dump($userPosts);
 
         if (empty($userPosts)) {
             $emptyState;
@@ -39,6 +38,18 @@
 <body>
     <?php include_once('header.php'); ?>
     <div class="container">
+        <div class="row p-3">
+            <?php if (isset($success)): ?>
+                <div class="alert alert-success" role="alert">
+                    <?php echo $success; ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($error)): ?>
+                <div class="alert alert-danger" role="alert">
+                    <?php echo $error; ?>
+                </div>
+            <?php endif; ?>
+        </div>
         <div class="row d-flex align-items-center">
             <div class="col">
                 <img src="profile_pictures/<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
@@ -47,37 +58,31 @@
                 <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
                 <form action="" method="post">
                 <div class="my-4">
-                    <?php if (isset($success)): ?>
-                        <div class="alert alert-success" role="alert">
-                            <?php echo $success; ?>
-                        </div>
-                    <?php endif; ?>
-                    <?php if (isset($error)): ?>
-                        <div class="alert alert-danger" role="alert">
-                            <?php echo $error; ?>
-                        </div>
-                    <?php endif; ?>
                     <!-- are you sure alert -->
-                    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                    <div class="modal fade" id="exampleModalToggle" aria-hidden="true"
+                        aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalToggleLabel">Are you sure you want to report this user?</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <form action="" method="post">
-                            <div class="modal-footer">
-                            <button class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">No</button>
-                                <input type="submit" value="yes" name="report" class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
-                            </div>
-                            </form>
-                            
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalToggleLabel">Are you sure you want to report
+                                        this user?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <form action="" method="post">
+                                    <div class="modal-footer">
+                                        <button class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2"
+                                            data-bs-toggle="modal">No</button>
+                                        <input type="submit" value="yes" name="report" class="btn btn-primary"
+                                            data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <!-- are you sure alert -->
                     <div class="profile-btn">
-                        <a href="#" class="btn btn-primary mb-2">Follow</a>
+                        <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Follow</a>
                         <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report user</a>
                         <?php if (!empty($userPosts[0]['social_linkedin'])): ?>
                             <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
@@ -140,6 +145,7 @@
     </div>
 
     <?php echo include_once('footer.php'); ?>
+    <script src="javascript/follow.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

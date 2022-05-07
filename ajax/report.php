@@ -1,23 +1,26 @@
 <?php
-    include_once('../bootstrap.php');
-
-    if (!empty($_POST['report'])) {
+   include_once(__DIR__.'/../bootstrap.php');
+   
+    if (!empty($_POST)) {
         try {
             $report = new Report();
-            $report->setPostId($key);
-
+            $postId = intval($_POST['postid']);
+            $report->setPostId($postId);
+            
             //report
             $report->reportPost();
-            
+
             //success weergeven
             $response = [
                 'status' => 'success',
-                'message' => 'Post reported. Thank you for your feedback.'
+                'message' => "Post is reported. Thank you for your feedback.",
             ];
-            
-            header('Content-Type: application/json');
-            echo json_encode($response);
         } catch (Exception $e) {
-            $error = $e->getMessage();
+            $response = [
+                'status' => 'error',
+                'message' => "Something went wrong. Please try again later."
+            ];
         }
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }

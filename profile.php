@@ -13,17 +13,6 @@
         if (empty($userPosts)) {
             $emptyState;
         }
-
-        if (!empty($_POST['report'])) {
-            try {
-                $report = new Report();
-                $report->setUserId($key);
-                $report->reportUser();
-                $success = "User reported. Thank you for your feedback.";
-            } catch (Exception $e) {
-                $error = $e->getMessage();
-            }
-        }
     }
 
 ?><!DOCTYPE html>

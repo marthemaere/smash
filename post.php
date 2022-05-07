@@ -1,5 +1,6 @@
 <?php
     include_once("bootstrap.php");
+    $postId =  $_GET['p'];
     session_start();
 
     if (!isset($_SESSION['id'])) {
@@ -124,12 +125,12 @@
                                 <input type="submit" value="Like" class="btn p-0 ps-1" name="like">
                                 <p class="num-of-likes"> 1</p>
                             </div>
+                            <a class="btn btn-outline-primary ms-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report</a>
+                            <a class="btn btn-outline-primary text-danger" data-bs-toggle="modal" href="#deleteProject" role="button">Delete project</a>
                         </form>
-                        <a class="btn btn-outline-primary ms-2" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report</a>
-                        <a class="btn btn-outline-primary text-danger" data-bs-toggle="modal" href="#deleteProject" role="button">Delete post</a>
-                    </div>
-                </div>
-            </div>
+                        </div>
+                        </div>
+                        </div>
         </div>
 
         <div class="row">

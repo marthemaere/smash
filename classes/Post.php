@@ -67,7 +67,9 @@ class Post
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("delete from posts where id = :postId");
-        $statement->bindValue(":postId", $postId);  
+        $statement->bindValue(":postId", $postId); 
+        $postId =  $_GET['p'];
+        print_r($postId);
         return $statement->execute();
     }
 

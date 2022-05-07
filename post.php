@@ -12,16 +12,6 @@
         if (empty($comments)) {
             $emptystate = true;
         }
-        if (!empty($_POST['report'])) {
-            try {
-                $report = new Report();
-                $report->setPostId($key);
-                $report->reportPost();
-                $success = "Post reported. Thank you for your feedback.";
-            } catch (Exception $e) {
-                $error = $e->getMessage();
-            }
-        }
 
         if (!empty($_POST['deleteProject'])) {
             try {
@@ -49,11 +39,9 @@
     <?php include_once('header.php'); ?>
     <div class="container my-5">
         <div class="row">
-            <?php if (isset($success)): ?>
-            <div class="alert alert-success m-2" role="alert">
-                <?php echo $success; ?>
+            <div id="report-success" class="invisible" role="alert">
+                      
             </div>
-            <?php endif; ?>
             <?php if (isset($error)): ?>
             <div class="alert alert-danger" role="alert">
                 <?php echo $error; ?>
@@ -61,21 +49,21 @@
             <?php endif; ?>
 
             <!-- are you sure alert -->
-            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+            <div class="modal fade" id="reportPost" aria-hidden="true" aria-labelledby="reportPostLabel"
                 tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">Are you sure you want to report this
+                            <h5 class="modal-title" id="reportPostLabel">Are you sure you want to report this
                                 post?</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="" method="post">
                             <div class="modal-footer">
-                                <button class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2"
+                                <button class="btn btn-outline-primary" 
                                     data-bs-toggle="modal">No</button>
-                                <input id="report-post" data-postId=`$key` type="submit" value="yes" name="report"
-                                    class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                                <input id="report-post" data-postId="<?php echo $postId ?>" type="submit" value="yes" name="report"
+                                    class="btn btn-primary" 
                                     data-bs-toggle="modal">
                             </div>
                         </form>
@@ -125,12 +113,12 @@
                                 <input type="submit" value="Like" class="btn p-0 ps-1" name="like">
                                 <p class="num-of-likes"> 1</p>
                             </div>
-                            <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report</a>
+                            <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Report</a>
                             <a class="btn btn-outline-primary text-danger" data-bs-toggle="modal" href="#deleteProject" role="button">Delete project</a>
                         </form>
-                        </div>
-                        </div>
-                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">

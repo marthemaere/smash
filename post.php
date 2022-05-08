@@ -37,7 +37,7 @@
 
 <body>
     <?php include_once('header.php'); ?>
-    <div class="container my-5">
+    <div class="container my-4">
         <div class="row">
             <div id="report-success" class="invisible" role="alert">
                       
@@ -114,7 +114,7 @@
                                 <p class="num-of-likes"> 1</p>
                             </div>
                             <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Report</a>
-                            <a class="btn btn-outline-primary text-danger" data-bs-toggle="modal" href="#deleteProject" role="button">Delete project</a>
+                            <a class="btn btn-outline-danger ms-2" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
                         </form>
                     </div>
                 </div>

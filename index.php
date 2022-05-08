@@ -61,7 +61,9 @@
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">A-Z</a></li>
+                    <li><h6 class="dropdown-header">Sort</h6></li>
+                    <li><a class="dropdown-item" href="#">Ascending (a-z)</a></li>
+                    <li><a class="dropdown-item" href="#">Descending (z-a)</a></li>
                     <li><a class="dropdown-item" href="#">Following</a></li>
                 </ul>
             </div>

@@ -12,16 +12,6 @@
         if (empty($comments)) {
             $emptystate = true;
         }
-        if (!empty($_POST['report'])) {
-            try {
-                $report = new Report();
-                $report->setPostId($key);
-                $report->reportPost();
-                $success = "Post reported. Thank you for your feedback.";
-            } catch (Exception $e) {
-                $error = $e->getMessage();
-            }
-        }
 
         if (!empty($_POST['deleteProject'])) {
             try {
@@ -49,11 +39,9 @@
     <?php include_once('header.php'); ?>
     <div class="container my-5">
         <div class="row">
-            <?php if (isset($success)): ?>
-            <div class="alert alert-success m-2" role="alert">
-                <?php echo $success; ?>
+            <div id="report-success" class="invisible" role="alert">
+                      
             </div>
-            <?php endif; ?>
             <?php if (isset($error)): ?>
             <div class="alert alert-danger" role="alert">
                 <?php echo $error; ?>
@@ -61,21 +49,21 @@
             <?php endif; ?>
 
             <!-- are you sure alert -->
-            <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+            <div class="modal fade" id="reportPost" aria-hidden="true" aria-labelledby="reportPostLabel"
                 tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalToggleLabel">Are you sure you want to report this
+                            <h5 class="modal-title" id="reportPostLabel">Are you sure you want to report this
                                 post?</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="" method="post">
                             <div class="modal-footer">
-                                <button class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2"
+                                <button class="btn btn-outline-primary" 
                                     data-bs-toggle="modal">No</button>
-                                <input id="report-post" data-postId=`$key` type="submit" value="yes" name="report"
-                                    class="btn btn-primary" data-bs-target="#exampleModalToggle2"
+                                <input id="report-post" data-postId="<?php echo $postId ?>" type="submit" value="yes" name="report"
+                                    class="btn btn-primary" 
                                     data-bs-toggle="modal">
                             </div>
                         </form>
@@ -105,18 +93,18 @@
             <!-- are you sure alert for deleting a post -->
 
             <div class="d-flex align-items-center py-2">
-                <img src="profile_pictures/<?php echo $projectData['profile_pic']; ?>" class="img-profile-post">
-                <a href="profile.php?p=<?php echo $projectData['user_id'];?>">
-                    <h4 class="pt-2 ps-2"><?php echo $projectData['username'];?></h4>
+                <img src="profile_pictures/<?php echo htmlspecialchars($projectData['profile_pic']); ?>" class="img-profile-post">
+                <a href="profile.php?p=<?php echo htmlspecialchars($projectData['user_id']);?>">
+                    <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($projectData['username']);?></h4>
                 </a>
             </div>
 
             <div class="col-8 py-0">
                 <div class="d-flex align-items-start justify-content-between">
                     <div>
-                        <h2><?php echo $projectData['title']; ?></h2>
-                        <p class="pe-4"><?php echo $projectData['description']; ?> <span
-                                class="link-primary"><?php echo $projectData['tags']; ?></span></p>
+                        <h2><?php echo htmlspecialchars($projectData['title']); ?></h2>
+                        <p class="pe-4"><?php echo htmlspecialchars($projectData['description']); ?> <span
+                                class="link-primary"><?php echo htmlspecialchars($projectData['tags']); ?></span></p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <form class="d-flex align-items-center" action="" method="post">
@@ -125,17 +113,17 @@
                                 <input type="submit" value="Like" class="btn p-0 ps-1" name="like">
                                 <p class="num-of-likes"> 1</p>
                             </div>
-                            <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Report</a>
+                            <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Report</a>
                             <a class="btn btn-outline-primary text-danger" data-bs-toggle="modal" href="#deleteProject" role="button">Delete project</a>
                         </form>
-                        </div>
-                        </div>
-                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
             <div class="col-8">
-                <img src="uploaded_projects/<?php echo $projectData['image'];?>" width="100%" height="100%"
+                <img src="uploaded_projects/<?php echo htmlspecialchars($projectData['image']);?>" width="100%" height="100%"
                     class="img-project-post" style="object-fit:cover">
             </div>
 
@@ -166,6 +154,7 @@
     </div>
 
     <?php require_once("footer.php"); ?>
+    <script src="javascript/report-post.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

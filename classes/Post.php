@@ -94,12 +94,12 @@ class Post
 
     public function canUploadProject()
     {
-        $file = $_FILES['file'];
+       // $file = $_FILES['file'];
         $fileName = $_FILES['file']['name'];
         $fileTmpName = $_FILES['file']['tmp_name'];
         $fileSize = $_FILES['file']['size'];
         $fileError = $_FILES['file']['error'];
-        $fileType = $_FILES['file']['type'];
+       // $fileType = $_FILES['file']['type'];
     
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt)); //check in lowercase
@@ -154,13 +154,17 @@ class Post
         return $statement->execute();
     }
 
-    public function editTitle($postId, $title)
+    public function editTitle($id)
         {     
-            $this->title = $title;
+            $title = $this->getTitle();
+            $userId = $this->getUserId();
+            $id= $this->id;
 
             $conn = Db::getInstance();
-            $statement = $conn->prepare("UPDATE posts SET title= :title where id= :post_id)");
-            $statement->bindValue(":post_id", $this->postId);
+            $statement = $conn->prepare("UPDATE posts SET title= :title where id= :id)");
+            $statement->bindValue(":id", $id);
+            $statement->bindValue(":title", $title);
+            $statement->bindValue(":userId", $userId);
             $result = $statement->execute();
             return $result;
             if (!$result) {

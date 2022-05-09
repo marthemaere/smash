@@ -8,10 +8,26 @@
         $key = $_GET['p'];
         $projectData = Post::getPostDataFromId($key);
         //var_dump($projectData);
+      
+
+        if(!empty($_POST['addComment']))
+        {
+            try {
+                $comment = new Comment();
+                $comment->setText($_POST['comment']);
+                $comment->save();
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        }
+        
+        //altijd alle laatste activiteiten ophalen
         $comments = Comment::getCommentsFromPostId($key);
+
         if (empty($comments)) {
             $emptystate = true;
         }
+
         if (!empty($_POST['report'])) {
             try {
                 $report = new Report();
@@ -22,8 +38,9 @@
                 $error = $e->getMessage();
             }
         }
-    }
 
+
+}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +49,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
     <title>Post</title>
+    <script type="text/javascript"></script>
 </head>
 <body>
     <?php include_once('header.php'); ?>
@@ -92,6 +110,12 @@
                 </div>
             </div>
 
+            <div>
+                <form method="post" action="editProject.php" id="edit_form">
+                    <input type="submit" value="&#9998;" name="edit_title">
+                </form>    
+            </div>
+
             <div class="row">
                 <div class="col-9">
                     <img src="uploaded_projects/<?php echo htmlspecialchars($projectData['image']);?>" width="100%" height="75%" class="img-project-post" style="object-fit:cover" >
@@ -102,7 +126,7 @@
                     <?php if (isset($emptystate)): ?>
                         <p class="empty-state">No comments yet</p>
                     <?php else: ?>
-                    <ul class="">
+                    <ul class="" id="listupdates">
                         <?php foreach ($comments as $c): ?>
                             <li class=""><?php echo htmlspecialchars($c['text']); ?></li>
                         <?php endforeach; ?>
@@ -110,8 +134,8 @@
                     <?php endif; ?>
                     <div class="row d-flex justify-content-between">
                         <form class="form" action="" method="post">
-                            <input class="form-control col" type="text" placeholder="make a comment" id="commentText">
-                            <input type="submit" value="Send" class="btn btn-primary col col-lg-3" data-postid="3" name="comment" id="btnAddComment">
+                            <input class="form-control col" type="text" placeholder="make a comment" id="comment" name="comment">
+                            <input type="submit" name="addComment" value="Add comment" class="btn btn-primary col col-lg-3" data-postId="1" id="btnAddComment">
                         </form>
                     </div>
                 </div>

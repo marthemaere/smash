@@ -67,20 +67,19 @@
 
         public function save(){
             $conn= new PDO("mysql:host=db;dbname='facebook', 'root', 'root'");
-            $statement= $conn->prepare("insert into comments (text, postId, userId) values (:text, :postId, :userId");
+            $statement= $conn->prepare("INSERT into comments (text, post_id, user_id) values (:text, :post_id, :user_id)");
             
             $text= $this->getText();
-            $postId= $this->getPostId();
-            $userId= $this->getUserId();
+            //$postId= $this->getPostId();
+            //$userId= $this->getUserId();
            
             $statement->bindValue(":text", $text);
-            $statement->bindValue(":postId", $postId);
-            $statement->bindValue(":userId", $userId);
+            $statement->bindValue(":post_id", '1');
+            $statement->bindValue(":user_id", '1');
 
             $result= $statement->execute();
             return $result;
         }
-
 
         public static function getCommentsFromPostId($id)
         {

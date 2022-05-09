@@ -58,12 +58,19 @@ class Tag
         return $result;
     }
 
-    public function editTags()
+    public function editTags($post_id)
     {
-        $db = Db::getInstance();
-        $stmt = $db->prepare("UPDATE posts (tags) VALUES (:user_id)");
-        $stmt->bindValue(":user_id", $this->userId);
-        $result = $stmt->execute();
+
+        $tags = $this->getTags();
+        $tags = explode(", ", $tags);
+
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE tags (tag, post_id) values (:tag, :post_id)");
+        for ($i=0; $i<count($tags); $i++) {
+            $statement->bindValue(":tag", $tags[$i]);
+            $statement->bindValue(":post_id", $post_id);
+            $result = $statement->execute();
+        }   
         return $result;
         if (!$result) {
             throw new Exception("Something went wrong while reporting user.");

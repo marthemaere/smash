@@ -1,20 +1,20 @@
-document.querySelector("#btnAddComment").addEventListener("click", e => {
-    //postid
-    //posttext
-    //let postId= this.dataset.postid;
-    let comment= document.querySelector("#comment").value;
+document.querySelector("#btnSubmit").addEventListener("click", function(e) {
+    e.preventDefault();
 
-    //console.log(postId);
-    console.log(comment);
-    console.log(postId);
+    let postId= e.target.dataset.postId;
+    let userId= e.target.dataset.userId;
+    let comment= document.querySelector("#comment").value;
 
     //ajax
     let data= new FormData();
     data.append("comment", comment);
+    data.append("postId", postId);
+    data.append("userId", userId);
 
-    fetch("./ajax/save_comment.php", {
-    method: 'POST', // or 'PUT'
-    body: data,
+
+    fetch("ajax/save_comment.php", {
+    method: 'POST', 
+    body: data
     })
     .then(response => response.json())
     .then(data => {
@@ -22,13 +22,12 @@ document.querySelector("#btnAddComment").addEventListener("click", e => {
             let li= `<li>${data.data.comment}</li>`;
             document.querySelector("#listupdates").innerHTML += li;
             document.querySelector("#comment").value ="";
-        }
-    })
-    .catch((error) => {
-    console.error('Error:', error);
+        }})
+        .then(result => {
+            console.log(result);
+        })
+        .catch(error => {
+            console.log(error);
+        });
     });
-
-
-    e.preventDefault();
-})
     //bevestiging

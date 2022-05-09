@@ -8,6 +8,9 @@
     } else {
         $key = $_GET['p'];
         $projectData = Post::getPostDataFromId($key);
+        $sessionId=$_SESSION['id'];
+        $userDataFromId = User::getUserDataFromId($sessionId);
+
         //var_dump($projectData);
     
         if(!empty($_POST['addComment']))
@@ -15,6 +18,8 @@
             try {
                 $comment = new Comment();
                 $comment->setText($_POST['comment']);
+                $comment->setPostId($postId);
+                $comment->setUserId($sessionId);
                 $comment->save();
             } catch (\Throwable $th) {
                 //throw $th;
@@ -156,28 +161,30 @@
                     <?php if (isset($emptystate)): ?>
                     <p class="">There are no comments for this project.</p>
                     <?php else: ?>
-                    <ul class="" id="listupdates">
-                        <?php foreach ($comments as $c): ?>
-                        <li class=""><?php echo $c['text']; ?></li>
-                        <?php endforeach; ?>
+                    <?php foreach ($comments as $c): ?>
+
+                    <ul class="list-group list-group-flush" id="listupdates">
+                                <li class="list-group-item d-flex align-items-center border-bottom">
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($projectData['user_id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($projectData['profile_pic']); ?>" class="img-profile-post"></a>
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($projectData['user_id']);?>">
+                                        <h4 class="p-2 mb-0"><?php echo htmlspecialchars($projectData['username']);?></h4>
+                                    </a>
+                                    <?php echo $c['text']; ?>
+                                </li>
                     </ul>
+                    <?php endforeach; ?>
+
                     <?php endif; ?>
                     <div class="row d-flex justify-content-between">
-                        <form class="form" action="" method="post">
-                            <input class="form-control col" type="text" placeholder="make a comment" id="comment" name="comment">
-                            <input type="submit" name="addComment" value="Add comment" class="btn btn-primary col col-lg-3" data-postId="1" id="btnAddComment">
+                        <form class="" action="" method="post">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Place a comment" aria-label="Place a comment" aria-describedby="button-addon2" id="comment" name="comment">
+                                <input type="submit" name="addComment" id="btnSubmit" data-userId="<?php echo $userId ?>" data-postId="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >
+                            </div>
                         </form>
                     </div>
-                </div>
 
-                <form class="" action="" method="post">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Place a comment"
-                            aria-label="Place a comment" aria-describedby="button-addon2">
-                        <input class="btn btn-outline-primary btn-icon-search" type="submit" name="submit-search"
-                            id="button-addon2" value=">">
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>

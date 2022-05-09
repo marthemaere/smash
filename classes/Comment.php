@@ -66,16 +66,16 @@
         }
 
         public function save(){
-            $conn= new PDO("mysql:host=db;dbname='facebook', 'root', 'root'");
-            $statement= $conn->prepare("INSERT into comments (text, post_id, user_id) values (:text, :post_id, :user_id)");
+                $conn = Db::getInstance();
+                $statement= $conn->prepare("INSERT into comments (text, post_id, user_id) values (:text, :post_id, :user_id)");
             
             $text= $this->getText();
-            //$postId= $this->getPostId();
-            //$userId= $this->getUserId();
+            $postId= $this->getPostId();
+            $userId= $this->getUserId();
            
             $statement->bindValue(":text", $text);
-            $statement->bindValue(":post_id", '1');
-            $statement->bindValue(":user_id", '1');
+            $statement->bindValue(":post_id", $postId);
+            $statement->bindValue(":user_id", $userId);
 
             $result= $statement->execute();
             return $result;

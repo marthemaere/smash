@@ -26,6 +26,7 @@
         $search = $_POST['search'];
         $posts = Post::search($search);
     }
+<<<<<<< HEAD
     
     if (!empty($_POST['ASC'])) {
         $sorting = 'ASC';
@@ -40,6 +41,8 @@
     if (empty($posts)) {
         $emptystate = true;
     }
+=======
+>>>>>>> checkavailability
 ?>
 <!DOCTYPE html>
 <html lang="en">

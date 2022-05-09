@@ -8,8 +8,8 @@
     } else {
         $key = $_GET['p'];
         $projectData = Post::getPostDataFromId($key);
-        $sessionId=$_SESSION['id'];
-        $userDataFromId = User::getUserDataFromId($sessionId);
+        $userId=$_SESSION['id'];
+        $userDataFromId = User::getUserDataFromId($userId);
 
         //var_dump($projectData);
     
@@ -19,7 +19,7 @@
                 $comment = new Comment();
                 $comment->setText($_POST['comment']);
                 $comment->setPostId($postId);
-                $comment->setUserId($sessionId);
+                $comment->setUserId($userId);
                 $comment->save();
             } catch (\Throwable $th) {
                 //throw $th;

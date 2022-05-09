@@ -1,4 +1,5 @@
 document.querySelector("#btnSubmit").addEventListener("click", function(e) {
+
     e.preventDefault();
 
     let postId= e.target.dataset.postId;
@@ -10,7 +11,6 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
     data.append("comment", comment);
     data.append("postId", postId);
     data.append("userId", userId);
-
 
     fetch("ajax/save_comment.php", {
     method: 'POST', 
@@ -29,5 +29,7 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
         .catch(error => {
             console.log(error);
         });
+
     });
+
     //bevestiging

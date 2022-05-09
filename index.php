@@ -2,34 +2,44 @@
     include_once("bootstrap.php");
     session_start();
     
-
     $conn = Db::getInstance();
+    
+    if (isset($_SESSION['id'])) {
+        $sessionId = $_SESSION['id'];
+        $userDataFromId = User::getUserDataFromId($sessionId);
+    }
 
-        $posts = Post::getAll();
-        if (empty($posts)) {
-            $emptystate = true;
-        }
+    $limit = 15;
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $start = ($page -1) * $limit;
 
-        $limit= 15;
-        $conn = Db::getInstance();
-        $result = $conn->query("select count(id) AS id from posts");
-        $postCount= $result->fetchAll();
-        $total= $postCount[0]['id'];
-        $pages= ceil($total / $limit);
-
-        if (isset($_SESSION['id'])) {
-            $sessionId = $_SESSION['id'];
-            $userDataFromId = User::getUserDataFromId($sessionId);
-        }
-        
+    $sorting = 'DESC';
+    $posts = Post::getPosts($sorting, $start, $limit);
+    
+    $conn = Db::getInstance();
+    $result = $conn->query("select count(id) AS id from posts");
+    $postCount= $result->fetchAll();
+    $total= $postCount[0]['id'];
+    $pages= ceil($total / $limit);
+    
     if (!empty($_POST['submit-search'])) {
         $search = $_POST['search'];
         $posts = Post::search($search);
-        if (empty($posts)) {
-            $emptystate = true;
-        }
     }
-
+    
+    if (!empty($_POST['ASC'])) {
+        $sorting = 'ASC';
+        $posts = Post::getPosts($sorting, $start, $limit);
+    } elseif (!empty($_POST['DESC'])) {
+        $sorting = 'DESC';
+        $posts = Post::getPosts($sorting, $start, $limit);
+    } elseif (!empty($_POST['following'])) {
+        $posts = Post::filterPostsByFollowing($start, $limit);
+    }
+    
+    if (empty($posts)) {
+        $emptystate = true;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,16 +65,30 @@
     <div class="container mt-5 mb-5">
         <div class="d-flex justify-content-between align-items-center m-3">
             <div class="btn-group">
-                <button type="button" class="btn btn-primary">Latest</button>
+                <button type="button" class="btn btn-primary sort-title">
+                    <?php if (!empty($_POST['ASC'])): ?>
+                        <?php echo "Oldest"; ?>
+                    <?php elseif (!empty($_POST['DESC'])): ?>
+                        <?php echo "Latest"; ?>
+                    <?php elseif (!empty($_POST['following'])): ?>
+                        <?php echo "Following"; ?>
+                    <?php else: ?>
+                        <?php echo "Latest"; ?>
+                    <?php endif; ?>
+                </button>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
+                
                 <ul class="dropdown-menu">
-                    <li><h6 class="dropdown-header">Sort</h6></li>
-                    <li><a class="dropdown-item" href="#">Ascending (a-z)</a></li>
-                    <li><a class="dropdown-item" href="#">Descending (z-a)</a></li>
-                    <li><a class="dropdown-item" href="#">Following</a></li>
+                    <form action="" method="POST">
+                        <li><h6 class="dropdown-header">Sort by date</h6></li>
+                        <li><a class="dropdown-item sort-latest" href="#"><input type="submit" name="DESC" value="Latest"></a></li>
+                        <li><a class="dropdown-item sort-oldest" href="#"><input type="submit" name="ASC" value="Oldest"></a></li>
+                        <li><h6 class="dropdown-header">Filter</h6></li>
+                        <li><a class="dropdown-item filter-following" href="#"><input type="submit" name="following" value="Following"></a></li>
+                    </form>
                 </ul>
             </div>
 
@@ -82,9 +106,9 @@
         </div>
 
         <?php if (isset($emptystate)): ?>
-        <div class="empty-state">
-            <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">
-            <p> No projects were found. </p>
+        <div class="empty-state flex-column">
+            <img class="d-block mx-auto" src="assets/images/empty-state.png" alt="emptystate">
+            <h3 class="text-center py-4">Nothing to see here...</h3>
         </div>
         <?php endif; ?>
 
@@ -170,7 +194,6 @@
     
     <?php require_once("footer.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="/javascript/like.js"></script>
+    <script src="javascript/like.js"></script>
 </body>
-
 </html>

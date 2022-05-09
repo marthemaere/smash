@@ -67,7 +67,7 @@ class Post
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("delete from posts where id = :postId");
-        $statement->bindValue(":postId", $postId); 
+        $statement->bindValue(":postId", $postId);
         $postId =  $_GET['p'];
         print_r($postId);
         return $statement->execute();
@@ -90,16 +90,17 @@ class Post
     }
 
     
-    public static function getAll()
-    {
-        $limit=15;
-        $page= isset($_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
-        $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
+    // public static function getAll()
+    // {
+    //     $limit=15;
+    //     $page= isset($_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
+    //     $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
 
-        $conn = Db::getInstance();
-        $result = $conn->query("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id ORDER BY date DESC LIMIT $start, $limit");
-        return $result->fetchAll();
-    }
+    //     $conn = Db::getInstance();
+    //     $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id ORDER BY `date` DESC LIMIT $start, $limit");
+    //     $statement->execute();
+    //     return $statement->fetchAll();
+    // }
 
     public function setProjectInDatabase()
     {
@@ -173,6 +174,32 @@ class Post
         $statement->bindValue(':id', $id);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public static function getPosts($sorting, $start, $limit)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags ON tags.post_id = posts.id ORDER BY `date` $sorting LIMIT $start, $limit");
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
+    public static function filterPostsByFollowing($start, $limit)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare(
+            "SELECT * 
+            FROM posts p
+            INNER JOIN followers f ON f.following_id = p.user_id
+            INNER JOIN users u ON p.user_id = u.id 
+            INNER JOIN tags t ON t.post_id = p.id
+            ORDER BY `date` DESC 
+            LIMIT $start, $limit"
+        );
+        $statement->execute();
+        $result = $statement->fetchAll();
         return $result;
     }
 

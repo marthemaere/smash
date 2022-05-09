@@ -6,15 +6,10 @@ session_start();
 if (!isset($_SESSION['id'])) {
     header('Location: login.php');
 } else {
-    $key = $_GET['p'];
-    $projectData = Post::getPostDataFromId($key);
-    //var_dump($projectData);
     $postId =  $_GET['p'];
+    $projectData = Post::getPostDataFromId($postId);
 
-    $posts = Post::getAll();
-
-
-        if (!empty($_POST)) {
+        if (!empty($_POST['submit'])) {
             try {
                 $post = new Post();
                 $post->setTitle($_POST['title']);
@@ -24,7 +19,7 @@ if (!isset($_SESSION['id'])) {
                 $tags->setTag($_POST['tags']);
                 $tags->editTags($postId);
 
-               // header('Location: index.php');
+                header('Location: index.php');
                 echo "oke";
             } catch (Throwable $e) {
                 $error = $e->getMessage();
@@ -32,31 +27,6 @@ if (!isset($_SESSION['id'])) {
 
             }
         }
-
-        
-
-        //post aanmaken
-     /*   $post = new Post();
-        $post->setTitle($_POST['title']);
-        $userId= $_SESSION['id'];
-      
-       // $post->setUserId($userId);
-        $post->editTitle($postId);
-
-        $idTags = $post->canUploadProject();
-
-
-        //tags toevoegen
-        $tags = new Tag();
-        $tags->setTag($_POST['tags']);
-        $tags->editTags($postId);
-        $tags->addTagsToDatabase($idTags);
-
-        header("Location: index.php");
-    } catch (\Throwable $e) {
-        $error = $e->getMessage();
-    }
-}*/
 }
 ?>
 <!DOCTYPE html>

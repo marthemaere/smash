@@ -33,7 +33,6 @@ if (!empty($_POST)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/custom.css">
     <title>Smasssh</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
 </head>
@@ -59,13 +58,15 @@ if (!empty($_POST)) {
                     <?php endif; ?>
 
                     <div class="form-floating my-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" value="r012345@student.thomasmore.be" name="email">
+                        <input type="text" class="form-control" id="email" placeholder="name@example.com" value="xxx@student.thomasmore.be" onblur="checkEmail()" name="email">
+                        <span id="email_response"></span>
                         <label for="floatingInput">Email</label>
                     </div>
 
                     <div class="form-floating my-3">
-                        <input name="txt_username" placeholder="username" type="text" id="#txt_username" class="form-control" onBlur="checkAvailability()"><span id="user-availability-status"></span>
-                        <div id="uname_response"></div>
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username" onblur="checkUsername()" />
+                        <span id="username_response"></span>
+                        <label for="floatingInput">Username</label> 
                     </div>
 
             <div class="form-floating my-3">
@@ -74,7 +75,7 @@ if (!empty($_POST)) {
             </div>
 
             <div class="d-grid">
-                <input type="submit" value="Sign up" class="btn btn-dark">
+                <input type="submit" value="Sign up" class="btn btn-dark" id="signup">
             </div>
             </form>
             </div>
@@ -82,9 +83,10 @@ if (!empty($_POST)) {
         </div>
     </div>
     </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascript/accountAvailability.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <script src="acountAvailability.js"></script>
-
+                     
 </body>
 
 </html>

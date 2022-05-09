@@ -1,13 +1,15 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
 -- Server versie:                5.7.24 - MySQL Community Server (GPL)
--- Server OS:                    Win32
--- HeidiSQL Versie:              11.3.0.6295
+-- Server OS:                    Win64
+-- HeidiSQL Versie:              12.0.0.6468
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
@@ -27,8 +29,6 @@ CREATE TABLE IF NOT EXISTS `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumpen data van tabel smash.comments: ~0 rows (ongeveer)
-/*!40000 ALTER TABLE `comments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comments` ENABLE KEYS */;
 
 -- Structuur van  tabel smash.followers wordt geschreven
 CREATE TABLE IF NOT EXISTS `followers` (
@@ -39,8 +39,6 @@ CREATE TABLE IF NOT EXISTS `followers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumpen data van tabel smash.followers: ~0 rows (ongeveer)
-/*!40000 ALTER TABLE `followers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `followers` ENABLE KEYS */;
 
 -- Structuur van  tabel smash.likes wordt geschreven
 CREATE TABLE IF NOT EXISTS `likes` (
@@ -51,8 +49,6 @@ CREATE TABLE IF NOT EXISTS `likes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumpen data van tabel smash.likes: ~0 rows (ongeveer)
-/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 
 -- Structuur van  tabel smash.posts wordt geschreven
 CREATE TABLE IF NOT EXISTS `posts` (
@@ -64,10 +60,9 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `tags` varchar(300) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
--- Dumpen data van tabel smash.posts: ~12 rows (ongeveer)
-/*!40000 ALTER TABLE `posts` DISABLE KEYS */;
+-- Dumpen data van tabel smash.posts: ~16 rows (ongeveer)
 INSERT INTO `posts` (`id`, `title`, `date`, `image`, `description`, `tags`, `user_id`) VALUES
 	(9, 'Smash: branding and mobile app', '2022-04-30', 'project-smash.png', 'Mobile web application built for the course php', NULL, 2),
 	(11, 'Hoppin: mobility mobile app', '2022-05-03', 'project-hoppin-fien-gerardi.png', 'Hoppin is made to make travelling easy with every vehicle.', NULL, 2),
@@ -76,12 +71,15 @@ INSERT INTO `posts` (`id`, `title`, `date`, `image`, `description`, `tags`, `use
 	(15, 'Tingels: learning platform', '2022-05-03', 'tingels dribbble.png', 'A fun platform with educational videos for children', NULL, 1),
 	(18, 'Connec: reconnect students', '2022-05-03', 'mockup connec.png', 'An idea to reconnect students through activities', NULL, 1),
 	(19, 'Hoppin: transport app', '2022-05-03', 'hoppin-min.png', 'Transportation with much possibilities', NULL, 1),
-	(20, 'SLAM: reconnecting students', '2022-05-03', 'Screenshot 2022-05-03 at 12.40.20.png', 'A platform where students can reconnect through projects for organisations', NULL, 1),
 	(21, 'Democrats abroad: marketing campaign', '2022-05-04', 'democratsabroad.jpg', 'Marketing campaign to engage Americans living in Belgium to vote for the American Elections', NULL, 3),
 	(22, 'Skwikkl: online learning platform for children', '2022-05-04', 'skwikkl.png', 'An online platform where children can learn in a playful way', NULL, 3),
 	(25, 'Grofgerief: an online platform for circular economy', '2022-05-04', 'grofgerief.png', 'An online website to make circular economy possible', NULL, 3),
-	(26, 'Hoppin: combimobility app', '2022-05-04', 'hoppin.png', 'An app to improve mobility with public transport in Belgium', NULL, 3);
-/*!40000 ALTER TABLE `posts` ENABLE KEYS */;
+	(26, 'Hoppin: combimobility app', '2022-05-04', 'hoppin.png', 'An app to improve mobility with public transport in Belgium', NULL, 3),
+	(27, 'SLAM: connect vzw\'s with students', '2022-05-04', 'Slam.png', 'SLAM gives the opportunity to students to realise a real life project with non profit organisations', NULL, 1),
+	(28, 'Johannes Gutenberg: One of the kids', '2022-05-07', '1.png', 'We were challenged to tell a historical story to children with animation. I made Johannes a best friend for the kids. ', NULL, 4),
+	(29, 'Designing a logo for a startup', '2022-05-07', '5.png', 'This is a design for a logo for a startup working around qr codes for stores. They wanted a retro vibe. ', NULL, 4),
+	(30, 'Enjoy Digital: A complete branding for a marketing agency', '2022-05-07', '3.png', 'A happy and young look, this was the main goal for Enjoy Digital\'s branding. We created a website, total branding and wrote the texts for the whole project. ', NULL, 4),
+	(31, 'Tingels: An interactive learning platform for children', '2022-05-07', 'tingels.png', 'An interactive learning platform in a dashboard design where kids can grow in a fun way and with each other at their own pace. ', NULL, 4);
 
 -- Structuur van  tabel smash.reports wordt geschreven
 CREATE TABLE IF NOT EXISTS `reports` (
@@ -93,8 +91,6 @@ CREATE TABLE IF NOT EXISTS `reports` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumpen data van tabel smash.reports: ~0 rows (ongeveer)
-/*!40000 ALTER TABLE `reports` DISABLE KEYS */;
-/*!40000 ALTER TABLE `reports` ENABLE KEYS */;
 
 -- Structuur van  tabel smash.reset_password wordt geschreven
 CREATE TABLE IF NOT EXISTS `reset_password` (
@@ -106,8 +102,6 @@ CREATE TABLE IF NOT EXISTS `reset_password` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Dumpen data van tabel smash.reset_password: ~0 rows (ongeveer)
-/*!40000 ALTER TABLE `reset_password` DISABLE KEYS */;
-/*!40000 ALTER TABLE `reset_password` ENABLE KEYS */;
 
 -- Structuur van  tabel smash.tags wordt geschreven
 CREATE TABLE IF NOT EXISTS `tags` (
@@ -115,10 +109,9 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `tag` varchar(50) DEFAULT NULL,
   `post_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
 
--- Dumpen data van tabel smash.tags: ~18 rows (ongeveer)
-/*!40000 ALTER TABLE `tags` DISABLE KEYS */;
+-- Dumpen data van tabel smash.tags: ~23 rows (ongeveer)
 INSERT INTO `tags` (`id`, `tag`, `post_id`) VALUES
 	(7, '#design #development #app', 9),
 	(8, '#design #branding #webapp', 10),
@@ -137,8 +130,12 @@ INSERT INTO `tags` (`id`, `tag`, `post_id`) VALUES
 	(21, '#prototype #design', 23),
 	(22, '#webdesign #coding #circulareconomy', 24),
 	(23, '#webdesign #coding #circulareconomy', 25),
-	(24, '#prototype #design', 26);
-/*!40000 ALTER TABLE `tags` ENABLE KEYS */;
+	(24, '#prototype #design', 26),
+	(25, '#branding #design #development', 27),
+	(26, '#design #animation #adobeanimate', 28),
+	(27, '#logo #design #retrostyle', 29),
+	(28, '#development #webdesign #branding', 30),
+	(29, '#wireframing #webdesign #figma', 31);
 
 -- Structuur van  tabel smash.users wordt geschreven
 CREATE TABLE IF NOT EXISTS `users` (
@@ -155,16 +152,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `social_github` varchar(300) DEFAULT NULL,
   `social_instagram` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- Dumpen data van tabel smash.users: ~3 rows (ongeveer)
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+-- Dumpen data van tabel smash.users: ~4 rows (ongeveer)
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `is_admin`, `profile_pic`, `bio`, `education`, `second_email`, `social_linkedin`, `social_github`, `social_instagram`) VALUES
 	(1, 'r0786673@student.thomasmore.be', 'ellendeveth', '$2y$12$uvFCVOYl8ptMDd3Tb/5EN.hEGbohUfb9sGh8C6A.pNWRbuAASycS6', NULL, 'me.jpeg', 'Ready to explore fun designs', 'Interactive multimedia design', 'ellen.deveth@hotmail.com', 'https://www.linkedin.com/in/ellendeveth/', 'https://github.com/ellendeveth', 'https://www.instagram.com/ellendeveth/'),
 	(2, 'r0857158@student.thomasmore.be', 'fiengerardi', '$2y$12$uruF6vSBstHyjixiXf4Jke6YTQIk6o2cfGMpPglegmOgvCm1kCXbK', NULL, 'juri-gianfrancesco-UCEtRnp8qR0-unsplash.jpg', 'Ready to ace designs and code.', 'Interactive Multimedia Design', 'fien.gerardi@gmail.com', 'https://www.linkedin.com/in/fien-gérardi-035003151/', 'https://github.com/fgrardi', 'https://www.instagram.com/fiengerardi/'),
-	(3, 'r0710641@student.thomasmore.be', 'yanellevdb', '$2y$12$d.t4JXgKn4eWmhm7ZGZ3HumUFKcKLFtWxxqqGAHN2itXHeTqHub8a', NULL, 'Knipsel.PNG', 'New member of the smash community', '', '', NULL, NULL, NULL);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+	(3, 'r0710641@student.thomasmore.be', 'yanellevdb', '$2y$12$d.t4JXgKn4eWmhm7ZGZ3HumUFKcKLFtWxxqqGAHN2itXHeTqHub8a', NULL, 'Knipsel.PNG', 'New member of the smash community', '', '', NULL, NULL, NULL),
+	(4, 'jadeapers@student.thomasmore.be', 'jadeapers', '$2y$12$H2MrqzcKGCOfe7qITqM5iu/rxou58QKWUVt2E0l2pEiypE20sT8Zi', NULL, 'default.png', 'New member of the smash community', NULL, NULL, NULL, NULL, NULL);
 
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

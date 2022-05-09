@@ -5,7 +5,6 @@
 
     $conn = Db::getInstance();
 
-   
         $posts = Post::getAll();
         if (empty($posts)) {
             $emptystate = true;
@@ -47,6 +46,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/custom.css">
     <title>Feed</title>
+
 </head>
 
 <body>
@@ -61,7 +61,9 @@
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">A-Z</a></li>
+                    <li><h6 class="dropdown-header">Sort</h6></li>
+                    <li><a class="dropdown-item" href="#">Ascending (a-z)</a></li>
+                    <li><a class="dropdown-item" href="#">Descending (z-a)</a></li>
                     <li><a class="dropdown-item" href="#">Following</a></li>
                 </ul>
             </div>
@@ -136,13 +138,16 @@
                             <h2><?php echo $p['title']; ?></h2>
                         </a>
 
-                        <p class="pe-4"><?php echo $p['description']; ?> <span
-                                class="link-primary"><?php echo $p['tag']; ?></span></p>
-                    </div>
+                        <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>  </div>
                     <!-- <div class="d-flex justify-content-between align-items-center">
                         <a href="" class="link-dark">View comments</a>
                         <a href="" class="btn btn-smash">Smash</a>
                     </div> -->
+
+                    <div class="d-flex justify-content-between align-items-center">
+                    <a href="" class="link-dark">View comments</a>
+                    <a href="" class="btn btn-outline-primary">Smash</a>
+                </div>
                 </div>
                 <?php endif; ?>
             <?php endforeach; ?>

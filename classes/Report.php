@@ -1,4 +1,6 @@
 <?php
+include_once(__DIR__ . "/Db.php");
+
     class Report
     {
         private $userId;
@@ -47,25 +49,19 @@
 
         public function reportUser()
         {
-            $db = Db::getInstance();
-            $stmt = $db->prepare("INSERT INTO reports (user_id) VALUES (:user_id)");
-            $stmt->bindValue(":user_id", $this->userId);
-            $result = $stmt->execute();
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("INSERT INTO reports (user_id) VALUES (:user_id)");
+            $statement->bindValue(":user_id", $this->userId);
+            $result = $statement->execute();
             return $result;
-            if (!$result) {
-                throw new Exception("Something went wrong while reporting user.");
-            }
         }
 
         public function reportPost()
         {
-            $db = Db::getInstance();
-            $stmt = $db->prepare("INSERT INTO reports (post_id) VALUES (:post_id)");
-            $stmt->bindValue(":post_id", $this->postId);
-            $result = $stmt->execute();
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("INSERT INTO reports (post_id) VALUES (:post_id)");
+            $statement->bindValue(":post_id", $this->postId);
+            $result = $statement->execute();
             return $result;
-            if (!$result) {
-                throw new Exception("Something went wrong while reporting post.");
-            }
         }
     }

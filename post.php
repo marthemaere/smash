@@ -9,8 +9,7 @@
         $key = $_GET['p'];
         $projectData = Post::getPostDataFromId($key);
         //var_dump($projectData);
-      
-
+    
         if(!empty($_POST['addComment']))
         {
             try {
@@ -54,8 +53,6 @@
 
 <body>
     <?php include_once('header.php'); ?>
-    <?php foreach ($posts as $key => $p): ?>
-
     <div class="container my-4">
         <div class="row">
             <div id="report-success" class="invisible" role="alert">
@@ -135,16 +132,16 @@
                             </div>
                             <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Report</a>
                             <a class="btn btn-outline-danger ms-2" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
-                            <form method="post" action="editProject.php?p=<?php echo $p[0]?>" id="edit_form">
-                                <input type="submit" value="&#9998;" class="btn btn-outline-primary ms-2" name="editProject">
-                            </form>    
                         </form>
+
+                        <form method="post" action="editProject.php?p=<?php echo $key?>" id="edit_form">
+                                <input type="submit" value="&#9998;" class="btn btn-outline-primary ms-2" name="editProject">
+                        </form> 
+
                     </div>
                 </div>
             </div>
         </div>
-
-        <?php endforeach; ?>
 
           
         <div class="row">

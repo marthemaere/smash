@@ -184,21 +184,15 @@ class Post
         return $statement->execute();
     }
 
-    public function editTitle($id)
+    public function editTitle($postId)
         {     
             $title = $this->getTitle();
-            $userId = $this->getUserId();
-            $id= $this->id;
+           // $postId =  $_GET['p'];
 
             $conn = Db::getInstance();
-            $statement = $conn->prepare("UPDATE posts SET title= :title where id= :id)");
-            $statement->bindValue(":id", $id);
+            $statement = $conn->prepare("UPDATE posts SET title= :title where id = :postId");
             $statement->bindValue(":title", $title);
-            $statement->bindValue(":userId", $userId);
-            $result = $statement->execute();
-            return $result;
-            if (!$result) {
-                throw new Exception("Something went wrong.");
-            }
-        }
+            $statement->bindValue(":postId", $postId); 
+            return $statement->execute();
+           }
 }

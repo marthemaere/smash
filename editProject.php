@@ -6,20 +6,42 @@ session_start();
 if (!isset($_SESSION['id'])) {
     header('Location: login.php');
 } else {
-    // $key = $_GET['p'];
-    //$projectData = Post::getPostDataFromId($key);
+    $key = $_GET['p'];
+    $projectData = Post::getPostDataFromId($key);
     //var_dump($projectData);
+    $postId =  $_GET['p'];
 
-if (!empty($_POST)) {
-    try {
+    $posts = Post::getAll();
+
+
+        if (!empty($_POST)) {
+            try {
+                $post = new Post();
+                $post->setTitle($_POST['title']);
+                $post->editTitle($postId);
+                            
+                $tags= new Tag();
+                $tags->setTag($_POST['tags']);
+                $tags->editTags($postId);
+
+               // header('Location: index.php');
+                echo "oke";
+            } catch (Throwable $e) {
+                $error = $e->getMessage();
+                echo "ni oke";
+
+            }
+        }
+
+        
 
         //post aanmaken
-        $post = new Post();
+     /*   $post = new Post();
         $post->setTitle($_POST['title']);
         $userId= $_SESSION['id'];
       
        // $post->setUserId($userId);
-        $post->editTitle($id);
+        $post->editTitle($postId);
 
         $idTags = $post->canUploadProject();
 
@@ -34,11 +56,9 @@ if (!empty($_POST)) {
     } catch (\Throwable $e) {
         $error = $e->getMessage();
     }
+}*/
 }
-}
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -54,8 +74,9 @@ if (!empty($_POST)) {
     <div class="container py-4">
         <a href="index.php" class="btn btn-outline-primary">Cancel</a>
 
+
         <div class="upload-intro text-center pt-4">
-            <h1>Editing your project: <?php echo $projectData['title'] ?></h1>
+            <h1>Editing your project: <br> <?php echo $projectData['title'] ?></h1>
         </div>
 
         <div class="col-7 py-5 m-auto">
@@ -74,7 +95,6 @@ if (!empty($_POST)) {
                     <input type="text" class="form-control" id="tags" name="tags" placeholder="Give it some tags like #branding">
                     <div class="form-text">Don't forget the famous '#' before your tag</div>
                 </fieldset>
-
                 <input class="btn btn-primary col-12" type="submit" value="Save changes" name="submit">
             </form>
         </div>

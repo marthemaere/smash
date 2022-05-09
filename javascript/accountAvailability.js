@@ -7,7 +7,7 @@
                     $.ajax({
                         url: 'accountAvailability.php',
                         type: 'post',
-                        data: { username: username},
+                        data: {username:username},
                         success: function(response) {
                             $('#uname_response').html(response);
                         }

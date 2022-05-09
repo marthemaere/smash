@@ -1,11 +1,6 @@
 <?php
 include_once('../bootstrap.php');
 
-	/*$con =mysqli_connect('localhost','root','','dp_testing');
-	if(!$con){
-       die("Failed to connect:" . mysqli_connect_error());
-    } */
-
 
 	if(isset($_POST['username'])){
         $username = $_POST['username'];

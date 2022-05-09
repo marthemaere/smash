@@ -1,7 +1,6 @@
 document.querySelector("#report-post").addEventListener("click", function(e) {
     e.preventDefault();
     let postid = e.target.dataset.postid;
-
     
     let formData = new FormData();
     formData.append("postid", postid);

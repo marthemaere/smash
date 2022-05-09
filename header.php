@@ -18,7 +18,7 @@
     
         <div class="d-flex align-items-center">
             <?php if (!isset($_SESSION['email'])): ?>
-            <form class="d-flex"> <!--class="d-none"-->
+            <form class="d-flex">
                 <a href="login.php" class="btn btn-outline-primary me-2">Login</a>
                 <a href="register.php" class="btn btn-primary">Signup</a>
             </form>
@@ -36,7 +36,7 @@
                 </a>
                 <ul class="dropdown-menu text-small shadow"  style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 34px, 0px);" aria-labelledby="dropdownUser2">
                     <li><a class="dropdown-item" href="#">Personal feed</a></li>
-                    <li><a class="dropdown-item" href="usersettings.php">Settings</a></li>
+                    <li><a class="dropdown-item" href="account-info.php">Settings</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
                 </ul>

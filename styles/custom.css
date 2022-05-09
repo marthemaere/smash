@@ -27,7 +27,7 @@ body {
 
 nav .img-thumbnail {
     max-width: 60px;
-    max-height: 60px;
+   max-height: 60px;
 }
 
 .header {
@@ -98,15 +98,13 @@ fieldset {
 }
 
 /* ------EmptyStates------ */
-.empty-state{
-    display: flex;
-    justify-content: center;
+.empty-state {
+    margin-top: 12%;
 }
 
-.empty-state p{
-    margin-top: 1em;
-    position: absolute;
-    text-align: center;
+.empty-state img {
+    width: 30%;
+    height: auto;
 }
 
 /* ------UploadProjects------ */

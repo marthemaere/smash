@@ -15,9 +15,9 @@
             <div class="col">
                 <h4>Profile</h4>
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a href="usersettings.php" class="nav-link px-0 text-muted">Account info</a></li>    
-                    <li class="nav-item"><a href="editProfile.php" class="nav-link px-0 text-muted">Edit profile</a></li>
-                    <li class="nav-item"><a href="changePassword.php" class="nav-link px-0 text-muted">Change password</a></li>
+                    <li class="nav-item"><a href="account-info.php" class="nav-link px-0 text-muted">Account info</a></li>    
+                    <li class="nav-item"><a href="edit-profile.php" class="nav-link px-0 text-muted">Edit profile</a></li>
+                    <li class="nav-item"><a href="change-password.php" class="nav-link px-0 text-muted">Change password</a></li>
                 </ul>
             </div>
             <div class="col">

@@ -65,10 +65,10 @@
         <div class="row">
             <div class="col-3">
                 <div class="list-group">
-                    <a class="list-group-item list-group-item-action active" href="usersettings.php" >Account</a>
-                    <a class="list-group-item list-group-item-action" href="editProfile.php">Edit profile</a>
-                    <a class="list-group-item list-group-item-action" href="changePassword.php">Change password</a>
-                    <a class="list-group-item list-group-item-action" href="socialAccounts.php">Social profiles</a>
+                <a class="list-group-item list-group-item-action active" href="account-info.php">Account</a>
+                    <a class="list-group-item list-group-item-action" href="edit-profile.php">Edit profile</a>
+                    <a class="list-group-item list-group-item-action" href="change-password.php">Change password</a>
+                    <a class="list-group-item list-group-item-action" href="social-accounts.php">Social profiles</a>
                     <a class="list-group-item list-group-item-action text-danger" data-bs-toggle="modal" role="button" href="#deleteAccount">Remove account</a>
                 </div>
             </div>

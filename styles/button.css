@@ -77,8 +77,6 @@ nav .btn {
     text-decoration: none;
 }
 
-
-
 a {
     text-decoration: none;
     color: black;
@@ -99,4 +97,9 @@ a:hover {
 
 .dropdown-item:active {
     background-color: #222020;
+}
+
+.dropdown-menu input {
+    background: none;
+    border: none;
 }

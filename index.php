@@ -29,7 +29,6 @@
             $emptystate = true;
         }
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

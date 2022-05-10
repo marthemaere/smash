@@ -31,9 +31,21 @@
                 //throw $th;
             }
         }
+
+        if(!empty($_POST['like'])){
+            try {
+                $comment = new Like();
+                $comment->setPostId($postId);
+                $comment->setUserId($userId);
+                $comment->saveLike();
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        }
         
         //altijd alle laatste activiteiten ophalen
         $comments = Comment::getCommentsFromPostId($key);
+        $likes= Like::countLike($key);
 
         if (empty($comments)) {
             $emptystate = true;
@@ -135,10 +147,10 @@
                                 class="link-primary"><?php echo htmlspecialchars($projectData['tags']); ?></span></p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <form class="d-flex align-items-center" action="" method="post">
+                        <form class="d-flex align-items-center" action="" method="post">                                
                             <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
                                 <img src="assets/images/empty-heart.svg" class="btn-icon-like">
-                                <input type="submit" value="Like" class="btn p-0 ps-1" name="like">
+                                <input type="submit" value="Like" class="btn p-0 ps-1" name="like" name= "like" class="like" id="likePost" data-userId="<?php echo $userId ?>" data-postId="<?php echo $postId ?>>
                                 <p class="num-of-likes"> 1</p>
                             </div>
                             <?php if ($isReported === false): ?>
@@ -203,5 +215,6 @@
     <script src="javascript/report-post.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="javascript/comment.js"></script>
+    <script src="javascript/like.js"></script>
 </body>
 </html>

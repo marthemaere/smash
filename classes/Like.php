@@ -28,24 +28,32 @@
 
         public function saveLike()
         {
+            $postId= $this->getPostId();
+            $userId= $this->getUserId();
+
             $conn = Db::getInstance();
-            $statement = $conn->prepare("insert into likes (post_id, user_id) values (:postid, :userid)");
-            $statement->bindValue(":postid", $this->getPostId());
-            $statement->bindValue(":userid", $this->getUserId());
-            return $statement->execute();
+            $statement = $conn->prepare("INSERT into likes (user_id, post_id) values (:user_id, :post_id)");
+            $statement->bindValue(":user_id", $userId);
+            $statement->bindValue(":post_id", $postId);
+
+            $result= $statement->execute();
+            return $result;        
         }
 
-        public function countLike()
+        public static function countLike($id)
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT COUNT(user_id) FROM likes");
-            return $statement->execute();
+            $statement = $conn->prepare("SELECT COUNT(user_id) FROM likes WHERE post_id= :id");
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            $likes = $statement->fetchAll(PDO::FETCH_ASSOC);
+            return $likes;
         }
 
         public static function deleteLikes($id)
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare('DELETE FROM likes WHERE user_id = :id');
+            $statement = $conn->prepare("DELETE FROM likes WHERE user_id = :id");
             $statement->bindValue(':id', $id);
             return $statement->execute();
         }

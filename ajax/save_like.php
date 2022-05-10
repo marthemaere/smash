@@ -1,27 +1,30 @@
 <?php
     require_once('../bootstrap.php');
 
-    if(!empty($_POST)){
-        $postId= $_POST['postId'];
+    if(!empty($_POST['like'])){
+        $postId = intval($_POST['postId']);
+        $userId = intval($_POST['userId']);
 
         try{
             $like= new Like();
             $like->setPostId($postId);
-            $like->setUserId(1);
+            $like->setUserId($userId);
             $like->saveLike();
+            $like->countLike($id);
         
             $response= [
                 "status"=> "success",
-                "message" => "Like was successful"
+                "message" => "Like was successful.",
             ];
 
         } 
-        catch (Throwable $e){
+        catch (Exception $e){
             $response= [  
                 "status"=> "error",
-                "message" => "Like failed"
+                "message" => "Liking failed."
             ];
         }
 
+        header('Content-Type: application/json');
         echo json_encode($response);
     }

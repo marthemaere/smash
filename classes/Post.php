@@ -180,7 +180,7 @@ class Post
     public static function getPosts($sorting, $start, $limit)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags ON tags.post_id = posts.id ORDER BY `date` $sorting LIMIT $start, $limit");
+        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id LEFT JOIN tags on tags.id= posts.id ORDER BY `date` $sorting LIMIT $start, $limit");
         $statement->execute();
         $result = $statement->fetchAll();
         return $result;

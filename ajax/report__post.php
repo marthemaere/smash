@@ -5,7 +5,9 @@
         try {
             $report = new Report();
             $postId = intval($_POST['postid']);
+            $userid = intval($_POST['userid']);
             $report->setPostId($postId);
+            $report->setReport_userId($userid);
             
             //report
             $report->reportPost();

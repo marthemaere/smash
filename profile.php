@@ -10,6 +10,11 @@
         $userData = User::getUserDataFromId($key);
         $userPosts = $user->getUserPostsFromId($key);
 
+        $report = new Report();
+        $report->setReported_userId($key);
+        $report->setReport_userId($_SESSION['id']);
+        $isReported = $report->isUserReportedByUser();
+
         if (empty($userPosts)) {
             $emptyState;
         }
@@ -60,7 +65,7 @@
                                     <div class="modal-footer">
                                         <button class="btn btn-outline-primary"
                                             data-bs-toggle="modal">No</button>
-                                        <input id="report-user" data-userid="<?php echo $userId ?>"  type="submit" value="Yes" name="report" class="btn btn-primary"
+                                        <input id="report-user" data-userid="<?php echo $userId ?>" data-report_userid="<?php echo $_SESSION['id'] ?>"  type="submit" value="Yes" name="report" class="btn btn-primary"
                                             data-bs-toggle="modal">
                                     </div>
                                 </form>
@@ -70,7 +75,11 @@
                     <!-- are you sure alert -->
                     <div class="profile-btn">
                         <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Follow</a>
+                        <?php if ($isReported === false): ?>
                         <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#report-user" id="report-btn" role="button">Report user</a>
+                        <?php else: ?>
+                        <a class="btn btn-danger disabled mb-2" data-bs-toggle="modal" href="#report-user" id="report-btn" role="button">Reported</a>
+                        <?php endif; ?>
                         <?php if (!empty($userPosts[0]['social_linkedin'])): ?>
                             <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
                         <?php endif; ?>

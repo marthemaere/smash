@@ -145,6 +145,9 @@
             $options = [
                 "cost" => 12
             ];
+            if (strlen($password) < 6) {
+                throw new Exception("Password must be at least 6 characters long.");
+            }
             $passwordhash = password_hash($password, PASSWORD_DEFAULT, $options);
             
             // Update database

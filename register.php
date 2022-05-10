@@ -52,7 +52,7 @@ if (!empty($_POST)) {
                     <?php if (isset($error)) : ?>
                         <div class="alert alert-danger">
                             <p>
-                                Oops, something went wrong! Please check if all fields are filled in and you used a unique Thomas More email address.
+                               <?php echo $error; ?>
                             </p>
                         </div>
                     <?php endif; ?>

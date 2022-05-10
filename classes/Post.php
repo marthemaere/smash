@@ -7,6 +7,7 @@ class Post
     private $image;
     private $description;
     private $userId;
+    private $postId;
 
     public function getUserId()
     {
@@ -47,6 +48,32 @@ class Post
         return $this;
     }
 
+
+    public function setPostId($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT id FROM posts WHERE id = :postId");
+        $statement->bindValue(":postId", $postId);
+        $postId = $statement->execute();
+        return $postId;
+    }
+
+    public function getPostId()
+    {
+        return $this->postId;
+    }
+
+    public static function deleteProject($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("delete from posts where id = :postId");
+        $statement->bindValue(":postId", $postId);
+        $postId =  $_GET['p'];
+        print_r($postId);
+        return $statement->execute();
+    }
+
+
     public function getDescription()
     {
         return $this->description;
@@ -63,16 +90,17 @@ class Post
     }
 
     
-    public static function getAll()
-    {
-        $limit=15;
-        $page= isset($_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
-        $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
+    // public static function getAll()
+    // {
+    //     $limit=15;
+    //     $page= isset($_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
+    //     $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
 
-        $conn = Db::getInstance();
-        $result = $conn->query("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id ORDER BY date DESC LIMIT $start, $limit");
-        return $result->fetchAll();
-    }
+    //     $conn = Db::getInstance();
+    //     $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id ORDER BY `date` DESC LIMIT $start, $limit");
+    //     $statement->execute();
+    //     return $statement->fetchAll();
+    // }
 
     public function setProjectInDatabase()
     {
@@ -92,14 +120,15 @@ class Post
         return $result;
     }
 
+
     public function canUploadProject()
     {
-        $file = $_FILES['file'];
+       // $file = $_FILES['file'];
         $fileName = $_FILES['file']['name'];
         $fileTmpName = $_FILES['file']['tmp_name'];
         $fileSize = $_FILES['file']['size'];
         $fileError = $_FILES['file']['error'];
-        $fileType = $_FILES['file']['type'];
+       // $fileType = $_FILES['file']['type'];
     
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt)); //check in lowercase
@@ -127,6 +156,8 @@ class Post
         }
     }
 
+   
+
     public static function search($search)
     {
         $conn = Db::getInstance();
@@ -146,6 +177,32 @@ class Post
         return $result;
     }
 
+    public static function getPosts($sorting, $start, $limit)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id LEFT JOIN tags on tags.id= posts.id ORDER BY `date` $sorting LIMIT $start, $limit");
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
+    public static function filterPostsByFollowing($start, $limit)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare(
+            "SELECT * 
+            FROM posts p
+            INNER JOIN followers f ON f.following_id = p.user_id
+            INNER JOIN users u ON p.user_id = u.id 
+            INNER JOIN tags t ON t.post_id = p.id
+            ORDER BY `date` DESC 
+            LIMIT $start, $limit"
+        );
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
     public static function deletePosts($id)
     {
         $conn = Db::getInstance();
@@ -153,4 +210,16 @@ class Post
         $statement->bindValue(':id', $id);
         return $statement->execute();
     }
+
+    public function editTitle($postId)
+        {     
+            $title = $this->getTitle();
+           // $postId =  $_GET['p'];
+
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("UPDATE posts SET title= :title where id = :postId");
+            $statement->bindValue(":title", $title);
+            $statement->bindValue(":postId", $postId); 
+            return $statement->execute();
+           }
 }

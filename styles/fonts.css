@@ -5,11 +5,6 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: Pacifico;
-    src: url('/assets/fonts/Pacifico/Pacifico-Regular.ttf');
-}
-
 a.navbar-brand {
     font-family: 'Pacifico', cursive;
     font-size: 2rem;

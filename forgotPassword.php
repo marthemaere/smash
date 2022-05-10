@@ -37,7 +37,9 @@
 
                 <form action="" method="post">
                     <h1>Reset your password</h1>
-                    <p class="alert alert-info">An email will be send to reset your password</p>
+                    <?php if (!isset($success)): ?>
+                    <p class="alert alert-info">An email will be send to reset your password.</p>
+                    <?php endif; ?>
 
                     <?php if (isset($error)):?>
                     <div class="alert alert-danger">
@@ -47,7 +49,7 @@
 
                     <?php if (isset($success)):?>
                     <div class="alert alert-success">
-                        <p>An email has been sent to reset your password</p>
+                        <p>An email has been sent to reset your password.</p>
                     </div>
                     <?php endif; ?>
 

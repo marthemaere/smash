@@ -2,35 +2,44 @@
     include_once("bootstrap.php");
     session_start();
     
-
     $conn = Db::getInstance();
+    
+    if (isset($_SESSION['id'])) {
+        $sessionId = $_SESSION['id'];
+        $userDataFromId = User::getUserDataFromId($sessionId);
+    }
 
-   
-        $posts = Post::getAll();
-        if (empty($posts)) {
-            $emptystate = true;
-        }
+    $limit = 15;
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $start = ($page -1) * $limit;
 
-        $limit= 15;
-        $conn = Db::getInstance();
-        $result = $conn->query("select count(id) AS id from posts");
-        $postCount= $result->fetchAll();
-        $total= $postCount[0]['id'];
-        $pages= ceil($total / $limit);
-
-        if (isset($_SESSION['id'])) {
-            $sessionId = $_SESSION['id'];
-            $userDataFromId = User::getUserDataFromId($sessionId);
-        }
-        
+    $sorting = 'DESC';
+    $posts = Post::getPosts($sorting, $start, $limit);
+    
+    $conn = Db::getInstance();
+    $result = $conn->query("select count(id) AS id from posts");
+    $postCount= $result->fetchAll();
+    $total= $postCount[0]['id'];
+    $pages= ceil($total / $limit);
+    
     if (!empty($_POST['submit-search'])) {
         $search = $_POST['search'];
         $posts = Post::search($search);
-        if (empty($posts)) {
-            $emptystate = true;
-        }
     }
-
+    
+    if (!empty($_POST['ASC'])) {
+        $sorting = 'ASC';
+        $posts = Post::getPosts($sorting, $start, $limit);
+    } elseif (!empty($_POST['DESC'])) {
+        $sorting = 'DESC';
+        $posts = Post::getPosts($sorting, $start, $limit);
+    } elseif (!empty($_POST['following'])) {
+        $posts = Post::filterPostsByFollowing($start, $limit);
+    }
+    
+    if (empty($posts)) {
+        $emptystate = true;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,39 +56,94 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="styles/custom.css">
     <title>Feed</title>
+
 </head>
 
 <body>
     <?php require_once("header.php"); ?>
 
-    <?php
-    if (isset($emptystate)): ?>
-    <div class="empty-state">
-        <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">
-        <p> No projects were found. </p>
-    </div>
-    <?php endif; ?>
-
     <div class="container mt-5 mb-5">
-        <div class="row justify-content-center">
+        <div class="d-flex justify-content-between align-items-center m-3">
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary sort-title">
+                    <?php if (!empty($_POST['ASC'])): ?>
+                        <?php echo "Oldest"; ?>
+                    <?php elseif (!empty($_POST['DESC'])): ?>
+                        <?php echo "Latest"; ?>
+                    <?php elseif (!empty($_POST['following'])): ?>
+                        <?php echo "Following"; ?>
+                    <?php else: ?>
+                        <?php echo "Latest"; ?>
+                    <?php endif; ?>
+                </button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                
+                <ul class="dropdown-menu">
+                    <form action="" method="POST">
+                        <li><h6 class="dropdown-header">Sort by date</h6></li>
+                        <li><a class="dropdown-item sort-latest" href="#"><input type="submit" name="DESC" value="Latest"></a></li>
+                        <li><a class="dropdown-item sort-oldest" href="#"><input type="submit" name="ASC" value="Oldest"></a></li>
+                        <li><h6 class="dropdown-header">Filter</h6></li>
+                        <li><a class="dropdown-item filter-following" href="#"><input type="submit" name="following" value="Following"></a></li>
+                    </form>
+                </ul>
+            </div>
+
+            <div>
+                <a href="#" class="px-2 btn btn-light">All</a>
+                <a href="#" class="px-2 text-muted">Branding</a>
+                <a href="#" class="px-2 text-muted">Development</a>
+                <a href="#" class="px-2 text-muted">Mobile</a>
+                <a href="#" class="px-2 text-muted">Typography</a>
+            </div>
+
+            <div>
+                <a href="#" class="px-2 btn btn-outline-primary">Filters</a>
+            </div>
+        </div>
+
+        <?php if (isset($emptystate)): ?>
+        <div class="empty-state flex-column">
+            <img class="d-block mx-auto" src="assets/images/empty-state.png" alt="emptystate">
+            <h3 class="text-center py-4">Nothing to see here...</h3>
+        </div>
+        <?php endif; ?>
+
+        <div class="row justify-content-start">
 
             <?php foreach ($posts as $key => $p): ?>
                 <?php if (!isset($_SESSION['id'])) :?>
 
-                <div class="col-4 p-5">
-                    <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="200px" class="rounded"
-                        style="object-fit:cover">
-                    <h2><?php echo $p['title']; ?></h2>
-                    <div class="d-flex justify-content-between align-items-center" v>
-                        <a href="/login.php" class="link-dark">View comments</a>
-                        <a href="/login.php" class="btn btn-outline-primary">Smash</a>
+                    <div class="col-4 p-4">
+                        <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
+                            class="img-project-post" style="object-fit:cover">
+                        <div>
+                            <div class="d-flex justify-content-between py-2">
+                                <div class="d-flex align-items-center justify-content-start">
+                                    <img src="profile_pictures/<?php echo $p['profile_pic']; ?>" class="img-profile-post">
+                                    <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/empty-heart.svg" class="like">
+                                    <p class="num-of-likes">1</p>
+                                </div>
+                            </div>
+                            <h2><?php echo $p['title']; ?></h2>
+                            <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
+                        </div>
+                        <!-- <div class="d-flex justify-content-between align-items-center">
+                            <a href="" class="link-dark">View comments</a>
+                            <a href="" class="btn btn-smash">Smash</a>
+                        </div> -->
                     </div>
-                </div>
 
                 <?php else: ?>
 
-                <div class="col-4 p-5">
-                    <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="220px"
+                <div class="col-4 p-4">
+                    <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                         class="img-project-post" style="object-fit:cover">
                     <div>
                         <div class="d-flex justify-content-between py-2">
@@ -98,24 +162,27 @@
                             <h2><?php echo $p['title']; ?></h2>
                         </a>
 
-                        <p class="pe-4"><?php echo $p['description']; ?> <span
-                                class="link-primary"><?php echo $p['tag']; ?></span></p>
-                    </div>
+                        <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>  </div>
                     <!-- <div class="d-flex justify-content-between align-items-center">
                         <a href="" class="link-dark">View comments</a>
                         <a href="" class="btn btn-smash">Smash</a>
                     </div> -->
+
+                    <div class="d-flex justify-content-between align-items-center">
+                    <a href="" class="link-dark">View comments</a>
+                    <a href="" class="btn btn-outline-primary">Smash</a>
+                </div>
                 </div>
                 <?php endif; ?>
             <?php endforeach; ?>
 
             <div class="row justify-content-center">
-                <div class="col-md-10 d-flex justify-content-center">
+                <div class="d-flex justify-content-center">
                     <nav class="page-navigation" aria-label="page navigation">
                         <ul class="pagination">
                             <?php for ($i=1; $i<= $pages; $i++): ?>
                             <li>
-                                Page <a href="index.php?page=<?= $i; ?>" class="link-dark p-2"><?= $i; ?></a>
+                                Page <a href="index.php?page=<?= $i; ?>" class="link-dark"><?= $i; ?> </a>
                             </li>
                             <?php endfor; ?>
                         </ul>
@@ -129,5 +196,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="javascript/like.js"></script>
 </body>
-
 </html>

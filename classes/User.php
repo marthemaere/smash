@@ -47,7 +47,7 @@
         {
             $password_input = $_POST['password'];
             if (empty($password) || strlen($password_input) < 6) {
-                throw new Exception("password cannot be empty and needs to contain at least 6 characters");
+                throw new Exception("Password cannot be empty and needs to contain at least 6 characters.");
             }
             $this->password = $password;
             return $this;
@@ -180,7 +180,7 @@
                 $result = $statement->execute();
                 return $result;
             } else {
-                throw new Exception("email cannot be empty and needs to be a Thomas More email address");
+                throw new Exception("Email cannot be empty and needs to be a Thomas More email address. Try again.");
             }
         }
 

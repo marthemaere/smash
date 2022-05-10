@@ -31,19 +31,11 @@ class Tag
         return $this;
     }
 
-    /*public function addPostId()
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("INSERT INTO tags(post_id) SELECT posts.id from posts inner join tags on posts.id = tags.post_id");
-        $statement->execute();
-        $postId = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $postId;
-    }*/
 
     public function addTagsToDatabase($post_id)
     {
         $tags = $this->getTags();
-        $tags = explode(", ", $tags);
+        $tags = explode(" ", $tags);
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into tags (tag, post_id) values (:tag, :post_id)");
       
@@ -56,5 +48,21 @@ class Tag
 
         unset($tags);
         return $result;
+    }
+
+    public function editTags($postId)
+    {
+
+        $tags = $this->getTags();
+
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("UPDATE tags SET tag= :tag where post_id = :postId");
+        
+        $statement->bindValue(":tag", $tags);
+        $statement->bindValue(":postId", $postId);
+        $result = $statement->execute();
+        return $result;
+        
     }
 }

@@ -40,16 +40,16 @@
 <body>
     <?php include_once('header.php'); ?>
     <div class="container">
-        <p class="ps-3 pt-5 text-muted"><?php echo $userDataFromId['username']; ?> / Settings / Password</p>
+        <p class="ps-3 pt-5 text-muted"><?php echo htmlspecialchars($userDataFromId['username']); ?> / Settings / Password</p>
         <h1 class="ps-3">Change password</h1>
 
         <div class="row">
             <div class="col-3">
             <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action " href="usersettings.php">Account</a>
-                    <a class="list-group-item list-group-item-action " href="editProfile.php">Edit profile</a>
-                    <a class="list-group-item list-group-item-action active" href="changePassword.php">Change password</a>
-                    <a class="list-group-item list-group-item-action" href="socialAccounts.php">Social profiles</a>
+            <a class="list-group-item list-group-item-action" href="account-info.php">Account</a>
+                    <a class="list-group-item list-group-item-action" href="edit-profile.php">Edit profile</a>
+                    <a class="list-group-item list-group-item-action active " href="change-password.php">Change password</a>
+                    <a class="list-group-item list-group-item-action" href="social-accounts.php">Social profiles</a>
                     <a class="list-group-item list-group-item-action text-danger" href="deleteAccount.php">Remove account</a>
                 </div>
             </div>

@@ -39,7 +39,7 @@
 <body>
     <?php include_once('header.php'); ?>
     <div class="container">
-        <p class="ps-3 pt-5 text-muted"><?php echo $userDataFromId['username']; ?> / Settings / Account</p>
+        <p class="ps-3 pt-5 text-muted"><?php echo htmlspecialchars($userDataFromId['username']); ?> / Settings / Account</p>
         <h1 class="ps-3">Account information</h1>
 
         <!-- are you sure alert -->
@@ -65,10 +65,10 @@
         <div class="row">
             <div class="col-3">
                 <div class="list-group">
-                    <a class="list-group-item list-group-item-action active" href="usersettings.php" >Account</a>
-                    <a class="list-group-item list-group-item-action" href="editProfile.php">Edit profile</a>
-                    <a class="list-group-item list-group-item-action" href="changePassword.php">Change password</a>
-                    <a class="list-group-item list-group-item-action" href="socialAccounts.php">Social profiles</a>
+                <a class="list-group-item list-group-item-action active" href="account-info.php">Account</a>
+                    <a class="list-group-item list-group-item-action" href="edit-profile.php">Edit profile</a>
+                    <a class="list-group-item list-group-item-action" href="change-password.php">Change password</a>
+                    <a class="list-group-item list-group-item-action" href="social-accounts.php">Social profiles</a>
                     <a class="list-group-item list-group-item-action text-danger" data-bs-toggle="modal" role="button" href="#deleteAccount">Remove account</a>
                 </div>
             </div>
@@ -79,19 +79,19 @@
                     <div class="tab-pane fade active show" id="account" role="tabpanel" aria-labelledby="account-list">
                             <fieldset>
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" name="name" value="<?php echo $userDataFromId['username'];?>" id="name" readonly>
+                                <input type="text" class="form-control" name="name" value="<?php echo htmlspecialchars($userDataFromId['username']);?>" id="name" readonly>
                                 <div class="form-text">Used on feed when posting projects.</div>
                             </fieldset>
 
                             <fieldset>
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" name="email" value="<?php echo $userDataFromId['email'];?>" id="email" readonly>
+                                <input type="text" class="form-control" name="email" value="<?php echo htmlspecialchars($userDataFromId['email']);?>" id="email" readonly>
                                 <div class="form-text">Registration email from school.</div>
                             </fieldset>
 
                             <fieldset>
                                 <label for="email" class="form-label">Second email</label>
-                                <input type="text" class="form-control" name="email" value="<?php echo $userDataFromId['second_email'];?>" id="email" readonly>
+                                <input type="text" class="form-control" name="email" value="<?php echo htmlspecialchars($userDataFromId['second_email']);?>" id="email" readonly>
                                 <div class="form-text">Additional email to login with when losing your school account.</div>
                             </fieldset>
                         </form>

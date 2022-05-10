@@ -1,28 +1,33 @@
+function checkUsername(){
 
-            $(document).ready(function(){
+    $.ajax({
+        type:"POST",
+        url:"ajax/checkUsername.php",
+        cache:false,
+        data:{
+            type:1,
+            username:$("#username").val(),
+        },
+        success:function(data){
+            $("#username_response").html(data);
+        }
+    });
+}
 
-                $("#username").keyup(function(){
 
-                    var username = $(this).val().trim();
-            
-                    if(username != ''){
-            
-                       
-            
-                        $.ajax({
-                            url: 'ajaxfile.php',
-                            type: 'post',
-                            data: {username: username},
-                            success: function(response){
-                
-                                $('#uname_response').html(response);
-                
-                             }
-                        });
-                    }else{
-                        $("#uname_response").html("");
-                    }
-            
-                });
+function checkEmail(){
 
-            });
+    $.ajax({
+        type:"POST",
+        url:"ajax/checkEmail.php",
+        cache:false,
+        data:{
+            type:1,
+            email:$("#email").val(),
+        },
+        success:function(data){
+            $("#email_response").html(data);
+        }
+    });
+    
+}

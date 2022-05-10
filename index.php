@@ -182,7 +182,7 @@
                         <ul class="pagination">
                             <?php for ($i=1; $i<= $pages; $i++): ?>
                             <li>
-                                Page <a href="index.php?page=<?= $i; ?>" class="link-dark"><?= $i; ?></a>
+                                Page <a href="index.php?page=<?= $i; ?>" class="link-dark"><?= $i; ?> </a>
                             </li>
                             <?php endfor; ?>
                         </ul>

@@ -36,14 +36,14 @@
         public function hasAccount()
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("select * from users where email = :email");
+            $statement = $conn->prepare("select * from users where email OR second_email = :email");
             $statement->bindValue(":email", $this->email);
             $statement->execute();
             $user = $statement->fetch(PDO::FETCH_ASSOC);
             if ($user) {
                 return true;
             } else {
-                throw new Exception("user doesn't exist");
+                throw new Exception("This user doesn't exist.");
             }
         }
 

@@ -9,9 +9,15 @@
         $key = $_GET['p'];
         $projectData = Post::getPostDataFromId($key);
         //var_dump($projectData);
+         
+        //check if post is reported by user who is logged in
+        $report = new Report();
+        $report->setPostId($postId);
+        $report->setReport_userId($_SESSION['id']);
+        $isReported = $report->isPostReportedByUser();
+        //var_dump($isReported);
     
-        if(!empty($_POST['addComment']))
-        {
+        if (!empty($_POST['addComment'])) {
             try {
                 $comment = new Comment();
                 $comment->setText($_POST['comment']);
@@ -79,7 +85,7 @@
                             <div class="modal-footer">
                                 <button class="btn btn-outline-primary" 
                                     data-bs-toggle="modal">No</button>
-                                <input id="report-post" data-postId="<?php echo $postId ?>" type="submit" value="yes" name="report"
+                                <input id="report-post" data-postId="<?php echo $postId ?>" data-userid="<?php echo $_SESSION['id'] ?>" type="submit" value="yes" name="report"
                                     class="btn btn-primary" 
                                     data-bs-toggle="modal">
                             </div>
@@ -130,7 +136,11 @@
                                 <input type="submit" value="Like" class="btn p-0 ps-1" name="like">
                                 <p class="num-of-likes"> 1</p>
                             </div>
+                            <?php if ($isReported === false): ?>
                             <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Report</a>
+                            <?php elseif ($isReported === true): ?>
+                            <a class="btn btn-danger disabled" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Reported</a>
+                            <?php endif; ?>
                             <a class="btn btn-outline-danger ms-2" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
                         </form>
 

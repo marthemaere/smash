@@ -4,8 +4,10 @@
     if (!empty($_POST)) {
         try {
             $report = new Report();
-            $userId = intval($_POST['userid']);
-            $report->setUserId($userId);
+            $reported_userId = intval($_POST['userid']);
+            $report_userId = intval($_POST['report_userid']);
+            $report->setReported_userId($reported_userId);
+            $report->setReport_userId($report_userId);
             
             //report
             $report->reportUser();

@@ -203,6 +203,23 @@ class Post
         return $result;
     }
 
+    public static function showSmashedProjects($start, $limit)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare(
+            "SELECT * 
+            FROM posts p
+            INNER JOIN followers f ON f.following_id = p.user_id
+            INNER JOIN users u ON p.user_id = u.id 
+            INNER JOIN tags t ON t.post_id = p.id
+            ORDER BY `date` DESC 
+            LIMIT $start, $limit"
+        );
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
     public static function deletePosts($id)
     {
         $conn = Db::getInstance();

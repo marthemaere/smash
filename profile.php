@@ -9,7 +9,7 @@
         $key = $_GET['p'];
         $userData = User::getUserDataFromId($key);
         $userPosts = $user->getUserPostsFromId($key);
-
+        
         $report = new Report();
         $report->setReported_userId($key);
         $report->setReport_userId($_SESSION['id']);
@@ -124,7 +124,9 @@
                                         <p class="num-of-likes">1</p>
                                     </div>
                                 </div>
-                                <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+                                <a href="post.php?p=<?php echo $post['id'];?>">
+                                    <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+                                </a>
                                 <p class="pe-4"><?php echo htmlspecialchars($post['description']); ?> <span
                                         class="link-primary"><?php echo htmlspecialchars($post['tag']); ?></span></p>
                             </div>

@@ -1,14 +1,12 @@
 <?php
    include_once(__DIR__.'/../bootstrap.php');
    
-    if (!empty($_POST['smashed'])) {
+    if (!empty($_POST)) {
 
-        $postId = intval($_POST['postId']);
-        $userId = intval($_POST['userId']);
         
         try{
             $posts= new Post();
-            $posts->setPostId($postId);
+            $postId = intval($_POST['postId']);
             $posts->smashed($postId);
             print_r($posts);
         

@@ -51,7 +51,7 @@
                 <form action="" method="post">
                 <div class="my-4">
                     <!-- are you sure alert -->
-                    <div class="modal fade" id="report-user" aria-hidden="true"
+                    <div class="modal fade" id="reportUser" aria-hidden="true"
                         aria-labelledby="report-userLabel" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -76,9 +76,9 @@
                     <div class="profile-btn">
                         <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Follow</a>
                         <?php if ($isReported === false): ?>
-                        <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#report-user" id="report-btn" role="button">Report user</a>
+                        <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Report user</a>
                         <?php else: ?>
-                        <a class="btn btn-danger disabled mb-2" data-bs-toggle="modal" href="#report-user" id="report-btn" role="button">Reported</a>
+                        <a class="btn btn-danger disabled mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Reported</a>
                         <?php endif; ?>
                         <?php if (!empty($userPosts[0]['social_linkedin'])): ?>
                             <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>

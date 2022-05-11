@@ -106,7 +106,6 @@ class Post
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into posts (title, image, description, date, user_id) values (:title, :image, :description, now(), :userId)");
-        
         $title = $this->getTitle();
         $image = $this->getImage();
         $userId = $this->getUserId();
@@ -203,18 +202,19 @@ class Post
         return $result;
     }
 
-    public static function showSmashedProjects($start, $limit)
+    public static function smashed(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET isShowcase= 1 where id = 15");
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
+    public static function showSmashedProjects()
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare(
-            "SELECT * 
-            FROM posts p
-            INNER JOIN followers f ON f.following_id = p.user_id
-            INNER JOIN users u ON p.user_id = u.id 
-            INNER JOIN tags t ON t.post_id = p.id
-            ORDER BY `date` DESC 
-            LIMIT $start, $limit"
-        );
+        "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags ON tags.post_id = posts.id WHERE posts.isShowcase=1" );
         $statement->execute();
         $result = $statement->fetchAll();
         return $result;

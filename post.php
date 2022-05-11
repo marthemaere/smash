@@ -175,7 +175,7 @@
 
                     <ul class="list-group list-group-flush" id="listupdates">
                                 <li class="list-group-item d-flex align-items-center border-bottom">
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($projectData['profile_pic']); ?>" class="img-profile-post"></a>
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-profile-post"></a>
                                     <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>">
                                         <h4 class="p-2 mb-0"><?php echo htmlspecialchars($userDataFromId['username']);?></h4>
                                     </a>

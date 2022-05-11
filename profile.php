@@ -115,7 +115,7 @@
                                     <div class="d-flex align-items-center justify-content-start">
                                         <img src="profile_pictures/<?php echo htmlspecialchars($post['profile_pic']); ?>"
                                             class="img-profile-post">
-                                        <a href="profile.php?p=<?php echo htmlspecialchars($post['user_id']);?>">
+                                        <a href="profile.php?p=<?php echo htmlspecialchars($post[0]['user_id']);?>">
                                             <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($post['username']);?></h4>
                                         </a>
                                     </div>

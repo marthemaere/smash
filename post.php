@@ -132,7 +132,7 @@
                     <div>
                         <h2><?php echo htmlspecialchars($projectData['title']); ?></h2>
                         <p class="pe-4"><?php echo htmlspecialchars($projectData['description']); ?> <span
-                                class="link-primary"><?php echo htmlspecialchars($projectData['tags']); ?></span></p>
+                                class="link-primary"><?php echo htmlspecialchars($projectData['tag']); ?></span></p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         <form class="d-flex align-items-center" action="" method="post">
@@ -175,8 +175,8 @@
 
                     <ul class="list-group list-group-flush" id="listupdates">
                                 <li class="list-group-item d-flex align-items-center border-bottom">
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-profile-post"></a>
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>">
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-profile-post"></a>
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['id']);?>">
                                         <h4 class="p-2 mb-0"><?php echo htmlspecialchars($userDataFromId['username']);?></h4>
                                     </a>
                                     <?php echo $c['text']; ?>

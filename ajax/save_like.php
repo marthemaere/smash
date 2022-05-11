@@ -2,8 +2,8 @@
     require_once('../bootstrap.php');
 
     if(!empty($_POST['like'])){
-        $postId = intval($_POST['postId']);
-        $userId = intval($_POST['userId']);
+        $postId = $_POST['postId'];
+        $userId = $_POST['userId'];
 
         try{
             $like= new Like();

@@ -147,12 +147,14 @@
                                 class="link-primary"><?php echo htmlspecialchars($projectData['tags']); ?></span></p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <form class="d-flex align-items-center" action="" method="post">                                
+                        <form action="" method="post">
                             <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
                                 <img src="assets/images/empty-heart.svg" class="btn-icon-like">
                                 <input type="submit" value="Like" class="btn p-0 ps-1" name="like" name= "like" class="like" id="likePost" data-userId="<?php echo $userId ?>" data-postId="<?php echo $postId ?>>
                                 <p class="num-of-likes"> 1</p>
                             </div>
+                        </form>
+                        <form class="d-flex align-items-center" action="" method="post">                                
                             <?php if ($isReported === false): ?>
                             <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Report</a>
                             <?php elseif ($isReported === true): ?>
@@ -187,7 +189,7 @@
 
                     <ul class="list-group list-group-flush" id="listupdates">
                                 <li class="list-group-item d-flex align-items-center border-bottom">
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($projectData['profile_pic']); ?>" class="img-profile-post"></a>
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-profile-post"></a>
                                     <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>">
                                         <h4 class="p-2 mb-0"><?php echo htmlspecialchars($userDataFromId['username']);?></h4>
                                     </a>

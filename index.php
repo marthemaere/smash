@@ -21,7 +21,13 @@
     $postCount= $result->fetchAll();
     $total= $postCount[0]['id'];
     $pages= ceil($total / $limit);
-    
+    $postId =  $_GET['p'];
+
+    // if (!empty($_POST['smashed'])) {
+    //     $posts=Post::smashed($postId);
+    //     print_r("yes smashed");
+    // }
+
     if (!empty($_POST['submit-search'])) {
         $search = $_POST['search'];
         $posts = Post::search($search);
@@ -170,7 +176,9 @@
 
                     <div class="d-flex justify-content-between align-items-center">
                     <a href="" class="link-dark">View comments</a>
-                    <a href="" class="btn btn-outline-primary">Smash</a>
+                    <button type="button" id="smashed" name="smashed" value="smashed" class="btn btn-outline-primary"> Smash </button>
+                  
+
                 </div>
                 </div>
                 <?php endif; ?>
@@ -195,5 +203,6 @@
     <?php require_once("footer.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="javascript/like.js"></script>
+    <script src="javascript/smashed.js"></script>
 </body>
 </html>

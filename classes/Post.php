@@ -202,12 +202,12 @@ class Post
         return $result;
     }
 
-    public static function smashed(){
+    public static function smashed($postId){
+
         $conn = Db::getInstance();
-        $statement = $conn->prepare("UPDATE posts SET isShowcase= 1 where id = 15");
-        $statement->execute();
-        $result = $statement->fetchAll();
-        return $result;
+        $statement = $conn->prepare("UPDATE posts SET isShowcase= 1 where id = :postId");
+        $statement->bindValue(':postId', $postId);
+        return $statement->execute();
     }
 
     public static function showSmashedProjects()

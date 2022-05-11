@@ -18,6 +18,7 @@
         if (empty($userPosts)) {
             $emptyState;
         }
+
     }
 
 ?><!DOCTYPE html>
@@ -97,8 +98,12 @@
                 <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image'];?>" alt="latest posts">
             </div>
         </div>
-        <div class="">
-            <h4 class="header py-1">All projects</h4>
+        <div>
+        <div class="d-flex">
+            <div class="header mr-auto p-2 "><h3>All projects</h3></div>
+            <div class="p-2"><p> Want to see my favorites?</p></div>
+            <div class="p-2"><button type="submit" name="smashedprojects" class="btn btn-outline-success">Smashed projects 🙌</button></div>
+        </div>              
             <?php if (isset($emptyState)): ?>
                 <div class= "empty-state">
                     <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">

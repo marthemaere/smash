@@ -135,7 +135,7 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="" class="link-dark">View comments</a>
-                                <a href="" class="btn btn-smash">Smash</a>
+                                <button type="button" id="smashed" name="smashed" value="smashed" class="btn btn-outline-primary"> Smash </button>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -148,6 +148,7 @@
     <?php echo include_once('footer.php'); ?>
     <script src="javascript/follow.js"></script>
     <script src="javascript/report-user.js"></script>
+    <script src="javascript/smashed.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

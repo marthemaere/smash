@@ -3,6 +3,7 @@
     $postId =  $_GET['p'];
     session_start();
 
+    
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
@@ -31,21 +32,9 @@
                 //throw $th;
             }
         }
-
-        if(!empty($_POST['like'])){
-            try {
-                $comment = new Like();
-                $comment->setPostId($postId);
-                $comment->setUserId($userId);
-                $comment->saveLike();
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
-        }
         
         //altijd alle laatste activiteiten ophalen
         $comments = Comment::getCommentsFromPostId($key);
-        $likes= Like::countLike($key);
 
         if (empty($comments)) {
             $emptystate = true;
@@ -144,17 +133,15 @@
                     <div>
                         <h2><?php echo htmlspecialchars($projectData['title']); ?></h2>
                         <p class="pe-4"><?php echo htmlspecialchars($projectData['description']); ?> <span
-                                class="link-primary"><?php echo htmlspecialchars($projectData['tags']); ?></span></p>
+                                class="link-primary"><?php echo htmlspecialchars($projectData['tag']); ?></span></p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
-                        <form action="" method="post">
+                        
+                        <form class="d-flex align-items-center" action="" method="post">
                             <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
-                                <img src="assets/images/empty-heart.svg" class="btn-icon-like">
-                                <input type="submit" value="Like" class="btn p-0 ps-1" name="like" name= "like" class="like" id="likePost" data-userId="<?php echo $userId ?>" data-postId="<?php echo $postId ?>>
+                                <img src="assets/images/empty-heart.svg" name= "like" class="like btn-icon-like" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $_GET['id'] ?>">
                                 <p class="num-of-likes"> 1</p>
                             </div>
-                        </form>
-                        <form class="d-flex align-items-center" action="" method="post">                                
                             <?php if ($isReported === false): ?>
                             <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Report</a>
                             <?php elseif ($isReported === true): ?>
@@ -162,6 +149,10 @@
                             <?php endif; ?>
                             <a class="btn btn-outline-danger ms-2" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
                         </form>
+
+                        <?php /*if(isset($_SESSION['id']) && $_SESSION['id'] = $projectData['user_id']): ?>
+        <?php var_dump($_SESSION['id']); var_dump($projectData['user_id']); */?>
+
 
                         <form method="post" action="editProject.php?p=<?php echo $key?>" id="edit_form">
                                 <input type="submit" value="&#9998;" class="btn btn-outline-primary ms-2" name="editProject">
@@ -189,8 +180,8 @@
 
                     <ul class="list-group list-group-flush" id="listupdates">
                                 <li class="list-group-item d-flex align-items-center border-bottom">
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-profile-post"></a>
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['user_id']);?>">
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-profile-post"></a>
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['id']);?>">
                                         <h4 class="p-2 mb-0"><?php echo htmlspecialchars($userDataFromId['username']);?></h4>
                                     </a>
                                     <?php echo $c['text']; ?>
@@ -217,6 +208,5 @@
     <script src="javascript/report-post.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="javascript/comment.js"></script>
-    <script src="javascript/like.js"></script>
 </body>
 </html>

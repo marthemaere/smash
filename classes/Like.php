@@ -40,11 +40,11 @@
             return $result;        
         }
 
-        public static function countLike($id)
+        public static function countLike($postId)
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT COUNT(user_id) FROM likes WHERE post_id= :id");
-            $statement->bindValue(":id", $id);
+            $statement = $conn->prepare("SELECT COUNT(user_id) FROM likes WHERE post_id= :postid");
+            $statement->bindValue(":postid", $postId);
             $statement->execute();
             $likes = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $likes;

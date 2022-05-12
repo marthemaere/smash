@@ -40,6 +40,27 @@
     if (empty($posts)) {
         $emptystate = true;
     }
+
+    if(!empty($_POST['like'])){
+        $postId = intval($_POST['postId']);
+        $userId = intval($_POST['userId']);
+
+        $like= new Like();
+        $like->setPostId($postId);
+        $like->setUserId($userId);
+        $like->saveLike();
+        $like->countLike($userId);
+    } 
+/*
+        if (!empty($_POST['deleteLike'])) {
+            try {
+                $like->deleteLikes($id);
+                header('Location: index.php');
+            } catch (Throwable $e) {
+                $error = $e->getMessage();
+            }
+        }*/
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -155,8 +176,8 @@
                             </div>
                             <form class="" action="" method="post">
                                 <div class="d-flex align-items-center">
-                                    <img src="assets/images/empty-heart.svg" name= "like" class="like" id="likePost" data-userId="<?php echo $userId ?>" data-postId="<?php echo $postId ?>">
-                                    <p class="num-of-likes">1</p>
+                                    <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
+                                    <p class="num-of-likes"><?php  ?></p>
                                 </div>
                             </form>
                         </div>

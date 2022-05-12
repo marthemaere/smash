@@ -1,7 +1,7 @@
 <?php
     require_once('../bootstrap.php');
 
-    if(!empty($_POST['like'])){
+    if(!empty($_POST)){
         $postId = intval($_POST['postId']);
         $userId = intval($_POST['userId']);
 
@@ -10,7 +10,7 @@
             $like->setPostId($postId);
             $like->setUserId($userId);
             $like->saveLike();
-            $like->countLike($id);
+            $like->countLike($userId);
         
             $response= [
                 "status"=> "success",

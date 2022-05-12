@@ -1,10 +1,15 @@
+//let l= document.getElementById("#likePost");
+//let notLiked= document.querySelector("#likePost").value= "notLiked";
+
+//if (l.value == "liked"){
+
 document.querySelector("#likePost").addEventListener("click", function(e){
     console.log("we are liking");
     
     e.preventDefault();
 
-    let postId= e.target.dataset.postId;
-    let userId= e.target.dataset.userId;
+    let postId= e.target.dataset.postid;
+    let userId= e.target.dataset.userid;
 
     console.log(postId);
     console.log(userId);
@@ -20,8 +25,8 @@ document.querySelector("#likePost").addEventListener("click", function(e){
         .then(response => response.json())
         .then(data => {
             if(data.status === "success"){
-                document.querySelector("#likePost").innerHTML = "YOU LIKED THIS";
-                //document.querySelector(".num-of-likes").innerHTML=+1;
+                document.querySelector("#likePost").src = "assets/images/liked-heart.svg";
+                document.querySelector(".num-of-likes").innerHTML=+1;
                 console.log("joepie");
             }
         })
@@ -31,14 +36,14 @@ document.querySelector("#likePost").addEventListener("click", function(e){
         .catch((error) => {
             console.log(error);
         });
-});/*
-} else {
+})/*
+} else if (l.value=="liked") {
     document.querySelector("#likePost").addEventListener("click", function(e){
-        console.log("we are liking");
+        console.log("we are unliking");
        // e.preventDefault();
     
-        let postId= e.target.dataset.postId;
-        let userId= e.target.dataset.userId;
+        let postId= e.target.dataset.postid;
+        let userId= e.target.dataset.userid;
     
         let data= new FormData();
         data.append("postId", postId);
@@ -51,7 +56,7 @@ document.querySelector("#likePost").addEventListener("click", function(e){
             .then(response => response.json())
             .then(data => {
                 if(data.status === "success"){
-                    document.querySelector("#likePost").innerHTML = "<img src='assets/images/empty-heart.svg'";
+                document.querySelector("#likePost").src = "assets/images/empty-heart.svg";
                     //document.querySelector(".num-of-likes").innerHTML=+1;
                     console.log("joepie");
                 }
@@ -62,4 +67,5 @@ document.querySelector("#likePost").addEventListener("click", function(e){
             .catch((error) => {
                 console.log(error);
             });
-    });*/
+    })
+}*/

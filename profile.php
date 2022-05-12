@@ -20,12 +20,22 @@
             $post->setPostId($postId);
             $isSmashed = $post->isSmashed();
 
+<<<<<<< HEAD
     
     
             if (empty($userPosts)) {
                 $emptyState;
 
     
+=======
+        $following = new Follower();
+        $following->setFollowingId($key);
+        $following->setFollowerId($_SESSION['id']);
+        $isFollowed = $following->isFollowedByUser();
+
+        if (empty($userPosts)) {
+            $emptyState;
+>>>>>>> main
         }
 
     }
@@ -85,12 +95,18 @@
                     </div>
                     <!-- are you sure alert -->
                     <div class="profile-btn">
+                        <?php if (!$isFollowed): ?>
                         <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Follow</a>
+                        <?php else: ?>
+                        <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Following</a>
+                        <?php endif; ?>
+
                         <?php if ($isReported === false): ?>
                         <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Report user</a>
                         <?php else: ?>
                         <a class="btn btn-danger disabled mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Reported</a>
                         <?php endif; ?>
+
                         <?php if (!empty($userPosts[0]['social_linkedin'])): ?>
                             <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
                         <?php endif; ?>

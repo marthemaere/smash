@@ -143,7 +143,7 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="" class="link-dark">View comments</a>
-                                <a href="#" id="smashed" name="smashed" class="btn btn-outline-primary"  data-postId="<?php echo htmlspecialchars($post['id']); ?>" data-userId="<?php echo $_SESSION['id']?>"> Smash </a>
+                                <a href="#" id="smashed" name="smashed" class="btn btn-outline-primary"  data-postid="<?php echo($post['id']); ?>" data-userid="<?php echo $_SESSION['id']?>"> Smash </a>
                             </div>
                         </div>
                     <?php endforeach; ?>

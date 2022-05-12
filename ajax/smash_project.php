@@ -25,8 +25,6 @@
              $posts->setUserId($userId);
              $posts->smashed($postId);
 
-            
-        
             $response= [
                 "status"=> "success",
                 "message" => "Smashed.",

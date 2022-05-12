@@ -1,27 +1,38 @@
-document.querySelector(".like").addEventListener("click", e =>{
-    console.log("we are liking");
-    e.preventDefault();
+let btn= document.querySelector("#likePost");
 
-   // e.preventDefault();
-    /*let postId= e.target.dataset.post;
+let postId= btn.dataset.postid;
+let userId= btn.dataset.userid;
+
+btn.addEventListener("click", function(e){
+    
     console.log(postId);
+    console.log(userId);
+    console.log("we are liking");
 
     let data= new FormData();
     data.append("postId", postId);
+    data.append("userId", userId);
 
-    fetch("./ajax/save_like.php", {
-        method: 'POST', // or 'PUT'
+    fetch("ajax/save_like.php", {
+        method: 'POST', 
         body: data,
         })
         .then(response => response.json())
-        .then(data => {
-            console.log(data);
-            if(data.status === "success"){
-                document.querySelector(".like").innerHTML = "YOU LIKED THIS";
+        .then(result => {
+            if(result.isLiked === true){
+                btn.src = "assets/images/liked-heart.svg";
+                document.querySelector(".num-of-likes").innerHTML++;
+                //btn.classList.add("active");
+            } else{
+                btn.src = "assets/images/empty-heart.svg";
+                //btn.classList.remove("active");
+                document.querySelector(".num-of-likes").innerHTML--;
             }
+            console.log('Success: ', result);
         })
-        .catch((error) => {
-        console.error('Error:', error);
+        .catch(error=>{
+            console.log('Error: ', error);
         });
-    */
-})
+
+        e.preventDefault();
+    })

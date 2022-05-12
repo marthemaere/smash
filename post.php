@@ -3,6 +3,8 @@
     $postId =  $_GET['p'];
     session_start();
 
+    $conn = Db::getInstance();
+    
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
@@ -47,6 +49,19 @@
                 $error = $e->getMessage();
             }
         }
+
+        if(!empty($_POST['like'])){
+            $postId = intval($_POST['postId']);
+            $userId = intval($_POST['userId']);
+    
+            $like= new Like();
+            $like->setPostId($postId);
+            $like->setUserId($userId);
+            $like->saveLike();
+            $likeAmount= $like->countLike($userId);
+           // $isLiked = $like->isLikedByUser();
+           // var_dump($isLiked);
+        } 
     }
 ?>
 
@@ -135,10 +150,10 @@
                                 class="link-primary"><?php echo htmlspecialchars($projectData['tag']); ?></span></p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
+                        
                         <form class="d-flex align-items-center" action="" method="post">
                             <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
-                                <img src="assets/images/empty-heart.svg" class="btn-icon-like">
-                                <input type="submit" value="Like" class="btn p-0 ps-1" name="like">
+                                <img src="assets/images/empty-heart.svg" name= "like" class="like btn-icon-like" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $_GET['id'] ?>">
                                 <p class="num-of-likes"> 1</p>
                             </div>
                             <?php if ($isReported === false): ?>
@@ -155,7 +170,6 @@
                                 <input type="submit" value="&#9998;" class="btn btn-outline-primary ms-2" name="editProject">
                         </form> 
                         <?php endif; ?>
-
                     </div>
                 </div>
             </div>

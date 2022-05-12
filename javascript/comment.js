@@ -31,5 +31,3 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
         });
 
     });
-
-    //bevestiging

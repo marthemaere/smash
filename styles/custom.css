@@ -166,7 +166,13 @@ p.num-of-likes {
     margin-top: 0;
 }
 
+.liked{
+    display: none;
+}
 
+.notLiked{
+    display: block;
+}
 /* ------MediaQueries------ */
 
 @media (max-width: 992px) {

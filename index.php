@@ -43,6 +43,20 @@
     if (empty($posts)) {
         $emptystate = true;
     }
+
+    if(!empty($_POST['like'])){
+        $postId = intval($_POST['postId']);
+        $userId = intval($_POST['userId']);
+
+        $like= new Like();
+        $like->setPostId($postId);
+        $like->setUserId($userId);
+        $like->saveLike();
+        $likeAmount= $like->countLike($userId);
+      //  $isLiked= $like->isLikedByUser();
+      //  var_dump($isLiked);
+    }    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -156,10 +170,12 @@
                                     <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
                                 </a>
                             </div>
-                            <div class="d-flex align-items-center">
-                                <img src="assets/images/empty-heart.svg" class="like">
-                                <p class="num-of-likes">1</p>
-                            </div>
+                            <form class="" action="" method="post">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
+                                    <p class="num-of-likes"><?php  ?></p>
+                                </div>
+                            </form>
                         </div>
                         <a href="post.php?p=<?php echo $p[0]?>">
                             <h2><?php echo $p['title']; ?></h2>

@@ -37,7 +37,7 @@
         <div class="login--form col">
             <div class="form form--login">
                 <form action="" method="post">
-                    <h1 class="mb-6">Welcome back,<br> Smasher!</h1>
+                    <h1 class="pb-2">Welcome back,<br> Smasher!</h1>
 
                     <?php if (isset($error)):?>
                     <div class="alert alert-danger"><?php echo $error; ?></div>
@@ -56,7 +56,7 @@
                         <a href="forgotPassword.php" class="link-dark">Forgot password?</a>
                     </div>
                     <div class="d-grid">
-                        <input type="submit" value="Log in" class="btn btn-dark" value="Log in">
+                        <input type="submit" value="Log in" class="btn btn-dark py-3" value="Log in">
                     </div>
                 </form>
                 <p class="text-center my-2">Not a member? <a href="register.php" class="link-primary">Sign up today</a></p>

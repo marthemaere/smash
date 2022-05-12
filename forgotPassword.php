@@ -36,7 +36,7 @@
                 <a href="login.php" class="link-dark">Go back</a>
 
                 <form action="" method="post">
-                    <h1>Reset your password</h1>
+                    <h1 class="py-2">Forgot your racket uh...password?</h1>
                     <?php if (!isset($success)): ?>
                     <p class="alert alert-info">An email will be send to reset your password.</p>
                     <?php endif; ?>
@@ -58,7 +58,7 @@
                         <label for="email">Email</label>
                     </div>
                     <div class="d-grid">
-                        <input type="submit" class="btn btn-dark" id="btnSubmit" value="Send email" name="forgot_password">
+                        <input type="submit" class="btn btn-dark py-3" id="btnSubmit" value="Send email" name="forgot_password">
                     </div>
                 </form>
             </div>

@@ -202,17 +202,30 @@ class Post
         return $result;
     }
 
-    public function smashed(){
+    public function smashExists()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT COUNT(*) FROM posts WHERE posts.isShowcase = 1");
+        $statement->execute();
+        $count = intval($statement->fetchColumn());
+
+        if ($count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function smashed($postId){
         $conn = Db::getInstance();
         $statement = $conn->prepare("UPDATE posts SET isShowcase=1 where posts.id = :postId");
-        $statement->bindValue(':postId', $this->getPostId());
+        $statement->bindValue(':postId', $postId);
         return $statement->execute();
     }
 
-    public function unsmashed(){
+    public static function unsmashed($postId){
         $conn = Db::getInstance();
         $statement = $conn->prepare("UPDATE posts SET isShowcase=0 where posts.id = :postId");
-        $statement->bindValue(':postId', $this->getPostId());
+        $statement->bindValue(':postId', $postId);
         return $statement->execute();
     }
 

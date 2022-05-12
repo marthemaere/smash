@@ -20,7 +20,7 @@ smashButton.addEventListener("click", function (e) {
   })
     .then((response) => response.json())
     .then(result => {
-      if (result.smashed === 1) {
+      if (result.smashed === 1 ) {
         smashButton.text = "Smashed 💥";
         smashButton.classList.add("active");
       } else {
@@ -33,4 +33,4 @@ smashButton.addEventListener("click", function (e) {
       console.log("Error:", error);
     });
   e.preventDefault();
-});
+})

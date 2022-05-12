@@ -7,7 +7,7 @@
         try{
 
             //new smashed project
-            //  $posts= new Post();
+            
             $postId = intval(($_POST['postid']));
             $userId = intval(($_POST['userid']));  
 
@@ -15,25 +15,25 @@
              $posts->setPostId($postId);
              $posts->setUserId($userId);
             
-            if($posts->unsmashed()) {
-                $posts->smashed();
+            if($posts->smashExists()) {
+                $posts->unsmashed($postId);
 
             $response= [
                 "status" => "success",
                 "userid" => $userId,
                 "postid" => $postId,
-                "message" => "Smashed.",
-                'smashed' => 1
+                "message" => "Unsmashed.",
+                'smashed' => 0
             ];
 
         }   else{
-            $posts->smashed();
+            $posts->smashed($postId);
             $response = [
                 'status' => 'success',
                 "userid" => $userId,
                 "postid" => $postId,
-                'message' => "Unsmashed.",
-                'smashed' => 0
+                'message' => "smashed.",
+                'smashed' => 1
             ];
         }
 

@@ -30,6 +30,7 @@ CREATE TABLE `comments` (
   `text` varchar(300) DEFAULT NULL,
   `post_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
+  `isShowcase` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

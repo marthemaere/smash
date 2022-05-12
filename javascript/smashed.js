@@ -1,6 +1,5 @@
-document.querySelector("#smashed").addEventListener("click", function(e){
+document.querySelector("#smashed").addEventListener("click", function(){
     console.log("smashing it");
-    e.preventDefault();
 
     //postId?
     let postId = this.dataset.postId;

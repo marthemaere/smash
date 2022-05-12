@@ -9,7 +9,7 @@
         $key = $_GET['p'];
         $userData = User::getUserDataFromId($key);
         $userPosts = $user->getUserPostsFromId($key);
-
+        
         $report = new Report();
         $report->setReported_userId($key);
         $report->setReport_userId($_SESSION['id']);
@@ -52,7 +52,7 @@
                 <form action="" method="post">
                 <div class="my-4">
                     <!-- are you sure alert -->
-                    <div class="modal fade" id="report-user" aria-hidden="true"
+                    <div class="modal fade" id="reportUser" aria-hidden="true"
                         aria-labelledby="report-userLabel" tabindex="-1">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -77,9 +77,9 @@
                     <div class="profile-btn">
                         <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Follow</a>
                         <?php if ($isReported === false): ?>
-                        <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#report-user" id="report-btn" role="button">Report user</a>
+                        <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Report user</a>
                         <?php else: ?>
-                        <a class="btn btn-danger disabled mb-2" data-bs-toggle="modal" href="#report-user" id="report-btn" role="button">Reported</a>
+                        <a class="btn btn-danger disabled mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Reported</a>
                         <?php endif; ?>
                         <?php if (!empty($userPosts[0]['social_linkedin'])): ?>
                             <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
@@ -120,7 +120,7 @@
                                     <div class="d-flex align-items-center justify-content-start">
                                         <img src="profile_pictures/<?php echo htmlspecialchars($post['profile_pic']); ?>"
                                             class="img-profile-post">
-                                        <a href="profile.php?p=<?php echo htmlspecialchars($post['user_id']);?>">
+                                        <a href="profile.php?p=<?php echo htmlspecialchars($post[0]['user_id']);?>">
                                             <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($post['username']);?></h4>
                                         </a>
                                     </div>
@@ -129,13 +129,15 @@
                                         <p class="num-of-likes">1</p>
                                     </div>
                                 </div>
-                                <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+                                <a href="post.php?p=<?php echo $post['id'];?>">
+                                    <h2><?php echo htmlspecialchars($post['title']); ?></h2>
+                                </a>
                                 <p class="pe-4"><?php echo htmlspecialchars($post['description']); ?> <span
                                         class="link-primary"><?php echo htmlspecialchars($post['tag']); ?></span></p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="" class="link-dark">View comments</a>
-                                <button type="button" id="smashed" name="smashed" value="smashed" class="btn btn-outline-primary"> Smash </button>
+                                <a href="" id="smashed" name="smashed" class="btn btn-outline-primary" data-postId="3"> Smash </a>
                             </div>
                         </div>
                     <?php endforeach; ?>

@@ -122,12 +122,12 @@ class Post
 
     public function canUploadProject()
     {
-       // $file = $_FILES['file'];
+        // $file = $_FILES['file'];
         $fileName = $_FILES['file']['name'];
         $fileTmpName = $_FILES['file']['tmp_name'];
         $fileSize = $_FILES['file']['size'];
         $fileError = $_FILES['file']['error'];
-       // $fileType = $_FILES['file']['type'];
+        // $fileType = $_FILES['file']['type'];
     
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt)); //check in lowercase
@@ -169,7 +169,7 @@ class Post
     public static function getPostDataFromId($id)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id WHERE posts.id = :id");
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id WHERE posts.id = :id");
         $statement->bindValue(':id', $id);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -229,14 +229,14 @@ class Post
     }
 
     public function editTitle($postId)
-        {     
-            $title = $this->getTitle();
-           // $postId =  $_GET['p'];
+    {
+        $title = $this->getTitle();
+        // $postId =  $_GET['p'];
 
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("UPDATE posts SET title= :title where id = :postId");
-            $statement->bindValue(":title", $title);
-            $statement->bindValue(":postId", $postId); 
-            return $statement->execute();
-           }
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET title= :title where id = :postId");
+        $statement->bindValue(":title", $title);
+        $statement->bindValue(":postId", $postId);
+        return $statement->execute();
+    }
 }

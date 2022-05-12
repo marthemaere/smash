@@ -18,20 +18,30 @@
 
             //new smashed project
              $posts= new Post();
-            //  $postId = intval(($_POST['postId']));
-            //  $userId = intval(($_POST['userId']));  
-            //  $posts->setPostId($postId);
-            //  $posts->setUserId($userId);
-             $posts->smashed($postId);
-             print_r($posts);
+             $postId = intval(($_POST['postid']));
+             $userId = intval(($_POST['userid']));  
+             $posts->setPostId($postid);
+             $posts->setUserId($userid);
+            
+            if($posts->unsmashed($postId)) {
+                $posts->smashed($postId);
 
             $response= [
-                "status"=> "success",
+                "status" => "success",
                 "message" => "Smashed.",
+                'smashed' => false
             ];
 
-        } 
-        catch (Exception $e){
+        }   else{
+            $posts->unsmashed($postId);
+            $response = [
+                'status' => 'success',
+                'message' => 'Unsmashed.',
+                'smashed' => true
+            ];
+        }
+
+        }catch (Exception $e){
             $response= [  
                 "status"=> "error",
                 "message" => "Cannot smash."

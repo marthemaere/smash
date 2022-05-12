@@ -1,9 +1,13 @@
 document.querySelector("#likePost").addEventListener("click", function(e){
     console.log("we are liking");
+    
     e.preventDefault();
 
     let postId= e.target.dataset.postId;
     let userId= e.target.dataset.userId;
+
+    console.log(postId);
+    console.log(userId);
 
     let data= new FormData();
     data.append("postId", postId);

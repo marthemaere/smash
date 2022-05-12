@@ -155,7 +155,7 @@
                             </div>
                             <form class="" action="" method="post">
                                 <div class="d-flex align-items-center">
-                                    <img src="assets/images/empty-heart.svg" name= "like" class="like" id="likePost" data-userId="<?php echo $userId ?>" data-postId="<?php echo $postId ?>>
+                                    <img src="assets/images/empty-heart.svg" name= "like" class="like" id="likePost" data-userId="<?php echo $userId ?>" data-postId="<?php echo $postId ?>">
                                     <p class="num-of-likes">1</p>
                                 </div>
                             </form>

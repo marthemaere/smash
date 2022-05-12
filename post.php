@@ -3,6 +3,8 @@
  
     session_start();
 
+    $conn = Db::getInstance();
+    
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
@@ -13,9 +15,15 @@
         $userDataFromId = User::getUserDataFromId($userId);
     
         //var_dump($projectData);
+         
+        //check if post is reported by user who is logged in
+        $report = new Report();
+        $report->setPostId($postId);
+        $report->setReport_userId($_SESSION['id']);
+        $isReported = $report->isPostReportedByUser();
+        //var_dump($isReported);
     
-        if(!empty($_POST['addComment']))
-        {
+        if (!empty($_POST['addComment'])) {
             try {
                 $comment = new Comment();
                 $comment->setText($_POST['comment']);
@@ -42,6 +50,19 @@
                 $error = $e->getMessage();
             }
         }
+
+        if(!empty($_POST['like'])){
+            $postId = intval($_POST['postId']);
+            $userId = intval($_POST['userId']);
+    
+            $like= new Like();
+            $like->setPostId($postId);
+            $like->setUserId($userId);
+            $like->saveLike();
+            $likeAmount= $like->countLike($userId);
+           // $isLiked = $like->isLikedByUser();
+           // var_dump($isLiked);
+        } 
     }
 ?>
 
@@ -85,7 +106,7 @@
                             <div class="modal-footer">
                                 <button class="btn btn-outline-primary" 
                                     data-bs-toggle="modal">No</button>
-                                <input id="report-post" data-postId="<?php echo $postId ?>" type="submit" value="yes" name="report"
+                                <input id="report-post" data-postId="<?php echo $postId ?>" data-userid="<?php echo $_SESSION['id'] ?>" type="submit" value="yes" name="report"
                                     class="btn btn-primary" 
                                     data-bs-toggle="modal">
                             </div>
@@ -127,23 +148,29 @@
                     <div>
                         <h2><?php echo htmlspecialchars($projectData['title']); ?></h2>
                         <p class="pe-4"><?php echo htmlspecialchars($projectData['description']); ?> <span
-                                class="link-primary"><?php echo htmlspecialchars($projectData['tags']); ?></span></p>
+                                class="link-primary"><?php echo htmlspecialchars($projectData['tag']); ?></span></p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
+                        
                         <form class="d-flex align-items-center" action="" method="post">
                             <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
-                                <img src="assets/images/empty-heart.svg" class="btn-icon-like">
-                                <input type="submit" value="Like" class="btn p-0 ps-1" name="like">
+                                <img src="assets/images/empty-heart.svg" name= "like" class="like btn-icon-like" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $_GET['id'] ?>">
                                 <p class="num-of-likes"> 1</p>
                             </div>
+                            <?php if ($isReported === false): ?>
                             <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Report</a>
+                            <?php elseif ($isReported === true): ?>
+                            <a class="btn btn-danger disabled" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Reported</a>
+                            <?php endif; ?>
+                            <?php if($_SESSION['id'] == $projectData['user_id']): ?>
                             <a class="btn btn-outline-danger ms-2" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
+                            <?php endif; ?>
                         </form>
-
+                        <?php if($_SESSION['id'] == $projectData['user_id']): ?>
                         <form method="post" action="editProject.php?p=<?php echo $key?>" id="edit_form">
                                 <input type="submit" value="&#9998;" class="btn btn-outline-primary ms-2" name="editProject">
                         </form> 
-
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -166,9 +193,9 @@
 
                     <ul class="list-group list-group-flush" id="listupdates">
                                 <li class="list-group-item d-flex align-items-center border-bottom">
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($projectData['user_id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($projectData['profile_pic']); ?>" class="img-profile-post"></a>
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($projectData['user_id']);?>">
-                                        <h4 class="p-2 mb-0"><?php echo htmlspecialchars($projectData['username']);?></h4>
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-profile-post"></a>
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($userDataFromId['id']);?>">
+                                        <h4 class="p-2 mb-0"><?php echo htmlspecialchars($userDataFromId['username']);?></h4>
                                     </a>
                                     <?php echo $c['text']; ?>
                                 </li>

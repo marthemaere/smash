@@ -21,10 +21,13 @@
     $postCount= $result->fetchAll();
     $total= $postCount[0]['id'];
     $pages= ceil($total / $limit);
-    
+   // $postId =  $_GET['p'];
+
+
     if (!empty($_POST['submit-search'])) {
         $search = $_POST['search'];
         $posts = Post::search($search);
+        $searched = true;
     }
     
     if (!empty($_POST['ASC'])) {
@@ -40,6 +43,20 @@
     if (empty($posts)) {
         $emptystate = true;
     }
+
+    if(!empty($_POST['like'])){
+        $postId = intval($_POST['postId']);
+        $userId = intval($_POST['userId']);
+
+        $like= new Like();
+        $like->setPostId($postId);
+        $like->setUserId($userId);
+        $like->saveLike();
+        $likeAmount= $like->countLike($userId);
+      //  $isLiked= $like->isLikedByUser();
+      //  var_dump($isLiked);
+    }    
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -48,14 +65,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="styles/custom.css">
-    <title>Feed</title>
+    <?php include_once('style.php'); ?>
+    <title>Home</title>
 
 </head>
 
@@ -105,6 +116,12 @@
             </div>
         </div>
 
+        <?php if (!empty($searched)): ?>
+            <div class="d-flex justify-content-center">
+                <h3>Search results for: <?php echo $search; ?></h3>
+            </div>
+        <?php endif; ?>
+
         <?php if (isset($emptystate)): ?>
         <div class="empty-state flex-column">
             <img class="d-block mx-auto" src="assets/images/empty-state.png" alt="emptystate">
@@ -153,10 +170,12 @@
                                     <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
                                 </a>
                             </div>
-                            <div class="d-flex align-items-center">
-                                <img src="assets/images/empty-heart.svg" class="like">
-                                <p class="num-of-likes">1</p>
-                            </div>
+                            <form class="" action="" method="post">
+                                <div class="d-flex align-items-center">
+                                    <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
+                                    <p class="num-of-likes"><?php  ?></p>
+                                </div>
+                            </form>
                         </div>
                         <a href="post.php?p=<?php echo $p[0]?>">
                             <h2><?php echo $p['title']; ?></h2>
@@ -168,10 +187,7 @@
                         <a href="" class="btn btn-smash">Smash</a>
                     </div> -->
 
-                    <div class="d-flex justify-content-between align-items-center">
-                    <a href="" class="link-dark">View comments</a>
-                    <a href="" class="btn btn-outline-primary">Smash</a>
-                </div>
+                    
                 </div>
                 <?php endif; ?>
             <?php endforeach; ?>
@@ -195,5 +211,6 @@
     <?php require_once("footer.php"); ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="javascript/like.js"></script>
+    <script src="javascript/smashed.js"></script>
 </body>
 </html>

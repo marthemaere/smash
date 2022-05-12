@@ -30,9 +30,4 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
             console.log(error);
         });
 
-        e.preventDefault();
-
-
     });
-
-    //bevestiging

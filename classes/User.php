@@ -17,6 +17,7 @@
         private $socialInstagram;
         private $socialGitHub;
 
+
         public function setEmail($email)
         {
             if (empty($email)) {
@@ -47,7 +48,7 @@
         {
             $password_input = $_POST['password'];
             if (empty($password) || strlen($password_input) < 6) {
-                throw new Exception("password cannot be empty and needs to contain at least 6 characters");
+                throw new Exception("Password cannot be empty and needs to contain at least 6 characters.");
             }
             $this->password = $password;
             return $this;
@@ -180,7 +181,7 @@
                 $result = $statement->execute();
                 return $result;
             } else {
-                throw new Exception("email cannot be empty and needs to be a Thomas More email address");
+                throw new Exception("Email cannot be empty and needs to be a Thomas More email address. Try again.");
             }
         }
 
@@ -381,7 +382,7 @@
         {
             $conn = Db::getInstance();
             $statement = $conn->prepare(
-                "SELECT u.username, u.profile_pic, u.social_github, u.social_linkedin, u.social_instagram, p.title, p.image, p.description, t.tag 
+                "SELECT u.username, u.profile_pic, u.social_github, u.social_linkedin, u.social_instagram, p.id, p.title, p.image, p.description, t.tag 
                 FROM users u 
                 INNER JOIN posts p ON u.id = p.user_id
                 INNER JOIN tags t ON p.id = t.post_id

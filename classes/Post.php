@@ -106,7 +106,6 @@ class Post
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into posts (title, image, description, date, user_id) values (:title, :image, :description, now(), :userId)");
-        
         $title = $this->getTitle();
         $image = $this->getImage();
         $userId = $this->getUserId();
@@ -123,12 +122,12 @@ class Post
 
     public function canUploadProject()
     {
-       // $file = $_FILES['file'];
+        // $file = $_FILES['file'];
         $fileName = $_FILES['file']['name'];
         $fileTmpName = $_FILES['file']['tmp_name'];
         $fileSize = $_FILES['file']['size'];
         $fileError = $_FILES['file']['error'];
-       // $fileType = $_FILES['file']['type'];
+        // $fileType = $_FILES['file']['type'];
     
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt)); //check in lowercase
@@ -170,7 +169,7 @@ class Post
     public static function getPostDataFromId($id)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id WHERE posts.id = :id");
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id WHERE posts.id = :id");
         $statement->bindValue(':id', $id);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -203,6 +202,56 @@ class Post
         return $result;
     }
 
+    public function smashExists()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT COUNT(*) FROM posts WHERE posts.isShowcase = 1");
+        $statement->execute();
+        $count = intval($statement->fetchColumn());
+
+        if ($count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function smashed($postId){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET isShowcase=1 where posts.id = :postId");
+        $statement->bindValue(':postId', $postId);
+        return $statement->execute();
+    }
+
+    public static function unsmashed($postId){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET isShowcase=0 where posts.id = :postId");
+        $statement->bindValue(':postId', $postId);
+        return $statement->execute();
+    }
+
+    public static function showSmashedProjects()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare(
+        "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags ON tags.post_id = posts.id WHERE posts.isShowcase=1" );
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
+    public function isSmashed()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts WHERE posts.isShowcase=1");
+        $statement->execute();
+        $result = $statement->fetchAll();
+        if ($result != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function deletePosts($id)
     {
         $conn = Db::getInstance();
@@ -212,14 +261,14 @@ class Post
     }
 
     public function editTitle($postId)
-        {     
-            $title = $this->getTitle();
-           // $postId =  $_GET['p'];
+    {
+        $title = $this->getTitle();
+        // $postId =  $_GET['p'];
 
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("UPDATE posts SET title= :title where id = :postId");
-            $statement->bindValue(":title", $title);
-            $statement->bindValue(":postId", $postId); 
-            return $statement->execute();
-           }
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET title= :title where id = :postId");
+        $statement->bindValue(":title", $title);
+        $statement->bindValue(":postId", $postId);
+        return $statement->execute();
+    }
 }

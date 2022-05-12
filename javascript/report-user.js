@@ -1,11 +1,13 @@
 document.querySelector("#report-user").addEventListener("click", function(e) {
     console.log("geklikt");
     e.preventDefault();
-    let userid = e.target.dataset.userid;
+    let reported_user = e.target.dataset.userid;
+    let report_user = e.target.dataset.report_userid;
 
     
     let formData = new FormData();
-    formData.append("userid", userid);
+    formData.append("userid", reported_user);
+    formData.append("report_userid", report_user);
 
     fetch("ajax/report__user.php",  {
         method: "POST",

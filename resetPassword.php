@@ -44,7 +44,9 @@
 
                 <form action="" method="post">
                     <h1>Reset your password</h1>
-                    <p class="alert alert-info">Set your new password</p>
+                    <?php if (!isset($success)): ?>
+                    <p class="alert alert-info">Set your new password.</p>
+                    <?php endif; ?>
 
                     <?php if (isset($error)):?>
                     <div class="alert alert-danger">
@@ -54,12 +56,13 @@
 
                     <?php if (isset($success)):?>
                     <div class="alert alert-success">
-                        <p>Your password is changed</p>
+                        <p>Your password is changed.</p>
                     </div>
+                    <a href="login.php">Go to login page</a>
                     <?php endif; ?>
 
                     <div class="form-floating my-3">
-                        <input type="text" class="form-control" id="password" placeholder="new password"  name="password">
+                        <input type="password" class="form-control" id="password" placeholder="new password"  name="password">
                         <label for="password">New password</label>
                     </div>
                     <div class="d-grid">

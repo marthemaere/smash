@@ -13,7 +13,6 @@ document.querySelector("#smashed").addEventListener("click", function (e) {
   formData.append("postid", smashed_post);
   formData.append("userid", smashed_user);
 
-
   fetch("ajax/smash_project.php", {
     method: "POST",
     body: formData,

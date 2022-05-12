@@ -209,6 +209,13 @@ class Post
         return $statement->execute();
     }
 
+    public static function unsmashed($postId){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE posts SET isShowcase=0 where posts.id = :postId");
+        $statement->bindValue(':postId', $postId);
+        return $statement->execute();
+    }
+
     // public static function showSmashedProjects()
     // {
     //     $conn = Db::getInstance();

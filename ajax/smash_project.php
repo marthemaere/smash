@@ -11,7 +11,6 @@
             // $postId = intval(($_POST['postId']));
             // $userId = intval(($_POST['userId']));
 
-
             // $posts->setPostId($postId);
             // $posts->setUserId($userId);
             // $posts->saveSmash($postId);
@@ -19,11 +18,12 @@
 
             //new smashed project
              $posts= new Post();
-             $postId = intval(($_POST['postId']));
-             $userId = intval(($_POST['userId']));  
-             $posts->setPostId($postId);
-             $posts->setUserId($userId);
+            //  $postId = intval(($_POST['postId']));
+            //  $userId = intval(($_POST['userId']));  
+            //  $posts->setPostId($postId);
+            //  $posts->setUserId($userId);
              $posts->smashed($postId);
+             print_r($posts);
 
             $response= [
                 "status"=> "success",

@@ -48,6 +48,17 @@
                 $error = $e->getMessage();
             }
         }
+
+        if(!empty($_POST['like'])){
+            $postId = intval($_POST['postId']);
+            $userId = intval($_POST['userId']);
+    
+            $like= new Like();
+            $like->setPostId($postId);
+            $like->setUserId($userId);
+            $like->saveLike();
+            $like->countLike($userId);
+        } 
     }
 ?>
 

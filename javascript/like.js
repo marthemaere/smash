@@ -3,16 +3,16 @@
 
 //if (l.value == "liked"){
 
-document.querySelector("#likePost").addEventListener("click", function(e){
-    console.log("we are liking");
+let btn= document.querySelector("#likePost");
+
+let postId= btn.dataset.postid;
+let userId= btn.dataset.userid;
+
+btn.addEventListener("click", function(e){
     
-    e.preventDefault();
-
-    let postId= e.target.dataset.postid;
-    let userId= e.target.dataset.userid;
-
     console.log(postId);
     console.log(userId);
+    console.log("we are liking");
 
     let data= new FormData();
     data.append("postId", postId);
@@ -23,7 +23,23 @@ document.querySelector("#likePost").addEventListener("click", function(e){
         body: data,
         })
         .then(response => response.json())
-        .then(data => {
+        .then(result => {
+            if(result.isLiked === true){
+                btn.src = "assets/images/liked-heart.svg";
+                btn.classList.add("active");
+            } else{
+                btn.src = "assets/images/empty-heart.svg";
+                btn.classList.remove("active");
+            }
+            console.log('Succes: ', result);
+        })
+        .catch(error=>{
+            console.log('Error: ', error);
+        });
+
+        e.preventDefault();
+    })/*
+
             if(data.status === "success"){
                 document.querySelector("#likePost").src = "assets/images/liked-heart.svg";
                 document.querySelector(".num-of-likes").innerHTML=+1;

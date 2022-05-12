@@ -7,37 +7,33 @@
         try{
 
             //new smashed project
-            // $posts= new Smashed();
-            // $postId = intval(($_POST['postId']));
-            // $userId = intval(($_POST['userId']));
+            //  $posts= new Post();
+            $postId = intval(($_POST['postid']));
+            $userId = intval(($_POST['userid']));  
 
-            // $posts->setPostId($postId);
-            // $posts->setUserId($userId);
-            // $posts->saveSmash($postId);
-
-
-            //new smashed project
              $posts= new Post();
-             $postId = intval(($_POST['postid']));
-             $userId = intval(($_POST['userid']));  
-             $posts->setPostId($postid);
-             $posts->setUserId($userid);
+             $posts->setPostId($postId);
+             $posts->setUserId($userId);
             
-            if($posts->unsmashed($postId)) {
-                $posts->smashed($postId);
+            if($posts->unsmashed()) {
+                $posts->smashed();
 
             $response= [
                 "status" => "success",
+                "userid" => $userId,
+                "postid" => $postId,
                 "message" => "Smashed.",
-                'smashed' => false
+                'smashed' => 1
             ];
 
         }   else{
-            $posts->unsmashed($postId);
+            $posts->smashed();
             $response = [
                 'status' => 'success',
-                'message' => 'Unsmashed.',
-                'smashed' => true
+                "userid" => $userId,
+                "postid" => $postId,
+                'message' => "Unsmashed.",
+                'smashed' => 0
             ];
         }
 

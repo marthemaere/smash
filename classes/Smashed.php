@@ -51,8 +51,6 @@ class Smashed {
             return $result;        
         }
 
-
-
     public static function showSmashedProjects()
     {
         $conn = Db::getInstance();
@@ -62,10 +60,4 @@ class Smashed {
         $result = $statement->fetchAll();
         return $result;
     }
-
-
-
-
-
-
 }

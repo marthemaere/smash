@@ -1,40 +1,36 @@
 let smashButton = document.querySelector("#smashed");
-smashButton.addEventListener("click", function (e) {
-  e.preventDefault();
-  console.log("smashing it");
 
-  //postId?
-  let smashed_post = e.target.dataset.postid;
-  console.log(smashed_post);
-  let smashed_user = e.target.dataset.userid;
-  console.log(smashed_user);
+let smashedPost = smashButton.dataset.postid;
+console.log(smashedPost);
+let smashedUser = smashButton.dataset.userid;
+console.log(smashedUser);
+
+smashButton.addEventListener("click", function (e) {
+
+  console.log("smashing it");
 
   //post naar database AJAX
   let formData = new FormData();
-  formData.append("postid", smashed_post);
-  formData.append("userid", smashed_user);
+  formData.append("postid", smashedPost);
+  formData.append("userid", smashedUser);
 
   fetch("ajax/smash_project.php", {
     method: "POST",
     body: formData,
   })
-    .then(response => response.json())
+    .then((response) => response.json())
     .then(result => {
-
-      if(result.smash === true){
-        smashButton.innerHtml = "Smashed 💥";
+      if (result.smashed === 1) {
+        smashButton.text = "Smashed 💥";
         smashButton.classList.add("active");
-      }else{
-        smashButton.innerHtml = "Smash";
+      } else {
+        smashButton.text = "Smash";
         smashButton.classList.remove("active");
       }
       console.log("Success:", result);
-
-    
-  
     })
-    .catch(error => {
-      console.error("Error:", error);
+    .catch((error) => {
+      console.log("Error:", error);
     });
-    e.preventDefault();
+  e.preventDefault();
 });

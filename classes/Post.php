@@ -202,17 +202,17 @@ class Post
         return $result;
     }
 
-    public static function smashed($postId){
+    public function smashed(){
         $conn = Db::getInstance();
         $statement = $conn->prepare("UPDATE posts SET isShowcase=1 where posts.id = :postId");
-        $statement->bindValue(':postId', $postId);
+        $statement->bindValue(':postId', $this->getPostId());
         return $statement->execute();
     }
 
-    public static function unsmashed($postId){
+    public function unsmashed(){
         $conn = Db::getInstance();
         $statement = $conn->prepare("UPDATE posts SET isShowcase=0 where posts.id = :postId");
-        $statement->bindValue(':postId', $postId);
+        $statement->bindValue(':postId', $this->getPostId());
         return $statement->execute();
     }
 

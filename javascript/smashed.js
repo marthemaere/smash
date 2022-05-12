@@ -5,9 +5,8 @@ document.querySelector("#smashed").addEventListener("click", function (e) {
   //postId?
   let smashed_post = e.target.dataset.postId;
   console.log(smashed_post);
-  let smashed_user = e.target.dataset.postId;
+  let smashed_user = e.target.dataset.userId;
   console.log(smashed_user);
-  
 
   //post naar database AJAX
   let formData = new FormData();

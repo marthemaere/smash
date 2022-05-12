@@ -381,7 +381,7 @@
         {
             $conn = Db::getInstance();
             $statement = $conn->prepare(
-                "SELECT u.username, u.profile_pic, u.social_github, u.social_linkedin, u.social_instagram, p.title, p.image, p.description, t.tag 
+                "SELECT u.username, u.profile_pic, u.social_github, u.social_linkedin, u.social_instagram, p.id, p.title, p.image, p.description, t.tag 
                 FROM users u 
                 INNER JOIN posts p ON u.id = p.user_id
                 INNER JOIN tags t ON p.id = t.post_id

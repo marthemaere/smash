@@ -67,10 +67,6 @@ nav .img-thumbnail {
     margin: auto;
 }
 
-.form--register h1, .form--login h1, .form--reset h1 {
-    padding-bottom: 2rem;
-}
-
 /* ------ListItems------ */
 
 .list-group-item {
@@ -113,7 +109,7 @@ fieldset {
     justify-content: center;
 }
 
-.upload-intro p, .login h1, .register h1 {
+.upload-intro p{
     text-align: center;
 }
  .uploadzone input[type="text"], .uploadzone input[type="file"], .uploadzone textarea {
@@ -176,4 +172,11 @@ p.num-of-likes {
 
 .notLiked{
     display: block;
+}
+/* ------MediaQueries------ */
+
+@media (max-width: 992px) {
+    .register--image, .login--image, .reset--image {
+        display: none;
+    }
 }

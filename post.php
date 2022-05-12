@@ -163,17 +163,11 @@
                             <?php endif; ?>
                             <a class="btn btn-outline-danger ms-2" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
                         </form>
-
-                        <?php if($_SESSION['id'] = $projectData['user_id']): ?>
-        <?php var_dump($_SESSION['id']); var_dump($projectData['user_id']); ?>
-
-
+                        <?php if($_SESSION['id'] == $projectData['user_id']): ?>
                         <form method="post" action="editProject.php?p=<?php echo $key?>" id="edit_form">
                                 <input type="submit" value="&#9998;" class="btn btn-outline-primary ms-2" name="editProject">
                         </form> 
-
                         <?php endif; ?>
-
                     </div>
                 </div>
             </div>

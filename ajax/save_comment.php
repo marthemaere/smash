@@ -4,8 +4,8 @@
 
     if( !empty($_POST) ) {
         $text = $_POST['comment'];
-        $postId = intval($_POST['postId']);
-        $userId = intval($_POST['userId']);
+        $postId = intval($_POST['postid']);
+        $userId = intval($_POST['userid']);
 
 
         try {

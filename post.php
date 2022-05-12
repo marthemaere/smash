@@ -1,16 +1,17 @@
 <?php
     include_once("bootstrap.php");
-    $postId =  $_GET['p'];
+ 
     session_start();
 
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
         $key = $_GET['p'];
-        $projectData = Post::getPostDataFromId($key);
+        $postId=$_GET['p'];
         $userId=$_SESSION['id'];
+        $projectData = Post::getPostDataFromId($key);
         $userDataFromId = User::getUserDataFromId($userId);
-
+    
         //var_dump($projectData);
     
         if(!empty($_POST['addComment']))
@@ -179,7 +180,7 @@
                         <form class="" action="" method="post">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Place a comment" aria-label="Place a comment" aria-describedby="button-addon2" id="comment" name="comment">
-                                <input type="submit" name="addComment" id="btnSubmit" data-userId="<?php echo $userId ?>" data-postId="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >
+                                <input type="submit" name="addComment" id="btnSubmit" data-userid="<?php echo $userId ?>" data-postid="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >
                             </div>
                         </form>
                     </div>

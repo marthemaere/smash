@@ -1,16 +1,16 @@
-let btnComment= document.querySelector("#btnSubmit");
+document.querySelector("#btnSubmit").addEventListener("click", function(e) {
 
-let postId= btnComment.dataset.postId;
-let userId= btnComment.dataset.userId;
-let comment= document.querySelector("#comment").value;
 
-btnComment.addEventListener("click", function(e) {
+    let postId= e.target.dataset.postid;
+    let userId= e.target.dataset.userid;
+    let comment= document.querySelector("#comment").value;
+
 
       //ajax
     let data= new FormData();
     data.append("comment", comment);
-    data.append("postId", postId);
-    data.append("userId", userId);
+    data.append("postid", postId);
+    data.append("userid", userId);
 
     fetch("ajax/save_comment.php", {
     method: 'POST', 

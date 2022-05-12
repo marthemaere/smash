@@ -64,4 +64,21 @@
             $statement->bindValue(':postid', $this->getPostId());
             return $statement->execute();
         }
+
+        public function isLikedByUser()
+        {
+            $conn = Db::getInstance();
+            $userId = $this->getUserId();
+            $postId = $this->getPostId();
+            $statement = $conn->prepare("SELECT * FROM likes WHERE user_id = :userid AND post_id = :postid");
+            $statement->bindValue(":userid", $userId);
+            $statement->bindValue(":postid", $postId);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            if ($result != null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }

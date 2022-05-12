@@ -50,8 +50,9 @@
         $like->setUserId($userId);
         $like->saveLike();
         $likeAmount= $like->countLike($userId);
-    } 
-    
+        $isLiked= $like->isLikedByUser();
+        var_dump($isLiked);
+    }    
 
 ?>
 <!DOCTYPE html>
@@ -168,8 +169,13 @@
                             </div>
                             <form class="" action="" method="post">
                                 <div class="d-flex align-items-center">
+                                    <?php if ($isLiked === false): ?>
                                     <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
                                     <p class="num-of-likes"><?php  ?></p>
+                                    <?php else: ?>
+                                    <img src="assets/images/liked-heart.svg" name= "like" class="like liked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
+                                    <p class="num-of-likes"><?php  ?></p>
+                                    <?php endif; ?>
                                 </div>
                             </form>
                         </div>

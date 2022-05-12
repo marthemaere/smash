@@ -17,6 +17,7 @@
         private $socialInstagram;
         private $socialGitHub;
 
+
         public function setEmail($email)
         {
             if (empty($email)) {

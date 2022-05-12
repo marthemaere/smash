@@ -202,23 +202,23 @@ class Post
         return $result;
     }
 
-    public static function smashed($postId){
+    // public static function smashed($postId){
 
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("UPDATE posts SET isShowcase= 1 where id = :postId");
-        $statement->bindValue(':postId', $postId);
-        return $statement->execute();
-    }
+    //     $conn = Db::getInstance();
+    //     $statement = $conn->prepare("UPDATE posts SET isShowcase= 1 where id = :postId");
+    //     $statement->bindValue(':postId', $postId);
+    //     return $statement->execute();
+    // }
 
-    public static function showSmashedProjects()
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare(
-        "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags ON tags.post_id = posts.id WHERE posts.isShowcase=1" );
-        $statement->execute();
-        $result = $statement->fetchAll();
-        return $result;
-    }
+    // public static function showSmashedProjects()
+    // {
+    //     $conn = Db::getInstance();
+    //     $statement = $conn->prepare(
+    //     "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags ON tags.post_id = posts.id WHERE posts.isShowcase=1" );
+    //     $statement->execute();
+    //     $result = $statement->fetchAll();
+    //     return $result;
+    // }
 
     public static function deletePosts($id)
     {

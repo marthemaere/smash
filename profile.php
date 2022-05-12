@@ -6,22 +6,24 @@
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
-        $user = new User();
-        $key = $_GET['p'];
-        $userData = User::getUserDataFromId($key);
-        $userPosts = $user->getUserPostsFromId($key);
-        
-        $report = new Report();
-        $report->setReported_userId($key);
-        $report->setReport_userId($_SESSION['id']);
-        $isReported = $report->isUserReportedByUser();
+            $user = new User();
+            $key = $_GET['p'];
+            $userData = User::getUserDataFromId($key);
+            $userPosts = $user->getUserPostsFromId($key);
+            
+            $report = new Report();
+            $report->setReported_userId($key);
+            $report->setReport_userId($_SESSION['id']);
+            $isReported = $report->isUserReportedByUser();
+    
+            $post = new Post();
+            $post->setPostId($postId);
+    
+    
+            if (empty($userPosts)) {
+                $emptyState;
 
-        $post = new Post();
-        $post->setPostId($postId);
-
-
-        if (empty($userPosts)) {
-            $emptyState;
+    
         }
 
     }
@@ -107,8 +109,7 @@
         <div>
         <div class="d-flex">
             <div class="header mr-auto p-2 "><h3>All projects</h3></div>
-            <div class="p-2"><p> Want to see my favorites?</p></div>
-            <div class="p-2"><button type="submit" name="smashedprojects" class="btn btn-outline-success">Smashed projects 🙌</button></div>
+            <div class="p-2"><a href="/smash/smashedProjects.php" type="submit"  name="smashedprojects" class="btn btn-outline-success">Smashed projects 🙌</a></div>
         </div>              
             <?php if (isset($emptyState)): ?>
                 <div class= "empty-state">

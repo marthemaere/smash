@@ -23,10 +23,6 @@
     $pages= ceil($total / $limit);
     $postId =  $_GET['p'];
 
-    // if (!empty($_POST['smashed'])) {
-    //     $posts=Post::smashed($postId);
-    //     print_r("yes smashed");
-    // }
 
     if (!empty($_POST['submit-search'])) {
         $search = $_POST['search'];

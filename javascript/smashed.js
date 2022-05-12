@@ -1,4 +1,5 @@
-document.querySelector("#smashed").addEventListener("click", function (e) {
+let smashButton = document.querySelector("#smashed");
+smashButton.addEventListener("click", function (e) {
   e.preventDefault();
   console.log("smashing it");
 
@@ -17,11 +18,23 @@ document.querySelector("#smashed").addEventListener("click", function (e) {
     method: "POST",
     body: formData,
   })
-    .then((response) => response.json())
-    .then((result) => {
+    .then(response => response.json())
+    .then(result => {
+
+      if(result.smash === true){
+        smashButton.innerHtml = "Smashed 💥";
+        smashButton.classList.add("active");
+      }else{
+        smashButton.innerHtml = "Smash";
+        smashButton.classList.remove("active");
+      }
       console.log("Success:", result);
+
+    
+  
     })
-    .catch((error) => {
+    .catch(error => {
       console.error("Error:", error);
     });
+    e.preventDefault();
 });

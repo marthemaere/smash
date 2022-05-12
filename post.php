@@ -58,7 +58,9 @@
             $like->setPostId($postId);
             $like->setUserId($userId);
             $like->saveLike();
-            $like->countLike($userId);
+            $likeAmount= $like->countLike($userId);
+           // $isLiked = $like->isLikedByUser();
+           // var_dump($isLiked);
         } 
     }
 ?>

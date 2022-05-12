@@ -82,7 +82,7 @@ CREATE TABLE `posts` (
 LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
 
-INSERT INTO `posts` (`id`, `title`, `date`, `image`, `description`, `user_id`)
+INSERT INTO `posts` (INSERT INTO `posts` (`id`, `title`, `date`, `image`, `description`, `user_id`, `isShowcase`) )
 VALUES
 	(9,'Smash: branding and mobile app','2022-04-30 00:00:00','project-smash.png','Mobile web application built for the course php',2),
 	(11,'Hoppin: mobility mobile app','2022-05-03 00:00:00','project-hoppin-fien-gerardi.png','Hoppin is made to make travelling easy with every vehicle.',2),

@@ -176,8 +176,8 @@
 
                     <div class="d-flex justify-content-between align-items-center">
                     <a href="" class="link-dark">View comments</a>
-                    <button type="button" id="smashed" name="smashed" value="smashed" class="btn btn-outline-primary"> Smash </button>
-                  
+                    <button type="button" id="smashed" name="smashed" class="btn btn-outline-primary" data-postId="3" > Smash </button>
+                    <p id="smash_confirmation"></p>
 
                 </div>
                 </div>

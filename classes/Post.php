@@ -239,6 +239,19 @@ class Post
         return $result;
     }
 
+    public function isSmashed()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts WHERE posts.isShowcase=1");
+        $statement->execute();
+        $result = $statement->fetchAll();
+        if ($result != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function deletePosts($id)
     {
         $conn = Db::getInstance();

@@ -18,6 +18,8 @@
     
             $post = new Post();
             $post->setPostId($postId);
+            $isSmashed = $post->isSmashed();
+
     
     
             if (empty($userPosts)) {
@@ -146,6 +148,7 @@
                                 <a href="" class="link-dark">View comments</a>
                                 <a href="#" id="smashed" name="smashed" class="btn btn-outline-primary"  data-postid="<?php echo($post['id']); ?>" data-userid="<?php echo $_SESSION['id']?>"> Smash </a>
                             </div>
+                           
                         </div>
                     <?php endforeach; ?>
                 </div>

@@ -18,7 +18,6 @@
             // success
             $response = [
                 "status" => "success",
-                //"body" => htmlspecialchars($c->getText()),
                 "message" => "Comment was saved.", 
             ];
 

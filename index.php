@@ -15,6 +15,9 @@
 
     $sorting = 'DESC';
     $posts = Post::getPosts($sorting, $start, $limit);
+
+    /*$likes= new Like();
+    $likes->countLike();*/
     
     $conn = Db::getInstance();
     $result = $conn->query("select count(id) AS id from posts");
@@ -43,19 +46,6 @@
     if (empty($posts)) {
         $emptystate = true;
     }
-
-    if(!empty($_POST['like'])){
-        $postId = intval($_POST['postId']);
-        $userId = intval($_POST['userId']);
-
-        $like= new Like();
-        $like->setPostId($postId);
-        $like->setUserId($userId);
-        $like->saveLike();
-        $likeAmount= $like->countLike($userId);
-      //  $isLiked= $like->isLikedByUser();
-      //  var_dump($isLiked);
-    }    
 
 ?>
 <!DOCTYPE html>

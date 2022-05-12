@@ -22,19 +22,7 @@
         $report->setReport_userId($_SESSION['id']);
         $isReported = $report->isPostReportedByUser();
         //var_dump($isReported);
-    
-        if (!empty($_POST['addComment'])) {
-            try {
-                $comment = new Comment();
-                $comment->setText($_POST['comment']);
-                $comment->setPostId($postId);
-                $comment->setUserId($userId);
-                $comment->save();
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
-        }
-        
+          
         //altijd alle laatste activiteiten ophalen
         $comments = Comment::getCommentsFromPostId($key);
 
@@ -50,8 +38,8 @@
                 $error = $e->getMessage();
             }
         }
-
-        if(!empty($_POST['like'])){
+        
+       /* if(!empty($_POST['like'])){
             $postId = intval($_POST['postId']);
             $userId = intval($_POST['userId']);
     
@@ -62,7 +50,8 @@
             $likeAmount= $like->countLike($userId);
            // $isLiked = $like->isLikedByUser();
            // var_dump($isLiked);
-        } 
+        } */
+
     }
 ?>
 

@@ -167,4 +167,10 @@ p.num-of-likes {
 }
 
 
+/* ------MediaQueries------ */
 
+@media (max-width: 992px) {
+    .register--image, .login--image, .reset--image {
+        display: none;
+    }
+}

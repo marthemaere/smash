@@ -2,6 +2,7 @@
     include_once("bootstrap.php");
     session_start();
     $userId = $_GET['p'];
+
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
@@ -14,6 +15,10 @@
         $report->setReported_userId($key);
         $report->setReport_userId($_SESSION['id']);
         $isReported = $report->isUserReportedByUser();
+
+        $post = new Post();
+        $post->setPostId($postId);
+
 
         if (empty($userPosts)) {
             $emptyState;
@@ -28,6 +33,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
+    <link rel="stylesheet" href="styles/custom.css">
     <title>Profile</title>
 </head>
 <body>
@@ -137,7 +143,7 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="" class="link-dark">View comments</a>
-                                <a href="#" id="smashed" name="smashed" class="btn btn-outline-primary" data-postId="3"> Smash </a>
+                                <a href="#" id="smashed" name="smashed" class="btn btn-outline-primary"  data-postId="1" data-userId="<?php echo $_SESSION['id']?>"> Smash </a>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -148,10 +154,10 @@
     </div>
 
     <?php echo include_once('footer.php'); ?>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="javascript/follow.js"></script>
     <script src="javascript/report-user.js"></script>
     <script src="javascript/smashed.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

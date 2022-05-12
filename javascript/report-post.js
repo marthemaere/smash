@@ -7,6 +7,8 @@ document.querySelector("#report-post").addEventListener("click", function(e) {
     let formData = new FormData();
     formData.append("postid", postid);
     formData.append("userid", userid);
+    console.log(postid);
+
 
     fetch("ajax/report__post.php",  {
         method: "POST",

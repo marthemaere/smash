@@ -7,10 +7,25 @@
         try{
 
             //new smashed project
-            $posts= new Smashed();
-            $posts->setPostId($_POST['postId']);
-            $posts->setUserId($_SESSION['id']);
-            $posts->saveSmash($postId);
+            // $posts= new Smashed();
+            // $postId = intval(($_POST['postId']));
+            // $userId = intval(($_POST['userId']));
+
+
+            // $posts->setPostId($postId);
+            // $posts->setUserId($userId);
+            // $posts->saveSmash($postId);
+
+
+            //new smashed project
+             $posts= new Post();
+             $postId = intval(($_POST['postId']));
+             $userId = intval(($_POST['userId']));  
+             $posts->setPostId($postId);
+             $posts->setUserId($userId);
+             $posts->smashed($postId);
+
+            
         
             $response= [
                 "status"=> "success",

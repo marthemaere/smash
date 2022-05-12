@@ -1,12 +1,12 @@
-document.querySelector("#btnSubmit").addEventListener("click", function(e) {
+let btnComment= document.querySelector("#btnSubmit");
 
-    e.preventDefault();
+let postId= btnComment.dataset.postId;
+let userId= btnComment.dataset.userId;
+let comment= document.querySelector("#comment").value;
 
-    let postId= e.target.dataset.postId;
-    let userId= e.target.dataset.userId;
-    let comment= document.querySelector("#comment").value;
+btnComment.addEventListener("click", function(e) {
 
-    //ajax
+      //ajax
     let data= new FormData();
     data.append("comment", comment);
     data.append("postId", postId);
@@ -29,6 +29,9 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
         .catch(error => {
             console.log(error);
         });
+
+        e.preventDefault();
+
 
     });
 

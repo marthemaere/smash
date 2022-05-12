@@ -73,4 +73,19 @@
             $statement->bindValue(':userId', $userId);
             return $statement->execute();
         }
+
+        public function isFollowedByUser()
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT * FROM followers WHERE follower_id = :follower_id AND following_id = :following_id");
+            $statement->bindValue(":follower_id", $this->getFollowerId());
+            $statement->bindValue(":following_id", $this->getFollowingId());
+            $statement->execute();
+            $result = $statement->fetch();
+            if ($result != null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }

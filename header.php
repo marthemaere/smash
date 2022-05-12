@@ -35,7 +35,7 @@
                     <img src="profile_pictures/<?php echo $userDataFromId['profile_pic']; ?>" class="p-2 rounded-circle img-thumbnail" >
                 </a>
                 <ul class="dropdown-menu text-small shadow"  style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 34px, 0px);" aria-labelledby="dropdownUser2">
-                    <li><a class="dropdown-item" href="#">Personal feed</a></li>
+                    <li><a class="dropdown-item" href="profile.php?p=<?php echo $userDataFromId['id'] ?>">Profile</a></li>
                     <li><a class="dropdown-item" href="account-info.php">Settings</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="logout.php">Sign out</a></li>

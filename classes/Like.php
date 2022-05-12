@@ -43,8 +43,9 @@
         public function countLike()
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT COUNT(user_id) FROM likes WHERE post_id= :postid");
+            $statement = $conn->prepare("SELECT COUNT(id) FROM likes WHERE post_id= :postid OR user_id=:userid");
             $statement->bindValue(":postid", $this->getPostId());
+            $statement->bindValue(":userid", $this->getUserId());
             $statement->execute();
             $count = intval($statement->fetchColumn());
 

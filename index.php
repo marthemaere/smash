@@ -49,18 +49,10 @@
         $like->setPostId($postId);
         $like->setUserId($userId);
         $like->saveLike();
-        $like->countLike($userId);
+        $likeAmount= $like->countLike($userId);
     } 
-/*
-        if (!empty($_POST['deleteLike'])) {
-            try {
-                $like->deleteLikes($id);
-                header('Location: index.php');
-            } catch (Throwable $e) {
-                $error = $e->getMessage();
-            }
-        }*/
     
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -191,10 +183,7 @@
                         <a href="" class="btn btn-smash">Smash</a>
                     </div> -->
 
-                    <div class="d-flex justify-content-between align-items-center">
-                    <a href="" class="link-dark">View comments</a>
-                    <a href="" class="btn btn-outline-primary">Smash</a>
-                </div>
+                
                 </div>
                 <?php endif; ?>
             <?php endforeach; ?>

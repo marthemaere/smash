@@ -20,14 +20,6 @@
             $post->setPostId($postId);
             $isSmashed = $post->isSmashed();
 
-<<<<<<< HEAD
-    
-    
-            if (empty($userPosts)) {
-                $emptyState;
-
-    
-=======
         $following = new Follower();
         $following->setFollowingId($key);
         $following->setFollowerId($_SESSION['id']);
@@ -35,7 +27,6 @@
 
         if (empty($userPosts)) {
             $emptyState;
->>>>>>> main
         }
 
     }
@@ -127,7 +118,7 @@
         <div>
         <div class="d-flex">
             <div class="header mr-auto p-2 "><h3>All projects</h3></div>
-            <div class="p-2"><a href="/smash/smashedProjects.php" type="submit"  name="smashedprojects" class="btn btn-outline-success">Smashed projects 🙌</a></div>
+            <div class="p-2"><a href="/smash/smashedProjects.php" type="submit"  name="smashedprojects" class="btn btn-outline-success">Smashed projects 💥</a></div>
         </div>              
             <?php if (isset($emptyState)): ?>
                 <div class= "empty-state">
@@ -162,9 +153,10 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="" class="link-dark">View comments</a>
+                                <?php if($_SESSION['id'] === $userId): ?>
                                 <a href="#" id="smashed" name="smashed" class="btn btn-outline-primary"  data-postid="<?php echo($post['id']); ?>" data-userid="<?php echo $_SESSION['id']?>"> Smash </a>
+                                <?php endif; ?>
                             </div>
-                           
                         </div>
                     <?php endforeach; ?>
                 </div>

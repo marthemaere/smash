@@ -1,15 +1,19 @@
 <?php
     include_once(__DIR__ . "/bootstrap.php");
-    
+    $info = true;
     if (!empty($_POST)) {
         $email = $_POST['email'];
         try {
             $mailer = new Mailer();
             $mailer->setEmail($_POST['email']);
             $mailer->hasAccount();
-            if (!empty($_POST['forgot_password'])) {
+            if (empty($_POST['email'])) {
+                $error = "Email cannot be empty.";
+                $info = false;
+            } elseif (!empty($_POST['forgot_password'])) {
                 $mailer->sendPasswordResetEmail();
                 $success = true;
+                $info = false;
                 // header("Location: passwordMessage.php");
             }
         } catch (Throwable $e) {
@@ -37,7 +41,7 @@
 
                 <form action="" method="post">
                     <h1 class="py-2">Forgot your racket uh...password?</h1>
-                    <?php if (!isset($success)): ?>
+                    <?php if (!empty($info)): ?>
                     <p class="alert alert-info">An email will be send to reset your password.</p>
                     <?php endif; ?>
 

@@ -25,11 +25,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="styles/custom.css">
+  <?php include_once('style.php'); ?>
   <title>Smasssh</title>
 </head>
 <body class="">
@@ -41,7 +37,7 @@
         <div class="login--form col">
             <div class="form form--login">
                 <form action="" method="post">
-                    <h1 class="mb-6">Welcome back,<br> Smasher!</h1>
+                    <h1 class="pb-2">Welcome back,<br> Smasher!</h1>
 
                     <?php if (isset($error)):?>
                     <div class="alert alert-danger"><?php echo $error; ?></div>
@@ -60,7 +56,7 @@
                         <a href="forgotPassword.php" class="link-dark">Forgot password?</a>
                     </div>
                     <div class="d-grid">
-                        <input type="submit" value="Log in" class="btn btn-dark" value="Log in">
+                        <input type="submit" value="Log in" class="btn btn-dark py-3" value="Log in">
                     </div>
                 </form>
                 <p class="text-center my-2">Not a member? <a href="register.php" class="link-primary">Sign up today</a></p>

@@ -26,7 +26,6 @@
     $pages= ceil($total / $limit);
    // $postId =  $_GET['p'];
 
-
     if (!empty($_POST['submit-search'])) {
         $search = $_POST['search'];
         $posts = Post::search($search);
@@ -46,6 +45,8 @@
     if (empty($posts)) {
         $emptystate = true;
     }
+
+    
 
 ?>
 <!DOCTYPE html>
@@ -124,6 +125,12 @@
             <?php foreach ($posts as $key => $p): ?>
                 <?php if (!isset($_SESSION['id'])) :?>
 
+                    <?php
+                        $like = new Like();
+                        $like->setPostId($p['id']);
+                        $count = $like->getLikes();
+                        //var_dump($count);
+                    ?>
                     <div class="col-4 p-4">
                         <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                             class="img-project-post" style="object-fit:cover">
@@ -135,7 +142,11 @@
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <img src="assets/images/empty-heart.svg" class="like">
-                                    <p class="num-of-likes">1</p>
+                                    <?php if ($count['COUNT(id)'] === "0"): ?>
+                                        <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php ?></p>
+                                    <?php else : ?>
+                                        <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php echo $count['COUNT(id)'] ?></p>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                             <h2><?php echo $p['title']; ?></h2>
@@ -148,7 +159,14 @@
                     </div>
 
                 <?php else: ?>
-
+                    <?php
+                        $like = new Like();
+                        $like->setPostId($p['id']);
+                        $like->setUserId($_SESSION['id']);
+                        $isLiked = $like->isPostLikedByUser();
+                        $count = $like->getLikes();
+                        //var_dump($count);
+                    ?>
                 <div class="col-4 p-4">
                     <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                         class="img-project-post" style="object-fit:cover">
@@ -162,8 +180,17 @@
                             </div>
                             <form class="" action="" method="post">
                                 <div class="d-flex align-items-center">
-                                    <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
-                                    <p class="num-of-likes"><?php  ?></p>
+                                    <?php if (!$isLiked): ?>
+                                        <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
+                                        <?php if ($count['COUNT(id)'] === "0"): ?>
+                                            <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php ?></p>
+                                        <?php else : ?>
+                                            <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php echo $count['COUNT(id)'] ?></p>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <img src="assets/images/liked-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
+                                        <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php echo $count['COUNT(id)'] ?></p>  
+                                    <?php endif; ?> 
                                 </div>
                             </form>
                         </div>

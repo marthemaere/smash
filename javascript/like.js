@@ -1,9 +1,12 @@
-let btn= document.querySelector("#likePost");
+let likes= document.querySelectorAll("#likePost");
+let number = document.querySelectorAll(".num-of-likes");
 
-let postId= btn.dataset.postid;
-let userId= btn.dataset.userid;
+likes.forEach(function(like) {
 
-btn.addEventListener("click", function(e){
+let postId= like.dataset.postid;
+let userId= like.dataset.userid;
+
+like.addEventListener("click", function(e){
     
     console.log(postId);
     console.log(userId);
@@ -20,13 +23,23 @@ btn.addEventListener("click", function(e){
         .then(response => response.json())
         .then(result => {
             if(result.isLiked === true){
-                btn.src = "assets/images/liked-heart.svg";
-                document.querySelector(".num-of-likes").innerHTML++;
+                like.src = "assets/images/liked-heart.svg";
+                number.forEach(function(num){
+                    if(num.dataset.postid === postId){
+                        num.innerHTML++;
+                    }
+                })
+                //document.querySelector(".num-of-likes").innerHTML++;
                 //btn.classList.add("active");
             } else{
-                btn.src = "assets/images/empty-heart.svg";
+                like.src = "assets/images/empty-heart.svg";
                 //btn.classList.remove("active");
-                document.querySelector(".num-of-likes").innerHTML--;
+                number.forEach(function(num){
+                    if(num.dataset.postid === postId){
+                        num.innerHTML--;
+                        
+                    }
+                })
             }
             console.log('Success: ', result);
         })
@@ -36,3 +49,4 @@ btn.addEventListener("click", function(e){
 
         e.preventDefault();
     })
+});

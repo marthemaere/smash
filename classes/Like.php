@@ -43,7 +43,7 @@
         public function countLike()
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT COUNT(id) FROM likes WHERE post_id= :postid OR user_id=:userid");
+            $statement = $conn->prepare("SELECT COUNT(id) FROM likes WHERE post_id= :postid AND user_id=:userid");
             $statement->bindValue(":postid", $this->getPostId());
             $statement->bindValue(":userid", $this->getUserId());
             $statement->execute();
@@ -59,27 +59,10 @@
         public function deleteLikes()
         {
             $conn = Db::getInstance();
-            $statement = $conn->prepare("DELETE FROM likes WHERE user_id = :userid OR post_id= :postid");
+            $statement = $conn->prepare("DELETE FROM likes WHERE user_id = :userid AND post_id= :postid");
             $statement->bindValue(':userid', $this->getUserId());
             $statement->bindValue(':postid', $this->getPostId());
             return $statement->execute();
-        }
-
-        public function isLikedByUser()
-        {
-            $conn = Db::getInstance();
-            $userId = $this->getUserId();
-            $postId = $this->getPostId();
-            $statement = $conn->prepare("SELECT * FROM likes WHERE user_id = :userid AND post_id = :postid");
-            $statement->bindValue(":userid", $userId);
-            $statement->bindValue(":postid", $postId);
-            $statement->execute();
-            $result = $statement->fetchAll();
-            if ($result != null) {
-                return true;
-            } else {
-                return false;
-            }
         }
 
         public static function deleteLikesFromUser($id)
@@ -88,5 +71,30 @@
             $statement = $conn->prepare("DELETE FROM likes WHERE user_id = :id");
             $statement->bindValue(':id', $id);
             return $statement->execute();
+        }
+
+        public function isPostLikedByUser()
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT * FROM likes WHERE user_id = :user_id AND post_id = :post_id");
+            $statement->bindValue(":user_id", $this->getUserId());
+            $statement->bindValue(":post_id", $this->getPostId());
+            $statement->execute();
+            $result = $statement->fetch();
+            if ($result != null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function getLikes()
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT COUNT(id) FROM likes WHERE post_id= :postid");
+            $statement->bindValue(":postid", $this->getPostId());
+            $statement->execute();
+            $count = $statement->fetch();
+            return $count;
         }
     }

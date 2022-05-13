@@ -9,11 +9,13 @@
         $userDataFromId = User::getUserDataFromId($sessionId);
     }
 
-    $posts = Post::showSmashedProjects($sessionId);
+    $key = $_GET['p'];
+    $posts = Post::showSmashedProjects($key);
+    
 
     
     if (empty($posts)) {
-        $emptystate = true;
+        $emptyState = true;
     }
 ?>
 <!DOCTYPE html>
@@ -39,12 +41,12 @@
     <div class="container mt-5 mb-5">
         <h1> My smashed showcase page 💥</h1>
 
-        <?php if (isset($emptystate)):?>
+        <?php if (!empty($emptyState)):?>
         <div class="empty-state flex-column">
             <img class="d-block mx-auto" src="assets/images/empty-state.png" alt="emptystate">
             <h3 class="text-center py-4">Nothing to see here...</h3>
         </div>
-        <?php endif; ?>
+        <?php else: ?>
 
         <div class="row justify-content-start">
 
@@ -77,6 +79,7 @@
             <?php endforeach; ?>
 
         </div>
+        <?php endif; ?>
     </div>
     
     <?php require_once("footer.php"); ?>

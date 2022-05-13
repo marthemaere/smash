@@ -6,24 +6,24 @@
 
         public function getPostId()
         {
-                return $this->postId;
+            return $this->postId;
         }
          
         public function setPostId($postId)
         {
-                $this->postId = $postId;
-                return $this;
+            $this->postId = $postId;
+            return $this;
         }
 
         public function getUserId()
         {
-                return $this->userId;
+            return $this->userId;
         }
 
         public function setUserId($userId)
         {
-                $this->userId = $userId;
-                return $this;
+            $this->userId = $userId;
+            return $this;
         }
 
         public function saveLike()
@@ -37,7 +37,7 @@
             $statement->bindValue(":post_id", $postId);
 
             $result= $statement->execute();
-            return $result;        
+            return $result;
         }
 
         public function countLike()
@@ -49,7 +49,7 @@
             $statement->execute();
             $count = intval($statement->fetchColumn());
 
-            if ($count > 0){
+            if ($count > 0) {
                 return true;
             }
 
@@ -80,5 +80,13 @@
             } else {
                 return false;
             }
+        }
+
+        public static function deleteLikesFromUser($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("DELETE FROM likes WHERE user_id = :id");
+            $statement->bindValue(':id', $id);
+            return $statement->execute();
         }
     }

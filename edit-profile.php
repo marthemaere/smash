@@ -42,7 +42,7 @@
             User::deleteUser($sessionId);
             Post::deletePosts($sessionId);
             Comment::deleteComments($sessionId);
-            Like::deleteLikes($sessionId);
+            Like::deleteLikesFromUser($sessionId);
             Follower::deleteFollowers($sessionId);
             header('Location: index.php');
             session_destroy();

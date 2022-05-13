@@ -3,42 +3,42 @@
 
    
     if (!empty($_POST)) {
-
-        try{
+        try {
 
             //new smashed project
             
             $postId = intval(($_POST['postid']));
-            $userId = intval(($_POST['userid']));  
+            $userId = intval(($_POST['userid']));
 
-             $posts= new Post();
-             $posts->setPostId($postId);
-             $posts->setUserId($userId);
+            $posts= new Post();
+            $posts->setPostId($postId);
+            $posts->setUserId($userId);
+            $count = $posts->smashExists();
             
-            if($posts->smashExists()) {
+            if ($posts->smashExists()) {
                 $posts->unsmashed($postId);
 
-            $response= [
+                $response= [
                 "status" => "success",
                 "userid" => $userId,
                 "postid" => $postId,
                 "message" => "Unsmashed.",
-                'smashed' => 0
+                'smashed' => false,
+                'count' => $count
             ];
-
-        }   else{
-            $posts->smashed($postId);
-            $response = [
+            } else {
+                $posts->smashed($postId);
+                $response = [
                 'status' => 'success',
                 "userid" => $userId,
                 "postid" => $postId,
                 'message' => "smashed.",
-                'smashed' => 1
+                'smashed' => true,
+                'count' => $count
             ];
-        }
-
-        }catch (Exception $e){
-            $response= [  
+            }
+        } catch (Exception $e) {
+            $response= [
                 "status"=> "error",
                 "message" => "Cannot smash."
             ];

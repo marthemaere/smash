@@ -17,6 +17,11 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
     body: data
     })
     .then(response => response.json())
+    /*.then(result => {
+        let newComment= document.createElement('li');
+        newComment.innerHTML= result.body;
+        document.querySelector("#comment").appendChild(newComment);
+    })*/
     .then(data => {
         if(data.status === "success"){
             let li= `<li>${data.data.comment}</li>`;
@@ -24,10 +29,12 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
             document.querySelector("#comment").value ="";
         }})
         .then(result => {
-            console.log(result);
+            console.log("success:", result);
         })
         .catch(error => {
-            console.log(error);
+            console.log("error:", error);
         });
+
+        e.preventDefault();
 
     });

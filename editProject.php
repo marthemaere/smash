@@ -57,7 +57,7 @@ if (!isset($_SESSION['id'])) {
             <form class="uploadzone" action="#" method="POST" enctype="multipart/form-data">
                 <fieldset>
                     <!-- <label for="floatingInput">Edit the title of your project</label> -->
-                    <input type="text" class="form-control" id="floatingInput" name="title" placeholder="<?php echo $projectData['title'] ?>">
+                    <input type="text" class="form-control" id="floatingInput" name="title" value="<?php echo $projectData['title'] ?>">
                 </fieldset>
 
                 <fieldset>

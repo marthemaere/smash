@@ -209,19 +209,15 @@
                 <?php endif; ?>
             <?php endforeach; ?>
 
-            <div class="row justify-content-center">
-                <div class="d-flex justify-content-center">
-                    <nav class="page-navigation" aria-label="page navigation">
-                        <ul class="pagination">
-                            <?php for ($i=1; $i<= $pages; $i++): ?>
-                            <li>
-                                Page <a href="index.php?page=<?= $i; ?>" class="link-dark"><?= $i; ?> </a>
-                            </li>
-                            <?php endfor; ?>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+            <nav aria-label="Results pages">
+                <ul class="pagination justify-content-center">
+                    <?php for ($i=1; $i<= $pages; $i++): ?>
+                    <li class="page-item" aria-current="page">
+                        <a href="index.php?page=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+                    </li>
+                    <?php endfor; ?>
+                </ul>
+            </nav>
         </div>
     </div>
     

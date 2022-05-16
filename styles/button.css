@@ -103,3 +103,17 @@ a:hover {
     background: none;
     border: none;
 }
+
+/* ------PageLink------ */
+.page-link {
+    color: black;
+}
+
+.page-link:hover {
+    color: black;
+}
+
+.page-item.active .page-link {
+    background-color: #16CF83;
+    border-color: #16CF83;
+}

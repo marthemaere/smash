@@ -135,6 +135,7 @@ fieldset {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .img-project-post {
@@ -172,6 +173,10 @@ p.num-of-likes {
 
 .notLiked{
     display: block;
+}
+
+.notLiked:hover {
+    width: 20px;
 }
 /* ------MediaQueries------ */
 

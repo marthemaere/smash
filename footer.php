@@ -9,7 +9,7 @@
                 <h4>Pages</h4>
                 <ul class="nav flex-column">
                     <li class="nav-item"><a href="index.php" class="nav-link px-0 text-muted">Home</a></li>
-                    <li class="nav-item"><a href="feed.php" class="nav-link px-0 text-muted">Personal feed</a></li>
+                    <li class="nav-item"><a href="profile.php?p=<?php echo $userDataFromId['id']; ?>" class="nav-link px-0 text-muted">Profile</a></li>
                 </ul>
             </div>
             <div class="col">

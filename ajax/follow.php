@@ -1,11 +1,12 @@
 <?php
     include_once('../bootstrap.php');
+    session_start();
     
     if (!empty($_POST)) {
         try {
             $follow = new Follower();
 
-            $followerId = intval($_POST['followerid']);
+            $followerId = $_SESSION['id'];
             $followingId = intval($_POST['followingid']);
 
             $follow->setFollowerId($followerId);

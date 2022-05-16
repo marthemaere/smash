@@ -205,35 +205,40 @@ class Post
     public function smashExists()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT COUNT(*) FROM posts WHERE posts.isShowcase = 1");
+        $statement = $conn->prepare("SELECT COUNT(id) FROM posts WHERE posts.isShowcase = 1 AND id=:id");
+        $statement->bindValue(':id', $this->postId);
         $statement->execute();
         $count = intval($statement->fetchColumn());
 
         if ($count > 0) {
             return true;
         }
-        return false;
+        return $count;
     }
 
-    public static function smashed($postId){
+    public static function smashed($postId)
+    {
         $conn = Db::getInstance();
         $statement = $conn->prepare("UPDATE posts SET isShowcase=1 where posts.id = :postId");
         $statement->bindValue(':postId', $postId);
         return $statement->execute();
     }
 
-    public static function unsmashed($postId){
+    public static function unsmashed($postId)
+    {
         $conn = Db::getInstance();
         $statement = $conn->prepare("UPDATE posts SET isShowcase=0 where posts.id = :postId");
         $statement->bindValue(':postId', $postId);
         return $statement->execute();
     }
 
-    public static function showSmashedProjects()
+    public static function showSmashedProjects($id)
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare(
-        "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags ON tags.post_id = posts.id WHERE posts.isShowcase=1" );
+            "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags ON tags.post_id = posts.id WHERE posts.isShowcase=1 AND posts.user_id = :id"
+        );
+        $statement->bindValue(':id', $id);
         $statement->execute();
         $result = $statement->fetchAll();
         return $result;
@@ -242,14 +247,16 @@ class Post
     public function isSmashed()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts WHERE posts.isShowcase=1");
+        $statement = $conn->prepare("SELECT * FROM posts WHERE posts.id = :id AND posts.isShowcase = 1 ");
+        $statement->bindValue(':id', $this->postId);
         $statement->execute();
-        $result = $statement->fetchAll();
+        $result = $statement->fetch();
         if ($result != null) {
             return true;
         } else {
             return false;
         }
+        return $result;
     }
 
     public static function deletePosts($id)

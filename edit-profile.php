@@ -16,8 +16,12 @@
 
     if (!empty($_POST['submitProfilePicture'])) {
         try {
-            $user->canUploadPicture($sessionId);
-            $success = "Profile picture saved. Refresh to see changes.";
+            $fileName = $_FILES['profilePicture']['name'];
+            $fileTmpName = $_FILES['profilePicture']['tmp_name'];
+            $fileSize = $_FILES['profilePicture']['size'];
+
+            $user->canUploadPicture($sessionId, $fileName, $fileTmpName, $fileSize);
+            $success = "Profile picture saved.";
         } catch (Exception $e) {
             $error = $e->getMessage();
         }
@@ -42,7 +46,7 @@
             User::deleteUser($sessionId);
             Post::deletePosts($sessionId);
             Comment::deleteComments($sessionId);
-            Like::deleteLikes($sessionId);
+            Like::deleteLikesFromUser($sessionId);
             Follower::deleteFollowers($sessionId);
             header('Location: index.php');
             session_destroy();

@@ -6,29 +6,24 @@
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
-            $user = new User();
-            $key = $_GET['p'];
-            $userData = User::getUserDataFromId($key);
-            $userPosts = $user->getUserPostsFromId($key);
+        $user = new User();
+        $key = $_GET['p'];
+        $userData = User::getUserDataFromId($key);
+        $userPosts = $user->getUserPostsFromId($key);
             
-            $report = new Report();
-            $report->setReported_userId($key);
-            $report->setReport_userId($_SESSION['id']);
-            $isReported = $report->isUserReportedByUser();
+        $report = new Report();
+        $report->setReported_userId($key);
+        $report->setReport_userId($_SESSION['id']);
+        $isReported = $report->isUserReportedByUser();
     
-            $post = new Post();
-            $post->setPostId($postId);
-            $isSmashed = $post->isSmashed();
-
-        $following = new Follower();
-        $following->setFollowingId($key);
-        $following->setFollowerId($_SESSION['id']);
-        $isFollowed = $following->isFollowedByUser();
+        $follower = new Follower();
+        $follower->setFollowerId($_SESSION['id']);
+        $follower->setFollowingId($key);
+        $isFollowed = $follower->isFollowedByUser();
 
         if (empty($userPosts)) {
             $emptyState;
         }
-
     }
 
 ?><!DOCTYPE html>
@@ -87,9 +82,9 @@
                     <!-- are you sure alert -->
                     <div class="profile-btn">
                         <?php if (!$isFollowed): ?>
-                        <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Follow</a>
+                        <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followingid="<?php echo $key;?>">Follow</a>
                         <?php else: ?>
-                        <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Following</a>
+                        <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followingid="<?php echo $key;?>">Following</a>
                         <?php endif; ?>
 
                         <?php if ($isReported === false): ?>
@@ -118,16 +113,23 @@
         <div>
         <div class="d-flex">
             <div class="header mr-auto p-2 "><h3>All projects</h3></div>
-            <div class="p-2"><a href="/smash/smashedProjects.php" type="submit"  name="smashedprojects" class="btn btn-outline-success">Smashed projects 💥</a></div>
+            <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" type="submit"  name="smashedprojects" class="btn btn-outline-success">Showcase</a></div>
         </div>              
             <?php if (isset($emptyState)): ?>
-                <div class= "empty-state">
-                    <img class="empty-state-picture" src="assets/images/empty-box.svg" alt="emptystate">
-                    <p>Username hasn't uploaded any projects.</p> 
+                <div class="empty-state flex-column m-3">
+                    <img class="d-block mx-auto" src="assets/images/empty-state.png" alt="emptystate">
+                    <h3 class="text-center py-4">Nothing to see here...</h3>
                 </div>
             <?php else: ?>
                 <div class="row">
                     <?php foreach ($userPosts as $post): ?>
+                        <?php
+                            $smash = new Post();
+                            $smash->setPostId($post['id']);
+                            $isSmashed = $smash->isSmashed();
+                            // var_dump($post['id']);
+                            // var_dump($isSmashed);
+                        ?>
                         <div class="col-4 p-4">
                             <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']);?>" width="100%" height="250px"
                                 class="img-project-post" style="object-fit:cover">
@@ -153,8 +155,12 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="" class="link-dark">View comments</a>
-                                <?php if($_SESSION['id'] === $userId): ?>
-                                <a href="#" id="smashed" name="smashed" class="btn btn-outline-primary"  data-postid="<?php echo($post['id']); ?>" data-userid="<?php echo $_SESSION['id']?>"> Smash </a>
+                                <?php if ($_SESSION['id'] === $userId): ?>
+                                    <?php if (!$isSmashed): ?>
+                                        <a href="#" id="smashed" name="smashed" class="btn btn-outline-primary"  data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id']?>"> Smash </a>
+                                    <?php else: ?>
+                                        <a href="#" id="smashed" name="smashed" class="btn btn-outline-primary"  data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id']?>"> Smashed </a>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             </div>
                         </div>

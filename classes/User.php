@@ -248,15 +248,10 @@
             $statement->execute();
         }
 
-        public function canUploadPicture($sessionId)
+        public function canUploadPicture($sessionId, $fileName, $fileTmpName, $fileSize)
         {
-            $fileName = $_FILES['profilePicture']['name'];
-            $fileTmpName = $_FILES['profilePicture']['tmp_name'];
-            $fileSize = $_FILES['profilePicture']['size'];
-            
             $fileTarget = 'profile_pictures/' . basename($fileName);
             $fileExtention = strtolower(pathinfo($fileTarget, PATHINFO_EXTENSION));
-            
             $fileIsImage = getimagesize($fileTmpName);
 
             // Check if file is an image

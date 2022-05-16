@@ -1,36 +1,39 @@
-let smashButton = document.querySelector("#smashed");
+let smashed = document.querySelectorAll("#smashed");
 
-let smashedPost = smashButton.dataset.postid;
-console.log(smashedPost);
-let smashedUser = smashButton.dataset.userid;
-console.log(smashedUser);
+smashed.forEach(function(smash) {
 
-smashButton.addEventListener("click", function (e) {
-
-  console.log("smashing it");
-
-  //post naar database AJAX
-  let formData = new FormData();
-  formData.append("postid", smashedPost);
-  formData.append("userid", smashedUser);
-
-  fetch("ajax/smash_project.php", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => response.json())
-    .then(result => {
-      if (result.smashed === 1 ) {
-        smashButton.text = "Smashed 💥";
-        smashButton.classList.add("active");
-      } else {
-        smashButton.text = "Smash";
-        smashButton.classList.remove("active");
-      }
-      console.log("Success:", result);
+  smash.addEventListener("click", function (e) {
+    let smashedPost = smash.dataset.postid;
+      console.log(smashedPost);
+    let smashedUser = smash.dataset.userid;
+      console.log(smashedUser);
+    
+      console.log("smashing it");
+  
+    //post naar database AJAX
+    let formData = new FormData();
+    formData.append("postid", smashedPost);
+    formData.append("userid", smashedUser);
+  
+    fetch("ajax/smash_project.php", {
+      method: "POST",
+      body: formData,
     })
-    .catch((error) => {
-      console.log("Error:", error);
-    });
-  e.preventDefault();
+      .then((response) => response.json())
+      .then(result => {
+        if (result.smashed === true ) {
+          smash.text = "Smashed 💥";
+          smash.classList.add("active");
+        } else {
+          smash.text = "Smash";
+          smash.classList.remove("active");
+        }
+        console.log("Success:", result);
+      })
+      .catch((error) => {
+        console.log("Error:", error);
+      });
+    e.preventDefault();
+  })
+  
 })

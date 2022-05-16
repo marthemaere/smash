@@ -81,6 +81,14 @@
             </div>
             <?php endif; ?>
 
+            <?php
+                $like = new Like();
+                $like->setPostId($postId);
+                $like->setUserId($_SESSION['id']);
+                $isLiked = $like->isPostLikedByUser();
+                $count = $like->getLikes();
+            ?>
+
             <!-- are you sure alert -->
             <div class="modal fade" id="reportPost" aria-hidden="true" aria-labelledby="reportPostLabel"
                 tabindex="-1">
@@ -143,8 +151,17 @@
                         
                         <form class="d-flex align-items-center" action="" method="post">
                             <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
-                                <img src="assets/images/empty-heart.svg" name= "like" class="like btn-icon-like" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $_GET['id'] ?>">
-                                <p class="num-of-likes"> 1</p>
+                            <?php if (!$isLiked): ?>
+                                        <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $postId ?>">
+                                        <?php if ($count['COUNT(id)'] === "0"): ?>
+                                            <p class="num-of-likes" data-postid="<?php echo $postId ?>"><?php ?></p>
+                                        <?php else : ?>
+                                            <p class="num-of-likes" data-postid="<?php echo $postId ?>"><?php echo $count['COUNT(id)'] ?></p>
+                                        <?php endif; ?>
+                                    <?php else: ?>
+                                        <img src="assets/images/liked-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $postId ?>">
+                                        <p class="num-of-likes" data-postid="<?php echo $postId ?>"><?php echo $count['COUNT(id)'] ?></p>  
+                                    <?php endif; ?>
                             </div>
                             <?php if ($isReported === false): ?>
                             <a class="btn btn-outline-primary" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Report</a>
@@ -210,5 +227,6 @@
     <script src="javascript/report-post.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="javascript/comment.js"></script>
+    <script src="javascript/like.js"></script>
 </body>
 </html>

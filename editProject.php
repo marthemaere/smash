@@ -46,7 +46,7 @@ if (!isset($_SESSION['id'])) {
 
 
         <div class="upload-intro text-center pt-4">
-            <h1>Editing your project: <br> <?php echo $projectData['title'] ?></h1>
+            <h1>Editing your project:</h1>
         </div>
 
         <div class="col-7 py-5 m-auto">
@@ -57,7 +57,7 @@ if (!isset($_SESSION['id'])) {
             <form class="uploadzone" action="#" method="POST" enctype="multipart/form-data">
                 <fieldset>
                     <!-- <label for="floatingInput">Edit the title of your project</label> -->
-                    <input type="text" class="form-control" id="floatingInput" name="title" placeholder="Give your project a name">
+                    <input type="text" class="form-control" id="floatingInput" name="title" placeholder="<?php echo $projectData['title'] ?>">
                 </fieldset>
 
                 <fieldset>

@@ -16,12 +16,10 @@
         $report->setReport_userId($_SESSION['id']);
         $isReported = $report->isUserReportedByUser();
     
-        
-
-        $following = new Follower();
-        $following->setFollowingId($key);
-        $following->setFollowerId($_SESSION['id']);
-        $isFollowed = $following->isFollowedByUser();
+        $follower = new Follower();
+        $follower->setFollowerId($_SESSION['id']);
+        $follower->setFollowingId($key);
+        $isFollowed = $follower->isFollowedByUser();
 
         if (empty($userPosts)) {
             $emptyState;
@@ -84,9 +82,9 @@
                     <!-- are you sure alert -->
                     <div class="profile-btn">
                         <?php if (!$isFollowed): ?>
-                        <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Follow</a>
+                        <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followingid="<?php echo $key;?>">Follow</a>
                         <?php else: ?>
-                        <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followerid="<?php echo $_SESSION['id'];?>" data-followingid="<?php echo $key;?>">Following</a>
+                        <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followingid="<?php echo $key;?>">Following</a>
                         <?php endif; ?>
 
                         <?php if ($isReported === false): ?>
@@ -129,8 +127,8 @@
                             $smash = new Post();
                             $smash->setPostId($post['id']);
                             $isSmashed = $smash->isSmashed();
-                            var_dump($post['id']);
-                            var_dump($isSmashed);
+                            // var_dump($post['id']);
+                            // var_dump($isSmashed);
                         ?>
                         <div class="col-4 p-4">
                             <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']);?>" width="100%" height="250px"

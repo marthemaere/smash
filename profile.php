@@ -40,8 +40,7 @@
     <?php include_once('header.php'); ?>
     <div class="container">
         <div class="row p-3">
-            <div id="report-success" class="invisible" role="alert">
-                      
+            <div id="report-success" class="invisible" role="alert">          
             </div>
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger" role="alert">
@@ -111,9 +110,9 @@
             </div>
         </div>
         <div>
-        <div class="d-flex">
-            <div class="header mr-auto p-2 "><h3>All projects</h3></div>
-            <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" type="submit"  name="smashedprojects" class="btn btn-outline-success">Showcase</a></div>
+        <div class="d-flex header mr-auto p-2 ">
+            <div class=""><h3>All projects</h3></div>
+            <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" type="submit"  name="smashedprojects" class="btn btn-outline-success">My featured projects 💥</a></div>
         </div>              
             <?php if (isset($emptyState)): ?>
                 <div class="empty-state flex-column m-3">

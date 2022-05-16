@@ -40,8 +40,7 @@
     <?php include_once('header.php'); ?>
     <div class="container">
         <div class="row p-3">
-            <div id="report-success" class="invisible" role="alert">
-                      
+            <div id="report-success" class="invisible" role="alert">          
             </div>
             <?php if (isset($error)): ?>
                 <div class="alert alert-danger" role="alert">

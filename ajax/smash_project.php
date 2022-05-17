@@ -23,18 +23,16 @@
                 "userid" => $userId,
                 "postid" => $postId,
                 "message" => "Unsmashed.",
-                'smashed' => false,
-                'count' => $count
-            ];
+                'smashed' => false
+             ];
             } else {
                 $posts->smashed($postId);
                 $response = [
-                'status' => 'success',
+                "status" => "success",
                 "userid" => $userId,
                 "postid" => $postId,
                 'message' => "smashed.",
-                'smashed' => true,
-                'count' => $count
+                'smashed' => true
             ];
             }
         } catch (Exception $e) {

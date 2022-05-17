@@ -94,7 +94,7 @@
                 </ul>
             </div>
 
-            <div>
+            <div class="filter-tags">
                 <a href="#" class="px-2 btn btn-light">All</a>
                 <a href="#" class="px-2 text-muted">Branding</a>
                 <a href="#" class="px-2 text-muted">Development</a>
@@ -136,7 +136,7 @@
                         <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                             class="img-project-post" style="object-fit:cover">
                         <div>
-                            <div class="d-flex justify-content-between py-2">
+                            <div class="d-flex justify-content-between align-items-center py-2">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <img src="profile_pictures/<?php echo $p['profile_pic']; ?>" class="img-profile-post">
                                     <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
@@ -177,7 +177,7 @@
                     <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                         class="img-project-post" style="object-fit:cover">
                     <div>
-                        <div class="d-flex justify-content-between py-2">
+                        <div class="d-flex justify-content-between align-items-center py-2">
                             <div class="d-flex align-items-center justify-content-start">
                                 <img src="profile_pictures/<?php echo $p['profile_pic']; ?>" class="img-profile-post">
                                 <a href="profile.php?p=<?php echo $p['user_id'];?>">

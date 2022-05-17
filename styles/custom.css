@@ -167,11 +167,11 @@ p.num-of-likes {
     margin-top: 0;
 }
 
-.liked{
+.liked {
     display: none;
 }
 
-.notLiked{
+.notLiked {
     display: block;
 }
 

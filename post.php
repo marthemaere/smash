@@ -150,7 +150,7 @@
                     <div class="d-flex justify-content-between align-items-center">
                         
                         <form class="d-flex align-items-center" action="" method="post">
-                            <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
+                            <div class="btn btn-primary d-flex align-items-center mx-2 p-2">
                             <?php if (!$isLiked): ?>
                                         <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $postId ?>">
                                         <?php if ($count['COUNT(id)'] === "0"): ?>

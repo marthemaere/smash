@@ -12,9 +12,9 @@ if (!empty($_POST)) {
         $posts = new Post();
         $posts->setPostId($postId);
         $posts->setUserId($userId);
-        //$count = $posts->smashExists();
 
-        if ($posts->smashExists()) {
+
+        if ($posts->isSmashed()) {
             $posts->unsmashed($postId);
 
             $response = [

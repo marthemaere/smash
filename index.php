@@ -128,6 +128,7 @@
                     <?php
                         $like = new Like();
                         $like->setPostId($p['id']);
+                        var_dump($like);
                         $count = $like->getLikes();
                         //var_dump($count);
                     ?>

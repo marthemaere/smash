@@ -1,13 +1,11 @@
 let smashed = document.querySelectorAll("#smashed");
 
 smashed.forEach(function (smash) {
-  smash.addEventListener("click", function(e) {
+  smash.addEventListener("click", function (e) {
     let smashedPost = smash.dataset.postid;
     console.log(smashedPost);
     let smashedUser = smash.dataset.userid;
     console.log(smashedUser);
-
-    console.log("smashing it");
 
     //post naar database AJAX
     let formData = new FormData();
@@ -33,5 +31,5 @@ smashed.forEach(function (smash) {
         console.log("Error:", error);
       });
     e.preventDefault();
-  })
+  });
 });

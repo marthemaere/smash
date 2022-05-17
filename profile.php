@@ -124,10 +124,11 @@
                     <?php foreach ($userPosts as $post): ?>
                         <?php
                             $smash = new Post();
-                            $smash->setPostId($post['id']);
+                            $smash->setPostId($p['id']);
+                            //var_dump($smash);
                             $isSmashed = $smash->isSmashed();
-                            // var_dump($post['id']);
-                            // var_dump($isSmashed);
+                           //var_dump($post['id']);
+                            //var_dump($isSmashed);
                         ?>
                         <div class="col-4 p-4">
                             <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']);?>" width="100%" height="250px"

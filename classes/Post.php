@@ -48,14 +48,10 @@ class Post
         return $this;
     }
 
-
     public function setPostId($postId)
     {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT id FROM posts WHERE id = :postId");
-        $statement->bindValue(":postId", $postId);
-        $postId = $statement->execute();
-        return $postId;
+        $this->postId = $postId;
+        return $this;
     }
 
     public function getPostId()
@@ -73,6 +69,15 @@ class Post
         return $statement->execute();
     }
 
+    public function setPostById($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT id FROM posts WHERE id = :postId");
+        $statement->bindValue(":postId", $postId);
+        $postId = $statement->execute();
+        return $postId;
+    }
+
 
     public function getDescription()
     {
@@ -88,19 +93,6 @@ class Post
         $this->description = $description;
         return $this;
     }
-
-
-    // public static function getAll()
-    // {
-    //     $limit=15;
-    //     $page= isset($_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
-    //     $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
-
-    //     $conn = Db::getInstance();
-    //     $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id ORDER BY `date` DESC LIMIT $start, $limit");
-    //     $statement->execute();
-    //     return $statement->fetchAll();
-    // }
 
     public function setProjectInDatabase()
     {
@@ -202,20 +194,6 @@ class Post
         return $result;
     }
 
-    public function smashExists()
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT COUNT(*) FROM posts WHERE posts.isShowcase = 1 AND id=:id");
-        $statement->bindValue(':id', $this->postId);
-        $statement->execute();
-        $count = intval($statement->fetchColumn());
-
-        if ($count > 0) {
-            return true;
-        }
-        return false;
-        
-    }
 
     public static function smashed($postId)
     {

@@ -193,18 +193,16 @@
                                 <form class="" action="" method="post">
                                     <div class="d-flex align-items-center">
                                         <?php if (!$isLiked): ?>
-                                        <img src="assets/images/empty-heart.svg" name="like" class="like notLiked" id="likePost"
-                                            data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p[0] ?>">
+                                            <img src="assets/images/empty-heart.svg" name="like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p[0] ?>">
                                         <?php if ($count['COUNT(id)'] === "0"): ?>
-                                        <p class="num-of-likes" data-postid="<?php echo $p[0] ?>"><?php ?></p>
+                                            <p class="num-of-likes" data-postid="<?php echo $p[0] ?>"><?php ?></p>
                                         <?php else : ?>
                                         <p class="num-of-likes" data-postid="<?php echo $p[0] ?>">
                                             <?php echo $count['COUNT(id)'] ?></p>
                                         <?php endif; ?>
                                         <?php else: ?>
-                                        <img src="assets/images/liked-heart.svg" name="like" class="like notLiked" id="likePost"
-                                            data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p[0] ?>">
-                                        <p class="num-of-likes" data-postid="<?php echo $p[0] ?>">
+                                            <img src="assets/images/liked-heart.svg" name="like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p[0] ?>">
+                                            <p class="num-of-likes" data-postid="<?php echo $p[0] ?>">
                                             <?php echo $count['COUNT(id)'] ?></p>
                                         <?php endif; ?>
                                     </div>

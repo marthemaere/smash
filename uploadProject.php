@@ -10,7 +10,10 @@ if (!empty($_POST)) {
         $post = new Post();
         $post->setTitle($_POST['title']);
         $post->setDescription($_POST['description']);
-        $post->setPostId($_POST['id']);
+        //$post->setPostId($_POST['id']);
+        //$post->setPostById($postId);
+        //var_dump($post);
+      
         $userId= $_SESSION['id'];
         $post->setUserId($userId);
         $id = $post->canUploadProject();
@@ -52,7 +55,7 @@ if (!empty($_POST)) {
             <p>Show us what you got! Upload your mindblowing project.</p>
         </div>
 
-        <div class="col-7 py-5 m-auto">
+        <div class="col-sm-12 col-md-10 col-lg-7 py-5 m-auto">
             <?php if (isset($error)):?>
             <div class="alert alert-danger"><?php echo $error; ?></div>
             <?php endif;?>

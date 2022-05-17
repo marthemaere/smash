@@ -93,7 +93,7 @@
 
         
         <div class="row">
-            <div class="col-3">
+            <div class="col-sm-12 col-md-4 col-lg-3">
             <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action" href="account-info.php">Account info</a>
                     <a class="list-group-item list-group-item-action active" href="edit-profile.php">Edit profile</a>
@@ -104,7 +104,7 @@
             </div>
 
             <!-- EditProfile -->
-            <div class="col-9">
+            <div class="col-sm-12 col-md-8 col-lg-9">
             <div class="tab-pane fade active show" >
                         <?php if (isset($error)): ?>
                             <p class="alert alert-danger"><?php echo $error; ?></p>

@@ -79,7 +79,7 @@
         <!-- are you sure alert -->
 
         <div class="row">
-            <div class="col-3">
+            <div class="col-sm-12 col-md-auto col-lg-3">
             <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action" href="account-info.php">Account info</a>
                     <a class="list-group-item list-group-item-action" href="edit-profile.php">Edit profile</a>
@@ -89,7 +89,7 @@
                 </div>
             </div>
 
-            <div class="col-9">
+            <div class="col-sm-12 col-md-auto col-lg-3">
                 <div class="" id="socials" role="tabpanel" aria-labelledby="socials-list">
                     <?php if (isset($error)): ?>
                         <p class="alert alert-danger"><?php echo $error; ?></p>

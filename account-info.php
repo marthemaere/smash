@@ -63,7 +63,7 @@
         <!-- are you sure alert -->
 
         <div class="row">
-            <div class="col-3">
+            <div class="col-sm-12 col-md-auto col-lg-3">
                 <div class="list-group">
                 <a class="list-group-item list-group-item-action active" href="account-info.php">Account info</a>
                     <a class="list-group-item list-group-item-action" href="edit-profile.php">Edit profile</a>
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <div class="col-9">
+            <div class="col-sm-12 col-md-auto col-lg-9">
                 <div class="tab-content" id="nav-tabContent">
                     <!-- AccountInfo -->
                     <div class="tab-pane fade active show" id="account" role="tabpanel" aria-labelledby="account-list">

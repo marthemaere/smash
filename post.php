@@ -8,10 +8,9 @@
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
-        $key = $_GET['p'];
         $postId=$_GET['p'];
         $userId=$_SESSION['id'];
-        $projectData = Post::getPostDataFromId($key);
+        $projectData = Post::getPostDataFromId($postId);
         $userDataFromId = User::getUserDataFromId($userId);
     
         //var_dump($projectData);
@@ -24,7 +23,14 @@
         //var_dump($isReported);
           
         //altijd alle laatste activiteiten ophalen
-        $comments = Comment::getCommentsFromPostId($key);
+        $comments = Comment::getCommentsFromPostId($postId);
+        $tags = Post::getTagsFromPost($postId);
+
+        $like = new Like();
+        $like->setPostId($postId);
+        $like->setUserId($_SESSION['id']);
+        $isLiked = $like->isPostLikedByUser();
+        $count = $like->getLikes();
 
         if (empty($comments)) {
             $emptystate = true;
@@ -39,19 +45,18 @@
             }
         }
         
-       /* if(!empty($_POST['like'])){
-            $postId = intval($_POST['postId']);
-            $userId = intval($_POST['userId']);
-    
-            $like= new Like();
-            $like->setPostId($postId);
-            $like->setUserId($userId);
-            $like->saveLike();
-            $likeAmount= $like->countLike($userId);
-           // $isLiked = $like->isLikedByUser();
-           // var_dump($isLiked);
-        } */
+        /* if(!empty($_POST['like'])){
+             $postId = intval($_POST['postId']);
+             $userId = intval($_POST['userId']);
 
+             $like= new Like();
+             $like->setPostId($postId);
+             $like->setUserId($userId);
+             $like->saveLike();
+             $likeAmount= $like->countLike($userId);
+            // $isLiked = $like->isLikedByUser();
+            // var_dump($isLiked);
+         } */
     }
 ?>
 
@@ -80,14 +85,6 @@
                 <?php echo $error; ?>
             </div>
             <?php endif; ?>
-
-            <?php
-                $like = new Like();
-                $like->setPostId($postId);
-                $like->setUserId($_SESSION['id']);
-                $isLiked = $like->isPostLikedByUser();
-                $count = $like->getLikes();
-            ?>
 
             <!-- are you sure alert -->
             <div class="modal fade" id="reportPost" aria-hidden="true" aria-labelledby="reportPostLabel"
@@ -140,17 +137,20 @@
                 </a>
             </div>
 
-            <div class="col-8 py-0">
+            <div class="col-sm-12 col-md-12 col-lg-8 py-0">
                 <div class="d-flex align-items-start justify-content-between">
-                    <div>
+                    <div class="">
                         <h2><?php echo htmlspecialchars($projectData['title']); ?></h2>
-                        <p class="pe-4"><?php echo htmlspecialchars($projectData['description']); ?> <span
-                                class="link-primary"><?php echo htmlspecialchars($projectData['tag']); ?></span></p>
+                        <p class="pe-4"><?php echo htmlspecialchars($projectData['description']); ?> 
+                            <?php foreach ($tags as $tag): ?>
+                            <span class="link-primary"><?php echo htmlspecialchars($tag['tag']); ?></span>
+                            <?php endforeach; ?>
+                        </p>
                     </div>
                     <div class="d-flex justify-content-between align-items-center">
                         
                         <form class="d-flex align-items-center" action="" method="post">
-                            <div class="btn btn-primary d-flex align-items-center mx-2 px-2">
+                            <div class="btn btn-primary d-flex align-items-center mx-2 p-2">
                             <?php if (!$isLiked): ?>
                                         <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $postId ?>">
                                         <?php if ($count['COUNT(id)'] === "0"): ?>
@@ -168,12 +168,12 @@
                             <?php elseif ($isReported === true): ?>
                             <a class="btn btn-danger disabled" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Reported</a>
                             <?php endif; ?>
-                            <?php if($_SESSION['id'] == $projectData['user_id']): ?>
+                            <?php if ($_SESSION['id'] == $projectData['user_id']): ?>
                             <a class="btn btn-outline-danger ms-2" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
                             <?php endif; ?>
                         </form>
-                        <?php if($_SESSION['id'] == $projectData['user_id']): ?>
-                        <form method="post" action="editProject.php?p=<?php echo $key?>" id="edit_form">
+                        <?php if ($_SESSION['id'] == $projectData['user_id']): ?>
+                        <form method="post" action="editProject.php?p=<?php echo $postId?>" id="edit_form">
                                 <input type="submit" value="&#9998;" class="btn btn-outline-primary ms-2" name="editProject">
                         </form> 
                         <?php endif; ?>
@@ -184,12 +184,12 @@
 
           
         <div class="row">
-            <div class="col-8">
+            <div class="col-sm-12 col-md-12 col-lg-8">
                 <img src="uploaded_projects/<?php echo htmlspecialchars($projectData['image']);?>" width="100%" height="100%"
                     class="img-project-post" style="object-fit:cover">
             </div>
 
-            <div class="col-4 col-lg-4 d-flex align-content-between flex-wrap">
+            <div class="col-sm-12 col-md-12 col-lg-4 d-flex align-content-between flex-wrap">
                 <div>
                     <h3>Comments</h3>
                     <?php if (isset($emptystate)): ?>
@@ -210,7 +210,7 @@
 
                     <?php endif; ?>
                     <div class="row d-flex justify-content-between">
-                        <form class="" action="" method="post">
+                        <form class="p-3" action="" method="post">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Place a comment" aria-label="Place a comment" aria-describedby="button-addon2" id="comment" name="comment">
                                 <input type="submit" name="addComment" id="btnSubmit" data-userid="<?php echo $userId ?>" data-postid="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >

@@ -48,14 +48,10 @@ class Post
         return $this;
     }
 
-
     public function setPostId($postId)
     {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT id FROM posts WHERE id = :postId");
-        $statement->bindValue(":postId", $postId);
-        $postId = $statement->execute();
-        return $postId;
+        $this->postId = $postId;
+        return $this;
     }
 
     public function getPostId()
@@ -73,13 +69,22 @@ class Post
         return $statement->execute();
     }
 
+    public function setPostById($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT id FROM posts WHERE id = :postId");
+        $statement->bindValue(":postId", $postId);
+        $postId = $statement->execute();
+        return $postId;
+    }
+
 
     public function getDescription()
     {
         return $this->description;
     }
 
- 
+
     public function setDescription($description)
     {
         if (empty($description)) {
@@ -88,19 +93,6 @@ class Post
         $this->description = $description;
         return $this;
     }
-
-    
-    // public static function getAll()
-    // {
-    //     $limit=15;
-    //     $page= isset($_GET['page']) ? $_GET['page'] : 1; //hiermee stellen we de home gelijk aan pagina 1
-    //     $start= ($page -1) * $limit; //het start bij 0 en gaat tot $limit
-
-    //     $conn = Db::getInstance();
-    //     $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id ORDER BY `date` DESC LIMIT $start, $limit");
-    //     $statement->execute();
-    //     return $statement->fetchAll();
-    // }
 
     public function setProjectInDatabase()
     {
@@ -128,12 +120,12 @@ class Post
         $fileSize = $_FILES['file']['size'];
         $fileError = $_FILES['file']['error'];
         // $fileType = $_FILES['file']['type'];
-    
+
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt)); //check in lowercase
-    
+
         $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'svg');
-    
+
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 2097152) {
@@ -155,7 +147,7 @@ class Post
         }
     }
 
-   
+
 
     public static function search($search)
     {
@@ -169,7 +161,7 @@ class Post
     public static function getPostDataFromId($id)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id INNER JOIN tags on tags.post_id = posts.id WHERE posts.id = :id");
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id WHERE posts.id = :id");
         $statement->bindValue(':id', $id);
         $statement->execute();
         $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -179,7 +171,17 @@ class Post
     public static function getPosts($sorting, $start, $limit)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select * from posts INNER JOIN users ON posts.user_id = users.id LEFT JOIN tags on tags.id= posts.id ORDER BY `date` $sorting LIMIT $start, $limit");
+        $statement = $conn->prepare("SELECT * from posts INNER JOIN users ON posts.user_id = users.id ORDER BY `date` $sorting LIMIT $start, $limit");
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
+    public static function getTagsFromPost($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM tags WHERE post_id = :postId");
+        $statement->bindValue(':postId', $postId);
         $statement->execute();
         $result = $statement->fetchAll();
         return $result;
@@ -202,19 +204,6 @@ class Post
         return $result;
     }
 
-    public function smashExists()
-    {
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT COUNT(id) FROM posts WHERE posts.isShowcase = 1 AND id=:id");
-        $statement->bindValue(':id', $this->postId);
-        $statement->execute();
-        $count = intval($statement->fetchColumn());
-
-        if ($count > 0) {
-            return true;
-        }
-        return $count;
-    }
 
     public static function smashed($postId)
     {
@@ -236,7 +225,7 @@ class Post
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare(
-            "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id INNER JOIN tags ON tags.post_id = posts.id WHERE posts.isShowcase=1 AND posts.user_id = :id"
+            "SELECT * FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.isShowcase=1 AND posts.user_id = :id"
         );
         $statement->bindValue(':id', $id);
         $statement->execute();

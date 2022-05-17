@@ -15,13 +15,8 @@ if (!isset($_SESSION['id'])) {
     $sessionId = $_SESSION['id'];
     $userDataFromId = User::getUserDataFromId($sessionId);
 
-   
     $posts = Post::showSmashedProjects($key);
 }
-
-
-
-
 
 if (empty($posts)) {
     $emptyState = true;
@@ -106,7 +101,7 @@ if (empty($posts)) {
                 </form>
             </div>
             <div class="col project--item--latest">
-                <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image'];?>" alt="latest posts">
+                <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
             </div>
         </div>
         <div>
@@ -126,30 +121,25 @@ if (empty($posts)) {
                 <div class="row justify-content-start">
 
                     <?php foreach ($posts as $key => $p) : ?>
-                        <?php if (!isset($_SESSION['id'])) : ?>
-
-                            <div class="col-12 col-md-6 col-lg-4 p-4">
-                                <img src="uploaded_projects/<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
-                                <div>
+                        <?php
+                        $tags = Post::getTagsFromPost($p[0]);
+                        //var_dump($p[0]);
+                        ?>
+                        <div class="col-12 col-md-6 col-lg-4 p-4">
+                            <img src="uploaded_projects/<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
+                            <div>
+                                <a href="post.php?p=<?php echo $p[0] ?>">
                                     <h2><?php echo $p['title']; ?></h2>
-                                    <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
-                                </div>
+                                </a>
+
+                                <p class="pe-4"><?php echo $p['description']; ?>
+                                    <?php foreach ($tags as $tag) : ?>
+                                        <span class="link-primary"><?php echo $tag['tag']; ?></span>
+                                    <?php endforeach; ?>
+                                </p>
                             </div>
 
-                        <?php else : ?>
-
-                            <div class="col-12 col-md-6 col-lg-4 p-4">
-                                <img src="uploaded_projects/<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
-                                <div>
-                                    <a href="post.php?p=<?php echo $p[0] ?>">
-                                        <h2><?php echo $p['title']; ?></h2>
-                                    </a>
-
-                                    <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
-                                </div>
-
-                            </div>
-                        <?php endif; ?>
+                        </div>
                     <?php endforeach; ?>
 
                 </div>

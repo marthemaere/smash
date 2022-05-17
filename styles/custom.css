@@ -167,11 +167,11 @@ p.num-of-likes {
     margin-top: 0;
 }
 
-.liked{
+.liked {
     display: none;
 }
 
-.notLiked{
+.notLiked {
     display: block;
 }
 
@@ -182,6 +182,12 @@ p.num-of-likes {
 
 @media (max-width: 992px) {
     .register--image, .login--image, .reset--image {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .filter-tags {
         display: none;
     }
 }

@@ -113,7 +113,7 @@ if (!isset($_SESSION['id'])) {
                 <div class="">
                     <h3>All projects</h3>
                 </div>
-                <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" type="submit" name="smashedprojects" class="btn btn-outline-success">My featured projects 💥</a></div>
+                <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" type="submit" name="smashedprojects" class="btn btn-outline-success">My featured projects</a></div>
             </div>
             <?php if (isset($emptyState)) : ?>
                 <div class="empty-state flex-column m-3">

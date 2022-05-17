@@ -134,6 +134,8 @@
                             $like->setUserId($_SESSION['id']);
                             $isLiked = $like->isPostLikedByUser();
                             $count = $like->getLikes();
+
+                            $tags = Post::getTagsFromPost($post['id']);
                         ?>
                         <div class="col-12 col-md-6 col-lg-4 p-4">
                             <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']);?>" width="100%" height="250px"
@@ -164,8 +166,11 @@
                                 <a href="post.php?p=<?php echo $post['id'];?>">
                                     <h2><?php echo htmlspecialchars($post['title']); ?></h2>
                                 </a>
-                                <p class="pe-4"><?php echo htmlspecialchars($post['description']); ?> <span
-                                        class="link-primary"><?php echo htmlspecialchars($post['tag']); ?></span></p>
+                                <p class="pe-4"><?php echo htmlspecialchars($post['description']); ?> 
+                                    <?php foreach ($tags as $tag): ?>
+                                    <span class="link-primary"><?php echo htmlspecialchars($tag['tag']); ?></span>
+                                    <?php endforeach; ?>
+                                </p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <a href="" class="link-dark">View comments</a>

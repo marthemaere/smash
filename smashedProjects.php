@@ -126,18 +126,10 @@ if (empty($posts)) {
                 <div class="row justify-content-start">
 
                     <?php foreach ($posts as $key => $p) : ?>
-                        <?php if (!isset($_SESSION['id'])) : ?>
-
-                            <div class="col-12 col-md-6 col-lg-4 p-4">
-                                <img src="uploaded_projects/<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
-                                <div>
-                                    <h2><?php echo $p['title']; ?></h2>
-                                    <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
-                                </div>
-                            </div>
-
-                        <?php else : ?>
-
+                        <?php
+                            $tags = Post::getTagsFromPost($p[0]);
+                            var_dump($p[0]);
+                        ?>
                             <div class="col-12 col-md-6 col-lg-4 p-4">
                                 <img src="uploaded_projects/<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                                 <div>
@@ -145,11 +137,14 @@ if (empty($posts)) {
                                         <h2><?php echo $p['title']; ?></h2>
                                     </a>
 
-                                    <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
+                                    <p class="pe-4"><?php echo $p['description']; ?> 
+                                        <?php foreach ($tags as $tag): ?>
+                                        <span class="link-primary"><?php echo $tag['tag']; ?></span>
+                                        <?php endforeach; ?>
+                                    </p>
                                 </div>
 
                             </div>
-                        <?php endif; ?>
                     <?php endforeach; ?>
 
                 </div>

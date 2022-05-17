@@ -108,8 +108,8 @@
         </div>
 
         <?php if (!empty($searched)): ?>
-            <div class="d-flex justify-content-center">
-                <h3>Search results for: <?php echo $search; ?></h3>
+            <div class="d-flex mt-5 ms-3 me-3 alert alert-dark">
+                <p class="m-0">Search results for: <span class="fw-bold"><?php echo $search; ?></span></p>
             </div>
         <?php endif; ?>
 
@@ -127,12 +127,17 @@
 
                     <?php
                         $like = new Like();
+<<<<<<< HEAD
                         $like->setPostId($p['id']);
                         var_dump($like);
+=======
+                        $like->setPostId($p[0]);
+>>>>>>> main
                         $count = $like->getLikes();
                         //var_dump($count);
+                        $tags = Post::getTagsFromPost($p[0]);
                     ?>
-                    <div class="col-4 p-4">
+                    <div class="col-12 col-md-4 p-4">
                         <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                             class="img-project-post" style="object-fit:cover">
                         <div>
@@ -144,14 +149,18 @@
                                 <div class="d-flex align-items-center">
                                     <img src="assets/images/empty-heart.svg" class="like">
                                     <?php if ($count['COUNT(id)'] === "0"): ?>
-                                        <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php ?></p>
+                                        <p class="num-of-likes" data-postid="<?php echo $p[0] ?>"><?php ?></p>
                                     <?php else : ?>
-                                        <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php echo $count['COUNT(id)'] ?></p>
+                                        <p class="num-of-likes" data-postid="<?php echo $p[0] ?>"><?php echo $count['COUNT(id)'] ?></p>
                                     <?php endif; ?>
                                 </div>
                             </div>
                             <h2><?php echo $p['title']; ?></h2>
-                            <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>
+                            <p class="pe-4"><?php echo $p['description']; ?> 
+                                <?php foreach ($tags as $tag): ?>
+                                <span class="link-primary"><?php echo $tag['tag']; ?></span>
+                                <?php endforeach; ?>
+                            </p>
                         </div>
                         <!-- <div class="d-flex justify-content-between align-items-center">
                             <a href="" class="link-dark">View comments</a>
@@ -162,13 +171,14 @@
                 <?php else: ?>
                     <?php
                         $like = new Like();
-                        $like->setPostId($p['id']);
+                        $like->setPostId($p[0]);
                         $like->setUserId($_SESSION['id']);
                         $isLiked = $like->isPostLikedByUser();
                         $count = $like->getLikes();
                         //var_dump($count);
+                        $tags = Post::getTagsFromPost($p[0]);
                     ?>
-                <div class="col-4 p-4">
+                <div class="col-12 col-md-6 col-lg-4 p-4">
                     <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                         class="img-project-post" style="object-fit:cover">
                     <div>
@@ -182,15 +192,15 @@
                             <form class="" action="" method="post">
                                 <div class="d-flex align-items-center">
                                     <?php if (!$isLiked): ?>
-                                        <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
+                                        <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p[0] ?>">
                                         <?php if ($count['COUNT(id)'] === "0"): ?>
-                                            <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php ?></p>
+                                            <p class="num-of-likes" data-postid="<?php echo $p[0] ?>"><?php ?></p>
                                         <?php else : ?>
-                                            <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php echo $count['COUNT(id)'] ?></p>
+                                            <p class="num-of-likes" data-postid="<?php echo $p[0] ?>"><?php echo $count['COUNT(id)'] ?></p>
                                         <?php endif; ?>
                                     <?php else: ?>
-                                        <img src="assets/images/liked-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p['id'] ?>">
-                                        <p class="num-of-likes" data-postid="<?php echo $p['id'] ?>"><?php echo $count['COUNT(id)'] ?></p>  
+                                        <img src="assets/images/liked-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $p[0] ?>">
+                                        <p class="num-of-likes" data-postid="<?php echo $p[0] ?>"><?php echo $count['COUNT(id)'] ?></p>  
                                     <?php endif; ?> 
                                 </div>
                             </form>
@@ -199,7 +209,12 @@
                             <h2><?php echo $p['title']; ?></h2>
                         </a>
 
-                        <p class="pe-4"><?php echo $p['description']; ?> <span class="link-primary"><?php echo $p['tag']; ?></span></p>  </div>
+                        <p class="pe-4"><?php echo $p['description']; ?> 
+                            <?php foreach ($tags as $tag): ?>
+                                <span class="link-primary"><?php echo $tag['tag']; ?></span>
+                            <?php endforeach; ?>
+                        </p>  
+                    </div>
                     <!-- <div class="d-flex justify-content-between align-items-center">
                         <a href="" class="link-dark">View comments</a>
                         <a href="" class="btn btn-smash">Smash</a>

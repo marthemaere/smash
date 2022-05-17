@@ -128,7 +128,7 @@ if (empty($posts)) {
                     <?php foreach ($posts as $key => $p) : ?>
                         <?php if (!isset($_SESSION['id'])) : ?>
 
-                            <div class="col-4 p-4">
+                            <div class="col-12 col-md-6 col-lg-4 p-4">
                                 <img src="uploaded_projects/<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                                 <div>
                                     <h2><?php echo $p['title']; ?></h2>
@@ -138,7 +138,7 @@ if (empty($posts)) {
 
                         <?php else : ?>
 
-                            <div class="col-4 p-4">
+                            <div class="col-12 col-md-6 col-lg-4 p-4">
                                 <img src="uploaded_projects/<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                                 <div>
                                     <a href="post.php?p=<?php echo $p[0] ?>">

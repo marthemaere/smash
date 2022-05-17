@@ -131,7 +131,7 @@
                         $count = $like->getLikes();
                         //var_dump($count);
                     ?>
-                    <div class="col-4 p-4">
+                    <div class="col-12 col-md-4 p-4">
                         <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                             class="img-project-post" style="object-fit:cover">
                         <div>
@@ -167,7 +167,7 @@
                         $count = $like->getLikes();
                         //var_dump($count);
                     ?>
-                <div class="col-4 p-4">
+                <div class="col-12 col-md-6 col-lg-4 p-4">
                     <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px"
                         class="img-project-post" style="object-fit:cover">
                     <div>

@@ -177,9 +177,9 @@ if (!isset($_SESSION['id'])) {
                                 <a href="" class="link-dark">View comments</a>
                                 <?php if ($_SESSION['id'] === $userId) : ?>
                                     <?php if (!$isSmashed) : ?>
-                                        <a href="#" id="smashed" name="smashed" class="btn btn-smash:active" data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id'] ?>"> Smash </a>
+                                        <a href="#" id="smashed" name="smashed" class="btn btn-smash" data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id'] ?>"> Smash </a>
                                     <?php else : ?>
-                                        <a href="#" id="smashed" name="smashed" class="btn btn-smash" data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id'] ?>"> Smashed </a>
+                                        <a href="#" id="smashed" name="smashed" class="btn btn-smash active" data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id'] ?>"> Smashed 💥</a>
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </div>

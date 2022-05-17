@@ -81,7 +81,7 @@
         <div class="row">
             <div class="col-3">
             <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action" href="account-info.php">Account</a>
+                    <a class="list-group-item list-group-item-action" href="account-info.php">Account info</a>
                     <a class="list-group-item list-group-item-action" href="edit-profile.php">Edit profile</a>
                     <a class="list-group-item list-group-item-action" href="change-password.php">Change password</a>
                     <a class="list-group-item list-group-item-action active" href="social-accounts.php">Social profiles</a>

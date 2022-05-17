@@ -55,6 +55,12 @@ nav .btn {
     /* padding-right: 22px; */
 }
 
+.btn-smash.active{
+    background-color: #C3B7FF;
+    border-color: #C3B7FF;
+    border-radius: 0 30px 30px 0;
+}
+
 .spacing{
     padding: 43px;
 }

@@ -1,47 +1,46 @@
 <?php
-   include_once(__DIR__.'/../bootstrap.php');
+include_once(__DIR__ . '/../bootstrap.php');
 
-   
-    if (!empty($_POST)) {
-        try {
 
-            //new smashed project
-            
-            $postId = intval(($_POST['postid']));
-            $userId = intval(($_POST['userid']));
+if (!empty($_POST)) {
+    try {
 
-            $posts= new Post();
-            $posts->setPostId($postId);
-            $posts->setUserId($userId);
-            $count = $posts->smashExists();
-            
-            if ($posts->smashExists()) {
-                $posts->unsmashed($postId);
+        //new smashed project
+        $postId = intval(($_POST['postid']));
+        $userId = intval(($_POST['userid']));
 
-                $response= [
+        $posts = new Post();
+        $posts->setPostId($postId);
+        $posts->setUserId($userId);
+        //$count = $posts->smashExists();
+
+        if ($posts->smashExists()) {
+            $posts->unsmashed($postId);
+
+            $response = [
                 "status" => "success",
                 "userid" => $userId,
                 "postid" => $postId,
                 "message" => "Unsmashed.",
-                'smashed' => false
-             ];
-            } else {
-                $posts->smashed($postId);
-                $response = [
+                'smashed' => 0
+            ];
+        } else {
+            $posts->smashed($postId);
+            $response = [
                 "status" => "success",
                 "userid" => $userId,
                 "postid" => $postId,
-                'message' => "smashed.",
-                'smashed' => true
-            ];
-            }
-        } catch (Exception $e) {
-            $response= [
-                "status"=> "error",
-                "message" => "Cannot smash."
+                'message' => "Smashed.",
+                'smashed' => 1
             ];
         }
-
-        header('Content-Type: application/json');
-        echo json_encode($response);
+    } catch (Exception $e) {
+        $response = [
+            "status" => "error",
+            "message" => "Cannot smash."
+        ];
     }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}

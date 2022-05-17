@@ -79,7 +79,7 @@ class Post
         return $this->description;
     }
 
- 
+
     public function setDescription($description)
     {
         if (empty($description)) {
@@ -89,7 +89,7 @@ class Post
         return $this;
     }
 
-    
+
     // public static function getAll()
     // {
     //     $limit=15;
@@ -128,12 +128,12 @@ class Post
         $fileSize = $_FILES['file']['size'];
         $fileError = $_FILES['file']['error'];
         // $fileType = $_FILES['file']['type'];
-    
+
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt)); //check in lowercase
-    
+
         $allowed = array('jpg', 'jpeg', 'png', 'pdf', 'svg');
-    
+
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 2097152) {
@@ -155,7 +155,7 @@ class Post
         }
     }
 
-   
+
 
     public static function search($search)
     {
@@ -212,10 +212,9 @@ class Post
 
         if ($count > 0) {
             return true;
-        } else{
-            return false;
         }
-       
+        return false;
+        
     }
 
     public static function smashed($postId)

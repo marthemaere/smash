@@ -52,7 +52,6 @@ class Tag
 
     public function editTags($postId)
     {
-
         $tags = $this->getTags();
 
         $conn = Db::getInstance();
@@ -63,6 +62,15 @@ class Tag
         $statement->bindValue(":postId", $postId);
         $result = $statement->execute();
         return $result;
-        
+    }
+
+    public static function filterPostsByTag($tag)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id INNER JOIN tags ON posts.id = tags.post_id WHERE tags.tag = :tag");
+        $statement->bindValue(':tag', $tag);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
     }
 }

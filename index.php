@@ -127,12 +127,7 @@
 
                     <?php
                         $like = new Like();
-<<<<<<< HEAD
-                        $like->setPostId($p['id']);
-                        var_dump($like);
-=======
                         $like->setPostId($p[0]);
->>>>>>> main
                         $count = $like->getLikes();
                         //var_dump($count);
                         $tags = Post::getTagsFromPost($p[0]);

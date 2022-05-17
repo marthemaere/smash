@@ -124,7 +124,7 @@
                     <?php foreach ($userPosts as $post): ?>
                         <?php
                             $smash = new Post();
-                            $smash->setPostId($p['id']);
+                            $smash->setPostId($post['id']);
                             //var_dump($smash);
                             $isSmashed = $smash->isSmashed();
                            //var_dump($post['id']);

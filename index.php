@@ -41,6 +41,13 @@
     } elseif (!empty($_POST['following'])) {
         $posts = Post::filterPostsByFollowing($start, $limit);
     }
+
+    if (!empty($_POST['tag'])) {
+        $tag = $_POST['tag'];
+        $posts = Tag::filterPostsByTag($tag);
+        //var_dump($tag);
+        $filtered = true;
+    }
     
     if (empty($posts)) {
         $emptystate = true;
@@ -110,6 +117,11 @@
         <?php if (!empty($searched)): ?>
             <div class="d-flex mt-5 ms-3 me-3 alert alert-dark">
                 <p class="m-0">Search results for: <span class="fw-bold"><?php echo $search; ?></span></p>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty($filtered)): ?>
+            <div class="d-flex mt-5 ms-3 me-3 alert alert-dark">
+                <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo $tag; ?></span></p>
             </div>
         <?php endif; ?>
 
@@ -206,7 +218,10 @@
 
                         <p class="pe-4"><?php echo $p['description']; ?> 
                             <?php foreach ($tags as $tag): ?>
-                                <span class="link-primary"><?php echo $tag['tag']; ?></span>
+                                
+                                <form action="" method="post" class="d-inline">
+                                    <input value="<?php echo $tag['tag']; ?>" class="link-primary bg-transparent border-0 " type="submit" name="tag"></input>
+                                </form>
                             <?php endforeach; ?>
                         </p>  
                     </div>

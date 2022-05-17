@@ -185,3 +185,9 @@ p.num-of-likes {
         display: none;
     }
 }
+
+@media (max-width: 767px) {
+    .filter-tags {
+        display: none;
+    }
+}

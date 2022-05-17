@@ -94,7 +94,7 @@
                 </ul>
             </div>
 
-            <div>
+            <div class="filter-tags">
                 <a href="#" class="px-2 btn btn-light">All</a>
                 <a href="#" class="px-2 text-muted">Branding</a>
                 <a href="#" class="px-2 text-muted">Development</a>

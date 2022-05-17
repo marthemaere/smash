@@ -1,5 +1,8 @@
 document.querySelector("#btnSubmit").addEventListener("click", function(e) {
 
+            e.preventDefault();
+
+
 
     let postId= e.target.dataset.postid;
     let userId= e.target.dataset.userid;
@@ -35,6 +38,5 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
             console.log("error:", error);
         });
 
-        e.preventDefault();
 
     });

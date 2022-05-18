@@ -211,16 +211,12 @@
                             <a href="post.php?p=<?php echo $p[0]?>">
                                 <h2><?php echo $p['title']; ?></h2>
                             </a>
-
-                            <p class="pe-4"><?php echo $p['description']; ?>
-                                <?php foreach ($tags as $tag): ?>
-
+                            <p class="pe-4 mb-1"><?php echo $p['description']; ?></p>
+                            <?php foreach ($tags as $tag): ?>
                                 <form action="" method="post" class="d-inline">
-                                    <input value="<?php echo $tag['tag']; ?>" class="link-primary bg-transparent border-0 "
-                                        type="submit" name="tag"></input>
+                                    <input value="<?php echo $tag['tag']; ?>" class="link-primary bg-transparent border-0 p-0" type="submit" name="tag"></input>
                                 </form>
-                                <?php endforeach; ?>
-                            </p>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 <?php endif; ?>

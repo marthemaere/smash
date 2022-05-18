@@ -1,0 +1,9 @@
+{
+    "require": {
+      "cloudinary/cloudinary_php": "^2",
+      "php": "^8.0.0"
+    },
+    "autoload": {
+        "classmap": ["classes/"]
+    }
+  }

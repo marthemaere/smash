@@ -6,6 +6,10 @@ session_start();
 if (!empty($_POST)) {
     try {
 
+        $result = Upload::upload($_FILES['file']);
+        var_dump($result);
+        die();
+
         //post aanmaken
         $post = new Post();
         $post->setTitle($_POST['title']);

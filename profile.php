@@ -106,7 +106,7 @@ if (!isset($_SESSION['id'])) {
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 project--item--latest">
                 <a href="post.php?p=<?php echo $userPosts[0]['id']?>">
-                    <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
+                    <img class="" src="<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
                 </a>
             </div>
         </div>
@@ -144,7 +144,7 @@ if (!isset($_SESSION['id'])) {
                         ?>
                         <div class="col-12 col-md-6 col-lg-4 p-4">
                             <a href="post.php?p=<?php echo $post['id']?>">
-                                <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']); ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
+                                <img src="<?php echo htmlspecialchars($post['image']); ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                             </a>
                             <div>
                                 <div class="d-flex justify-content-between py-2">

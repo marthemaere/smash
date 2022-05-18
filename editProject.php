@@ -50,7 +50,7 @@ if (!isset($_SESSION['id'])) {
         </div>
         
         <div class="col-7 py-5 m-auto">
-            <img src="uploaded_projects/<?php echo htmlspecialchars($projectData['image']); ?>" width="100%" height="auto" class="img-project-post mb-4" style="object-fit:cover">
+            <img src="<?php echo htmlspecialchars($projectData['image']); ?>" width="100%" height="auto" class="img-project-post mb-4" style="object-fit:cover">
 
             <?php if (isset($error)):?>
             <div class="alert alert-danger"><?php echo $error; ?></div>

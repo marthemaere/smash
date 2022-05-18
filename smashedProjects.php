@@ -107,7 +107,7 @@ if (empty($posts)) {
                     <?php foreach ($posts as $key => $p) : ?>
                         <?php $tags = Post::getTagsFromPost($p[0]); ?>
                         <div class="col-12 col-md-6 col-lg-4 p-4">
-                            <img src="uploaded_projects/<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
+                            <img src="<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                             <div>
                                 <a href="post.php?p=<?php echo $p[0]; ?>">
                                     <h2><?php echo $p['title']; ?></h2>

@@ -131,7 +131,7 @@
             <!-- are you sure alert for deleting a post -->
           
             <div class="d-flex align-items-center py-2">
-                <img src="profile_pictures/<?php echo htmlspecialchars($projectData['profile_pic']); ?>" class="img-profile-post">
+                <img src="<?php echo htmlspecialchars($projectData['profile_pic']); ?>" class="img-profile-post">
                 <a href="profile.php?p=<?php echo htmlspecialchars($projectData['user_id']);?>">
                     <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($projectData['username']);?></h4>
                 </a>

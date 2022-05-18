@@ -53,7 +53,7 @@ if (!isset($_SESSION['id'])) {
         <?php endif; ?>
         <div class="row d-flex align-items-center pt-4">
             <div class="col-sm-12 col-md-12 col-lg-6">
-                <img src="profile_pictures/<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
+                <img src="<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
                 <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • <span>16 followers</span></p>
                 <p class="biography"><?php echo htmlspecialchars($userData['bio']); ?></p>
                 <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
@@ -149,7 +149,7 @@ if (!isset($_SESSION['id'])) {
                             <div>
                                 <div class="d-flex justify-content-between py-2">
                                     <div class="d-flex align-items-center justify-content-start">
-                                        <img src="profile_pictures/<?php echo htmlspecialchars($post['profile_pic']); ?>" class="img-profile-post">
+                                        <img src="<?php echo htmlspecialchars($post['profile_pic']); ?>" class="img-profile-post">
                                         <a href="profile.php?p=<?php echo htmlspecialchars($post[0]['user_id']); ?>">
                                             <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($post['username']); ?></h4>
                                         </a>

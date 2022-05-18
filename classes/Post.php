@@ -29,7 +29,7 @@ class Post
     public function setTitle($title)
     {
         if (empty($title)) {
-            throw new Exception("Title cannot be empty");
+            throw new Exception("Title cannot be empty.");
         }
         $this->title = $title;
         return $this;
@@ -88,7 +88,7 @@ class Post
     public function setDescription($description)
     {
         if (empty($description)) {
-            throw new Exception("description cannot be empty");
+            throw new Exception("Description cannot be empty.");
         }
         $this->description = $description;
         return $this;
@@ -140,10 +140,10 @@ class Post
                     throw new Exception("Your file is too large!");
                 }
             } else {
-                throw new Exception("There was an error uploading your file");
+                throw new Exception("There was an error uploading your file.");
             }
         } else {
-            throw new Exception("You cannot upload files of this type");
+            throw new Exception("You cannot upload files of this type.");
         }
     }
 

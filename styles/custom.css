@@ -199,4 +199,8 @@ p.num-of-likes {
     .col-sm-12.project--item--latest {
         display: none;
     }
+
+    .filter-tags {
+        padding-top: 15px;
+    }
 }

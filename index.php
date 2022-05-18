@@ -62,7 +62,7 @@
     <?php require_once("header.php"); ?>
 
     <div class="container mt-5 mb-5">
-        <div class="d-flex justify-content-between align-items-center m-3">
+        <div class="d-flex flex-wrap justify-content-between align-items-center m-3">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary sort-title">
                     <?php if (!empty($_POST['ASC'])): ?>

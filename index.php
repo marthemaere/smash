@@ -16,6 +16,8 @@
     $sorting = 'DESC';
     $posts = Post::getPosts($sorting, $start, $limit);
     
+
+
     $conn = Db::getInstance();
     $result = $conn->query("select count(id) AS id from posts");
     $postCount= $result->fetchAll();
@@ -144,9 +146,11 @@
                     ?>
                     
                     <div class="col-12 col-md-6 col-lg-4 p-4">
+
                         <a href="register.php">
                             <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                         </a>
+
                         <div class="">
                             <div class="d-flex justify-content-between align-items-center py-2">
                                 <div class="d-flex align-items-center justify-content-start">
@@ -184,9 +188,11 @@
                         $tags = Post::getTagsFromPost($p[0]);
                     ?>
                     <div class="col-12 col-md-6 col-lg-4 p-4">
+
                         <a href="post.php?p=<?php echo $p[0]?>">
                             <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                         </a>
+
                         <div>
                             <div class="d-flex justify-content-between align-items-center py-2">
                                 <div class="d-flex align-items-center justify-content-start">

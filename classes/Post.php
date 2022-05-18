@@ -5,6 +5,7 @@ class Post
 {
     private $title;
     private $image;
+    private $imageThumb;
     private $description;
     private $userId;
     private $postId;
@@ -97,12 +98,13 @@ class Post
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image, description, date, user_id) values (:title, :image, :description, now(), :userId)");
+        $statement = $conn->prepare("insert into posts (title, image, image_thumb, description, date, user_id) values (:title, :image, :image_thumb, :description, now(), :userId)");
         $title = $this->getTitle();
         $image = $this->getImage();
         $userId = $this->getUserId();
         $description = $this->getDescription();
         $statement->bindValue(":title", $title);
+        $statement->bindValue(":image_thumb", $this->getImageThumb());
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
         $statement->bindValue(":userId", $userId);
@@ -266,5 +268,25 @@ class Post
         $statement->bindValue(":title", $title);
         $statement->bindValue(":postId", $postId);
         return $statement->execute();
+    }
+
+    /**
+     * Get the value of imageThumb
+     */ 
+    public function getImageThumb()
+    {
+        return $this->imageThumb;
+    }
+
+    /**
+     * Set the value of imageThumb
+     *
+     * @return  self
+     */ 
+    public function setImageThumb($imageThumb)
+    {
+        $this->imageThumb = $imageThumb;
+
+        return $this;
     }
 }

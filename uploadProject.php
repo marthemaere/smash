@@ -10,13 +10,14 @@ if (!empty($_POST)) {
         $post = new Post();
         $post->setTitle($_POST['title']);
         $post->setDescription($_POST['description']);
-        //$post->setPostId($_POST['id']);
-        //$post->setPostById($postId);
-        //var_dump($post);
-      
+        
         $userId= $_SESSION['id'];
         $post->setUserId($userId);
-        $id = $post->canUploadProject();
+        
+        $uploadResult = Upload::upload($_FILES['file']);
+        $post->setImage($uploadResult['image']);
+        $post->setImageThumb($uploadResult['image_thumb']);
+        $id = $post->setProjectInDatabase();
        
         $userId = $_SESSION['id'];
         $post->setUserId($userId);

@@ -185,7 +185,7 @@
           
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-8">
-                <img src="uploaded_projects/<?php echo htmlspecialchars($projectData['image']);?>" width="100%" height="100%"
+                <img src="<?php echo htmlspecialchars($projectData['image']);?>" width="100%" height="100%"
                     class="img-project-post" style="object-fit:cover">
             </div>
 

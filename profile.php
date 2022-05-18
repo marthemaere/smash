@@ -105,7 +105,9 @@ if (!isset($_SESSION['id'])) {
                 </form>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 project--item--latest">
-                <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
+                <a href="post.php?p=<?php echo $userPosts[0]['id']?>">
+                    <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
+                </a>
             </div>
         </div>
         <div>
@@ -141,7 +143,9 @@ if (!isset($_SESSION['id'])) {
                         $tags = Post::getTagsFromPost($post['id']);
                         ?>
                         <div class="col-12 col-md-6 col-lg-4 p-4">
-                            <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']); ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
+                            <a href="post.php?p=<?php echo $post['id']?>">
+                                <img src="uploaded_projects/<?php echo htmlspecialchars($post['image']); ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
+                            </a>
                             <div>
                                 <div class="d-flex justify-content-between py-2">
                                     <div class="d-flex align-items-center justify-content-start">

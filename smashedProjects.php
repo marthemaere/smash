@@ -12,6 +12,16 @@ if (!isset($_SESSION['id'])) {
     $userData = User::getUserDataFromId($key);
     $userPosts = $user->getUserPostsFromId($key);
 
+    $report = new Report();
+    $report->setReported_userId($key);
+    $report->setReport_userId($_SESSION['id']);
+    $isReported = $report->isUserReportedByUser();
+
+    $follower = new Follower();
+    $follower->setFollowerId($_SESSION['id']);
+    $follower->setFollowingId($key);
+    $isFollowed = $follower->isFollowedByUser();
+
     $sessionId = $_SESSION['id'];
     $userDataFromId = User::getUserDataFromId($sessionId);
 

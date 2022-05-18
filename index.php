@@ -114,13 +114,13 @@
         </div>
 
         <?php if (!empty($searched)): ?>
-            <div class="d-flex mt-5 ms-3 me-3 alert alert-dark">
+            <div class="d-flex mt-5 ms-3 me-3 alert alert-dark bg-light">
                 <p class="m-0">Search results for: <span class="fw-bold"><?php echo $search; ?></span></p>
             </div>
         <?php endif; ?>
 
         <?php if (!empty($filtered)): ?>
-            <div class="d-flex mt-5 ms-3 me-3 alert alert-dark">
+            <div class="d-flex mt-5 ms-3 me-3 alert alert-dark bg-light">
                 <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo $tag; ?></span></p>
             </div>
         <?php endif; ?>
@@ -211,7 +211,7 @@
                             <a href="post.php?p=<?php echo $p[0]?>">
                                 <h2><?php echo $p['title']; ?></h2>
                             </a>
-                            <p class="pe-4 mb-1"><?php echo $p['description']; ?></p>
+                            <p class="pe-4 mb-1 max-num-of-lines"><?php echo $p['description']; ?></p>
                             <?php foreach ($tags as $tag): ?>
                                 <form action="" method="post" class="d-inline">
                                     <input value="<?php echo $tag['tag']; ?>" class="link-primary bg-transparent border-0 p-0" type="submit" name="tag"></input>

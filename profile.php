@@ -167,13 +167,12 @@ if (!isset($_SESSION['id'])) {
                                 <a href="post.php?p=<?php echo $post['id']; ?>">
                                     <h2><?php echo htmlspecialchars($post['title']); ?></h2>
                                 </a>
-                                <p class="pe-4"><?php echo htmlspecialchars($post['description']); ?>
-                                    <?php foreach ($tags as $tag) : ?>
-                                        <span class="link-primary"><?php echo htmlspecialchars($tag['tag']); ?></span>
-                                    <?php endforeach; ?>
-                                </p>
+                                <p class="pe-4 mb-0 max-num-of-lines"><?php echo htmlspecialchars($post['description']); ?></p>
+                                <?php foreach ($tags as $tag) : ?>
+                                    <span class="link-primary"><?php echo htmlspecialchars($tag['tag']); ?></span>
+                                <?php endforeach; ?>
                             </div>
-                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center pt-2">
                                 <a href="" class="link-dark">View comments</a>
                                 <?php if ($_SESSION['id'] === $userId) : ?>
                                     <?php if (!$isSmashed) : ?>

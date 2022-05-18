@@ -4,29 +4,17 @@ session_start();
 
 $conn = Db::getInstance();
 
-if (!isset($_SESSION['id'])) {
-    header('Location: login.php');
-} else {
-    $user = new User();
-    $key = $_GET['p'];
-    $userData = User::getUserDataFromId($key);
-    $userPosts = $user->getUserPostsFromId($key);
-
-    $report = new Report();
-    $report->setReported_userId($key);
-    $report->setReport_userId($_SESSION['id']);
-    $isReported = $report->isUserReportedByUser();
-
-    $follower = new Follower();
-    $follower->setFollowerId($_SESSION['id']);
-    $follower->setFollowingId($key);
-    $isFollowed = $follower->isFollowedByUser();
-
+if (isset($_SESSION['id'])) {
     $sessionId = $_SESSION['id'];
     $userDataFromId = User::getUserDataFromId($sessionId);
-
-    $posts = Post::showSmashedProjects($key);
 }
+
+$user = new User();
+$key = $_GET['p'];
+$userData = User::getUserDataFromId($key);
+$userPosts = $user->getUserPostsFromId($key);
+
+$posts = Post::showSmashedProjects($key);
 
 if (empty($posts)) {
     $emptyState = true;
@@ -83,18 +71,6 @@ if (empty($posts)) {
                         </div>
                         <!-- are you sure alert -->
                         <div class="profile-btn">
-                            <?php if (!$isFollowed) : ?>
-                                <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followingid="<?php echo $key; ?>">Follow</a>
-                            <?php else : ?>
-                                <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followingid="<?php echo $key; ?>">Following</a>
-                            <?php endif; ?>
-
-                            <?php if ($isReported === false) : ?>
-                                <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Report user</a>
-                            <?php else : ?>
-                                <a class="btn btn-danger disabled mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Reported</a>
-                            <?php endif; ?>
-
                             <?php if (!empty($userPosts[0]['social_linkedin'])) : ?>
                                 <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
                             <?php endif; ?>
@@ -109,9 +85,6 @@ if (empty($posts)) {
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6 project--item--latest">
-                <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
             </div>
         </div>
         <div>
@@ -136,7 +109,7 @@ if (empty($posts)) {
                         <div class="col-12 col-md-6 col-lg-4 p-4">
                             <img src="uploaded_projects/<?php echo $p['image']; ?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                             <div>
-                                <a href="post.php?p=<?php echo $p[0] ?>">
+                                <a href="post.php?p=<?php echo $p[0]; ?>">
                                     <h2><?php echo $p['title']; ?></h2>
                                 </a>
                                 <p class="pe-4"><?php echo $p['description']; ?>

@@ -161,7 +161,9 @@
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <h2><?php echo $p['title']; ?></h2>
+                            <a href="register.php">
+                                <h2><?php echo $p['title']; ?></h2>
+                            </a>
                             <p class="pe-4"><?php echo $p['description']; ?>
                                 <?php foreach ($tags as $tag): ?>
                                     <span class="link-primary"><?php echo $tag['tag']; ?></span>

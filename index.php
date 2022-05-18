@@ -108,7 +108,7 @@
                 <a href="#" class="px-2 text-muted">Typography</a>
             </div>
 
-            <div>
+            <div class="filter-btn">
                 <a href="#" class="px-2 btn btn-outline-primary">Filters</a>
             </div>
         </div>
@@ -143,7 +143,7 @@
                         $tags = Post::getTagsFromPost($p[0]);
                     ?>
                     
-                    <div class="col-12 col-md-4 p-4">
+                    <div class="col-12 col-md-6 col-lg-4 p-4">
                         <img src="uploaded_projects/<?php echo $p['image'];?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                         <div class="">
                             <div class="d-flex justify-content-between align-items-center py-2">

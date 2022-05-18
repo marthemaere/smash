@@ -3,7 +3,7 @@
 
 
     if( !empty($_POST) ) {
-        $text = $_POST['comment'];
+        $text = $_POST['text'];
         $postId = intval($_POST['postid']);
         $userId = intval($_POST['userid']);
 

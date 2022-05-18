@@ -55,7 +55,7 @@ if (empty($posts)) {
             </div>
         <?php endif; ?>
         <div class="row d-flex align-items-center">
-            <div class="col">
+            <div class="col-sm-12 col-md-12 col-lg-6">
                 <img src="profile_pictures/<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
                 <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • 
                     <span>16 followers</span>
@@ -110,7 +110,7 @@ if (empty($posts)) {
                     </div>
                 </form>
             </div>
-            <div class="col project--item--latest">
+            <div class="col-sm-12 col-md-12 col-lg-6 project--item--latest">
                 <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
             </div>
         </div>

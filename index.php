@@ -15,6 +15,8 @@
 
     $sorting = 'DESC';
     $posts = Post::getPosts($sorting, $start, $limit);
+
+    $popularTags = Post::filterByPopularTags();
     
 
 
@@ -102,13 +104,14 @@
                 </ul>
             </div>
 
-            <div class="filter-tags">
-                <a href="#" class="px-2 btn btn-light">All</a>
-                <a href="#" class="px-2 text-muted">Branding</a>
-                <a href="#" class="px-2 text-muted">Development</a>
-                <a href="#" class="px-2 text-muted">Mobile</a>
-                <a href="#" class="px-2 text-muted">Typography</a>
-            </div>
+            <?php if (!empty($popularTags)): ?>
+                <div class="filter-tags">
+                    <a href="#" class="px-2 btn btn-light">All</a>
+                    <?php foreach ($popularTags as $tag): ?>
+                        <a href="#" class="px-1 text-muted"><?php echo $tag['tag'] ?></a>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
             <div class="filter-btn">
                 <a href="#" class="px-2 btn btn-outline-primary">Filters</a>
@@ -170,11 +173,10 @@
                             <a href="register.php">
                                 <h2><?php echo $p['title']; ?></h2>
                             </a>
-                            <p class="pe-4"><?php echo $p['description']; ?>
-                                <?php foreach ($tags as $tag): ?>
-                                    <span class="link-primary"><?php echo $tag['tag']; ?></span>
-                                <?php endforeach; ?>
-                            </p>
+                            <p class="pe-4"><?php echo $p['description']; ?></p>
+                            <?php foreach ($tags as $tag): ?>
+                                <span class="link-primary"><?php echo $tag['tag']; ?></span>
+                            <?php endforeach; ?>
                         </div>
                     </div>
 

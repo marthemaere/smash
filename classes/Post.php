@@ -206,6 +206,14 @@ class Post
         return $result;
     }
 
+    public static function filterByPopularTags()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT tag, COUNT(tag) FROM tags GROUP BY tag HAVING COUNT(tag) > 1 ORDER BY COUNT(tag) DESC LIMIT 5");
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
 
     public static function smashed($postId)
     {

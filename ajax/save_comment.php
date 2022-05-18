@@ -19,6 +19,9 @@
             $response = [
                 "status" => "success",
                 "message" => "Comment was saved.", 
+                "data" => [
+                    "comment" => htmlspecialchars($text)
+                ]
             ];
 
         } catch( Exception $e ) {

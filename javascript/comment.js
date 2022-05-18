@@ -26,21 +26,29 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
     body: data
     })
     .then(response => response.json())
-    /*.then(result => {
+    .then(
+        data => {
+            if(data.status === "success"){
+               // let li= `<li>${data.data.comment}</li>`;
+                document.querySelector("#listupdates").innerHTML += data.data.comment;
+               // document.querySelector("#comment").value ="";
+            }
+        /*result => {
         let newComment= document.createElement('li');
         newComment.innerHTML= result.body;
-        document.querySelector("#comment").appendChild(newComment);
-    })*/
-    
+        document.querySelector("#listupdates").appendChild(newComment);
+        console.log(result.body);*/
+    })
+    /*
         .then(result => {
             /*
             let li= document.createElement('li');
             li.innerHTML= result.body;
             document.querySelector("#listupdates").innerHTML += li;
-        */
+        
             let li= `<ul>${text}</ul>`;
             document.querySelector("#listupdates").innerHTML += li;
-            document.classList.add = "list-group list-group-flush";
+            document.classList.add = "list-group list-group-flush";*/
 
             //document.querySelector("#comment").value ="";*/
         })
@@ -48,4 +56,4 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
             console.error("error:", error);
         });
 
-    });
+    //});

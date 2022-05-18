@@ -8,25 +8,25 @@ if (!isset($_SESSION['id'])) {
 } else {
     $postId =  $_GET['p'];
     $projectData = Post::getPostDataFromId($postId);
+    $tags = Post::getTagsFromPost($postId);
 
-        if (!empty($_POST['submit'])) {
-            try {
-                $post = new Post();
-                $post->setTitle($_POST['title']);
-                $post->editTitle($postId);
+    if (!empty($_POST['submit'])) {
+        try {
+            $post = new Post();
+            $post->setTitle($_POST['title']);
+            $post->editTitle($postId);
                             
-                $tags= new Tag();
-                $tags->setTag($_POST['tags']);
-                $tags->editTags($postId);
+            $tags = new Tag();
+            $tags->setTag($_POST['tags']);
+            $tags->editTags($postId);
 
-                header('Location: index.php');
-                echo "oke";
-            } catch (Throwable $e) {
-                $error = $e->getMessage();
-                echo "ni oke";
-
-            }
+            header('Location: index.php');
+            echo "oke";
+        } catch (Throwable $e) {
+            $error = $e->getMessage();
+            echo "ni oke";
         }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -46,10 +46,12 @@ if (!isset($_SESSION['id'])) {
 
 
         <div class="upload-intro text-center pt-4">
-            <h1>Editing your project:</h1>
+            <h1>Edit your project:</h1>
         </div>
-
+        
         <div class="col-7 py-5 m-auto">
+            <img src="uploaded_projects/<?php echo htmlspecialchars($projectData['image']); ?>" width="100%" height="auto" class="img-project-post mb-4" style="object-fit:cover">
+
             <?php if (isset($error)):?>
             <div class="alert alert-danger"><?php echo $error; ?></div>
             <?php endif;?>
@@ -62,7 +64,7 @@ if (!isset($_SESSION['id'])) {
 
                 <fieldset>
                     <!-- <label for="tags">Edit your tags</label> -->
-                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Give it some tags like #branding">
+                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Give it some tags like #branding" value="<?php foreach ($tags as $tag): ?><?php echo $tag['tag']; ?> <?php endforeach; ?>">
                     <div class="form-text">Don't forget the famous '#' before your tag</div>
                 </fieldset>
                 <input class="btn btn-primary col-12" type="submit" value="Save changes" name="submit">

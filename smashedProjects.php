@@ -44,7 +44,7 @@ if (empty($posts)) {
         <?php endif; ?>
         <div class="row d-flex align-items-center">
             <div class="col-sm-12 col-md-12 col-lg-6">
-                <img src="profile_pictures/<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
+                <img src="<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
                 <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • 
                     <span>16 followers</span>
                 </p>

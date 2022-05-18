@@ -16,14 +16,14 @@
     <div class="container">
         <a href="index.php" class="navbar-brand">Smasssh</a>
     
-        <div class="d-flex align-items-center">
+        <div class="d-flex flex-wrap align-items-center justify-content-end">
             <?php if (!isset($_SESSION['email'])): ?>
             <form class="d-flex">
                 <a href="login.php" class="btn btn-outline-primary me-2">Login</a>
                 <a href="register.php" class="btn btn-primary">Signup</a>
             </form>
             <?php else: ?>
-            <form class="" action="" method="post">
+            <form class="header-search" action="" method="post">
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Search for projects" aria-label="Search for projects" aria-describedby="button-addon2">
                     <input class="btn btn-outline-primary btn-icon-search" type="submit" name="submit-search" id="button-addon2" value=">">

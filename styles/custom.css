@@ -203,4 +203,8 @@ p.num-of-likes {
     .filter-tags {
         padding-top: 15px;
     }
+
+    .header-search {
+        width: 100%;
+    }
 }

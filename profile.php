@@ -42,17 +42,17 @@ if (!isset($_SESSION['id'])) {
 <body>
     <?php include_once('header.php'); ?>
     <div class="container">
-        <div class="row p-3">
-            <div id="report-success" class="invisible" role="alert">
-            </div>
-            <?php if (isset($error)) : ?>
+        <?php if (isset($error)) : ?>
+            <div class="row p-3">
+                <div id="report-success" class="invisible" role="alert">
+                </div>
                 <div class="alert alert-danger" role="alert">
                     <?php echo $error; ?>
                 </div>
-            <?php endif; ?>
-        </div>
-        <div class="row d-flex align-items-center">
-            <div class="col">
+            </div>
+        <?php endif; ?>
+        <div class="row d-flex align-items-center pt-4">
+            <div class="col-sm-12 col-md-12 col-lg-6">
                 <img src="profile_pictures/<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
                 <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • <span>16 followers</span></p>
                 <p class="biography"><?php echo htmlspecialchars($userData['bio']); ?></p>
@@ -104,7 +104,7 @@ if (!isset($_SESSION['id'])) {
                     </div>
                 </form>
             </div>
-            <div class="col project--item--latest">
+            <div class="col-sm-12 col-md-12 col-lg-6 project--item--latest">
                 <img class="" src="uploaded_projects/<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
             </div>
         </div>

@@ -142,12 +142,6 @@ fieldset {
     border-radius: 12px;
 }
 
-.project--item--latest {
-    width: 100%;
-    height: 50%;
-    border-radius: 18px;
-}
-
 .project--item--latest img {
     height: auto;
     max-height: 400px;
@@ -199,6 +193,10 @@ p.num-of-likes {
 
 @media (max-width: 767px) {
     .filter-btn {
+        display: none;
+    }
+
+    .col-sm-12.project--item--latest {
         display: none;
     }
 }

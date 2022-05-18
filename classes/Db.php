@@ -10,7 +10,7 @@
                 return self::$conn;
             } else {
                 // New connection
-                $config = parse_ini_file($_SERVER["DOCUMENT_ROOT"] . "/smash/config/config.ini");
+                $config = parse_ini_file(__DIR__ . "/../config/config.ini");
                 self::$conn = new PDO('mysql:host='. $config['db_host'] .';dbname=' . $config['db_name'], $config['db_user'], $config['db_password']);
                 return self::$conn;
             }

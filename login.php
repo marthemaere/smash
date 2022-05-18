@@ -31,7 +31,7 @@
 <body class="">
     <div class="login row">
         <div class="login--image col">
-            <a class="navbar-brand">Smasssh</a>
+            <a class="navbar-brand" href="/">Smasssh</a>
         </div>
         
         <div class="login--form col">

@@ -73,8 +73,8 @@ if (!empty($_POST)) {
 
                 <fieldset>
                     <!-- <label for="tags">Add tags to your project</label> -->
-                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Give it some tags like #branding">
-                    <div class="form-text">Don't forget the famous '#' before your tag</div>
+                    <input type="text" class="form-control" id="tags" name="tags" placeholder="#branding #design">
+                    <div class="form-text">Don't forget the famous '#' before each tag and make sure you don't use a comma</div>
                 </fieldset>
 
                 <fieldset>

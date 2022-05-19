@@ -190,7 +190,7 @@
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-4 d-flex align-content-between flex-wrap">
-                <div>
+                <div id="comments_block">
                     <h3>Comments</h3>
                     <?php if (isset($emptystate)): ?>
                     <p class="">There are no comments for this project.</p>

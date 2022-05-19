@@ -2,8 +2,6 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
 
     console.log("klik");
 
-    
-
     e.preventDefault();
     let postId= e.target.dataset.postid;
     let userId= e.target.dataset.userid;
@@ -13,9 +11,7 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
     console.log(userId);
     console.log(text);
 
-    
-
-      //ajax
+    //ajax
     let data= new FormData();
     data.append("text", text);
     data.append("postid", postId);
@@ -29,8 +25,17 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
     .then(
         data => {
             if(data.status === "success"){
-               // let li= `<li>${data.data.comment}</li>`;
+                let newComment= document.createElement("ul");
+                newComment.classList.add= "list-group list-group-flush";
+                newComment.appendChild
                 document.querySelector("#listupdates").innerHTML += data.data.comment;
+                newComment.innerHTML="<li class='list-group-item d-flex align-items-center border-bottom'>"
+                newComment.innerHTML="<a href='profile.php?p=<?php echo $c['id'];?>''><img src='profile_pictures/<?php echo $c['profile_pic']; ?>' class='img-profile-post'></a>"
+                newComment.innerHTML="<a href='profile.php?p=<?php echo $c['id'];?>''><h4 class='p-2 mb-0'><?php echo $c['username'];?></h4></a>"
+                newComment.innerHTML="<?php echo $c['text']; ?></li>"
+                
+                //document.classList.add = "list-group list-group-flush";
+
                // document.querySelector("#comment").value ="";
             }
         /*result => {
@@ -48,12 +53,10 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
         
             let li= `<ul>${text}</ul>`;
             document.querySelector("#listupdates").innerHTML += li;
-            document.classList.add = "list-group list-group-flush";*/
 
-            //document.querySelector("#comment").value ="";*/
         })
         .catch(error => {
             console.error("error:", error);
-        });
+        });*/
 
-    //});
+    });

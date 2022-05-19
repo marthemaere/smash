@@ -42,7 +42,7 @@
                 <form action="" method="post">
                     <h1 class="py-2">Forgot your racket uh...password?</h1>
                     <?php if (!empty($info)): ?>
-                    <p class="alert alert-info">An email will be send to reset your password.</p>
+                    <p class="alert alert-info">An email will be sent to reset your password.</p>
                     <?php endif; ?>
 
                     <?php if (isset($error)):?>

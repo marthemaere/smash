@@ -111,12 +111,10 @@
                             <p class="alert alert-success"><?php echo $success; ?></p>
                         <?php endif; ?>
                         <!-- EditProfile > ProfilePicture -->
-                        <div class="profile-picture pb-3">
+                        <div class="profile-picture pb-3 d-flex align-items-center">
                             <img src="<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-thumbnail rounded-circle" alt="profile picture">
-                            <a href="#" class="btn btn-primary" id="upload-new-picture">Upload new picture</a>
-                            <div id="upload-file">
                                 <form action="" method="post" enctype="multipart/form-data">
-                                    <fieldset class="">
+                                    <fieldset class="mb-0 mt-3 ps-3">
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="profilePicture" id="profilePicture">
                                             <input type="submit" class="input-group-text" name="submitProfilePicture" value="Upload">
@@ -124,8 +122,6 @@
                                         <div class="form-text">JPG or PNG. Max size of 2MB</div>
                                     </fieldset>
                                 </form>
-                            </div>
-                            <a href="#" class="btn btn-outline-primary">Delete</a>
                         </div>
 
                         <!-- EditProfile > ProfileInfo -->

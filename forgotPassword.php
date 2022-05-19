@@ -4,16 +4,16 @@
     if (!empty($_POST)) {
         $email = $_POST['email'];
         try {
-            $mailer = new Mailer();
-            $mailer->setEmail($_POST['email']);
-            $mailer->hasAccount();
-            if (empty($_POST['email'])) {
-                $error = "Email cannot be empty.";
-            } elseif (!empty($_POST['forgot_password'])) {
-                $mailer->sendPasswordResetEmail();
-                $success = true;
-                // header("Location: passwordMessage.php");
-            }
+           if (Mailer::hasAccount($email)) {
+               if (empty($_POST['email'])) {
+                   $error = "Email cannot be empty.";
+               } elseif (!empty($_POST['forgot_password'])) {
+                  // $mailer->sendPasswordResetEmail();
+                   Mailer::sendMail($email);
+                   $success = true;
+                   // header("Location: passwordMessage.php");
+               }
+           }
         } catch (Throwable $e) {
             $error = $e->getMessage();
         }

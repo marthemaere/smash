@@ -30,7 +30,7 @@
         </div>
         <div class="d-flex justify-content-between align-items-center py-3">
             <p class="text-muted">&nbsp;</p>
-            <p class="text-muted fw-light">Made with love by <a href="https://github.com/Yanellevdb">Yanelle</a>, <a href="https://github.com/Jade-Apers">Jade</a>, <a href="https://github.com/ellendeveth">Ellen</a> & <a href="https://github.com/fgrardi">Fien</a><br> and contributors <a href="https://www.goodbytes.be" title="Freelance web developer Antwerp">GoodBytes</a></p>
+            <p class="text-muted fw-light" style="font-size: 0.8em">Made with love by <a href="https://github.com/Yanellevdb">Yanelle</a>, <a href="https://github.com/Jade-Apers">Jade</a>, <a href="https://github.com/ellendeveth">Ellen</a> & <a href="https://github.com/fgrardi">Fien</a><br> and contributors <a href="https://www.goodbytes.be" title="Freelance web developer Antwerp">GoodBytes</a>, <a href="https://bierebeeck.be/">Robbe</a></p>
         </div>
     </footer>
 </div>

@@ -3,10 +3,6 @@ let btn = document.querySelector(".follow")
 let followerId = btn.dataset.followerid;
 let followingId = btn.dataset.followingid;
 
-if (followerId === followingId) {
-    btn.style.display = "none";
-}
-
 btn.addEventListener("click", (e) => {
     let formData = new FormData();
 

@@ -79,10 +79,12 @@ if (!isset($_SESSION['id'])) {
                         </div>
                         <!-- are you sure alert -->
                         <div class="profile-btn">
-                            <?php if (!$isFollowed) : ?>
-                                <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followingid="<?php echo $key; ?>">Follow</a>
-                            <?php else : ?>
-                                <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followingid="<?php echo $key; ?>">Following</a>
+                            <?php if (!($_SESSION['id'] === $key)): ?>
+                                <?php if (!$isFollowed) : ?>
+                                    <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followingid="<?php echo $key; ?>">Follow</a>
+                                <?php else : ?>
+                                    <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followingid="<?php echo $key; ?>">Following</a>
+                                <?php endif; ?>
                             <?php endif; ?>
 
                             <?php if ($isReported === false) : ?>

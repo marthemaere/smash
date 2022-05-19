@@ -1,4 +1,5 @@
 let smashed = document.querySelectorAll("#smashed");
+console.log(smashed);
 
 smashed.forEach(function (smash) {
   smash.addEventListener("click", function (e) {

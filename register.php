@@ -56,8 +56,7 @@ if (!empty($_POST)) {
                     </div>
 
                     <div class="form-floating my-3">
-                        <input type="text" class="form-control" id="username" placeholder="Username" name="username"
-                            onblur="checkUsername()" />
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username" onblur="checkUsername()" />
                         <span id="username_response"></span>
                         <label for="floatingInput">Username</label>
                     </div>

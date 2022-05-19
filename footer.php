@@ -21,12 +21,14 @@
                     <li class="nav-item"><a href="change-password.php" class="nav-link px-0 text-muted">Change password</a></li>
                 </ul>
             </div>
+            <?php if (isset($_SESSION['id'])): ?>
             <div class="col-sm-12 col-md-2">
                 <h4>Account</h4>
                 <ul class="nav flex-column">
                     <li class="nav-item"><a href="logout.php" class="nav-link px-0 text-muted">Log out</a></li>
                 </ul>
             </div>
+            <?php endif; ?>
         </div>
         <div class="d-flex justify-content-between align-items-center py-3">
             <p class="text-muted">&nbsp;</p>

@@ -1,8 +1,6 @@
 <?php
 include_once(__DIR__.'/../bootstrap.php');
 
-
-
 if (isset($_POST['type']) == 1) {
     $username = $_POST['username'];
     $conn = Db::getInstance();

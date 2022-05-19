@@ -51,14 +51,14 @@ if (!empty($_POST)) {
 
                     <div class="form-floating my-3">
                         <input type="text" class="form-control" id="email" placeholder="your.name@student.thomasmore.be" onblur="checkEmail()" name="email">
-                        <span id="email_response"></span>
+                        <span id="email_response" class="form-text"></span>
                         <label for="floatingInput">Email</label>
                     </div>
 
                     <div class="form-floating my-3">
                         <input type="text" class="form-control" id="username" placeholder="Username" name="username"
                             onblur="checkUsername()" />
-                        <span id="username_response"></span>
+                        <span id="username_response" class="form-text"></span>
                         <label for="floatingInput">Username</label>
                     </div>
 

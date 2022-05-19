@@ -3,7 +3,8 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <a href="#" class="navbar-brand my-2">Smasssh</a>
-                <p class="py-3 pe-5">Smasssh is the educative community for students of Interactive Multimedia Design of Thomas More to share and like projects.</p>
+                <p class="py-3 pe-5">Smasssh is the educative community for students of <a href="https://weareimd.be/?utm_source=smash">Interactive Multimedia Design</a> of <a href="https://www.thomasmore.be/opleidingen/professionele-bachelor/informatiemanagement-en-multimedia/interactive-multimedia-design?utm_source=smash">Thomas More</a> to share and like projects.</p>
+                <p class="">We build cool stuff. Why not study with us?</p>
             </div>
             <div class="col-sm-12 col-md-2">
                 <h4>Pages</h4>
@@ -28,8 +29,8 @@
             </div>
         </div>
         <div class="d-flex justify-content-between align-items-center py-3">
-            <p class="text-muted">&copy; 2022 Smasssh, Inc</p>
-            <p class="text-muted">Made by Yanelle, Jade, Ellen & Fien</p>
+            <p class="text-muted">&nbsp;</p>
+            <p class="text-muted fw-light">Made with love by <a href="https://github.com/Yanellevdb">Yanelle</a>, <a href="https://github.com/Jade-Apers">Jade</a>, <a href="https://github.com/ellendeveth">Ellen</a> & <a href="https://github.com/fgrardi">Fien</a><br> and contributors <a href="https://www.goodbytes.be" title="Freelance web developer Antwerp">GoodBytes</a></p>
         </div>
     </footer>
 </div>

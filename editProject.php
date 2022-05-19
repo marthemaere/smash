@@ -5,29 +5,32 @@ session_start();
 
 if (!isset($_SESSION['id'])) {
     header('Location: login.php');
-} else {
-    $postId =  $_GET['p'];
-    $projectData = Post::getPostDataFromId($postId);
-    $tags = Post::getTagsFromPost($postId);
+}
 
-    if (!empty($_POST['submit'])) {
-        try {
-            $post = new Post();
-            $post->setTitle($_POST['title']);
-            $post->editTitle($postId);
+$postId =  $_GET['p'];
+$projectData = Post::getPostDataFromId($postId);
+$tags = Post::getTagsFromPost($postId);
+
+if ($_SESSION['id'] !== $projectData['user_id']) {
+    header('Location: index.php');
+}
+
+if (!empty($_POST['submit'])) {
+    try {
+        $post = new Post();
+        $post->setTitle($_POST['title']);
+        $post->editTitle($postId);
                             
-            $tags = new Tag();
-            $tags->setTag($_POST['tags']);
-            $tags->editTags($postId);
+        $tags = new Tag();
+        $tags->setTag($_POST['tags']);
+        $tags->editTags($postId);
 
-            header('Location: index.php');
-            echo "oke";
-        } catch (Throwable $e) {
-            $error = $e->getMessage();
-            echo "ni oke";
-        }
+        header('Location: index.php');
+    } catch (Throwable $e) {
+        $error = $e->getMessage();
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

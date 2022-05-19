@@ -40,7 +40,7 @@ if (!empty($_POST)) {
         <div class="register--form col">
             <div class="form form--register">
                 <form action="" method="post">
-                    <h1 class="pb-2">Hi there! Join the community now!</h1>
+                    <h1 class="pb-2">Join the community now!</h1>
                     <!-- <p>*use your Thomas More email address<br>*don't leave any field empty<br>*your password needs to have at least 6 characters</p> -->
 
                     <?php if (isset($error)) : ?>

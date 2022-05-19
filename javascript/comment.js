@@ -25,18 +25,17 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
     .then(
         data => {
             if(data.status === "success"){
-                let newComment= document.createElement("ul");
+                let newComment= document.createElement("li");
+                newComment.classList.add= "list-group-item d-flex border-0 border-bottom align-items-center";
                 let commentText= document.createTextNode(data.data.comment);
+                //let liItem= document.querySelector("#listupdates");
+               // newComment.appendChild(commentText);
+                //newComment.appendChild(liItem);
                 newComment.appendChild(commentText);
-                document.getElementById("listupdates").appendChild(commentText);
-                newComment.classList.add= "list-group list-group-flush";
+
                 //document.querySelector("#listupdates").innerHTML += data.data.comment;
 
-          /*      const node = document.createElement("li");
-const textnode = document.createTextNode("Water");
-node.appendChild(textnode);
-document.getElementById("myList").appendChild(node);*/
-                
+                   
                 //document.classList.add = "list-group list-group-flush";
 
                // document.querySelector("#comment").value ="";

@@ -195,18 +195,22 @@
                     <?php if (isset($emptystate)): ?>
                     <p class="">There are no comments for this project.</p>
                     <?php else: ?>
-                    <?php foreach ($comments as $c): ?>
 
                     <ul class="list-group list-group-flush" id="listupdates">
-                                <li class="list-group-item d-flex align-items-center border-bottom">
+
+                    <?php foreach ($comments as $c): ?>
+
+                                <li class="list-group-item d-flex border-0 border-bottom align-items-center">
                                     <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
                                     <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>">
                                         <h4 class="p-2 mb-0"><?php echo htmlspecialchars($c['username']);?></h4>
                                     </a>
                                     <?php echo $c['text']; ?>
                                 </li>
-                    </ul>
+
                     <?php endforeach; ?>
+
+                    </ul>
 
                     <?php endif; ?>
                     <div class="row d-flex justify-content-between">

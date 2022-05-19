@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <a href="#" class="navbar-brand my-2">Smasssh</a>
-                <p class="py-3 pe-5">Smasssh is the educative community for students of <a href="https://weareimd.be/?utm_source=smash">Interactive Multimedia Design</a> of <a href="https://www.thomasmore.be/opleidingen/professionele-bachelor/informatiemanagement-en-multimedia/interactive-multimedia-design?utm_source=smash">Thomas More</a> to share and like projects.</p>
-                <p class="">We build cool stuff. Why not study with us?</p>
+                <p class="py-3 pe-5">Smasssh is a design community created by and for students of <a href="https://weareimd.be/?utm_source=smash">Interactive Multimedia Design</a> at <a href="https://www.thomasmore.be/opleidingen/professionele-bachelor/informatiemanagement-en-multimedia/interactive-multimedia-design?utm_source=smash">Thomas More</a>.</p>
+                <p class="">We build cool stuff. Why not <a href="https://weareimd.be/?utm_source=smash">study with us</a>?</p>
             </div>
             <div class="col-sm-12 col-md-2">
                 <h4>Pages</h4>

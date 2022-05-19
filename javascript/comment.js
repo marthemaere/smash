@@ -32,7 +32,7 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
                  </a>${text}</li>`;
                  document.querySelector("#listupdates").innerHTML += li;
                 }
-        
+          
     })
     
         .catch(error => {

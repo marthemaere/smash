@@ -26,13 +26,16 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
         data => {
             if(data.status === "success"){
                 let newComment= document.createElement("ul");
+                let commentText= document.createTextNode(data.data.comment);
+                newComment.appendChild(commentText);
+                document.getElementById("listupdates").appendChild(commentText);
                 newComment.classList.add= "list-group list-group-flush";
-                newComment.appendChild
-                document.querySelector("#listupdates").innerHTML += data.data.comment;
-                newComment.innerHTML="<li class='list-group-item d-flex align-items-center border-bottom'>"
-                newComment.innerHTML="<a href='profile.php?p=<?php echo $c['id'];?>''><img src='profile_pictures/<?php echo $c['profile_pic']; ?>' class='img-profile-post'></a>"
-                newComment.innerHTML="<a href='profile.php?p=<?php echo $c['id'];?>''><h4 class='p-2 mb-0'><?php echo $c['username'];?></h4></a>"
-                newComment.innerHTML="<?php echo $c['text']; ?></li>"
+                //document.querySelector("#listupdates").innerHTML += data.data.comment;
+
+          /*      const node = document.createElement("li");
+const textnode = document.createTextNode("Water");
+node.appendChild(textnode);
+document.getElementById("myList").appendChild(node);*/
                 
                 //document.classList.add = "list-group list-group-flush";
 

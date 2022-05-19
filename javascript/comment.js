@@ -25,20 +25,9 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
     .then(
         data => {
             if(data.status === "success"){
-                let newComment= document.createElement("li");
-                newComment.classList.add= "list-group-item d-flex border-0 border-bottom align-items-center";
-                let commentText= document.createTextNode(data.data.comment);
-                //let liItem= document.querySelector("#listupdates");
-               // newComment.appendChild(commentText);
-                //newComment.appendChild(liItem);
-                newComment.appendChild(commentText);
+                 let li= `<li class="list-group-item d-flex border-0 border-bottom align-items-center">${text}</li>`;
+                 document.querySelector("#listupdates").innerHTML += li;
 
-                //document.querySelector("#listupdates").innerHTML += data.data.comment;
-
-                   
-                //document.classList.add = "list-group list-group-flush";
-
-               // document.querySelector("#comment").value ="";
             }
         /*result => {
         let newComment= document.createElement('li');
@@ -56,9 +45,9 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
             let li= `<ul>${text}</ul>`;
             document.querySelector("#listupdates").innerHTML += li;
 
-        })
+        })*/
         .catch(error => {
             console.error("error:", error);
-        });*/
+        });
 
     });

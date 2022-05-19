@@ -51,7 +51,7 @@ class Mailer
             $code = uniqid(true);
 
             if (getenv('POSTMARK_TOKEN')) {
-                $client = new PostmarkClient('POSTMARK_TOKEN');
+                $client = new PostmarkClient(getenv('POSTMARK_TOKEN'));
             } else {
                 $config = parse_ini_file(__DIR__ . "/../config/postmark.ini");
                 $client = new PostmarkClient($config['key']);

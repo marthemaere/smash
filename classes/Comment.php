@@ -77,8 +77,9 @@
             $statement->bindValue(":post_id", $postId);
             $statement->bindValue(":user_id", $userId);
 
-            $result= $statement->execute();
-            return $result;
+            $statement->execute();
+            $user= new User();
+            return $user::getUserDataFromId($userId);
         }
 
         public static function getCommentsFromPostId($id)

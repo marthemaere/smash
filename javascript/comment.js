@@ -25,27 +25,16 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
     .then(
         data => {
             if(data.status === "success"){
-                 let li= `<li class="list-group-item d-flex border-0 border-bottom align-items-center">${text}</li>`;
+                console.log(data.data);
+                 let li= `<li class="list-group-item d-flex border-0 border-bottom align-items-center"><a href="profile.php?p=${data.data.user['id']}"><img src="profile_pictures/${data.data.user['profile_pic']}" class="img-profile-post"></a>
+                 <a href="profile.php?p=${data.data.user['id']}">
+                     <h4 class="p-2 mb-0">${data.data.user['username']}</h4>
+                 </a>${text}</li>`;
                  document.querySelector("#listupdates").innerHTML += li;
-
-            }
-        /*result => {
-        let newComment= document.createElement('li');
-        newComment.innerHTML= result.body;
-        document.querySelector("#listupdates").appendChild(newComment);
-        console.log(result.body);*/
-    })
-    /*
-        .then(result => {
-            /*
-            let li= document.createElement('li');
-            li.innerHTML= result.body;
-            document.querySelector("#listupdates").innerHTML += li;
+                }
         
-            let li= `<ul>${text}</ul>`;
-            document.querySelector("#listupdates").innerHTML += li;
-
-        })*/
+    })
+    
         .catch(error => {
             console.error("error:", error);
         });

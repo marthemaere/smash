@@ -13,14 +13,14 @@
             $c->setText($text);
             $c->setPostId($postId);
             $c->setUserId($userId);
-            $c->save();
+            $result= $c->save();
 
             // success
             $response = [
                 "status" => "success",
                 "message" => "Comment was saved.", 
                 "data" => [
-                    "comment" => htmlspecialchars($text)
+                    "user"=> $result
                 ]
             ];
 

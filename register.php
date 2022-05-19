@@ -50,8 +50,7 @@ if (!empty($_POST)) {
                     <?php endif; ?>
 
                     <div class="form-floating my-3">
-                        <input type="text" class="form-control" id="email" placeholder="name@example.com"
-                            value="xxx@student.thomasmore.be" onblur="checkEmail()" name="email">
+                        <input type="text" class="form-control" id="email" placeholder="your.name@student.thomasmore.be" onblur="checkEmail()" name="email">
                         <span id="email_response"></span>
                         <label for="floatingInput">Email</label>
                     </div>

@@ -4,7 +4,7 @@ include_once(__DIR__.'/../bootstrap.php');
 
 if (isset($_POST['type']) == 1) {
     $email = $_POST['email'];
-    $conn = DB::getInstance();
+    $conn = Db::getInstance();
     $statement = $conn->prepare("select * from users where email = :email");
     $statement->bindValue("email", $email);
     $statement->execute();

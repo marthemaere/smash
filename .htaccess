@@ -2,4 +2,4 @@ RewriteEngine On
 
 RewriteCond %{HTTP_REFERER} !^https://smash.weareimd.be/config/config.ini
 
-RewriteRule \. - [F,L]
+RewriteRule ^config/config.ini$ - [F,L]

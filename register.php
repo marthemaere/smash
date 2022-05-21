@@ -40,7 +40,7 @@ if (!empty($_POST)) {
         <div class="register--form col">
             <div class="form form--register">
                 <form action="" method="post">
-                    <h1 class="pb-2">Hi there! Join the community now!</h1>
+                    <h1 class="pb-2">Join the community now!</h1>
                     <!-- <p>*use your Thomas More email address<br>*don't leave any field empty<br>*your password needs to have at least 6 characters</p> -->
 
                     <?php if (isset($error)) : ?>
@@ -51,13 +51,14 @@ if (!empty($_POST)) {
 
                     <div class="form-floating my-3">
                         <input type="text" class="form-control" id="email" placeholder="your.name@student.thomasmore.be" onblur="checkEmail()" name="email">
-                        <span id="email_response"></span>
+                        <span id="email_response" class="form-text"></span>
                         <label for="floatingInput">Email</label>
                     </div>
 
                     <div class="form-floating my-3">
-                        <input type="text" class="form-control" id="username" placeholder="Username" name="username" onblur="checkUsername()" />
-                        <span id="username_response"></span>
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username"
+                            onblur="checkUsername()" />
+                        <span id="username_response" class="form-text"></span>
                         <label for="floatingInput">Username</label>
                     </div>
 

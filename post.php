@@ -190,30 +190,34 @@
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-4 d-flex align-content-between flex-wrap">
-                <div>
+                <div id="comments_block">
                     <h3>Comments</h3>
                     <?php if (isset($emptystate)): ?>
                     <p class="">There are no comments for this project.</p>
                     <?php else: ?>
-                    <?php foreach ($comments as $c): ?>
 
                     <ul class="list-group list-group-flush" id="listupdates">
-                                <li class="list-group-item d-flex align-items-center border-bottom">
+
+                    <?php foreach ($comments as $c): ?>
+
+                                <li class="list-group-item d-flex border-0 border-bottom align-items-center">
                                     <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
                                     <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>">
                                         <h4 class="p-2 mb-0"><?php echo htmlspecialchars($c['username']);?></h4>
                                     </a>
                                     <?php echo $c['text']; ?>
                                 </li>
-                    </ul>
+
                     <?php endforeach; ?>
+
+                    </ul>
 
                     <?php endif; ?>
                     <div class="row d-flex justify-content-between">
                         <form class="p-3" action="" method="post">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Place a comment" aria-label="Place a comment" aria-describedby="button-addon2" id="comment" name="comment">
-                                <input type="submit" name="addComment" id="btnSubmit" data-userid="<?php echo $userId ?>" data-postid="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >
+                                <input type="text" class="form-control" placeholder="Place a comment" aria-label="Place a comment" aria-describedby="button-addon2" id="comment" name="text">
+                                <input type="submit" name="text" id="btnSubmit" data-userid="<?php echo $userId ?>" data-postid="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >
                             </div>
                         </form>
                     </div>

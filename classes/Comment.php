@@ -77,14 +77,15 @@
             $statement->bindValue(":post_id", $postId);
             $statement->bindValue(":user_id", $userId);
 
-            $result= $statement->execute();
-            return $result;
+            $statement->execute();
+            $user= new User();
+            return $user::getUserDataFromId($userId);
         }
 
         public static function getCommentsFromPostId($id)
         {
             $db = Db::getInstance();
-            $stmt = $db->prepare("SELECT * FROM comments INNER JOIN users on comments.user_id = users.id WHERE post_id = :id");
+            $stmt = $db->prepare("SELECT * FROM comments INNER JOIN users on comments.user_id = users.id WHERE post_id = :id ORDER BY comments.id ASC");
             $stmt->bindParam(":id", $id);
             $stmt->execute();
             $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);

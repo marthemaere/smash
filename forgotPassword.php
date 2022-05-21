@@ -4,18 +4,16 @@
     if (!empty($_POST)) {
         $email = $_POST['email'];
         try {
-            $mailer = new Mailer();
-            $mailer->setEmail($_POST['email']);
-            $mailer->hasAccount();
-            if (empty($_POST['email'])) {
-                $error = "Email cannot be empty.";
-                $info = false;
-            } elseif (!empty($_POST['forgot_password'])) {
-                $mailer->sendPasswordResetEmail();
-                $success = true;
-                $info = false;
-                // header("Location: passwordMessage.php");
-            }
+           if (Mailer::hasAccount($email)) {
+               if (empty($_POST['email'])) {
+                   $error = "Email cannot be empty.";
+               } elseif (!empty($_POST['forgot_password'])) {
+                  // $mailer->sendPasswordResetEmail();
+                   Mailer::sendMail($email);
+                   $success = true;
+                   // header("Location: passwordMessage.php");
+               }
+           }
         } catch (Throwable $e) {
             $error = $e->getMessage();
         }
@@ -40,11 +38,7 @@
                 <a href="login.php" class="link-dark">Go back</a>
 
                 <form action="" method="post">
-                    <h1 class="py-2">Forgot your racket uh...password?</h1>
-                    <?php if (!empty($info)): ?>
-                    <p class="alert alert-info">An email will be send to reset your password.</p>
-                    <?php endif; ?>
-
+                    <h1 class="py-2">Forgot your racket uh... password?</h1>
                     <?php if (isset($error)):?>
                     <div class="alert alert-danger">
                         <p><?php echo $error; ?></p>

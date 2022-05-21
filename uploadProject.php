@@ -2,6 +2,9 @@
 include_once("bootstrap.php");
 
 session_start();
+if (!isset($_SESSION['id'])) {
+    header('Location: login.php');
+}
 
 if (!empty($_POST)) {
     try {

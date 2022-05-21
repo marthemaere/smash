@@ -173,7 +173,7 @@
                             <a href="register.php">
                                 <h2><?php echo $p['title']; ?></h2>
                             </a>
-                            <p class="pe-4 max-num-of-lines"><?php echo $p['description']; ?></p>
+                            <p class="pe-4 mb-1 max-num-of-lines"><?php echo $p['description']; ?></p>
                             <?php foreach ($tags as $tag): ?>
                                 <span class="link-primary"><?php echo $tag['tag']; ?></span>
                             <?php endforeach; ?>

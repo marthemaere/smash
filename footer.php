@@ -10,7 +10,11 @@
                 <h4>Pages</h4>
                 <ul class="nav flex-column">
                     <li class="nav-item"><a href="index.php" class="nav-link px-0 text-muted">Home</a></li>
-                    <li class="nav-item"><a href="profile.php?p=<?php echo $userDataFromId['id']; ?>" class="nav-link px-0 text-muted">Profile</a></li>
+                    <?php if (isset($_SESSION['id'])): ?>
+                        <li class="nav-item"><a href="profile.php?p=<?php echo $userDataFromId['id']; ?>" class="nav-link px-0 text-muted">Profile</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a href="login.php" class="nav-link px-0 text-muted">Profile</a></li>
+                    <?php endif; ?>
                 </ul>
             </div>
             <div class="col-sm-12 col-md-2">

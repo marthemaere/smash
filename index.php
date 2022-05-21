@@ -43,8 +43,8 @@
     }
 
     if (!empty($_POST['tag'])) {
-        $tag = $_POST['tag'];
-        $posts = Tag::filterPostsByTag($tag);
+        $filteredTag = $_POST['tag'];
+        $posts = Tag::filterPostsByTag($filteredTag);
         $filtered = true;
     }
     
@@ -126,7 +126,7 @@
 
         <?php if (!empty($filtered)): ?>
             <div class="d-flex mt-5 ms-3 me-3 alert alert-dark bg-light">
-                <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo $tag; ?></span></p>
+                <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo $filteredTag; ?></span></p>
             </div>
         <?php endif; ?>
 

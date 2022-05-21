@@ -11,11 +11,7 @@ function emailCheck() {
   })
     .then((response) => response.json())
     .then((result) => {
-      if (result.availability === 1) {
-        emailresponse.textContent = "Email available";
-        emailresponse.style.color = "green";
-        //emailresponse.classList.add("status-available");
-      } else if (result.availability === 0) {
+    if (result.availability === 0) {
         emailresponse.textContent = "Email unavailable";
         emailresponse.style.color = "red";
         //emailresponse.classList.add("status-not-available");
@@ -44,11 +40,7 @@ function usernameCheck() {
   })
     .then((response) => response.json())
     .then((result) => {
-      if (result.availability === 1) {
-        usernameresponse.textContent = "Username available";
-        usernameresponse.style.color = "green";
-       // usernameresponse.classList.add("status-available ");
-      } else if (result.availability === 0) {
+   if (result.availability === 0) {
         usernameresponse.textContent = "Username unavailable";
         usernameresponse.style.color = "red";
         //usernameresponse.classList.add("status-not-available");

@@ -26,17 +26,34 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
         data => {
             if(data.status === "success"){
                 console.log(data.data);
+                console.log(data.status);
+                let empty= document.querySelector(".emptystate");
+                let notEmpty= document.querySelector("#listupdates");
+                if(empty !== 'undefined'){
+                    let li= `<li class="list-group-item d-flex border-0 border-bottom align-items-center"><a href="profile.php?p=${data.data.user['id']}"><img src="profile_pictures/${data.data.user['profile_pic']}" class="img-profile-post"></a>
+                    <a href="profile.php?p=${data.data.user['id']}">
+                        <h4 class="p-2 mb-0">${data.data.user['username']}</h4>
+                    </a>${text}</li>`;
+                    document.querySelector("#liststart").innerHTML += li;
+                } else {
+
                  let li= `<li class="list-group-item d-flex border-0 border-bottom align-items-center"><a href="profile.php?p=${data.data.user['id']}"><img src="profile_pictures/${data.data.user['profile_pic']}" class="img-profile-post"></a>
                  <a href="profile.php?p=${data.data.user['id']}">
                      <h4 class="p-2 mb-0">${data.data.user['username']}</h4>
                  </a>${text}</li>`;
                  document.querySelector("#listupdates").innerHTML += li;
                 }
+              /*   let lijst= document.createElement('ul');
+                 let block= document.querySelector("#comment_block");
+                 block.appendChild(lijst);
+                 document.querySelector(lijst).innerHTML += li;*/
+                }
         
     })
     
-        .catch(error => {
+       /* .catch(error => {
             console.error("error:", error);
-        });
+        });*/
+
 
     });

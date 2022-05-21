@@ -193,7 +193,9 @@
                 <div id="comments_block">
                     <h3>Comments</h3>
                     <?php if (isset($emptystate)): ?>
-                    <p class="">There are no comments for this project.</p>
+                    <p class="emptystate">There are no comments for this project.</p>
+                    <ul class="list-group list-group-flush" id="liststart">
+                    </ul>
                     <?php else: ?>
 
                     <ul class="list-group list-group-flush" id="listupdates">

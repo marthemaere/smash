@@ -13,10 +13,14 @@ function emailCheck() {
     .then((result) => {
       if (result.availability === 1) {
         emailresponse.textContent = "Email available";
+        emailresponse.style.color = "green";
         //emailresponse.classList.add("status-available");
-      } else {
+      } else if (result.availability === 0) {
         emailresponse.textContent = "Email unavailable";
+        emailresponse.style.color = "red";
         //emailresponse.classList.add("status-not-available");
+      } else {
+        emailresponse.textContent = " ";
       }
       console.log("Success:", result);
     })
@@ -25,12 +29,10 @@ function emailCheck() {
     });
 }
 
-
 function usernameCheck() {
   let username = document.querySelector("#username").value;
   let usernameresponse = document.getElementById("usernameresponse");
   console.log(usernameresponse);
-
 
   let formData = new FormData();
   formData.append("username", username);
@@ -44,12 +46,14 @@ function usernameCheck() {
     .then((result) => {
       if (result.availability === 1) {
         usernameresponse.textContent = "Username available";
-        usernameresponse.fontcolor("Green");
-        //usernameresponse.classList.add("status-available ");
-        console.log(usernameresponse);
-      } else {
+        usernameresponse.style.color = "green";
+       // usernameresponse.classList.add("status-available ");
+      } else if (result.availability === 0) {
         usernameresponse.textContent = "Username unavailable";
+        usernameresponse.style.color = "red";
         //usernameresponse.classList.add("status-not-available");
+      } else {
+        usernameresponse.textContent = " ";
       }
       console.log("Success:", result);
     })
@@ -57,7 +61,3 @@ function usernameCheck() {
       console.log("Error:", error);
     });
 }
-
-
-
-

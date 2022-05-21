@@ -230,17 +230,33 @@ class User
         return $result['id'];
     }
 
-    public function checkUsername()
+    public function checkUsernameAvailability()
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("select COUNT(*) from users where username = :username");
-        $statement->bindValue(':username', $this->username);
+        $statement->bindValue(":username", $this->username);
         $statement->execute();
         $result = $statement->fetch();
-        if ($result != 0) {
-            return false;
-        } else {
+        if ($result != 1) {
             return true;
+        } else {
+            return false;
+        }
+        return $result;
+    }
+
+
+    public function checkEmailAvailability()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select COUNT(*) from users where email = :email");
+        $statement->bindValue(':email', $this->email);
+        $statement->execute();
+        $result = $statement->fetch();
+        if ($result != 1) {
+            return true;
+        } else {
+            return false;
         }
         return $result;
     }

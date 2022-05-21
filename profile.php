@@ -122,36 +122,30 @@ if (!isset($_SESSION['id'])) {
                 </form>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 project--item--latest">
-            <?php if (empty($emptyState)) : ?>
-                <a href="post.php?p=<?php echo $userPosts[0]['id']?>">
-                    <img class="" src="<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
-                </a>
-            <?php endif; ?>
+                <?php if (empty($emptyState)) : ?>
+                    <a href="post.php?p=<?php echo $userPosts[0]['id']?>">
+                        <img class="" src="<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
+                    </a>
+                <?php else: ?>
+                    <img class="profile-empty-state d-flex justify-content-center" src="assets/images/empty-state-weareimd.png" alt="latest posts">
+                <?php endif; ?>
             </div>
         </div>
-        <div>
-            <div class="d-flex header mr-auto p-2 ">
-                <div class="">
-                    <h3>All projects</h3>
+        <?php if (empty($emptyState)) : ?>
+            <div>
+                <div class="d-flex header mr-auto p-2 ">
+                    <div class="">
+                        <h3>All projects</h3>
+                    </div>
+                    <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" name="smashedprojects" class="btn btn-outline-primary">My featured projects</a></div>
                 </div>
-                <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" name="smashedprojects" class="btn btn-outline-primary">My featured projects</a></div>
-            </div>
-            <?php if (!empty($emptyState)) : ?>
-                <div class="empty-state flex-column m-3">
-                    <img class="d-block mx-auto" src="assets/images/empty-state.png" alt="emptystate">
-                    <h3 class="text-center py-4">Nothing to see here...</h3>
-                </div>
-            <?php else : ?>
+            
                 <div class="row">
                     <?php foreach ($userPosts as $post) : ?>
                         <?php
                         $smash = new Post();
                         $smash->setPostId($post['id']);
                         $isSmashed = $smash->isSmashed();
-                       // var_dump($post['id']);
-                        //var_dump($isSmashed);
-                        // var_dump($isSmashed);
-                        //var_dump($smash);
 
                         $like = new Like();
                         $like->setPostId($post['id']);
@@ -208,8 +202,8 @@ if (!isset($_SESSION['id'])) {
                         </div>
                     <?php endforeach; ?>
                 </div>
-            <?php endif; ?>
-        </div>
+            </div>
+        <?php endif; ?>
     </div>
 
     <?php echo include_once('footer.php'); ?>

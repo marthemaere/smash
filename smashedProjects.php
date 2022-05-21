@@ -98,9 +98,8 @@ if (empty($posts)) {
             </div>
 
             <?php if (!empty($emptyState)) : ?>
-                <div class="empty-state flex-column">
-                    <img class="d-block mx-auto" src="assets/images/empty-state.png" alt="emptystate">
-                    <h3 class="text-center py-4">Nothing to see here...</h3>
+                <div class="empty-state">
+                    <img class="d-block mx-auto" src="assets/images/empty-state-weareimd.png" alt="empty state">
                 </div>
             <?php else : ?>
                 <div class="row justify-content-start">

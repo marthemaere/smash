@@ -144,9 +144,8 @@
         <?php endif; ?>
 
         <?php if (isset($emptystate)): ?>
-            <div class="empty-state flex-column">
-                <img class="d-block mx-auto" src="assets/images/empty-state.png" alt="emptystate">
-                <h3 class="text-center py-4">Nothing to see here...</h3>
+            <div class="empty-state">
+                <img class="d-block mx-auto" src="assets/images/empty-state-weareimd.png" alt="empty state">
             </div>
         <?php endif; ?>
 

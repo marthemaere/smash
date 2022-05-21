@@ -95,12 +95,19 @@ fieldset {
 
 /* ------EmptyStates------ */
 .empty-state {
-    margin-top: 12%;
+    margin-top: 7%;
+    margin-bottom: 5%;
 }
 
 .empty-state img {
     width: 30%;
     height: auto;
+}
+
+.profile-empty-state {
+    width: auto !important;
+    height: 100% !important;
+    margin: 0 auto !important;
 }
 
 .status-available{

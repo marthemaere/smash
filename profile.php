@@ -22,7 +22,7 @@ if (!isset($_SESSION['id'])) {
     $isFollowed = $follower->isFollowedByUser();
 
     if (empty($userPosts)) {
-        $emptyState;
+        $emptyState = true;
     }
 }
 
@@ -107,9 +107,11 @@ if (!isset($_SESSION['id'])) {
                 </form>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 project--item--latest">
+            <?php if (empty($emptyState)) : ?>
                 <a href="post.php?p=<?php echo $userPosts[0]['id']?>">
                     <img class="" src="<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
                 </a>
+            <?php endif; ?>
             </div>
         </div>
         <div>
@@ -119,7 +121,7 @@ if (!isset($_SESSION['id'])) {
                 </div>
                 <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" name="smashedprojects" class="btn btn-outline-primary">My featured projects</a></div>
             </div>
-            <?php if (isset($emptyState)) : ?>
+            <?php if (!empty($emptyState)) : ?>
                 <div class="empty-state flex-column m-3">
                     <img class="d-block mx-auto" src="assets/images/empty-state.png" alt="emptystate">
                     <h3 class="text-center py-4">Nothing to see here...</h3>

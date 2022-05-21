@@ -178,6 +178,11 @@ p.num-of-likes {
 .notLiked:hover {
     width: 20px;
 }
+
+.emptyComment {
+    display: block;
+}
+
 /* ------MediaQueries------ */
 
 @media (max-width: 992px) {

@@ -14,13 +14,15 @@
             $c->setPostId($postId);
             $c->setUserId($userId);
             $result= $c->save();
+            $notEmpty= $c->getCommentsFromPostId($postId);
 
             // success
             $response = [
                 "status" => "success",
                 "message" => "Comment was saved.", 
                 "data" => [
-                    "user"=> $result
+                    "user"=> $result, 
+                    "comments"=> $notEmpty
                 ]
             ];
 

@@ -121,7 +121,7 @@
             <?php endif; ?>
 
             <div class="filter-btn">
-                <a href="#" class="px-2 btn btn-outline-primary">Filters</a>
+                <p class="d-none"></p>
             </div>
         </div>
 

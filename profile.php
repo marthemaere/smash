@@ -57,7 +57,7 @@ if (!isset($_SESSION['id'])) {
                 <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • 
 
                 <?php if (($_SESSION['id'])): ?>
-                <?php if ( $countFollowers["COUNT(id)"] === "0"): ?>
+                <?php if ($countFollowers["COUNT(id)"] === "0"): ?>
                        <span> no followers yet </span></p>
                 <?php elseif ($countFollowers['COUNT(id)'] === "1"): ?>
                     <span> <?php echo $countFollowers["COUNT(id)"] ?> follower</span></p>
@@ -206,7 +206,8 @@ if (!isset($_SESSION['id'])) {
         <?php endif; ?>
     </div>
 
-    <?php echo include_once('footer.php'); ?>
+    <?php include_once('footer.php'); ?>
+    
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="javascript/follow.js"></script>
     <script src="javascript/report-user.js"></script>

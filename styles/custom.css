@@ -103,6 +103,10 @@ fieldset {
     height: auto;
 }
 
+.status-available{
+    color:green;
+}
+
 /* ------UploadProjects------ */
 
 .upload-intro {

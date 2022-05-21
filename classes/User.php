@@ -233,14 +233,14 @@ class User
     public function checkUsernameAvailability()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select COUNT(*) from users where username = :username");
+        $statement = $conn->prepare("select * from users where username = :username");
         $statement->bindValue(":username", $this->username);
         $statement->execute();
         $result = $statement->fetch();
-        if ($result != 1) {
-            return true;
-        } else {
+        if ($result != null) {
             return false;
+        } else {
+            return true;
         }
         return $result;
     }
@@ -249,14 +249,14 @@ class User
     public function checkEmailAvailability()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select COUNT(*) from users where email = :email");
+        $statement = $conn->prepare("select * from users where email = :email");
         $statement->bindValue(':email', $this->email);
         $statement->execute();
         $result = $statement->fetch();
-        if ($result != 1) {
-            return true;
-        } else {
+        if ($result != null) {
             return false;
+        } else {
+            return true;
         }
         return $result;
     }

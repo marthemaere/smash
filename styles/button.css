@@ -123,3 +123,11 @@ a:hover {
     background-color: #16CF83;
     border-color: #16CF83;
 }
+
+input[type="submit"] {
+    background-color: transparent;
+}
+
+input[type="submit"]:hover {
+    font-weight: 600;
+}

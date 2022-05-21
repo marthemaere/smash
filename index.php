@@ -16,16 +16,15 @@
     $sorting = 'DESC';
     $posts = Post::getPosts($sorting, $start, $limit);
 
-    $popularTags = Post::filterByPopularTags();
+    $sortPopularTags = Tag::sortPopularTagsDesc();
     
-
-
+    
     $conn = Db::getInstance();
     $result = $conn->query("select count(id) AS id from posts");
     $postCount= $result->fetchAll();
     $total= $postCount[0]['id'];
     $pages= ceil($total / $limit);
-
+    
     if (!empty($_POST['submit-search'])) {
         $search = $_POST['search'];
         $posts = Post::search($search);
@@ -41,13 +40,19 @@
     } elseif (!empty($_POST['following'])) {
         $posts = Post::filterPostsByFollowing($start, $limit);
     }
-
+    
     if (!empty($_POST['tag'])) {
         $filteredTag = $_POST['tag'];
         $posts = Tag::filterPostsByTag($filteredTag);
         $filtered = true;
     }
     
+    if (!empty($_POST['submitPopularTag'])) {
+        $popularTag = $_POST['submitPopularTag'];
+        $posts = Tag::filterPostsByPopularTag($popularTag);
+        $filteredPopularTag = true;
+    }
+
     if (empty($posts)) {
         $emptystate = true;
     }
@@ -104,11 +109,13 @@
                 </ul>
             </div>
 
-            <?php if (!empty($popularTags)): ?>
+            <?php if (!empty($sortPopularTags)): ?>
                 <div class="filter-tags">
                     <a href="#" class="px-2 btn btn-light">All</a>
-                    <?php foreach ($popularTags as $tag): ?>
-                        <a href="#" class="px-1 text-muted"><?php echo $tag['tag'] ?></a>
+                    <?php foreach ($sortPopularTags as $pTag): ?>
+                        <form action="" method="POST" class="d-inline px-1">
+                            <input href="#" type="submit" class="bg-transparant border-0 p-0" value="<?php echo $pTag['tag'];?>" name="submitPopularTag"></input>
+                        </form>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
@@ -127,6 +134,12 @@
         <?php if (!empty($filtered)): ?>
             <div class="d-flex mt-5 ms-3 me-3 alert alert-dark bg-light">
                 <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo $filteredTag; ?></span></p>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($filteredPopularTag)): ?>
+            <div class="d-flex mt-5 ms-3 me-3 alert alert-dark bg-light">
+                <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo $popularTag; ?></span></p>
             </div>
         <?php endif; ?>
 

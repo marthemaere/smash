@@ -73,4 +73,23 @@ class Tag
         $result = $statement->fetchAll();
         return $result;
     }
+
+    public static function sortPopularTagsDesc()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT tag, COUNT(tag) FROM tags GROUP BY tag HAVING COUNT(tag) > 1 ORDER BY COUNT(tag) DESC LIMIT 5");
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
+
+    public static function filterPostsByPopularTag($popularTag)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT * FROM posts INNER JOIN users on posts.user_id = users.id INNER JOIN tags ON posts.id = tags.post_id WHERE tags.tag = :tag");
+        $statement->bindValue(':tag', $popularTag);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    }
 }

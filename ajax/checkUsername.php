@@ -1,16 +1,37 @@
 <?php
-include_once(__DIR__.'/../bootstrap.php');
+include_once(__DIR__ . '/../bootstrap.php');
 
-if (isset($_POST['type']) == 1) {
-    $username = $_POST['username'];
-    $conn = Db::getInstance();
-    $statement = $conn->prepare("select * from users where username = :username");
-    $statement->bindValue("username", $username);
-    $result = $statement->execute();
-    $rowcount = $statement->rowCount();
-    if ($rowcount > 0) {
-        echo "<span style='color: red;' class='status-not-available'> Username Not Available.</span>";
-    } else {
-        echo "<span style='color: green'; class='status-available'> Username Available.</span>";
+if (!empty($_POST)) {
+    try {
+        $username = intval(($_POST['username']));
+
+        $users = new User();
+        $users->setUsername($username);
+        var_dump($username);
+        
+
+        if ($users->checkUsername()) {
+            $response = [
+                "status" => "success",
+                "username" => $username,
+                'availability' => 0,
+                "message" => "Username available."
+            ];
+        } else {
+            $response = [
+                "status" => "success",
+                "username" => $username,
+                'availability' => 1,
+                'message' => "Username unavailable."
+              
+            ];
+        }
+    } catch (Exception $e) {
+        $response = [
+            "status" => "error",
+            "message" => "Cannot check username."
+        ];
     }
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }

@@ -1,52 +1,29 @@
-function checkUsername(){
+function usernameCheck() {
+  let username = document.querySelector("#username").value;
+  console.log(username);
+  let usernameresponse = document.querySelector("#username_response");
+  console.log(username);
 
+  let formData = new FormData();
+  formData.append("username", username);
+  console.log(username);
 
-    let username = document.querySelector("#username");
-    let usernameresponse = document.querySelector("#username_response");
-    console.log(username); 
-    console.log(usernameresponse); 
-    
-    
-    fetch("ajax/checkUsername.php",{
-        method: 'POST',
-        username:username,
-        type: 1,
-        cache: false
+  fetch("ajax/checkUsername.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      if (result.availability === 1) {
+        usernameresponse.text = "Username unavailable";
+        usernameresponse.classList.add("status-not-available");
+      } else {
+        usernameresponse.text = "Smash available";
+        usernameresponse.classList.add("status-available");
+      }
+      console.log("Success:", result);
     })
-    .then((response)=> response.json())
-    .then((result) =>{
-        result = usernameresponse.html(type);
-    })
+    .catch((error) => {
+      console.log("Error:", error);
+    });
 }
-
-//     $.ajax({
-//         type:"POST",
-//         url:"ajax/checkUsername.php",
-//         cache:false,
-//         data:{
-//             type:1,
-//             username:$("#username").val(),
-//         },
-//         success:function(data){
-//             $("#username_response").html(data);
-//         }
-//     });
-// }
-
-
-// function checkEmail(){
-
-//     $.ajax({
-//         type:"POST",
-//         url:"ajax/checkEmail.php",
-//         cache:false,
-//         data:{
-//             type:1,
-//             email:$("#email").val(),
-//         },
-//         success:function(data){
-//             $("#email_response").html(data);
-//         }
-//     });
-    
-// }

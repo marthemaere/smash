@@ -12,6 +12,7 @@ smashed.forEach(function (smash) {
     let formData = new FormData();
     formData.append("postid", smashedPost);
     formData.append("userid", smashedUser);
+    console.log(smashedPost);
 
     fetch("ajax/smash_project.php", {
       method: "POST",

@@ -52,7 +52,7 @@ nav .img-thumbnail {
 }
 
 .register--image, .login--image, .reset--image {
-    background-color: #C3B7FF;
+    background-color: #BFFD00;
 }
 
 .register--form, .login--form, .reset--form, .upload--form {
@@ -75,7 +75,7 @@ nav .img-thumbnail {
 
 .list-group-item.active {
     color: black;
-    background-color: #C3B7FF;
+    background-color: #FCD7F7;
     border: 1px solid black;
 }
 

@@ -13,7 +13,9 @@
                 $_SESSION['id'] = $id;
                 $_SESSION['email']= $user->getEmail();
 
-
+                $_SESSION['auth']= true; 
+                $_SESSION['start']= time();
+                $_SESSION['expire']= $_SESSION['start']+ (60*60*24*7); //1 week session 
                 header("Location: index.php");
             }
         } catch (\Throwable $e) {

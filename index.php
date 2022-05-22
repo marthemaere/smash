@@ -7,18 +7,21 @@
     if (isset($_SESSION['id'])) {
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
-    } else {
-        $_SESSION['auth']= true; 
-                $_SESSION['start']= time();
-                $_SESSION['expire']= $_SESSION['start']+ (1*60); //1 minuut trial 
-                
+       // echo "session started";
+    } 
+    
+    if (!$_SESSION['auth']) {
+        //echo "no session";
+    }
+    else {
         $currentTime= time();
-        if($currentTime > $_SESSION['expire']){
+        if ($currentTime > $_SESSION['expire']) {
             session_unset();
             session_destroy();
-            header ('location: login.php');
+          //  echo "session stopped";
         }
     }
+       // else {
 
     $sort = "Newest First";
     $limit = 15;
@@ -73,6 +76,9 @@
     if (empty($posts)) {
         $emptystate = true;
     }
+
+//}
+//}
 
 ?><!DOCTYPE html>
 <html lang="en">

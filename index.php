@@ -9,6 +9,7 @@
         $userDataFromId = User::getUserDataFromId($sessionId);
     }
 
+    $sort = "Newest First";
     $limit = 15;
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $start = ($page -1) * $limit;
@@ -25,33 +26,38 @@
     $total= $postCount[0]['id'];
     $pages= ceil($total / $limit);
     
-    if (!empty($_POST['submit-search'])) {
-        $search = $_POST['search'];
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $_GET['search'];
         $posts = Post::search($search);
         $searched = true;
     }
     
-    if (!empty($_POST['ASC'])) {
-        $sorting = 'ASC';
-        $posts = Post::getPosts($sorting, $start, $limit);
-    } elseif (!empty($_POST['DESC'])) {
-        $sorting = 'DESC';
-        $posts = Post::getPosts($sorting, $start, $limit);
-    } elseif (!empty($_POST['following'])) {
-        $posts = Post::filterPostsByFollowing($start, $limit);
-    }
+    if (isset($_GET['sort'])) {
+        $sort = $_GET['sort'];
+        if($sort == "Newest First ") {
+            $posts = Post::getPosts("DESC", $start, $limit);
+        }
+        elseif($sort == "Oldest First") {
+            $posts = Post::getPosts("ASC", $start, $limit);
+        }
+        elseif($sort == "Following") {
+            $posts = Post::filterPostsByFollowing($start, $limit);
+        }      
+    } 
     
-    if (!empty($_POST['tag'])) {
-        $filteredTag = $_POST['tag'];
+    if (isset($_GET['tag']) && !empty($_GET['tag'])) {
+        $filteredTag = "#" . $_GET['tag'];
         $posts = Tag::filterPostsByTag($filteredTag);
         $filtered = true;
     }
     
-    if (!empty($_POST['submitPopularTag'])) {
-        $popularTag = $_POST['submitPopularTag'];
+    /*
+    if (isset($_GET['tag']) && !empty($_GET['tag'])) {
+        $popularTag = $_GET['tag'];
         $posts = Tag::filterPostsByPopularTag($popularTag);
         $filteredPopularTag = true;
     }
+    */
 
     if (empty($posts)) {
         $emptystate = true;
@@ -62,7 +68,6 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
     <title>Smash — #WeAreIMD Showcase</title>
 </head>
@@ -74,36 +79,28 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center m-3">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary sort-title">
-                    <?php if (!empty($_POST['ASC'])): ?>
-                        <?php echo "Oldest"; ?>
-                    <?php elseif (!empty($_POST['DESC'])): ?>
-                        <?php echo "Latest"; ?>
-                    <?php elseif (!empty($_POST['following'])): ?>
-                        <?php echo "Following"; ?>
-                    <?php else: ?>
-                        <?php echo "Latest"; ?>
-                    <?php endif; ?>
+                    <?php echo $sort; ?>
                 </button>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
 
                 <ul class="dropdown-menu">
-                    <form action="" method="POST">
+                    <form action="" method="GET">
                         <li>
                             <h6 class="dropdown-header">Sort by date</h6>
                         </li>
                         <li>
-                            <a class="dropdown-item sort-latest" href="#"><input type="submit" name="DESC" value="Latest"></a>
+                            <a class="dropdown-item sort-latest" href="#"><input type="submit" name="sort" value="Newest First"></a>
                         </li>
                         <li>
-                            <a class="dropdown-item sort-oldest" href="#"><input type="submit" name="ASC" value="Oldest"></a>
+                            <a class="dropdown-item sort-oldest" href="#"><input type="submit" name="sort" value="Oldest First"></a>
                         </li>
                         <li>
                             <h6 class="dropdown-header">Filter</h6>
                         </li>
                         <li>
-                            <a class="dropdown-item filter-following" href="#"><input type="submit" name="following" value="Following"></a>
+                            <a class="dropdown-item filter-following" href="#"><input type="submit" name="sort" value="Following"></a>
                         </li>
                     </form>
                 </ul>
@@ -111,11 +108,9 @@
 
             <?php if (!empty($sortPopularTags)): ?>
                 <div class="filter-tags">
-                    <a href="#" class="px-2 btn btn-light">All</a>
+                    <a href="index.php" class="px-2 btn btn-light">All</a>
                     <?php foreach ($sortPopularTags as $pTag): ?>
-                        <form action="" method="POST" class="d-inline px-1">
-                            <input href="#" type="submit" class="bg-transparant border-0 p-0" value="<?php echo $pTag['tag'];?>" name="submitPopularTag"></input>
-                        </form>
+                        <a href="index.php?tag=<?php echo str_replace("#", "", $pTag['tag']); ?>" class="px-2 btn btn-light"><?php echo $pTag['tag']; ?></a>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
@@ -242,9 +237,7 @@
                             </a>
                             <p class="pe-4 mb-1 max-num-of-lines"><?php echo $p['description']; ?></p>
                             <?php foreach ($tags as $tag): ?>
-                                <form action="" method="post" class="d-inline">
-                                    <input value="<?php echo $tag['tag']; ?>" class="link-primary bg-transparent border-0 p-0" type="submit" name="tag"></input>
-                                </form>
+                                <a href="index.php?tag=<?php echo str_replace("#", "", $tag['tag']); ?>" class="link-primary bg-transparent border-0 p-0"><?php echo $tag['tag']; ?></a>
                             <?php endforeach; ?>
                         </div>
                     </div>

@@ -32,7 +32,7 @@ if (!empty($_POST)) {
 </head>
 
 <body>
-    <div class="register row">
+    <div class="register row" style="margin-right: 0; margin-left: 0;">
         <div class="register--image col">
             <a class="navbar-brand" href="/">Smasssh</a>
         </div>

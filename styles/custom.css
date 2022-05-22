@@ -9,6 +9,10 @@ body {
     display: none;
 }
 
+.alert-danger p {
+    margin-bottom: 0;
+}
+
 .img-thumbnail {
     width: 100px;
     height: 100px;
@@ -198,6 +202,10 @@ p.num-of-likes {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 >>>>>>> main
+}
+
+footer p a {
+    border-bottom: 1px dotted black;
 }
 
 /* ------MediaQueries------ */

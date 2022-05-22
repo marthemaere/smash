@@ -69,9 +69,13 @@ if (!isset($_SESSION['id'])) {
             
 
 
-                
+                <?php if(!empty($userData['bio'])) : ?>
                 <p class="biography"><?php echo htmlspecialchars($userData['bio']); ?></p>
+                <?php endif; ?>
+
+                <?php if(!empty($userData['education'])) : ?>
                 <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
+                <?php endif; ?>
                 <form action="" method="post">
                     <div class="my-4">
                         <!-- are you sure alert -->
@@ -188,11 +192,11 @@ if (!isset($_SESSION['id'])) {
                                 </a>
                                 <p class="pe-4 mb-0 max-num-of-lines"><?php echo htmlspecialchars($post['description']); ?></p>
                                 <?php foreach ($tags as $tag) : ?>
-                                    <span class="link-primary"><?php echo htmlspecialchars($tag['tag']); ?></span>
+                                    <a href="index.php?tag=<?php echo str_replace("#", "", $tag['tag']); ?>" class="link-primary"><?php echo htmlspecialchars($tag['tag']); ?></span>
                                 <?php endforeach; ?>
                             </div>
                             <div class="d-flex justify-content-between align-items-center pt-2">
-                                <a href="" class="link-dark">View comments</a>
+                               
                                 <?php if ($_SESSION['id'] === $userId) : ?>
                                     <?php if (!$isSmashed) : ?>
                                         <a href="#" id="smashed" name="smashed" class="btn btn-smash" data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id'] ?>"> Smash </a>

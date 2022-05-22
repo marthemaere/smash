@@ -29,7 +29,7 @@
     <title>Smash - Forgot password</title>
 </head>
 <body>
-    <div class="resetPassword row">
+    <div class="resetPassword row" style="margin-right: 0; margin-left: 0;">
         <div class="reset--image col">
             <a href="index.php" class="navbar-brand">Smasssh</a>
         </div>

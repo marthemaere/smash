@@ -69,9 +69,13 @@ if (!isset($_SESSION['id'])) {
             
 
 
-                
+                <?php if(!empty($userData['bio'])) : ?>
                 <p class="biography"><?php echo htmlspecialchars($userData['bio']); ?></p>
+                <?php endif; ?>
+
+                <?php if(!empty($userData['education'])) : ?>
                 <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
+                <?php endif; ?>
                 <form action="" method="post">
                     <div class="my-4">
                         <!-- are you sure alert -->

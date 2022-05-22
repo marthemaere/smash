@@ -203,7 +203,6 @@
 
                     <?php foreach ($comments as $c): ?>
 
-<<<<<<< HEAD
                                 <li class="list-group-item border-0 border-bottom mw-80 m-1">
                                    <div class="d-flex align-items-start"> 
                                         <div class="d-flex align-items-center"> 
@@ -216,14 +215,6 @@
                                             <?php echo $c['text']; ?>
                                         </div>
                                    </div>
-=======
-                                <li class="list-group-item d-flex border-0 border-bottom align-items-center">
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>">
-                                        <h4 class="p-2 mb-0"><?php echo htmlspecialchars($c['username']);?></h4>
-                                    </a>
-                                    <?php echo $c['text']; ?>
->>>>>>> main
                                 </li>
 
                     <?php endforeach; ?>

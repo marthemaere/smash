@@ -170,7 +170,9 @@
                             <div class="d-flex justify-content-between align-items-center py-2">
                                 <div class="d-flex align-items-center justify-content-start">
                                     <img src="<?php echo $p['profile_pic']; ?>" class="img-profile-post">
-                                    <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
+                                    <a href="register.php">
+                                        <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
+                                    </a>
                                 </div>
 
                                 <div class="d-flex align-items-center">
@@ -187,7 +189,9 @@
                             </a>
                             <p class="pe-4 mb-1 max-num-of-lines"><?php echo $p['description']; ?></p>
                             <?php foreach ($tags as $tag): ?>
-                                <span class="link-primary"><?php echo $tag['tag']; ?></span>
+                                <a href="register.php">
+                                    <span class="link-primary"><?php echo $tag['tag']; ?></span>
+                                </a>
                             <?php endforeach; ?>
                         </div>
                     </div>

@@ -100,17 +100,23 @@
                     <form action="" method="post">
                             <div class="social-link-item">
                                 <label for="linkedin" class="form-label">LinkedIn</label>
-                                <input type="url" class="form-control" name="linkedin" id="linkedin" value="<?php echo htmlspecialchars($userDataFromId['social_linkedin']); ?>">
+                                <input type="url" class="form-control" name="linkedin" id="linkedin" value="<?php if($userDataFromId['social_linkedin']){
+                                    echo htmlspecialchars($userDataFromId['social_linkedin']);
+                                } ?>">
                             </div>
 
                             <div class="social-link-item my-3">
                                 <label for="instagram" class="form-label">Instagram</label>
-                                <input type="url" class="form-control" name="instagram" id="instagram" value="<?php echo htmlspecialchars($userDataFromId['social_instagram']); ?>">
+                                <input type="url" class="form-control" name="instagram" id="instagram" value="<?php if($userDataFromId['social_instagram']){
+                                    echo htmlspecialchars($userDataFromId['social_instagram']);
+                                } ?>">
                             </div>
 
                             <div class="social-link-item my-3">
                                 <label for="github" class="form-label">GitHub</label>
-                                <input type="url" class="form-control" name="github" id="github" value="<?php echo htmlspecialchars($userDataFromId['social_github']); ?>">
+                                <input type="url" class="form-control" name="github" id="github" value="<?php if($userDataFromId['social_github']){
+                                    echo htmlspecialchars($userDataFromId['social_github']);
+                                } ?>">
                             </div>
 
                         <input type="submit" class="btn btn-dark mt-4" name="updateSocialProfiles" value="Update social profiles">

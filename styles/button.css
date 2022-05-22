@@ -5,20 +5,20 @@ nav .btn {
 
 .btn-primary {
     color: black;
-    background-color: #16CF83;
-    border: 1px solid #16CF83;
+    background-color: #BFFD00;
+    border: 1px solid #BFFD00;
 }
 
 .btn-primary:hover, .btn-primary:focus {
-    color: black;
-    background-color: #0dac6a;
-    border: 1px solid #0dac6a;
+    /* color: black; */
+    background-color: black;
+    border: 1px solid black;
 }
 
 .btn-primary.active {
     color: black !important;
-    background-color: #C3B7FF !important;
-    border: 1px solid #C3B7FF !important;
+    background-color: #FCD7F7 !important;
+    border: 1px solid #FCD7F7 !important;
 }
 
 .btn-outline-primary {
@@ -38,7 +38,7 @@ nav .btn {
 
 .btn-dark:hover {
     color: black;
-    background-color: #C3B7FF;
+    background-color: #BFFD00;
 }
 
 .btn-smash {
@@ -49,15 +49,15 @@ nav .btn {
 }
 
 .btn-smash:hover {
-    background-color: #C3B7FF;
-    border-color: #C3B7FF;
+    background-color: #FCD7F7;
+    border-color: #FCD7F7;
     border-radius: 0 30px 30px 0;
     /* padding-right: 22px; */
 }
 
 .btn-smash.active{
-    background-color: #C3B7FF;
-    border-color: #C3B7FF;
+    background-color: #FCD7F7;
+    border-color: #FCD7F7;
     border-radius: 0 30px 30px 0;
 }
 
@@ -68,13 +68,13 @@ nav .btn {
 
 /* ------Links------ */
 .link-primary {
-    color: #7B61FF;
+    color: #0600FF;
     font-weight: 500;
     text-decoration: none;
 }
 
 .link-primary:hover {
-    color: #3a23ad;
+    color: #0300ce;
     font-weight: 500;
 }
 
@@ -89,7 +89,7 @@ a {
 }
 
 a:hover {
-    color: #7B61FF;
+    color: #0600FF;
 }
 
 .profile-btn img {
@@ -119,7 +119,10 @@ a:hover {
     color: black;
 }
 
-.page-item.active .page-link {
-    background-color: #16CF83;
-    border-color: #16CF83;
+.filter-tags input[type="submit"] {
+    background-color: transparent;
+}
+
+.filter-tags input[type="submit"]:hover {
+    font-weight: 600;
 }

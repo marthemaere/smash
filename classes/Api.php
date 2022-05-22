@@ -4,7 +4,7 @@
         public function get40LatestPosts()
         {
             $conn = Db::getInstance();
-            $statement = $conn->query('SELECT id, title postTitle, description postDescription ,CONCAT(\'http://localhost/api/feed.php?p=\', id) as postLink, date postDateAdded, image postImageThumbnail FROM posts ORDER BY id DESC LIMIT 40');
+            $statement = $conn->query('SELECT id, title postTitle, description postDescription ,CONCAT(\'https://smash.weareimd.be/feed.php?p=\', id) as postLink, date postDateAdded, image postImage, image_thumb postImageThumbnail FROM posts ORDER BY id DESC LIMIT 40');
             $statement->execute();
             $result = $statement->fetchAll(PDO::FETCH_ASSOC);
             return $result;

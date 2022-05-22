@@ -2,6 +2,9 @@
 include_once("bootstrap.php");
 
 session_start();
+if (!isset($_SESSION['id'])) {
+    header('Location: login.php');
+}
 
 if (!empty($_POST)) {
     try {
@@ -10,13 +13,14 @@ if (!empty($_POST)) {
         $post = new Post();
         $post->setTitle($_POST['title']);
         $post->setDescription($_POST['description']);
-        //$post->setPostId($_POST['id']);
-        //$post->setPostById($postId);
-        //var_dump($post);
-      
+        
         $userId= $_SESSION['id'];
         $post->setUserId($userId);
-        $id = $post->canUploadProject();
+        
+        $uploadResult = Upload::upload($_FILES['file']);
+        $post->setImage($uploadResult['image']);
+        $post->setImageThumb($uploadResult['image_thumb']);
+        $id = $post->setProjectInDatabase();
        
         $userId = $_SESSION['id'];
         $post->setUserId($userId);
@@ -42,7 +46,7 @@ if (!empty($_POST)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
-    <title>Upload your project</title>
+    <title>Smash Post - Upload</title>
 </head>
 <body>
     <?php require_once("header.php"); ?>
@@ -73,8 +77,8 @@ if (!empty($_POST)) {
 
                 <fieldset>
                     <!-- <label for="tags">Add tags to your project</label> -->
-                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Give it some tags like #branding">
-                    <div class="form-text">Don't forget the famous '#' before your tag</div>
+                    <input type="text" class="form-control" id="tags" name="tags" placeholder="#branding #design">
+                    <div class="form-text">Don't forget the famous '#' before each tag and make sure you don't use a comma</div>
                 </fieldset>
 
                 <fieldset>
@@ -89,5 +93,6 @@ if (!empty($_POST)) {
     </div>
 
     <?php require_once("footer.php"); ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>

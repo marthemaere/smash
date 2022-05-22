@@ -62,7 +62,7 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
                  block.appendChild(lijst);
                  document.querySelector(lijst).innerHTML += li;*/
                 }
-        
+          
     })
     
        /* .catch(error => {

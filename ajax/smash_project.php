@@ -37,7 +37,7 @@ if (!empty($_POST)) {
     } catch (Exception $e) {
         $response = [
             "status" => "error",
-            "message" => "Cannot smash."
+            "message" => "Cannot check."
         ];
     }
 

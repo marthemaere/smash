@@ -5,6 +5,7 @@ class Post
 {
     private $title;
     private $image;
+    private $imageThumb;
     private $description;
     private $userId;
     private $postId;
@@ -29,7 +30,7 @@ class Post
     public function setTitle($title)
     {
         if (empty($title)) {
-            throw new Exception("Title cannot be empty");
+            throw new Exception("Title cannot be empty.");
         }
         $this->title = $title;
         return $this;
@@ -88,7 +89,7 @@ class Post
     public function setDescription($description)
     {
         if (empty($description)) {
-            throw new Exception("description cannot be empty");
+            throw new Exception("Description cannot be empty.");
         }
         $this->description = $description;
         return $this;
@@ -97,12 +98,13 @@ class Post
     public function setProjectInDatabase()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into posts (title, image, description, date, user_id) values (:title, :image, :description, now(), :userId)");
+        $statement = $conn->prepare("insert into posts (title, image, image_thumb, description, date, user_id) values (:title, :image, :image_thumb, :description, now(), :userId)");
         $title = $this->getTitle();
         $image = $this->getImage();
         $userId = $this->getUserId();
         $description = $this->getDescription();
         $statement->bindValue(":title", $title);
+        $statement->bindValue(":image_thumb", $this->getImageThumb());
         $statement->bindValue(":image", $image);
         $statement->bindValue(":description", $description);
         $statement->bindValue(":userId", $userId);
@@ -140,10 +142,10 @@ class Post
                     throw new Exception("Your file is too large!");
                 }
             } else {
-                throw new Exception("There was an error uploading your file");
+                throw new Exception("There was an error uploading your file.");
             }
         } else {
-            throw new Exception("You cannot upload files of this type");
+            throw new Exception("You cannot upload files of this type.");
         }
     }
 
@@ -195,7 +197,6 @@ class Post
             FROM posts p
             INNER JOIN followers f ON f.following_id = p.user_id
             INNER JOIN users u ON p.user_id = u.id 
-            INNER JOIN tags t ON t.post_id = p.id
             ORDER BY `date` DESC 
             LIMIT $start, $limit"
         );
@@ -203,7 +204,6 @@ class Post
         $result = $statement->fetchAll();
         return $result;
     }
-
 
     public static function smashed($postId)
     {
@@ -266,5 +266,25 @@ class Post
         $statement->bindValue(":title", $title);
         $statement->bindValue(":postId", $postId);
         return $statement->execute();
+    }
+
+    /**
+     * Get the value of imageThumb
+     */
+    public function getImageThumb()
+    {
+        return $this->imageThumb;
+    }
+
+    /**
+     * Set the value of imageThumb
+     *
+     * @return  self
+     */
+    public function setImageThumb($imageThumb)
+    {
+        $this->imageThumb = $imageThumb;
+
+        return $this;
     }
 }

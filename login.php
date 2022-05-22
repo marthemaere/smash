@@ -26,12 +26,12 @@
 <head>
   <meta charset="UTF-8">
   <?php include_once('style.php'); ?>
-  <title>Smasssh</title>
+  <title>Smash - Login</title>
 </head>
 <body class="">
     <div class="login row">
         <div class="login--image col">
-            <a class="navbar-brand">Smasssh</a>
+            <a class="navbar-brand" href="/">Smasssh</a>
         </div>
         
         <div class="login--form col">
@@ -44,7 +44,7 @@
                     <?php endif;?>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" placeholder="name@student.thomasmore.be" value="r012345@student.thomasmore.be" name="email">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="name@student.thomasmore.be" value="" name="email">
                         <label for="floatingInput">Email</label>
                     </div>
 

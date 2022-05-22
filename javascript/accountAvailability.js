@@ -1,33 +1,55 @@
-function checkUsername(){
+function emailCheck() {
+  let email = document.querySelector("#email").value;
+  let emailresponse = document.getElementById("emailresponse");
 
-    $.ajax({
-        type:"POST",
-        url:"ajax/checkUsername.php",
-        cache:false,
-        data:{
-            type:1,
-            username:$("#username").val(),
-        },
-        success:function(data){
-            $("#username_response").html(data);
-        }
+  let formData = new FormData();
+  formData.append("email", email);
+
+  fetch("ajax/checkEmail.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((result) => {
+    if (result.availability === 0) {
+        emailresponse.textContent = "Email unavailable";
+        emailresponse.style.color = "red";
+        //emailresponse.classList.add("status-not-available");
+      } else {
+        emailresponse.textContent = " ";
+      }
+      console.log("Success:", result);
+    })
+    .catch((error) => {
+      console.log("Error:", error);
     });
 }
 
+function usernameCheck() {
+  let username = document.querySelector("#username").value;
+  let usernameresponse = document.getElementById("usernameresponse");
+  console.log(usernameresponse);
 
-function checkEmail(){
+  let formData = new FormData();
+  formData.append("username", username);
+  console.log(username);
 
-    $.ajax({
-        type:"POST",
-        url:"ajax/checkEmail.php",
-        cache:false,
-        data:{
-            type:1,
-            email:$("#email").val(),
-        },
-        success:function(data){
-            $("#email_response").html(data);
-        }
+  fetch("ajax/checkUsername.php", {
+    method: "POST",
+    body: formData,
+  })
+    .then((response) => response.json())
+    .then((result) => {
+   if (result.availability === 0) {
+        usernameresponse.textContent = "Username unavailable";
+        usernameresponse.style.color = "red";
+        //usernameresponse.classList.add("status-not-available");
+      } else {
+        usernameresponse.textContent = " ";
+      }
+      console.log("Success:", result);
+    })
+    .catch((error) => {
+      console.log("Error:", error);
     });
-    
 }

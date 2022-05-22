@@ -65,6 +65,15 @@
             $statement->bindValue(":followingId", $this->getFollowingId());
             return $statement->execute();
         }
+
+        public function countFollowers(){
+            $conn = Db::getInstance();
+            $statement = $conn->prepare('SELECT COUNT(id) FROM followers WHERE followers.follower_id = :followerId');
+            $statement->bindValue(":followerId", $_GET['p']);
+            $statement->execute();
+            $count = $statement->fetch();
+            return $count;
+        }
         
         public static function deleteFollowers($userId)
         {

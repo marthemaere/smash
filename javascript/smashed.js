@@ -1,4 +1,5 @@
 let smashed = document.querySelectorAll("#smashed");
+console.log(smashed);
 
 smashed.forEach(function (smash) {
   smash.addEventListener("click", function (e) {
@@ -11,6 +12,7 @@ smashed.forEach(function (smash) {
     let formData = new FormData();
     formData.append("postid", smashedPost);
     formData.append("userid", smashedUser);
+    console.log(smashedPost);
 
     fetch("ajax/smash_project.php", {
       method: "POST",

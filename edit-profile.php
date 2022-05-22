@@ -16,11 +16,9 @@
 
     if (!empty($_POST['submitProfilePicture'])) {
         try {
-            $fileName = $_FILES['profilePicture']['name'];
-            $fileTmpName = $_FILES['profilePicture']['tmp_name'];
-            $fileSize = $_FILES['profilePicture']['size'];
+            $uploadResult = Upload::upload($_FILES['profilePicture']);
+            $user->updatePictureInDatabase($uploadResult['image_thumb'], $_SESSION['id']);
 
-            $user->canUploadPicture($sessionId, $fileName, $fileTmpName, $fileSize);
             $success = "Profile picture saved.";
         } catch (Exception $e) {
             $error = $e->getMessage();
@@ -62,7 +60,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
-    <title>Settings</title>
+    <title>Smash Settings — Edit Profile</title>
     
 </head>
 <body>
@@ -113,12 +111,10 @@
                             <p class="alert alert-success"><?php echo $success; ?></p>
                         <?php endif; ?>
                         <!-- EditProfile > ProfilePicture -->
-                        <div class="profile-picture pb-3">
-                            <img src="profile_pictures/<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-thumbnail rounded-circle" alt="profile picture">
-                            <a href="#" class="btn btn-primary" id="upload-new-picture">Upload new picture</a>
-                            <div id="upload-file">
+                        <div class="profile-picture pb-3 d-flex align-items-center">
+                            <img src="<?php echo htmlspecialchars($userDataFromId['profile_pic']); ?>" class="img-thumbnail rounded-circle" alt="profile picture">
                                 <form action="" method="post" enctype="multipart/form-data">
-                                    <fieldset class="">
+                                    <fieldset class="mb-0 mt-3 ps-3">
                                         <div class="input-group">
                                             <input type="file" class="form-control" name="profilePicture" id="profilePicture">
                                             <input type="submit" class="input-group-text" name="submitProfilePicture" value="Upload">
@@ -126,8 +122,6 @@
                                         <div class="form-text">JPG or PNG. Max size of 2MB</div>
                                     </fieldset>
                                 </form>
-                            </div>
-                            <a href="#" class="btn btn-outline-primary">Delete</a>
                         </div>
 
                         <!-- EditProfile > ProfileInfo -->

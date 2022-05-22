@@ -34,7 +34,7 @@ if (!empty($_POST)) {
 <body>
     <div class="register row">
         <div class="register--image col">
-            <a class="navbar-brand">Smasssh</a>
+            <a class="navbar-brand" href="/">Smasssh</a>
         </div>
 
         <div class="register--form col">

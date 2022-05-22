@@ -22,7 +22,7 @@ class User
     public function setEmail($email)
     {
         if (empty($email)) {
-            throw new Exception("email cannot be empty");
+            throw new Exception("Email is required.");
         }
         $this->email = $email;
     }
@@ -35,7 +35,7 @@ class User
     public function setUsername($username)
     {
         if (empty($username)) {
-            throw new Exception("username cannot be empty");
+            throw new Exception("Username is required.");
         }
         $this->username = $username;
     }
@@ -49,7 +49,7 @@ class User
     {
         $password_input = $_POST['password'];
         if (empty($password) || strlen($password_input) < 6) {
-            throw new Exception("Password cannot be empty and needs to contain at least 6 characters.");
+            throw new Exception("Password must be at least 6 characters long.");
         }
         $this->password = $password;
         return $this;
@@ -182,7 +182,7 @@ class User
             $result = $statement->execute();
             return $result;
         } else {
-            throw new Exception("Email cannot be empty and needs to be a Thomas More email address. Try again.");
+            throw new Exception("Email must be a valid Thomas More email address.");
         }
     }
 
@@ -211,11 +211,11 @@ class User
             if (password_verify($this->password, $hash)) {
                 return true;
             } else {
-                throw new Exception("Password is wrong, try again");
+                throw new Exception("Password is wrong, try again.");
                 return false;
             }
         } else {
-            throw new Exception("Userdata does not match, try again");
+            throw new Exception("Sorry, that didn't work. Try again.");
         }
     }
 
@@ -302,7 +302,7 @@ class User
         // Check if file-size is under 2MB
         if ($fileSize > 2097152) { // 2097152 bytes
             $canUpload = false;
-            throw new Exception('Image size can not be larger than 2MB, try again.');
+            throw new Exception("Image size can't be larger than 2MB, try again.");
         }
 
         // Check if format is JPG, JPEG or PNG

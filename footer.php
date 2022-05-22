@@ -4,7 +4,7 @@
             <div class="col-sm-12 col-md-6">
                 <a href="#" class="navbar-brand my-2">Smasssh</a>
                 <p class="py-3 pe-5">Smasssh is a design community created by and for students of <a href="https://weareimd.be/?utm_source=smash">Interactive Multimedia Design</a> at <a href="https://www.thomasmore.be/opleidingen/professionele-bachelor/informatiemanagement-en-multimedia/interactive-multimedia-design?utm_source=smash">Thomas More</a>.</p>
-                <p class="">❤️ <strong>Did you know</strong> we have a WeAreIMD <a href="https://chrome.google.com/webstore/detail/imd-social-showcase/jcdbllfpadfhmjebbldaneiifhgllkdc">Chrome</a> or <a href="https://addons.mozilla.org/en-GB/firefox/addon/imd-social-showcase/">Firefox</a> extension you can install right now?</p>
+                <p class="">❤️ <strong>Did you know</strong> we have a WeAreIMD <a href="https://chrome.google.com/webstore/detail/imd-social-showcase/jcdbllfpadfhmjebbldaneiifhgllkdc">Chrome</a> or <a href="https://addons.mozilla.org/en-GB/firefox/addon/imd-social-showcase/">Firefox</a> extension you can install right now? Install it now to never miss an upload and to see <a href="https://wrk.weareimd.be">jobs & internships</a>.</p>
             </div>
             <div class="col-sm-12 col-md-2">
                 <h4>Pages</h4>

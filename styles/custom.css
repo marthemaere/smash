@@ -195,6 +195,10 @@ p.num-of-likes {
     -webkit-box-orient: vertical;
 }
 
+footer p a {
+    border-bottom: 1px dotted black;
+}
+
 /* ------MediaQueries------ */
 
 @media (max-width: 992px) {

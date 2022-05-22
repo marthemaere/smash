@@ -47,7 +47,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
-    <title>Settings</title>
+    <title>Smash Settings - Change Password</title>
     
 </head>
 <body>

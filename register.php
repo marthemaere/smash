@@ -28,7 +28,7 @@ if (!empty($_POST)) {
 <head>
     <meta charset="UTF-8">
     <?php include_once('style.php'); ?>
-    <title>Smasssh</title>
+    <title>Smash - Signup</title>
 </head>
 
 <body>

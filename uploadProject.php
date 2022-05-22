@@ -46,7 +46,7 @@ if (!empty($_POST)) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
-    <title>Upload your project</title>
+    <title>Smash Post - Upload</title>
 </head>
 <body>
     <?php require_once("header.php"); ?>

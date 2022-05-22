@@ -4,16 +4,16 @@
     if (!empty($_POST)) {
         $email = $_POST['email'];
         try {
-           if (Mailer::hasAccount($email)) {
-               if (empty($_POST['email'])) {
-                   $error = "Email cannot be empty.";
-               } elseif (!empty($_POST['forgot_password'])) {
-                  // $mailer->sendPasswordResetEmail();
-                   Mailer::sendMail($email);
-                   $success = true;
-                   // header("Location: passwordMessage.php");
-               }
-           }
+            if (Mailer::hasAccount($email)) {
+                if (empty($_POST['email'])) {
+                    $error = "Email cannot be empty.";
+                } elseif (!empty($_POST['forgot_password'])) {
+                    // $mailer->sendPasswordResetEmail();
+                    Mailer::sendMail($email);
+                    $success = true;
+                    // header("Location: passwordMessage.php");
+                }
+            }
         } catch (Throwable $e) {
             $error = $e->getMessage();
         }
@@ -26,7 +26,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
-    <title>Forgot password</title>
+    <title>Smash - Forgot password</title>
 </head>
 <body>
     <div class="resetPassword row">

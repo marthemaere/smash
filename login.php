@@ -26,7 +26,7 @@
 <head>
   <meta charset="UTF-8">
   <?php include_once('style.php'); ?>
-  <title>Smasssh</title>
+  <title>Smash - Login</title>
 </head>
 <body class="">
     <div class="login row">

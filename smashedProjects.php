@@ -28,7 +28,7 @@ if (empty($posts)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
     <link rel="stylesheet" href="styles/custom.css">
-    <title>My smashed projects</title>
+    <title>Smash - Showcase <?php echo $userData['username']; ?></title>
 </head>
 
 <body>

@@ -39,7 +39,7 @@ if (!empty($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
-    <title>Edit your project</title>
+    <title>Smash Post - Edit <?php echo $projectData['title']; ?> </title>
 </head>
 <body>
     <?php require_once("header.php"); ?>

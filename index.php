@@ -41,17 +41,19 @@
         $posts = Post::filterPostsByFollowing($start, $limit);
     }
     
-    if (!empty($_POST['tag'])) {
-        $filteredTag = $_POST['tag'];
+    if (isset($_GET['tag']) && !empty($_GET['tag'])) {
+        $filteredTag = "#" . $_GET['tag'];
         $posts = Tag::filterPostsByTag($filteredTag);
         $filtered = true;
     }
     
-    if (!empty($_POST['submitPopularTag'])) {
-        $popularTag = $_POST['submitPopularTag'];
+    /*
+    if (isset($_GET['tag']) && !empty($_GET['tag'])) {
+        $popularTag = $_GET['tag'];
         $posts = Tag::filterPostsByPopularTag($popularTag);
         $filteredPopularTag = true;
     }
+    */
 
     if (empty($posts)) {
         $emptystate = true;
@@ -111,11 +113,9 @@
 
             <?php if (!empty($sortPopularTags)): ?>
                 <div class="filter-tags">
-                    <a href="#" class="px-2 btn btn-light">All</a>
+                    <a href="index.php" class="px-2 btn btn-light">All</a>
                     <?php foreach ($sortPopularTags as $pTag): ?>
-                        <form action="" method="POST" class="d-inline px-1">
-                            <input href="#" type="submit" class="bg-transparant border-0 p-0" value="<?php echo $pTag['tag'];?>" name="submitPopularTag"></input>
-                        </form>
+                        <a href="index.php?tag=<?php echo str_replace("#", "", $pTag['tag']); ?>" class="px-2 btn btn-light"><?php echo $pTag['tag']; ?></a>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
@@ -242,9 +242,7 @@
                             </a>
                             <p class="pe-4 mb-1 max-num-of-lines"><?php echo $p['description']; ?></p>
                             <?php foreach ($tags as $tag): ?>
-                                <form action="" method="post" class="d-inline">
-                                    <input value="<?php echo $tag['tag']; ?>" class="link-primary bg-transparent border-0 p-0" type="submit" name="tag"></input>
-                                </form>
+                                <a href="index.php?tag=<?php echo str_replace("#", "", $tag['tag']); ?>" class="link-primary bg-transparent border-0 p-0"><?php echo $tag['tag']; ?></a>
                             <?php endforeach; ?>
                         </div>
                     </div>

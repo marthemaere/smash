@@ -102,10 +102,12 @@ if (!isset($_SESSION['id'])) {
                                 <?php endif; ?>
                             <?php endif; ?>
 
-                            <?php if ($isReported === false) : ?>
-                                <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Report user</a>
-                            <?php else : ?>
-                                <a class="btn btn-danger disabled mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Reported</a>
+                            <?php if (!($_SESSION['id'] === $key)): ?>
+                                <?php if ($isReported === false) : ?>
+                                    <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Report user</a>
+                                <?php else : ?>
+                                    <a class="btn btn-danger disabled mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Reported</a>
+                                <?php endif; ?>
                             <?php endif; ?>
 
                             <?php if (!empty($userPosts[0]['social_linkedin'])) : ?>

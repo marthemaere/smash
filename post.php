@@ -197,17 +197,22 @@
                     <ul class="list-group list-group-flush" id="liststart">
                     </ul>
                     <?php else: ?>
-
                     <ul class="list-group list-group-flush" id="listupdates">
 
                     <?php foreach ($comments as $c): ?>
 
-                                <li class="list-group-item d-flex border-0 border-bottom align-items-center">
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>">
-                                        <h4 class="p-2 mb-0"><?php echo htmlspecialchars($c['username']);?></h4>
-                                    </a>
-                                    <?php echo $c['text']; ?>
+                                <li class="list-group-item border-0 border-bottom w-100 m-1">
+                                   <div class="d-flex align-items-start"> 
+                                        <div class="d-flex align-items-center"> 
+                                            <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
+                                            <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>">
+                                                <h4 class="px-3 mb-0"><?php echo htmlspecialchars($c['username']);?></h4>
+                                            </a>
+                                        </div>
+                                        <div  class="mt-1">
+                                            <?php echo $c['text']; ?>
+                                        </div>
+                                   </div>
                                 </li>
 
                     <?php endforeach; ?>

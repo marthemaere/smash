@@ -9,6 +9,7 @@
         $userDataFromId = User::getUserDataFromId($sessionId);
     }
 
+    $sort = "Newest First";
     $limit = 15;
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $start = ($page -1) * $limit;
@@ -31,15 +32,18 @@
         $searched = true;
     }
     
-    if (!empty($_POST['ASC'])) {
-        $sorting = 'ASC';
-        $posts = Post::getPosts($sorting, $start, $limit);
-    } elseif (!empty($_POST['DESC'])) {
-        $sorting = 'DESC';
-        $posts = Post::getPosts($sorting, $start, $limit);
-    } elseif (!empty($_POST['following'])) {
-        $posts = Post::filterPostsByFollowing($start, $limit);
-    }
+    if (isset($_GET['sort'])) {
+        $sort = $_GET['sort'];
+        if($sort == "Newest First ") {
+            $posts = Post::getPosts("DESC", $start, $limit);
+        }
+        elseif($sort == "Oldest First") {
+            $posts = Post::getPosts("ASC", $start, $limit);
+        }
+        elseif($sort == "Following") {
+            $posts = Post::filterPostsByFollowing($start, $limit);
+        }      
+    } 
     
     if (isset($_GET['tag']) && !empty($_GET['tag'])) {
         $filteredTag = "#" . $_GET['tag'];
@@ -75,36 +79,28 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center m-3">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary sort-title">
-                    <?php if (!empty($_POST['ASC'])): ?>
-                        <?php echo "Oldest"; ?>
-                    <?php elseif (!empty($_POST['DESC'])): ?>
-                        <?php echo "Latest"; ?>
-                    <?php elseif (!empty($_POST['following'])): ?>
-                        <?php echo "Following"; ?>
-                    <?php else: ?>
-                        <?php echo "Latest"; ?>
-                    <?php endif; ?>
+                    <?php echo $sort; ?>
                 </button>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </button>
 
                 <ul class="dropdown-menu">
-                    <form action="" method="POST">
+                    <form action="" method="GET">
                         <li>
                             <h6 class="dropdown-header">Sort by date</h6>
                         </li>
                         <li>
-                            <a class="dropdown-item sort-latest" href="#"><input type="submit" name="DESC" value="Latest"></a>
+                            <a class="dropdown-item sort-latest" href="#"><input type="submit" name="sort" value="Newest First"></a>
                         </li>
                         <li>
-                            <a class="dropdown-item sort-oldest" href="#"><input type="submit" name="ASC" value="Oldest"></a>
+                            <a class="dropdown-item sort-oldest" href="#"><input type="submit" name="sort" value="Oldest First"></a>
                         </li>
                         <li>
                             <h6 class="dropdown-header">Filter</h6>
                         </li>
                         <li>
-                            <a class="dropdown-item filter-following" href="#"><input type="submit" name="following" value="Following"></a>
+                            <a class="dropdown-item filter-following" href="#"><input type="submit" name="sort" value="Following"></a>
                         </li>
                     </form>
                 </ul>

@@ -7,6 +7,17 @@
     if (isset($_SESSION['id'])) {
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
+    } else {
+        $_SESSION['auth']= true; 
+                $_SESSION['start']= time();
+                $_SESSION['expire']= $_SESSION['start']+ (1*60); //1 minuut trial 
+                
+        $currentTime= time();
+        if($currentTime > $_SESSION['expire']){
+            session_unset();
+            session_destroy();
+            header ('location: login.php');
+        }
     }
 
     $sort = "Newest First";

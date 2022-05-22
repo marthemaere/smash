@@ -178,6 +178,7 @@ p.num-of-likes {
 
 .notLiked {
     display: block;
+    cursor: pointer;
 }
 
 .notLiked:hover {

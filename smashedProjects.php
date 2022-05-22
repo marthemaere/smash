@@ -14,6 +14,13 @@ $key = $_GET['p'];
 $userData = User::getUserDataFromId($key);
 $userPosts = $user->getUserPostsFromId($key);
 
+
+$follower = new Follower();
+$follower->setFollowerId($_SESSION['id']);
+$follower->setFollowingId($key);
+$isFollowed = $follower->isFollowedByUser();
+$countFollowers = $follower->countFollowers();
+
 $posts = Post::showSmashedProjects($key);
 
 if (empty($posts)) {
@@ -46,8 +53,15 @@ if (empty($posts)) {
             <div class="col-sm-12 col-md-12 col-lg-6">
                 <img src="<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
                 <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • 
-                    <span>16 followers</span>
-                </p>
+                <?php if (($_SESSION['id'])): ?>
+                <?php if ($countFollowers["COUNT(id)"] === "0"): ?>
+                       <span> no followers yet </span></p>
+                <?php elseif ($countFollowers['COUNT(id)'] === "1"): ?>
+                    <span> <?php echo $countFollowers["COUNT(id)"] ?> follower</span></p>
+                <?php else: ?>
+                    <span> <?php echo $countFollowers["COUNT(id)"] ?> followers</span></p>
+                <?php endif; ?>
+                <?php endif; ?>                </p>
                 <p class="biography"><?php echo htmlspecialchars($userData['bio']); ?></p>
                 <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
                 <form action="" method="post">

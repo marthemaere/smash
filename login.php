@@ -29,7 +29,7 @@
   <title>Smash - Login</title>
 </head>
 <body class="">
-    <div class="login row">
+    <div class="login row" style="margin-right: 0; margin-left: 0;">
         <div class="login--image col">
             <a class="navbar-brand" href="/">Smasssh</a>
         </div>

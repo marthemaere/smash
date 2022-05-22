@@ -25,8 +25,8 @@
     $total= $postCount[0]['id'];
     $pages= ceil($total / $limit);
     
-    if (!empty($_POST['submit-search'])) {
-        $search = $_POST['search'];
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $_GET['search'];
         $posts = Post::search($search);
         $searched = true;
     }

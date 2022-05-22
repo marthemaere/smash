@@ -4,8 +4,8 @@
         $userDataFromId = User::getUserDataFromId($sessionId);
     }
 
-    if (!empty($_POST['submit-search'])) {
-        $search = $_POST['search'];
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $_GET['search'];
         $posts = Post::search($search);
         if (empty($posts)) {
             $emptystate = true;
@@ -23,10 +23,10 @@
                 <a href="register.php" class="btn btn-primary">Signup</a>
             </form>
             <?php else: ?>
-            <form class="header-search" action="" method="post">
+            <form class="header-search" action="" method="get">
                 <div class="input-group">
                     <input type="text" class="form-control" name="search" placeholder="Search for projects" aria-label="Search for projects" aria-describedby="button-addon2">
-                    <input class="btn btn-outline-primary btn-icon-search" type="submit" name="submit-search" id="button-addon2" value=">">
+                    <input class="btn btn-outline-primary btn-icon-search" type="submit" id="button-addon2" value=">">
                 </div>
             </form>
             <a href="uploadProject.php" class="btn btn-primary m-3">Upload Project</a>

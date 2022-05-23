@@ -15,7 +15,7 @@
 
                 $_SESSION['auth']= true; 
                 $_SESSION['start']= time();
-                $_SESSION['expire']= $_SESSION['start']+ (10); //1 week session 
+                $_SESSION['expire']= $_SESSION['start']+ (60*60*24*7); //1 week session 
                 header("Location: index.php");
             }
         } catch (\Throwable $e) {

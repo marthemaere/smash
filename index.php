@@ -7,21 +7,17 @@
     if (isset($_SESSION['id'])) {
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
-       // echo "session started";
+        echo "session started";
     } 
     
-    if (!$_SESSION['auth']) {
-        //echo "no session";
-    }
-    else {
+    if (isset($_SESSION['auth'])) {
         $currentTime= time();
         if ($currentTime > $_SESSION['expire']) {
             session_unset();
             session_destroy();
-          //  echo "session stopped";
+            echo "session stopped";
         }
     }
-       // else {
 
     $sort = "Newest First";
     $limit = 15;

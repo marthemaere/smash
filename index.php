@@ -109,12 +109,14 @@
                         <li>
                             <a class="dropdown-item sort-oldest" href="#"><input type="submit" name="sort" value="Oldest First"></a>
                         </li>
+                        <?php if (isset($_SESSION['id'])) : ?>
                         <li>
                             <h6 class="dropdown-header">Filter</h6>
                         </li>
                         <li>
-                            <a class="dropdown-item filter-following" href="#"><input type="submit" name="sort" value="Following"></a>
+                            <a class="dropdown-item filter-following" href="#"><input type="submit" name="following" value="Following"></a>
                         </li>
+                        <?php endif; ?>
                     </form>
                 </ul>
             </div>

@@ -7,15 +7,13 @@
     if (isset($_SESSION['id'])) {
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
-        echo "session started";
-    } 
+    }
     
     if (isset($_SESSION['auth'])) {
         $currentTime= time();
         if ($currentTime > $_SESSION['expire']) {
             session_unset();
             session_destroy();
-            echo "session stopped";
         }
     }
 
@@ -44,16 +42,14 @@
     
     if (isset($_GET['sort'])) {
         $sort = $_GET['sort'];
-        if($sort == "Newest First ") {
+        if ($sort == "Newest First ") {
             $posts = Post::getPosts("DESC", $start, $limit);
-        }
-        elseif($sort == "Oldest First") {
+        } elseif ($sort == "Oldest First") {
             $posts = Post::getPosts("ASC", $start, $limit);
-        }
-        elseif($sort == "Following") {
+        } elseif ($sort == "Following") {
             $posts = Post::filterPostsByFollowing($start, $limit);
-        }      
-    } 
+        }
+    }
     
     if (isset($_GET['tag']) && !empty($_GET['tag'])) {
         $filteredTag = "#" . $_GET['tag'];

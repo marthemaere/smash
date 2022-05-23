@@ -206,7 +206,7 @@
                                 <li class="list-group-item border-0 border-bottom mw-80 m-1">
                                    <div class="d-flex align-items-start"> 
                                         <div class="d-flex align-items-center"> 
-                                            <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
+                                            <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
                                             <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>">
                                                 <h4 class="px-3 mb-0"><?php echo htmlspecialchars($c['username']);?></h4>
                                             </a>

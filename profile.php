@@ -69,11 +69,11 @@ if (!isset($_SESSION['id'])) {
             
 
 
-                <?php if(!empty($userData['bio'])) : ?>
+                <?php if (!empty($userData['bio'])) : ?>
                 <p class="biography"><?php echo htmlspecialchars($userData['bio']); ?></p>
                 <?php endif; ?>
 
-                <?php if(!empty($userData['education'])) : ?>
+                <?php if (!empty($userData['education'])) : ?>
                 <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
                 <?php endif; ?>
                 <form action="" method="post">
@@ -191,9 +191,9 @@ if (!isset($_SESSION['id'])) {
                                     <h2><?php echo htmlspecialchars($post['title']); ?></h2>
                                 </a>
                                 <p class="pe-4 mb-0 max-num-of-lines"><?php echo htmlspecialchars($post['description']); ?></p>
-                                <?php foreach ($tags as $tag) : ?>
-                                    <a href="index.php?tag=<?php echo str_replace("#", "", $tag['tag']); ?>" class="link-primary"><?php echo htmlspecialchars($tag['tag']); ?></span>
-                                <?php endforeach; ?>
+                                <?php foreach ($tags as $tag): ?>
+                                <a href="index.php?tag=<?php echo str_replace("#", "", $tag['tag']); ?>" class="link-primary bg-transparent border-0 p-0"><?php echo $tag['tag']; ?></a>
+                            <?php endforeach; ?>
                             </div>
                             <div class="d-flex justify-content-between align-items-center pt-2">
                                

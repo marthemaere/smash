@@ -36,7 +36,7 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
                     <a href="profile.php?p=${data.data.user['id']}"><h4 class="px-3 mb-0">${data.data.user['username']}</h4></a>
                     </div>
                     <div class="mt-1">
-                    htmlspecialchars(${text})
+                    ${text}
                     </div>
                     </div>
                     </li>`;
@@ -52,10 +52,10 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
                  <a href="profile.php?p=${data.data.user['id']}"><h4 class="px-3 mb-0">${data.data.user['username']}</h4></a>
                  </div>
                  <div class="mt-1">
-                 htmlspecialchars(${text})
-                 </div>
-                 </div>
-                 </li>`;
+                    ${text}
+                    </div>
+                    </div>
+                    </li>`;
                  document.querySelector("#listupdates").innerHTML += li;
                  document.querySelector("#comment").value = '';
 
@@ -73,4 +73,4 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
         });*/
 
 
-    });
+    })

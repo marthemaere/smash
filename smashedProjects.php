@@ -26,7 +26,8 @@ $posts = Post::showSmashedProjects($key);
 if (empty($posts)) {
     $emptyState = true;
 }
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -52,53 +53,54 @@ if (empty($posts)) {
         <div class="row d-flex align-items-center">
             <div class="col-sm-12 col-md-12 col-lg-6">
                 <img src="<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
-                <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • 
-                <?php if (($_SESSION['id'])): ?>
-                <?php if ($countFollowers["COUNT(id)"] === "0"): ?>
-                       <span> no followers yet </span></p>
-                <?php elseif ($countFollowers['COUNT(id)'] === "1"): ?>
-                    <span> <?php echo $countFollowers["COUNT(id)"] ?> follower</span></p>
-                <?php else: ?>
-                    <span> <?php echo $countFollowers["COUNT(id)"] ?> followers</span></p>
-                <?php endif; ?>
-                <?php endif; ?>                </p>
-                <p class="biography"><?php echo htmlspecialchars($userData['bio']); ?></p>
-                <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
-                <form action="" method="post">
-                    <div class="my-4">
-                        <!-- are you sure alert -->
-                        <div class="modal fade" id="reportUser" aria-hidden="true" aria-labelledby="report-userLabel" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="report-userLabel">Are you sure you want to report this user?</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form action="" method="post">
-                                        <div class="modal-footer">
-                                            <button class="btn btn-outline-primary" data-bs-toggle="modal">No</button>
-                                            <input id="report-user" data-userid="<?php echo $userId ?>" data-report_userid="<?php echo $_SESSION['id'] ?>" type="submit" value="Yes" name="report" class="btn btn-primary" data-bs-toggle="modal">
-                                        </div>
-                                    </form>
-                                </div>
+                <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> •
+                    <?php if (($_SESSION['id'])) : ?>
+                        <?php if ($countFollowers["COUNT(id)"] === "0") : ?>
+                            <span> no followers yet </span>
+                </p>
+            <?php elseif ($countFollowers['COUNT(id)'] === "1") : ?>
+                <span> <?php echo $countFollowers["COUNT(id)"] ?> follower</span></p>
+            <?php else : ?>
+                <span> <?php echo $countFollowers["COUNT(id)"] ?> followers</span></p>
+            <?php endif; ?>
+        <?php endif; ?> </p>
+        <p class="biography"><?php echo htmlspecialchars($userData['bio']); ?></p>
+        <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
+        <form action="" method="post">
+            <div class="my-4">
+                <!-- are you sure alert -->
+                <div class="modal fade" id="reportUser" aria-hidden="true" aria-labelledby="report-userLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="report-userLabel">Are you sure you want to report this user?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                        </div>
-                        <!-- are you sure alert -->
-                        <div class="profile-btn">
-                            <?php if (!empty($userPosts[0]['social_linkedin'])) : ?>
-                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
-                            <?php endif; ?>
-
-                            <?php if (!empty($userPosts[0]['social_github'])) : ?>
-                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_github']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_github.png" alt="github"></a>
-                            <?php endif; ?>
-
-                            <?php if (!empty($userPosts[0]['social_instagram'])) : ?>
-                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_instagram']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_instagram.png" alt="instagram"></a>
-                            <?php endif; ?>
+                            <form action="" method="post">
+                                <div class="modal-footer">
+                                    <button class="btn btn-outline-primary" data-bs-toggle="modal">No</button>
+                                    <input id="report-user" data-userid="<?php echo $userId ?>" data-report_userid="<?php echo $_SESSION['id'] ?>" type="submit" value="Yes" name="report" class="btn btn-primary" data-bs-toggle="modal">
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
+                <!-- are you sure alert -->
+                <div class="profile-btn">
+                    <?php if (!empty($userPosts[0]['social_linkedin'])) : ?>
+                        <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($userPosts[0]['social_github'])) : ?>
+                        <a href="<?php echo htmlspecialchars($userPosts[0]['social_github']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_github.png" alt="github"></a>
+                    <?php endif; ?>
+
+                    <?php if (!empty($userPosts[0]['social_instagram'])) : ?>
+                        <a href="<?php echo htmlspecialchars($userPosts[0]['social_instagram']); ?>" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_instagram.png" alt="instagram"></a>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </form>
             </div>
         </div>
         <div>
@@ -146,4 +148,5 @@ if (empty($posts)) {
     <script src="javascript/report-user.js"></script>
     <script src="javascript/smashed.js"></script>
 </body>
+
 </html>

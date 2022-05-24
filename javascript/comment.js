@@ -30,7 +30,7 @@ document.querySelector("#btnSubmit").addEventListener("click", function (e) {
                     let li= `<li class="list-group-item border-0 border-bottom mw-80 m-1">
                     <div class="d-flex justify-content-between align-items-center"><div class="d-flex align-items-center">
                     <div class="d-flex flex-row align-items-start justify-content-start">
-                    <a href="profile.php?p=${data.data.user['id']}"><img src="profile_pictures/${data.data.user['profile_pic']}" class="img-profile-post"></a>
+                    <a href="profile.php?p=${data.data.user['id']}"><img src="${data.data.user['profile_pic']}" class="img-profile-post"></a>
                     <p class="mx-3"><a href="profile.php?p=${data.data.user['id']}" id="test">${data.data.user['username']}</a>
                     <span>${text}</span></p>
                     </div>
@@ -45,7 +45,7 @@ document.querySelector("#btnSubmit").addEventListener("click", function (e) {
                  let li= `<li class="list-group-item border-0 border-bottom mw-80 m-1">
                  <div class="d-flex justify-content-between align-items-center"><div class="d-flex align-items-center">
                  <div class="d-flex flex-row align-items-start justify-content-start">
-                 <a href="profile.php?p=${data.data.user['id']}"><img src="profile_pictures/${data.data.user['profile_pic']}" class="img-profile-post"></a>
+                 <a href="profile.php?p=${data.data.user['id']}"><img src="${data.data.user['profile_pic']}" class="img-profile-post"></a>
                  <p class="mx-3"><a href="profile.php?p=${data.data.user['id']}" id="test">${data.data.user['username']}</a>
                  <span>${text}</span></p>
                  </div>

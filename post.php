@@ -207,7 +207,7 @@
                                 <li class="list-group-item border-0 border-bottom mw-80 m-1">
                                     <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex flex-row align-items-start justify-content-start">
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
                                         <p class="mx-3"><a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>" id="test"><?php echo htmlspecialchars($c['username']);?></a>
                                         <span><?php echo htmlspecialchars($c['text']);?></span></p>
                                     </div>

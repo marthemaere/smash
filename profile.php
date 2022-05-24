@@ -57,9 +57,9 @@ if (!isset($_SESSION['id'])) {
                 <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • 
 
                 <?php if (($_SESSION['id'])): ?>
-                <?php if ($countFollowers["COUNT(id)"] === "0"): ?>
+                <?php if ($countFollowers["COUNT(id)"] === 0): ?>
                        <span> no followers yet </span></p>
-                <?php elseif ($countFollowers['COUNT(id)'] === "1"): ?>
+                <?php elseif ($countFollowers['COUNT(id)'] === 1): ?>
                     <span> <?php echo $countFollowers["COUNT(id)"] ?> follower</span></p>
                 <?php else: ?>
                     <span> <?php echo $countFollowers["COUNT(id)"] ?> followers</span></p>
@@ -98,15 +98,15 @@ if (!isset($_SESSION['id'])) {
                         </div>
                         <!-- are you sure alert -->
                         <div class="profile-btn">
-                            <?php if (!($_SESSION['id'] === $key)): ?>
+                            <?php if (($_SESSION['id'] !== $userData['id'])): ?>
                                 <?php if (!$isFollowed) : ?>
-                                    <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followingid="<?php echo $key; ?>">Follow</a>
+                                    <a href="#" name="follow" class="btn btn-primary mb-2 follow" data-followingid="<?php echo $userData['id']; ?>">Follow</a>
                                 <?php else : ?>
-                                    <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followingid="<?php echo $key; ?>">Following</a>
+                                    <a href="#" name="follow" class="btn btn-primary mb-2 follow active" data-followingid="<?php echo $userData['id']; ?>">Following</a>
                                 <?php endif; ?>
                             <?php endif; ?>
 
-                            <?php if (!($_SESSION['id'] === $key)): ?>
+                            <?php if (($_SESSION['id'] !== $userData['id'])): ?>
                                 <?php if ($isReported === false) : ?>
                                     <a class="btn btn-outline-primary mb-2" data-bs-toggle="modal" href="#reportUser" id="report-btn" role="button">Report user</a>
                                 <?php else : ?>

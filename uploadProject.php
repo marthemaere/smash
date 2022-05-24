@@ -73,6 +73,7 @@ if (!empty($_POST)) {
                 <fieldset>
                     <!-- <label for="title">Tell us more about your project</label> -->
                     <textarea name="description" class="form-control" id="description" cols="50" rows="3" placeholder="Tell us more about your project (but not a chapter)"></textarea>
+                    <div class="form-text">Your description may not be longer than 300 characters</div>
                 </fieldset>
 
                 <fieldset>

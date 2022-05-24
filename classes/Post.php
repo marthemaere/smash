@@ -91,6 +91,13 @@ class Post
         if (empty($description)) {
             throw new Exception("Description cannot be empty.");
         }
+
+        if( strlen($_POST['description']) > 300){
+            throw new Exception("Your description is too long.");
+        }
+
+        var_dump($_POST['description']);
+
         $this->description = $description;
         return $this;
     }
@@ -116,12 +123,11 @@ class Post
 
     public function canUploadProject()
     {
-        // $file = $_FILES['file'];
         $fileName = $_FILES['file']['name'];
         $fileTmpName = $_FILES['file']['tmp_name'];
         $fileSize = $_FILES['file']['size'];
         $fileError = $_FILES['file']['error'];
-        // $fileType = $_FILES['file']['type'];
+
 
         $fileExt = explode('.', $fileName);
         $fileActualExt = strtolower(end($fileExt)); //check in lowercase
@@ -131,7 +137,6 @@ class Post
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
                 if ($fileSize < 2097152) {
-                    //$fileNameNew = uniqid('', true) . "." . $fileActualExt;
                     $fileDestination = 'uploaded_projects/' . $fileName;
                     move_uploaded_file($fileTmpName, $fileDestination);
                     $image = basename($fileName);

@@ -8,21 +8,21 @@
     if (!isset($_SESSION['id'])) {
         header('Location: login.php');
     } else {
-        $postId=$_GET['p'];
-        $userId=$_SESSION['id'];
+        $postId = $_GET['p'];
+        $userId = $_SESSION['id'];
         $projectData = Post::getPostDataFromId($postId);
+        if (empty($projectData)) {
+            header('Location: index.php');
+        }
+
         $userDataFromId = User::getUserDataFromId($userId);
-    
-        //var_dump($projectData);
-         
-        //check if post is reported by user who is logged in
+             
+        // Check if post is reported by user who is logged in
         $report = new Report();
         $report->setPostId($postId);
         $report->setReport_userId($_SESSION['id']);
         $isReported = $report->isPostReportedByUser();
-        //var_dump($isReported);
           
-        //altijd alle laatste activiteiten ophalen
         $comments = Comment::getCommentsFromPostId($postId);
         $tags = Post::getTagsFromPost($postId);
 

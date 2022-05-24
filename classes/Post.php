@@ -92,7 +92,7 @@ class Post
             throw new Exception("Description cannot be empty.");
         }
 
-        if( strlen($_POST['description']) > 300){
+        if (strlen($_POST['description']) > 300) {
             throw new Exception("Your description is too long.");
         }
 

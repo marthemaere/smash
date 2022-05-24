@@ -204,17 +204,13 @@
                     <?php foreach ($comments as $c): ?>
 
                                 <li class="list-group-item border-0 border-bottom mw-80 m-1">
-                                   <div class="d-flex align-items-start"> 
-                                        <div class="d-flex align-items-center"> 
-                                            <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
-                                            <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>">
-                                                <h4 class="px-3 mb-0"><?php echo htmlspecialchars($c['username']);?></h4>
-                                            </a>
-                                        </div>
-                                        <div  class="mt-1">
-                                            <?php echo $c['text']; ?>
-                                        </div>
-                                   </div>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <div class="d-flex flex-row align-items-center justify-content-start">
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
+                                        <p class="m-2"><a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>" class="test"><?php echo htmlspecialchars($c['username']);?><span></a>
+                                        <span><?php echo htmlspecialchars($c['text']);?></span></p>
+                                    </div>
+                                    </div>
                                 </li>
 
                     <?php endforeach; ?>

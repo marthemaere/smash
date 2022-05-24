@@ -192,6 +192,7 @@ p.num-of-likes {
 .emptyComment {
     display: block;
 }
+
 .max-num-of-lines {
     word-break: break-word;
     overflow: hidden;
@@ -204,6 +205,11 @@ p.num-of-likes {
 
 footer p a {
     border-bottom: 1px dotted black;
+}
+
+a#test{
+    font-family: 'Spectral', serif;
+    font-weight: bold;
 }
 
 /* ------MediaQueries------ */

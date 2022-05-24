@@ -10,7 +10,7 @@
 
         try {
             $c = new Comment();
-            $c->setText($text);
+            $c->setText(htmlspecialchars($text));
             $c->setPostId($postId);
             $c->setUserId($userId);
             $result= $c->save();

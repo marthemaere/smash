@@ -169,7 +169,7 @@ if (!isset($_SESSION['id'])) {
                                 <div class="d-flex justify-content-between py-2">
                                     <div class="d-flex align-items-center justify-content-start">
                                         <img src="<?php echo htmlspecialchars($post['profile_pic']); ?>" class="img-profile-post">
-                                        <a href="profile.php?p=<?php echo htmlspecialchars($post[0]['user_id']); ?>">
+                                        <a href="profile.php?p=<?php echo htmlspecialchars($key); ?>">
                                             <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($post['username']); ?></h4>
                                         </a>
                                     </div>

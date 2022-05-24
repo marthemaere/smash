@@ -96,8 +96,6 @@ class Post
             throw new Exception("Your description is too long.");
         }
 
-        var_dump($_POST['description']);
-
         $this->description = $description;
         return $this;
     }

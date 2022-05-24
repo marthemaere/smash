@@ -68,6 +68,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
+    <link rel="stylesheet" href="./styles/custom.css">
     <title>Smash Post - <?php echo $projectData['title']; ?></title>
     <script type="text/javascript"></script>
 </head>
@@ -206,8 +207,8 @@
                                 <li class="list-group-item border-0 border-bottom mw-80 m-1">
                                     <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex flex-row align-items-start justify-content-start">
-                                    <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post mr-2"></a>
-                                        <p class="ml-2"><a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>" class="test"><?php echo htmlspecialchars($c['username']);?><span></a>
+                                    <a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>"><img src="profile_pictures/<?php echo htmlspecialchars($c['profile_pic']); ?>" class="img-profile-post"></a>
+                                        <p class="mx-3"><a href="profile.php?p=<?php echo htmlspecialchars($c['id']);?>" id="test"><?php echo htmlspecialchars($c['username']);?></a>
                                         <span><?php echo htmlspecialchars($c['text']);?></span></p>
                                     </div>
                                     </div>

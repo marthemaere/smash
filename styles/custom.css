@@ -207,9 +207,9 @@ footer p a {
     border-bottom: 1px dotted black;
 }
 
-test{
+a#test{
     font-family: 'Spectral', serif;
-    font-weight: 900;
+    font-weight: bold;
 }
 
 /* ------MediaQueries------ */

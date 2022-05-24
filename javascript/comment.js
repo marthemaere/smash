@@ -30,13 +30,12 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
                 console.log(data.status);
                 let empty= document.querySelector(".emptyComment");
                 if(empty !== null){
-                    let li= `<li class="list-group-item border-0 border-bottom mw-80 m-1 d-flex">
-                    <div class="d-flex align-items-start"><div class="d-flex align-items-center">
+                    let li= `<li class="list-group-item border-0 border-bottom mw-80 m-1">
+                    <div class="d-flex justify-content-between align-items-center"><div class="d-flex align-items-center">
+                    <div class="d-flex flex-row align-items-start justify-content-start">
                     <a href="profile.php?p=${data.data.user['id']}"><img src="profile_pictures/${data.data.user['profile_pic']}" class="img-profile-post"></a>
-                    <a href="profile.php?p=${data.data.user['id']}"><h4 class="px-3 mb-0">${data.data.user['username']}</h4></a>
-                    </div>
-                    <div class="mt-1">
-                    ${text}
+                    <p class="mx-3"><a href="profile.php?p=${data.data.user['id']}" id="test"><?php echo htmlspecialchars($c['username']);?></a>
+                    <span>${text}</span></p>
                     </div>
                     </div>
                     </li>`;
@@ -46,16 +45,15 @@ document.querySelector("#btnSubmit").addEventListener("click", function(e) {
 
                 } else {
 
-                 let li= `<li class="list-group-item border-0 border-bottom mw-80 m-1 d-flex">
-                 <div class="d-flex align-items-start"><div class="d-flex align-items-center">
+                 let li= `<li class="list-group-item border-0 border-bottom mw-80 m-1">
+                 <div class="d-flex justify-content-between align-items-center"><div class="d-flex align-items-center">
+                 <div class="d-flex flex-row align-items-start justify-content-start">
                  <a href="profile.php?p=${data.data.user['id']}"><img src="profile_pictures/${data.data.user['profile_pic']}" class="img-profile-post"></a>
-                 <a href="profile.php?p=${data.data.user['id']}"><h4 class="px-3 mb-0">${data.data.user['username']}</h4></a>
+                 <p class="mx-3"><a href="profile.php?p=${data.data.user['id']}" id="test">${data.data.user['username']}</a>
+                 <span>${text}</span></p>
                  </div>
-                 <div class="mt-1">
-                    ${text}
-                    </div>
-                    </div>
-                    </li>`;
+                 </div>
+                 </li>`;
                  document.querySelector("#listupdates").innerHTML += li;
                  document.querySelector("#comment").value = '';
 

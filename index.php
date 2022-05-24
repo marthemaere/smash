@@ -47,7 +47,7 @@
         } elseif ($sort == "Oldest First") {
             $posts = Post::getPosts("ASC", $start, $limit);
         } elseif ($sort == "Following") {
-            $posts = Post::filterPostsByFollowing($start, $limit);
+            $posts = Post::filterPostsByFollowing($start, $limit, $userDataFromId['id']);
         }
     }
     
@@ -110,7 +110,7 @@
                             <h6 class="dropdown-header">Filter</h6>
                         </li>
                         <li>
-                            <a class="dropdown-item filter-following" href="#"><input type="submit" name="following" value="Following"></a>
+                            <a class="dropdown-item filter-following" href="#"><input type="submit" name="sort" value="Following"></a>
                         </li>
                         <?php endif; ?>
                     </form>

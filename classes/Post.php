@@ -192,7 +192,7 @@ class Post
         return $result;
     }
 
-    public static function filterPostsByFollowing($start, $limit)
+    public static function filterPostsByFollowing($start, $limit, $user_id)
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare(
@@ -200,9 +200,11 @@ class Post
             FROM posts p
             INNER JOIN followers f ON f.following_id = p.user_id
             INNER JOIN users u ON p.user_id = u.id 
+            WHERE f.follower_id = :userId
             ORDER BY `date` DESC 
             LIMIT $start, $limit"
         );
+        $statement->bindValue(':userId', $user_id);
         $statement->execute();
         $result = $statement->fetchAll();
         return $result;

@@ -11,6 +11,7 @@
             $emptystate = true;
         }
     }
+    $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     
 ?><nav class="navbar navbar-light border-bottom">
     <div class="container">
@@ -23,12 +24,14 @@
                 <a href="register.php" class="btn btn-primary">Signup</a>
             </form>
             <?php else: ?>
-            <form class="header-search" action="" method="get">
-                <div class="input-group">
-                    <input type="text" class="form-control" name="search" placeholder="Search for projects" aria-label="Search for projects" aria-describedby="button-addon2">
-                    <input class="btn btn-outline-primary btn-icon-search" type="submit" id="button-addon2" value=">">
-                </div>
-            </form>
+            <?php if(str_contains($url, "index.php") || $url === "https://smash.weareimd.be/" || str_contains($url, "sort")): ?>
+                <form class="header-search" action="" method="get">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="search" placeholder="Search for projects" aria-label="Search for projects" aria-describedby="button-addon2">
+                        <input class="btn btn-outline-primary btn-icon-search" type="submit" id="button-addon2" value=">">
+                    </div>
+                </form>
+            <?php endif; ?>
             <a href="uploadProject.php" class="btn btn-primary m-3">Upload Project</a>
             <div class="flex-shrink-0 dropdown d-flex">
                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">

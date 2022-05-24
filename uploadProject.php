@@ -85,7 +85,7 @@ if (!empty($_POST)) {
                 <fieldset>
                     <label class="form-label" for="image"></label>
                     <input type="file" class="form-control" id="customFile" name="file">
-                    <div class="form-text">JPG or PNG. Max size of 2MB</div>
+                    <div class="form-text">JPG, PNG or GIF. Max size of 2MB</div>
                 </fieldset>
 
                 <input class="btn btn-primary col-12" type="submit" value="Upload masterpiece" name="submit">

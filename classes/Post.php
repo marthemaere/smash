@@ -256,14 +256,15 @@ class Post
         return $statement->execute();
     }
 
-    public function editTitle($postId)
+    public function editProject($postId)
     {
         $title = $this->getTitle();
-        // $postId =  $_GET['p'];
+        $description = $this->getDescription();
 
         $conn = Db::getInstance();
-        $statement = $conn->prepare("UPDATE posts SET title= :title where id = :postId");
+        $statement = $conn->prepare("UPDATE posts SET `title` = :title, `description` = :description where id = :postId");
         $statement->bindValue(":title", $title);
+        $statement->bindValue(":description", $description);
         $statement->bindValue(":postId", $postId);
         return $statement->execute();
     }

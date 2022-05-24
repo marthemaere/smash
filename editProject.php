@@ -19,11 +19,13 @@ if (!empty($_POST['submit'])) {
     try {
         $post = new Post();
         $post->setTitle($_POST['title']);
-        $post->editTitle($postId);
+        $post->setDescription($_POST['description']);
+        $post->editProject($postId);
                             
         $tags = new Tag();
         $tags->setTag($_POST['tags']);
-        $tags->editTags($postId);
+        $tags->resetTagsInDatabase($postId);
+        $tags->addTagsToDatabase($postId);
 
         header('Location: index.php');
     } catch (Throwable $e) {
@@ -53,16 +55,20 @@ if (!empty($_POST['submit'])) {
         </div>
         
         <div class="col-7 py-5 m-auto">
-            <img src="<?php echo htmlspecialchars($projectData['image']); ?>" width="100%" height="auto" class="img-project-post mb-4" style="object-fit:cover">
-
             <?php if (isset($error)):?>
             <div class="alert alert-danger"><?php echo $error; ?></div>
             <?php endif;?>
+
+            <img src="<?php echo htmlspecialchars($projectData['image']); ?>" width="100%" height="auto" class="img-project-post mb-4" style="object-fit:cover">
 
             <form class="uploadzone" action="#" method="POST" enctype="multipart/form-data">
                 <fieldset>
                     <!-- <label for="floatingInput">Edit the title of your project</label> -->
                     <input type="text" class="form-control" id="floatingInput" name="title" value="<?php echo $projectData['title'] ?>">
+                </fieldset>
+
+                <fieldset>
+                    <input type="text" class="form-control" id="floatingInput" name="description" value="<?php echo $projectData['description'] ?>">
                 </fieldset>
 
                 <fieldset>

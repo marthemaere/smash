@@ -39,7 +39,6 @@ class Tag
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into tags (tag, post_id) values (:tag, :post_id)");
       
-
         for ($i=0; $i<count($tags); $i++) {
             $statement->bindValue(":tag", $tags[$i]);
             $statement->bindValue(":post_id", $post_id);
@@ -50,18 +49,12 @@ class Tag
         return $result;
     }
 
-    public function editTags($postId)
+    public function resetTagsInDatabase($post_id)
     {
-        $tags = $this->getTags();
-
         $conn = Db::getInstance();
-
-        $statement = $conn->prepare("UPDATE tags SET tag= :tag where post_id = :postId");
-        
-        $statement->bindValue(":tag", $tags);
-        $statement->bindValue(":postId", $postId);
-        $result = $statement->execute();
-        return $result;
+        $statement = $conn->prepare("DELETE FROM tags WHERE post_id = :postid");
+        $statement->bindValue(':postid', $post_id);
+        return $statement->execute();
     }
 
     public static function filterPostsByTag($tag)

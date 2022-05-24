@@ -1,3 +1,4 @@
 config.ini
 config/postmark.ini
 vendor
+.DS_Store

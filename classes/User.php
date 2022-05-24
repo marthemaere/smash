@@ -17,6 +17,7 @@ class User
     private $socialLinkedIn;
     private $socialInstagram;
     private $socialGitHub;
+    private $socialPortfolio;
 
 
     public function setEmail($email)
@@ -152,6 +153,18 @@ class User
     public function getSocialGitHub()
     {
         return $this->socialGitHub;
+    }
+
+    public function getSocialPortfolio()
+    {
+        return $this->socialPortfolio;
+    }
+
+    public function setSocialPortfolio($socialPortfolio)
+    {
+        $this->socialPortfolio = $socialPortfolio;
+
+        return $this;
     }
 
     //registreren
@@ -348,18 +361,20 @@ class User
         $conn = Db::getInstance();
         $statement = $conn->prepare(
             "UPDATE users
-                SET social_linkedin = :linkedin, social_instagram = :instagram, social_github = :github
+                SET social_linkedin = :linkedin, social_instagram = :instagram, social_github = :github, social_portfolio = :portfolio
                 WHERE id = :userId"
         );
 
         $linkedIn = $this->getSocialLinkedIn();
         $instagram = $this->getSocialInstagram();
         $gitHub = $this->getSocialGitHub();
+        $portfolio = $this->getSocialPortfolio();
         $userId = $this->getUserId();
 
         $statement->bindValue(":linkedin", $linkedIn);
         $statement->bindValue(":instagram", $instagram);
         $statement->bindValue(":github", $gitHub);
+        $statement->bindValue(":portfolio", $portfolio);
         $statement->bindValue(":userId", $userId);
 
         $statement->execute();
@@ -411,7 +426,7 @@ class User
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare(
-            "SELECT u.username, u.profile_pic, u.social_github, u.social_linkedin, u.social_instagram, p.id, p.title, p.image, p.description
+            "SELECT u.username, u.profile_pic, u.social_github, u.social_linkedin, u.social_instagram, u.social_portfolio, p.id, p.title, p.image, p.description
                 FROM users u 
                 INNER JOIN posts p ON u.id = p.user_id
                 WHERE u.id = :id;"
@@ -421,4 +436,6 @@ class User
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    
 }

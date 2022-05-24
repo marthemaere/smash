@@ -19,6 +19,7 @@
             $linkedIn = $user->setSocialLinkedIn($_POST['linkedin']);
             $instagram = $user->setSocialInstagram($_POST['instagram']);
             $gitHub = $user->setSocialGitHub($_POST['github']);
+            $portfolio = $user->setSocialPortfolio($_POST['portfolio']);
             $userId = $user->setUserId($sessionId);
             $user->updateSocials();
 
@@ -89,7 +90,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-12 col-md-auto col-lg-3">
+            <div class="col-sm-12 col-md-auto col-lg-9">
                 <div class="" id="socials" role="tabpanel" aria-labelledby="socials-list">
                     <?php if (isset($error)): ?>
                         <p class="alert alert-danger"><?php echo $error; ?></p>
@@ -100,23 +101,22 @@
                     <form action="" method="post">
                             <div class="social-link-item">
                                 <label for="linkedin" class="form-label">LinkedIn</label>
-                                <input type="url" class="form-control" name="linkedin" id="linkedin" value="<?php if($userDataFromId['social_linkedin']){
-                                    echo htmlspecialchars($userDataFromId['social_linkedin']);
-                                } ?>">
+                                <input type="url" class="form-control" name="linkedin" id="linkedin" value="<?php if ($userDataFromId['social_linkedin']) { echo htmlspecialchars($userDataFromId['social_linkedin']);} ?>">
                             </div>
 
                             <div class="social-link-item my-3">
                                 <label for="instagram" class="form-label">Instagram</label>
-                                <input type="url" class="form-control" name="instagram" id="instagram" value="<?php if($userDataFromId['social_instagram']){
-                                    echo htmlspecialchars($userDataFromId['social_instagram']);
-                                } ?>">
+                                <input type="url" class="form-control" name="instagram" id="instagram" value="<?php if ($userDataFromId['social_instagram']) { echo htmlspecialchars($userDataFromId['social_instagram']);} ?>">
                             </div>
 
                             <div class="social-link-item my-3">
                                 <label for="github" class="form-label">GitHub</label>
-                                <input type="url" class="form-control" name="github" id="github" value="<?php if($userDataFromId['social_github']){
-                                    echo htmlspecialchars($userDataFromId['social_github']);
-                                } ?>">
+                                <input type="url" class="form-control" name="github" id="github" value="<?php if ($userDataFromId['social_github']) { echo htmlspecialchars($userDataFromId['social_github']);} ?>">
+                            </div>
+
+                            <div class="social-link-item my-3">
+                                <label for="portfolio" class="form-label">Portfolio</label>
+                                <input type="url" class="form-control" name="portfolio" id="portfolio" value="<?php if ($userDataFromId['social_portfolio']) {echo htmlspecialchars($userDataFromId['social_portfolio']);} ?>">
                             </div>
 
                         <input type="submit" class="btn btn-dark mt-4" name="updateSocialProfiles" value="Update social profiles">

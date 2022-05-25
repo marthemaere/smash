@@ -1,18 +1,20 @@
 <?php
     require_once('../bootstrap.php');
+    session_start();
 
 
     if( !empty($_POST) ) {
-        $text = $_POST['text'];
-        $postId = intval($_POST['postid']);
-        $userId = intval($_POST['userid']);
-
+      
 
         try {
+            $text = $_POST['text'];
+            $userId = $_SESSION['id'];
+            $postId = intval($_POST['postid']);
+
             $c = new Comment();
             $c->setText(htmlspecialchars($text));
-            $c->setPostId($postId);
             $c->setUserId($userId);
+            $c->setPostId($postId);
             $result= $c->save();
             $notEmpty= $c->getCommentsFromPostId($postId);
 

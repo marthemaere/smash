@@ -16,6 +16,9 @@ class Tag
     
     public function setTag($tags)
     {
+        if(empty($tags)) {
+            throw new Exception("Tags cannot be empty.");
+        }
         $this->tags = $tags;
         return $this;
     }
@@ -35,20 +38,25 @@ class Tag
     public function addTagsToDatabase($post_id)
     {
         $tags = $this->getTags();
-        $tags = explode(" ", $tags);
-        $conn = Db::getInstance();
-        $statement = $conn->prepare("insert into tags (tag, post_id) values (:tag, :post_id)");
-      
-        for ($i=0; $i<count($tags); $i++) {
-            $statement->bindValue(":tag", $tags[$i]);
-            $statement->bindValue(":post_id", $post_id);
-            $result = $statement->execute();
+        if (!empty($tags)) {
+            //$myString = $tags;
+            $tags = explode(" ", $tags);
+            for ($i = 0; $i < count($tags); $i++) {
+                if (strpos($tags[$i], '#') === false) {
+                    $tags[$i] =  "#" . $tags[$i];
+                }
+            }
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("INSERT into tags (tag, post_id) VALUES (:tag, :post_id)");
+            for ($i = 0; $i < count($tags); $i++) {
+                $statement->bindValue(":tag", $tags[$i]);
+                $statement->bindValue(":post_id", $post_id);
+                $result = $statement->execute();
+            }
+            unset($tags);
+            return $result;
         }
-
-        unset($tags);
-        return $result;
     }
-
     public function resetTagsInDatabase($post_id)
     {
         $conn = Db::getInstance();

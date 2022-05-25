@@ -12,6 +12,9 @@
         } catch (\Throwable $e) {
             $error = $e->getMessage();
         }
+        if ($userDataFromId['is_blocked']) {
+            header('Location: index.php');
+        }
     }
 
     if (!empty($_POST['submitProfilePicture'])) {
@@ -39,6 +42,7 @@
             $error = $e->getMessage();
         }
     }
+
     if (!empty($_POST['delete'])) {
         try {
             User::deleteUser($sessionId);
@@ -135,13 +139,17 @@
 
                                 <fieldset>
                                     <label for="education" class="form-label">Alternative email</label>
-                                    <input type="text" class="form-control" name="secondEmail" id="secondEmail" value="<?php if($userDataFromId['second_email']){ echo htmlspecialchars($userDataFromId['second_email']); } ?>">
+                                    <input type="text" class="form-control" name="secondEmail" id="secondEmail" value="<?php if ($userDataFromId['second_email']) {
+    echo htmlspecialchars($userDataFromId['second_email']);
+} ?>">
                                     <div class="form-text">In case you lose access from your school account, you can still log in with this email address as well.</div>
                                 </fieldset>
 
                                 <fieldset>
                                     <label for="education" class="form-label">Education</label>
-                                    <input type="text" class="form-control" name="education" id="education" value="<?php if($userDataFromId['education']){ echo htmlspecialchars($userDataFromId['education']); } ?>">
+                                    <input type="text" class="form-control" name="education" id="education" value="<?php if ($userDataFromId['education']) {
+    echo htmlspecialchars($userDataFromId['education']);
+} ?>">
                                     <div class="form-text">Add your education to complete your profile.</div>
                                 </fieldset>
 

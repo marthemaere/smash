@@ -37,6 +37,9 @@
                 $error = $e->getMessage();
             }
         }
+        if ($userDataFromId['is_blocked']) {
+            header('Location: index.php');
+        }
     }
 
 

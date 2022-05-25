@@ -9,9 +9,10 @@ if (!isset($_SESSION['id'])) {
 
 $postId =  $_GET['p'];
 $projectData = Post::getPostDataFromId($postId);
+$userDataFromId = User::getUserDataFromId($_SESSION['id']);
 $tags = Post::getTagsFromPost($postId);
 
-if ($_SESSION['id'] !== $projectData['user_id']) {
+if ($_SESSION['id'] !== $projectData['user_id'] || $userDataFromId['is_blocked']) {
     header('Location: index.php');
 }
 

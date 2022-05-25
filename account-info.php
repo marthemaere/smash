@@ -25,6 +25,9 @@
                 $error = $e->getMessage();
             }
         }
+        if ($userDataFromId['is_blocked']) {
+            header('Location: index.php');
+        }
     }
 
 ?><!DOCTYPE html>
@@ -91,7 +94,9 @@
 
                             <fieldset>
                                 <label for="email" class="form-label">Second email</label>
-                                <input type="text" class="form-control" name="email" value="<?php if($userDataFromId['second_email']) { echo htmlspecialchars($userDataFromId['second_email']); } ?>" id="email" readonly>
+                                <input type="text" class="form-control" name="email" value="<?php if ($userDataFromId['second_email']) {
+    echo htmlspecialchars($userDataFromId['second_email']);
+} ?>" id="email" readonly>
                                 <div class="form-text">Additional email to login with when losing your school account.</div>
                             </fieldset>
                         </form>

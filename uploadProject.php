@@ -6,6 +6,11 @@ if (!isset($_SESSION['id'])) {
     header('Location: login.php');
 }
 
+// $userDataFromId = User::getUserDataFromId($_SESSION['id']);
+// if ($userDataFromId['is_blocked']) {
+//     header('Location: index.php');
+// }
+
 if (!empty($_POST)) {
     try {
 

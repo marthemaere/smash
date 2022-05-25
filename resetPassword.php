@@ -7,6 +7,8 @@
         exit("Can't find page");
     } else {
         try {
+            $userDataFromId = User::getUserDataFromId($_SESSION['id']);
+
             // er is een nieuw wachtwoord ingevuld
             if (!empty($_POST['save_password'])) {
                 $user = Mailer::getEmailFromCode($code);
@@ -21,6 +23,10 @@
             }
         } catch (\Throwable $e) {
             $error = $e->getMessage();
+        }
+        
+        if ($userDataFromId['is_blocked']) {
+            header('Location: index.php');
         }
     }
 

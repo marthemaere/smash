@@ -2,7 +2,6 @@
     include_once("bootstrap.php");
  
     session_start();
-
     $conn = Db::getInstance();
     
     if (!isset($_SESSION['id'])) {
@@ -11,7 +10,9 @@
         $postId = $_GET['p'];
         $userId = $_SESSION['id'];
         $projectData = Post::getPostDataFromId($postId);
-        if (empty($projectData)) {
+        $userDataFromId = User::getUserDataFromId($_SESSION['id']);
+
+        if (empty($projectData) || $userDataFromId['is_blocked']) {
             header('Location: index.php');
         }
 

@@ -7,6 +7,10 @@ $conn = Db::getInstance();
 if (isset($_SESSION['id'])) {
     $sessionId = $_SESSION['id'];
     $userDataFromId = User::getUserDataFromId($sessionId);
+
+    if ($userDataFromId['is_blocked']) {
+        header('Location: index.php');
+    }
 }
 
 $user = new User();

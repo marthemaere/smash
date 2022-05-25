@@ -22,6 +22,11 @@ if (!isset($_SESSION['id'])) {
     $isFollowed = $follower->isFollowedByUser();
     $countFollowers = $follower->countFollowers();
 
+    $userDataFromSession = User::getUserDataFromId($key);
+    if ($userDataFromSession['is_blocked']) {
+        header('Location: index.php');
+    }
+
     if (empty($userPosts)) {
         $emptyState = true;
     }

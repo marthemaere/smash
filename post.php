@@ -223,7 +223,7 @@
                         <form class="p-3" action="" method="post">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Place a comment" aria-label="Place a comment" aria-describedby="button-addon2" id="comment" name="text">
-                                <input type="submit" name="text" id="btnSubmit" data-userid="<?php echo $userId ?>" data-postid="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >
+                                <input type="submit" name="text" id="btnSubmit" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >
                             </div>
                         </form>
                     </div>

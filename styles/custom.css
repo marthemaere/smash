@@ -212,6 +212,11 @@ a#test{
     font-weight: bold;
 }
 
+.modal_blocked {
+    background-color: rgba(0, 0, 0, 0.8);
+
+}
+
 /* ------MediaQueries------ */
 
 @media (max-width: 992px) {

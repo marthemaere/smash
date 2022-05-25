@@ -110,13 +110,57 @@ include_once(__DIR__ . "/Db.php");
         public function isUserReportedByUser()
         {
             $conn = Db::getInstance();
+
             $userId = $this->getReport_userId();
             $reportedUserId = $this->getReported_userId();
+
             $statement = $conn->prepare("SELECT * FROM reports WHERE report_user_id = :user_id AND reported_user_id = :reported_user_id");
             $statement->bindValue(":user_id", $userId);
             $statement->bindValue(":reported_user_id", $reportedUserId);
             $statement->execute();
             $result = $statement->fetchAll();
+
+            if ($result != null) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public static function getReportedUsers()
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT reported_user_id ,count(reported_user_id) as count, users.username from reports INNER JOIN users on users.id = reports.reported_user_id GROUP BY reported_user_id HAVING COUNT(reported_user_id) > 0  ORDER BY COUNT(post_id) DESC");
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+
+        public static function getReportedPosts()
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT post_id, COUNT(post_id) as `count`, posts.title, CONCAT('http://localhost:8888/smash/post.php?p=', post_id) as `link` from reports INNER JOIN posts on posts.id = reports.post_id GROUP BY post_id HAVING COUNT(post_id) > 0  ORDER BY COUNT(post_id) DESC");
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+
+        public static function blockUser($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("UPDATE users SET is_blocked = :bool WHERE id = :id");
+            $statement->bindValue(":id", $id);
+            $statement->bindValue(":bool", 1);
+            return $statement->execute();
+        }
+
+        public static function getBlockedUser($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT is_blocked FROM users WHERE id = :id ");
+            $statement->bindValue(":id", $id);
+            $statement->execute();
+            $result = $statement->fetch();
             if ($result != null) {
                 return true;
             } else {

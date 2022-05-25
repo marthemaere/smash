@@ -43,7 +43,6 @@
                         Report::blockUser($userReport['reported_user_id']);
                     }
                     $isBlocked = Report::getBlockedUser($userReport['reported_user_id']);
-                    var_dump($isBlocked);
                 ?>
                 <tr>
                     <th scope="row"><?php echo $userReport['reported_user_id']; ?></th>

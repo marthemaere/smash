@@ -84,19 +84,6 @@
 <body>
     <?php require_once("header.php"); ?>
 
-    <?php if ($userDataFromId['is_blocked']): ?>
-        <div class="modal modal_blocked fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-modal="true" role="dialog" style="display: block;">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Attention!</h5>
-                    </div>
-                    <div class="modal-body">Your account has been blocked due to many reports of your current profile.</div>
-                </div>
-            </div>
-        </div>
-    <?php endif; ?>
-
     <div class="container mt-5 mb-5">
         <div class="d-flex flex-wrap justify-content-between align-items-center m-3">
             <div class="btn-group">
@@ -216,6 +203,19 @@
                     </div>
 
                 <?php else: ?>
+                    <?php if ($userDataFromId['is_blocked']): ?>
+                        <div class="modal modal_blocked fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-modal="true" role="dialog" style="display: block;">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Attention!</h5>
+                                    </div>
+                                    <div class="modal-body">Your account has been blocked due to many reports of your current profile.</div>
+                                </div>
+                            </div>
+                        </div>
+                     <?php endif; ?>
+                     
                     <?php
                         $like = new Like();
                         $like->setPostId($p[0]);

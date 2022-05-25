@@ -65,6 +65,11 @@ nav .btn {
     padding: 43px;
 }
 
+.btn-icon:hover {
+    background-color: #FCD7F7;
+    border-color: #FCD7F7;
+    color: black;
+}
 
 /* ------Links------ */
 .link-primary {

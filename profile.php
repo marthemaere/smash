@@ -120,16 +120,16 @@ if (!isset($_SESSION['id'])) {
                             <?php endif; ?>
 
                             <?php if (!empty($userPosts[0]['social_linkedin'])) : ?>
-                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" target="_blank"class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
+                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_linkedin']); ?>" target="_blank"class="btn btn-outline-primary btn-icon mb-2"><img src="assets/icons/icon_linkedin.png" alt="linkedin"></a>
                             <?php endif; ?>
                             <?php if (!empty($userPosts[0]['social_github'])) : ?>
-                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_github']); ?>" target="_blank" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_github.png" alt="github"></a>
+                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_github']); ?>" target="_blank" class="btn btn-outline-primary btn-icon mb-2"><img src="assets/icons/icon_github.png" alt="github"></a>
                             <?php endif; ?>
                             <?php if (!empty($userPosts[0]['social_instagram'])) : ?>
-                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_instagram']); ?>" target="_blank" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_instagram.png" alt="instagram"></a>
+                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_instagram']); ?>" target="_blank" class="btn btn-outline-primary btn-icon mb-2"><img src="assets/icons/icon_instagram.png" alt="instagram"></a>
                             <?php endif; ?>
                             <?php if (!empty($userPosts[0]['social_portfolio'])) : ?>
-                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_portfolio']); ?>" target="_blank" class="btn btn-outline-primary mb-2"><img src="assets/icons/icon_portfolio.png" alt="portfolio"></a>
+                                <a href="<?php echo htmlspecialchars($userPosts[0]['social_portfolio']); ?>" target="_blank" class="btn btn-outline-primary btn-icon mb-2"><img src="assets/icons/icon_portfolio.png" alt="portfolio"></a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -184,7 +184,7 @@ if (!isset($_SESSION['id'])) {
                                     <div class="d-flex align-items-center">
                                         <?php if (!$isLiked) : ?>
                                             <img src="assets/images/empty-heart.svg" name="like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $post['id'] ?>">
-                                            <?php if ($count['COUNT(id)'] === "0") : ?>
+                                            <?php if ($count['COUNT(id)'] === 0) : ?>
                                                 <p class="num-of-likes" data-postid="<?php echo $post['id'] ?>"><?php ?></p>
                                             <?php else : ?>
                                                 <p class="num-of-likes" data-postid="<?php echo $post['id'] ?>"><?php echo $count['COUNT(id)'] ?></p>

@@ -59,10 +59,10 @@ if (empty($posts)) {
                 <img src="<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
                 <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> •
                     <?php if (($_SESSION['id'])) : ?>
-                        <?php if ($countFollowers["COUNT(id)"] === "0") : ?>
+                        <?php if ($countFollowers["COUNT(id)"] === 0) : ?>
                             <span> no followers yet </span>
                 </p>
-            <?php elseif ($countFollowers['COUNT(id)'] === "1") : ?>
+            <?php elseif ($countFollowers['COUNT(id)'] === 1) : ?>
                 <span> <?php echo $countFollowers["COUNT(id)"] ?> follower</span></p>
             <?php else : ?>
                 <span> <?php echo $countFollowers["COUNT(id)"] ?> followers</span></p>

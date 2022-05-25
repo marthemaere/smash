@@ -38,20 +38,22 @@
             </tr>
             <?php foreach ($userReports as $userReport): ?>
                 <?php
-                    if (!empty($_POST['blockUser'])) {
+                    $blockUser = 'blockUser' . $userReport['reported_user_id'];
+                    if (!empty($_POST[$blockUser])) {
                         Report::blockUser($userReport['reported_user_id']);
                     }
                     $isBlocked = Report::getBlockedUser($userReport['reported_user_id']);
+                    var_dump($isBlocked);
                 ?>
                 <tr>
                     <th scope="row"><?php echo $userReport['reported_user_id']; ?></th>
                     <td><?php echo $userReport['username']; ?></td>
                     <td><?php echo $userReport['count']; ?></td>
                     <td>
-                        <?php if (!isset($isBlocked)): ?>
-                        <form action="" method="POST">
-                            <input type="submit" value="Block" name="blockUser">
-                        </form>
+                        <?php if (($isBlocked['is_blocked'] == "1")): ?>
+                            <form action="" method="POST">
+                                <input type="submit" value="Block" name="blockUser<?php echo $userReport['reported_user_id']?>">
+                            </form>
                         <?php else: ?>
                             <input type="submit" value="Blocked" name="blockUser" disabled>
                         <?php endif; ?>

@@ -161,10 +161,6 @@ include_once(__DIR__ . "/Db.php");
             $statement->bindValue(":id", $id);
             $statement->execute();
             $result = $statement->fetch();
-            if ($result != null) {
-                return true;
-            } else {
-                return false;
-            }
+            return $result;
         }
     }

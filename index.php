@@ -8,14 +8,6 @@
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
     }
-    
-    if (isset($_SESSION['auth'])) {
-        $currentTime= time();
-        if ($currentTime > $_SESSION['expire']) {
-            session_unset();
-            session_destroy();
-        }
-    }
 
     $sort = "Newest First";
     $limit = 15;
@@ -215,7 +207,7 @@
                             </div>
                         </div>
                      <?php endif; ?>
-                     
+
                     <?php
                         $like = new Like();
                         $like->setPostId($p[0]);

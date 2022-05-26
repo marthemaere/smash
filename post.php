@@ -17,6 +17,20 @@
         }
 
         $userDataFromId = User::getUserDataFromId($userId);
+
+        // Check if user is moderator 
+        if ($userDataFromId['is_moderator'] == 1) {
+            $isModerator = true;
+        } else {
+            $isModerator = false;
+        }
+
+        // Check if user is admin
+        if ($userDataFromId['is_admin'] == 1) {
+            $isAdmin = true;
+        } else {
+            $isAdmin = false;
+        }
              
         // Check if post is reported by user who is logged in
         $report = new Report();
@@ -172,7 +186,7 @@
                                 <a class="btn btn-danger disabled" data-bs-toggle="modal" href="#reportPost" id="report-btn" role="button">Reported</a>
                                 <?php endif; ?>
                             <?php endif; ?>
-                            <?php if ($_SESSION['id'] == $projectData['user_id']): ?>
+                            <?php if ($_SESSION['id'] == $projectData['user_id'] || $isModerator === true || $isAdmin === true): ?>
                             <a class="btn btn-outline-danger ms-2" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
                             <?php endif; ?>
                         </form>

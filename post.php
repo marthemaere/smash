@@ -168,14 +168,14 @@
                         <form class="d-flex align-items-center" action="" method="post">
                             <div class="btn btn-primary btn-icon d-flex align-items-center mx-2 p-2">
                             <?php if (!$isLiked): ?>
-                                        <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $postId ?>">
+                                        <img src="assets/images/empty-heart.svg" name= "like" class="like notLiked" id="likePost"  data-postid="<?php echo $postId ?>">
                                         <?php if ($count['COUNT(id)'] === 0): ?>
                                             <p class="num-of-likes" data-postid="<?php echo $postId ?>"><?php ?></p>
                                         <?php else : ?>
                                             <p class="num-of-likes" data-postid="<?php echo $postId ?>"><?php echo $count['COUNT(id)'] ?></p>
                                         <?php endif; ?>
                                     <?php else: ?>
-                                        <img src="assets/images/liked-heart.svg" name= "like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $postId ?>">
+                                        <img src="assets/images/liked-heart.svg" name= "like" class="like notLiked" id="likePost" data-postid="<?php echo $postId ?>">
                                         <p class="num-of-likes" data-postid="<?php echo $postId ?>"><?php echo $count['COUNT(id)'] ?></p>  
                                     <?php endif; ?>
                             </div>

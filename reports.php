@@ -7,8 +7,8 @@
         $data = User::getUserDataFromId($sessionId);
     }
 
-    if($data["is_moderator"] == false) {
-        if($data["is_admin"] == false) {
+    if ($data["is_moderator"] == false) {
+        if ($data["is_admin"] == false) {
             header('Location: index.php');
         }
     }
@@ -46,7 +46,7 @@
                     if (!empty($_POST[$blockUser])) {
                         Report::blockUser($userReport['reported_user_id']);
                     }
-                    if(!empty($_POST[$unblockUser])){
+                    if (!empty($_POST[$unblockUser])) {
                         Report::unblockUser($userReport['reported_user_id']);
                     }
                     $user = Report::getBlockedUser($userReport['reported_user_id']);
@@ -58,11 +58,11 @@
                     <td>
                         <?php if (($user['is_blocked'] == false)): ?>
                             <form action="" method="POST">
-                                <input type="submit" value="Block" name="blockUser<?php echo $userReport['reported_user_id']?>">
+                                <input type="submit" value="Block" name="blockUser<?php echo $userReport['reported_user_id']?>" class="btn btn-success">
                             </form>
                         <?php else: ?>
                             <form action="" method="POST">
-                                <input type="submit" value="Unblock" name="unblockUser<?php echo $userReport['reported_user_id']?>">
+                                <input type="submit" value="Unblock" name="unblockUser<?php echo $userReport['reported_user_id']?>" class="btn btn-danger">
                             </form>
                         <?php endif; ?>
                     </td>
@@ -95,7 +95,7 @@
                     <td><?php echo $postReport['count']; ?></td>
                     <td>
                         <form action="" method="POST">
-                            <input type="submit" value="Delete" name="deletePost<?php echo $postReport['post_id']; ?>">
+                            <input type="submit" value="Delete" name="deletePost<?php echo $postReport['post_id']; ?>" class="btn btn-danger">
                         </form>
                     </td>
                 </tr>

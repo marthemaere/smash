@@ -72,6 +72,13 @@
                     <a class="list-group-item list-group-item-action" href="edit-profile.php">Edit profile</a>
                     <a class="list-group-item list-group-item-action" href="change-password.php">Change password</a>
                     <a class="list-group-item list-group-item-action" href="social-accounts.php">Social profiles</a>
+                    <?php if (($userDataFromId['is_admin'] && $userDataFromId['is_moderator'] == false) || ($userDataFromId['is_admin'] && $userDataFromId['is_moderator'])): ?>
+                        <a class="list-group-item list-group-item-action" href="reports.php">Reports</a>
+                        <a class="list-group-item list-group-item-action" href="roles.php">Roles</a>
+                    <?php endif; ?>
+                    <?php if ($userDataFromId['is_admin'] == false && $userDataFromId['is_moderator']): ?>
+                        <a class="list-group-item list-group-item-action" href="reports.php">Reports</a>
+                    <?php endif; ?>
                     <a class="list-group-item list-group-item-action text-danger" data-bs-toggle="modal" role="button" href="#deleteAccount">Remove account</a>
                 </div>
             </div>

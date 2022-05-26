@@ -206,7 +206,6 @@ class User
         $statement->execute();
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $users;
-        print_r($users);
     }
 
 
@@ -435,5 +434,14 @@ class User
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+    }
+
+    public static function updateModeratorRole($id, $isModerator)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE users SET is_moderator = :isModerator WHERE id = :id");
+        $statement->bindValue(":id", $id);
+        $statement->bindValue(":isModerator", $isModerator);
+        return $statement->execute();
     }
 }

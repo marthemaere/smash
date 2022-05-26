@@ -70,7 +70,7 @@ if (!isset($_SESSION['id'])) {
                         <?php endif; ?>
                     <?php endif; ?>
 
-                    <?php if ($userData['is_admin'] == true && $userData['is_moderator'] == true): ?>
+                    <?php if ($userData['is_moderator'] == true): ?>
                             <span class="badge bg-dark text-small ms-2">moderator</span>
                     <?php endif; ?>
                 </p>

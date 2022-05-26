@@ -7,8 +7,10 @@
         $data = User::getUserDataFromId($sessionId);
     }
 
-    if ($data['is_admin'] == false) {
-        header('Location: index.php');
+    if($data["is_moderator"] == false) {
+        if($data["is_admin"] == false) {
+            header('Location: index.php');
+        }
     }
 
     $userReports = Report::getReportedUsers();

@@ -419,8 +419,6 @@ class User
         return $statement->execute();
     }
 
-
-
     public function getUserPostsFromId($id)
     {
         $conn = Db::getInstance();
@@ -444,4 +442,11 @@ class User
         $statement->bindValue(":isModerator", $isModerator);
         return $statement->execute();
     }
+    public static function userAddWarned($id){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("UPDATE users SET is_warned = true WHERE id = :id");
+        $statement->bindValue(":id", $id);
+        return $statement->execute();
+    }
+
 }

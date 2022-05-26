@@ -7,6 +7,16 @@
     if (isset($_SESSION['id'])) {
         $sessionId = $_SESSION['id'];
         $userDataFromId = User::getUserDataFromId($sessionId);
+
+        $reports = Report::getCountReportedUser($sessionId);
+        $countReports = intval($reports['count']);
+        $userIsWarned = $userDataFromId['is_warned'];
+        
+        if($countReports >= 5 && $userIsWarned == false) {
+            $giveWarning = true;
+        } else {
+            $giveWarning = false;
+        }
     }
 
     $sort = "Newest First";
@@ -48,21 +58,15 @@
         $posts = Tag::filterPostsByTag($filteredTag);
         $filtered = true;
     }
-    
-    /*
-    if (isset($_GET['tag']) && !empty($_GET['tag'])) {
-        $popularTag = $_GET['tag'];
-        $posts = Tag::filterPostsByPopularTag($popularTag);
-        $filteredPopularTag = true;
+
+    if(!empty($_POST['warning'])){
+        User::UserAddWarned($_SESSION['id']);
+        header("Location: index.php");
     }
-    */
 
     if (empty($posts)) {
         $emptystate = true;
     }
-
-//}
-//}
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -195,6 +199,7 @@
                     </div>
 
                 <?php else: ?>
+                    <!-- modal for user who is blocked -->
                     <?php if ($userDataFromId['is_blocked']): ?>
                         <div class="modal modal_blocked fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-modal="true" role="dialog" style="display: block;">
                             <div class="modal-dialog modal-dialog-centered">
@@ -207,7 +212,29 @@
                             </div>
                         </div>
                      <?php endif; ?>
-
+                     <!-- modal closed -->
+                     <!-- modal for user who is warned after 3 reports -->
+                     <?php if ($giveWarning): ?>
+                        <div class="modal modal_blocked fade show" id="userWarned" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="userWarnedLabel" aria-modal="true" style="display: block;">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header ">
+                                        <h5 class="modal-title" id="userWarnedLabel">Attention!</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Your account is under surveillance for violating the community rules*. Click 'OK' to agree.</p>
+                                        <p class="form-text">*this may consider inappropriate content, like comment or posts.</p>
+                                    </div>
+                                    <div class="modal-footer flex-column border-top-0">
+                                        <form action="" method="post" class="w-100 mx-0 mb-2">
+                                            <input type="submit" name="warning" value="OK" class="btn btn-lg btn-primary w-100 mx-0 mb-2">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <!-- modal closed -->
                     <?php
                         $like = new Like();
                         $like->setPostId($p[0]);

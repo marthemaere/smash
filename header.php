@@ -7,6 +7,7 @@
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $_GET['search'];
         $posts = Post::search($search);
+        $searched = true;
         if (empty($posts)) {
             $emptystate = true;
         }

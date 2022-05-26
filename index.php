@@ -36,12 +36,6 @@
     $total= $postCount[0]['id'];
     $pages= ceil($total / $limit);
     
-    if (isset($_GET['search']) && !empty($_GET['search'])) {
-        $search = $_GET['search'];
-        $posts = Post::search($search);
-        $searched = true;
-    }
-    
     if (isset($_GET['sort'])) {
         $sort = $_GET['sort'];
         if ($sort == "Newest First ") {

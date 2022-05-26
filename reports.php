@@ -68,9 +68,15 @@
                 <th scope="col">title of post</th>
                 <th scope="col">link</th>
                 <th scope="col">num of reports</th>
-                <th scope="col">block post</th>
+                <th scope="col">delete post</th>
             </tr>
             <?php foreach ($postReports as $postReport): ?>
+                <?php
+                    $deletePost = 'deletePost' . $postReport['post_id'];
+                    if (!empty($_POST[$deletePost])) {
+                        Post::deleteProject($postReport['post_id']);
+                    }
+                ?>
                 <tr>
                     <th scope="row"><?php echo $postReport['post_id']; ?></th>
                     <td><?php echo $postReport['title']; ?></td>
@@ -80,7 +86,7 @@
                     <td><?php echo $postReport['count']; ?></td>
                     <td>
                         <form action="" method="POST">
-                            <input type="submit" value="Block" name="blockPost">
+                            <input type="submit" value="Delete" name="deletePost<?php echo $postReport['post_id']; ?>">
                         </form>
                     </td>
                 </tr>

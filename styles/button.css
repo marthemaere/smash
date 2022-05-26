@@ -124,10 +124,19 @@ a:hover {
     color: black;
 }
 
+/* ------FilterTags------ */
+
 .filter-tags input[type="submit"] {
     background-color: transparent;
 }
 
 .filter-tags input[type="submit"]:hover {
     font-weight: 600;
+}
+
+/* ------Badge------ */
+
+.badge.text-small {
+    font-size: 0.6em;
+    font-family: 'Arial';
 }

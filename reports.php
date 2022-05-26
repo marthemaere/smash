@@ -52,10 +52,10 @@
                     <td>
                         <?php if (($isBlocked['is_blocked'] == "1")): ?>
                             <form action="" method="POST">
-                                <input type="submit" value="Block" name="blockUser<?php echo $userReport['reported_user_id']?>">
+                                <input type="submit" value="Block" name="blockUser<?php echo $userReport['reported_user_id']?>" class="btn btn-success">
                             </form>
                         <?php else: ?>
-                            <input type="submit" value="Blocked" name="blockUser" disabled>
+                            <input type="submit" value="Blocked" name="blockUser" class="btn btn-danger">
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -87,7 +87,7 @@
                     <td><?php echo $postReport['count']; ?></td>
                     <td>
                         <form action="" method="POST">
-                            <input type="submit" value="Delete" name="deletePost<?php echo $postReport['post_id']; ?>">
+                            <input type="submit" value="Delete" name="deletePost<?php echo $postReport['post_id']; ?>" class="btn btn-danger">
                         </form>
                     </td>
                 </tr>

@@ -85,22 +85,26 @@ if (!isset($_SESSION['id'])) {
                 <form action="" method="post">
                     <div class="my-4">
                         <!-- are you sure alert -->
-                        <div class="modal fade" id="reportUser" aria-hidden="true" aria-labelledby="report-userLabel" tabindex="-1">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="report-userLabel">Are you sure you want to report
-                                            this user?</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form action="" method="post">
-                                        <div class="modal-footer">
-                                            <button class="btn btn-outline-primary" data-bs-toggle="modal">No</button>
-                                            <input id="report-user" data-userid="<?php echo $userId ?>" data-report_userid="<?php echo $_SESSION['id'] ?>" type="submit" value="Yes" name="report" class="btn btn-primary" data-bs-toggle="modal">
-                                        </div>
-                                    </form>
+                        <div class="modal fade" id="reportUser" aria-hidden="true"
+                        aria-labelledby="report-userLabel" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="report-userLabel">Are you sure you want to report
+                                        this user?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
+                                <form action="" method="post">
+                                    <div class="modal-footer">
+                                        <button class="btn btn-outline-primary"
+                                            data-bs-toggle="modal">No</button>
+                                        <input id="report-user" data-userid="<?php echo $userId ?>" data-report_userid="<?php echo $_SESSION['id'] ?>"  type="submit" value="Yes" name="report" class="btn btn-primary"
+                                            data-bs-toggle="modal">
+                                    </div>
+                                </form>
                             </div>
+                        </div>
                         </div>
                         <!-- are you sure alert -->
                         <div class="profile-btn">

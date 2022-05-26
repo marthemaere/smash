@@ -1,11 +1,12 @@
 <?php
    include_once(__DIR__.'/../bootstrap.php');
+   session_start();
    
     if (!empty($_POST)) {
         try {
             $report = new Report();
             $reported_userId = intval($_POST['userid']);
-            $report_userId = intval($_POST['report_userid']);
+            $report_userId = $_SESSION['id'];
             $report->setReported_userId($reported_userId);
             $report->setReport_userId($report_userId);
             

@@ -1,14 +1,9 @@
 document.querySelector("#report-post").addEventListener("click", function(e) {
     e.preventDefault();
     let postid = e.target.dataset.postid;
-    let userid = e.target.dataset.userid;
-
     
     let formData = new FormData();
     formData.append("postid", postid);
-    formData.append("userid", userid);
-    console.log(postid);
-
 
     fetch("ajax/report__post.php",  {
         method: "POST",

@@ -116,7 +116,7 @@
                             <div class="modal-footer">
                                 <button class="btn btn-outline-primary" 
                                     data-bs-toggle="modal">No</button>
-                                <input id="report-post" data-postId="<?php echo $postId ?>" data-userid="<?php echo $_SESSION['id'] ?>" type="submit" value="yes" name="report"
+                                <input id="report-post" data-postId="<?php echo $postId ?>" type="submit" value="yes" name="report"
                                     class="btn btn-primary" 
                                     data-bs-toggle="modal">
                             </div>

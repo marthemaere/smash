@@ -1,9 +1,10 @@
 <?php
     require_once('../bootstrap.php');
+    session_start();
 
     if(!empty($_POST)){
         $postId = intval($_POST['postId']);
-        $userId = intval($_POST['userId']);
+        $userId = $_SESSION['id'];
 
         try{
             $like= new Like();

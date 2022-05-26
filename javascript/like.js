@@ -4,7 +4,6 @@ let number = document.querySelectorAll(".num-of-likes");
 likes.forEach(function(like) {
 
 let postId= like.dataset.postid;
-let userId= like.dataset.userid;
 
 like.addEventListener("click", function(e){
     
@@ -14,7 +13,6 @@ like.addEventListener("click", function(e){
 
     let data= new FormData();
     data.append("postId", postId);
-    data.append("userId", userId);
 
     fetch("ajax/save_like.php", {
         method: 'POST', 

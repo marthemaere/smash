@@ -154,6 +154,15 @@ include_once(__DIR__ . "/Db.php");
             return $statement->execute();
         }
 
+        public static function unblockUser($id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("UPDATE users SET is_blocked = :bool WHERE id = :id");
+            $statement->bindValue(":id", $id);
+            $statement->bindValue(":bool", 0);
+            return $statement->execute();
+        }
+
         public static function getBlockedUser($id)
         {
             $conn = Db::getInstance();

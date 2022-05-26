@@ -42,22 +42,28 @@
             <?php foreach ($userReports as $userReport): ?>
                 <?php
                     $blockUser = 'blockUser' . $userReport['reported_user_id'];
+                    $unblockUser = 'unblockUser' . $userReport['reported_user_id'];
                     if (!empty($_POST[$blockUser])) {
                         Report::blockUser($userReport['reported_user_id']);
                     }
-                    $isBlocked = Report::getBlockedUser($userReport['reported_user_id']);
+                    if(!empty($_POST[$unblockUser])){
+                        Report::unblockUser($userReport['reported_user_id']);
+                    }
+                    $user = Report::getBlockedUser($userReport['reported_user_id']);
                 ?>
                 <tr>
                     <th scope="row"><?php echo $userReport['reported_user_id']; ?></th>
                     <td><?php echo $userReport['username']; ?></td>
                     <td><?php echo $userReport['count']; ?></td>
                     <td>
-                        <?php if (($isBlocked['is_blocked'] == "1")): ?>
+                        <?php if (($user['is_blocked'] == false)): ?>
                             <form action="" method="POST">
                                 <input type="submit" value="Block" name="blockUser<?php echo $userReport['reported_user_id']?>">
                             </form>
                         <?php else: ?>
-                            <input type="submit" value="Blocked" name="blockUser" disabled>
+                            <form action="" method="POST">
+                                <input type="submit" value="Unblock" name="unblockUser<?php echo $userReport['reported_user_id']?>">
+                            </form>
                         <?php endif; ?>
                     </td>
                 </tr>

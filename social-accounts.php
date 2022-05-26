@@ -90,6 +90,9 @@
                     <a class="list-group-item list-group-item-action" href="edit-profile.php">Edit profile</a>
                     <a class="list-group-item list-group-item-action" href="change-password.php">Change password</a>
                     <a class="list-group-item list-group-item-action active" href="social-accounts.php">Social profiles</a>
+                    <?php if ($userDataFromId['is_admin']): ?>
+                        <a class="list-group-item list-group-item-action" href="reports.php">Reports</a>
+                    <?php endif; ?>
                     <a class="list-group-item list-group-item-action text-danger" data-bs-toggle="modal" role="button" href="#deleteAccount">Remove account</a>
                 </div>
             </div>

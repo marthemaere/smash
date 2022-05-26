@@ -29,6 +29,7 @@
     <div class="container my-4">
         <h1>Reports</h1>
         <h2 class="mt-4">Users</h2>
+        <p>A user gets a warning on his or her screen that their account is being watched as soon as they have <span class="fw-bold">5 reports</span> of their account.</p>
         <table class="table table-bordered table-hover my-4">
             <tr>
                 <th scope="col">id</th>

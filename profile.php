@@ -155,7 +155,7 @@ if (!isset($_SESSION['id'])) {
                     <div class="">
                         <h3>All projects</h3>
                     </div>
-                    <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" name="smashedprojects" class="btn btn-outline-primary">My featured projects</a></div>
+                    <div class="p-2"><a href="smashedProjects.php?p=<?php echo $userData['id'] ?>" name="smashedprojects" class="btn btn-outline-primary">Showcase</a></div>
                 </div>
             
                 <div class="row">

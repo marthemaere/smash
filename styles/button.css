@@ -111,8 +111,9 @@ a:hover {
     background-color: #FCD7F7;
 }
 
-.dropdown-item:active input[type="submit"] {
+.dropdown-item:active input[type="submit"], .dropdown-item input[type="submit"] {
     color: black;
+    font-weight: normal;
 }
 
 .dropdown-menu input {

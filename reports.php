@@ -83,7 +83,7 @@
                 <?php
                     $deletePost = 'deletePost' . $postReport['post_id'];
                     if (!empty($_POST[$deletePost])) {
-                        Post::deleteProject($postReport['post_id']);
+                        Post::deleteProjectWithReport($postReport['post_id']);
                     }
                 ?>
                 <tr>

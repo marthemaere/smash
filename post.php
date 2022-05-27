@@ -53,7 +53,14 @@
 
         if (!empty($_POST['deleteProject'])) {
             try {
-                Post::deleteProject($postId);
+                $countReports = Report::getCountReportedPost($postId);
+                $count = intval($countReports['count']);
+                
+                if($count == 0){
+                    Post::deleteProjectWithoutReport($postId);
+                } else {
+                    Post::deleteProjectWithReport($postId);
+                }
                 header('Location: index.php');
             } catch (Throwable $e) {
                 $error = $e->getMessage();
@@ -127,6 +134,7 @@
             <!-- are you sure alert -->
 
              <!-- are you sure alert for deleting a post -->
+             <?php if($_SESSION['id'] == $projectData['user_id'] || $isModerator === true || $isAdmin === true): ?>
              <div class="modal fade" id="deleteProject" aria-hidden="true" aria-labelledby="deleteProjectLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -144,6 +152,7 @@
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
             <!-- are you sure alert for deleting a post -->
           
             <div class="d-flex align-items-center py-2">

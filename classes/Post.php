@@ -60,10 +60,17 @@ class Post
         return $this->postId;
     }
 
-    public static function deleteProject($postId)
+    public static function deleteProjectWithReport($postId)
     {
         $conn = Db::getInstance();
         $statement = $conn->prepare("DELETE p FROM posts p  INNER JOIN reports r ON p.id = r.post_id WHERE p.id = :postId");
+        $statement->bindValue(":postId", $postId);
+        return $statement->execute();
+    }
+    public static function deleteProjectWithoutReport($postId)
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("DELETE p FROM posts p WHERE p.id = :postId");
         $statement->bindValue(":postId", $postId);
         return $statement->execute();
     }

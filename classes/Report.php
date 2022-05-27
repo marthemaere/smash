@@ -146,6 +146,16 @@ include_once(__DIR__ . "/Db.php");
             return $result;
         }
 
+        public static function getCountReportedPost($post_id)
+        {
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT count(post_id) as count from reports WHERE post_id = :post_id");
+            $statement->bindValue(":post_id", $post_id);
+            $statement->execute();
+            $result = $statement->fetch();
+            return $result;
+        }
+
         public static function getReportedPosts()
         {
             $conn = Db::getInstance();

@@ -210,7 +210,7 @@ if (!isset($_SESSION['id'])) {
                             <div class="d-flex justify-content-between align-items-center pt-2">
                                 <a href="post.php?p=<?php echo $post['id']?>" class="link-dark">View comments</a>
 
-                                <?php if ($_SESSION['id'] === $userId) : ?>
+                                <?php if (intval($_SESSION['id']) === intval($userId)) : ?>
                                     <?php if (!$isSmashed) : ?>
                                         <a href="#" id="smashed" name="smashed" class="btn btn-smash" data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id'] ?>"> Smash </a>
                                     <?php else : ?>

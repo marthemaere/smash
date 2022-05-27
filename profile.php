@@ -1,28 +1,27 @@
 <?php
 include_once("bootstrap.php");
 session_start();
-$userId = $_GET['p'];
 
 if (!isset($_SESSION['id'])) {
     header('Location: login.php');
 } else {
     $user = new User();
-    $key = $_GET['p'];
-    $userData = User::getUserDataFromId($key);
-    $userPosts = $user->getUserPostsFromId($key);
+    $userId = $_GET['p'];
+    $userData = User::getUserDataFromId($userId);
+    $userPosts = $user->getUserPostsFromId($userId);
 
     $report = new Report();
-    $report->setReported_userId($key);
+    $report->setReported_userId($userId);
     $report->setReport_userId($_SESSION['id']);
     $isReported = $report->isUserReportedByUser();
 
     $follower = new Follower();
     $follower->setFollowerId($_SESSION['id']);
-    $follower->setFollowingId($key);
+    $follower->setFollowingId($userId);
     $isFollowed = $follower->isFollowedByUser();
     $countFollowers = $follower->countFollowers();
 
-    $userDataFromSession = User::getUserDataFromId($key);
+    $userDataFromSession = User::getUserDataFromId($userId);
     if ($userDataFromSession['is_blocked']) {
         header('Location: index.php');
     }
@@ -182,7 +181,7 @@ if (!isset($_SESSION['id'])) {
                                 <div class="d-flex justify-content-between py-2">
                                     <div class="d-flex align-items-center justify-content-start">
                                         <img src="<?php echo htmlspecialchars($post['profile_pic']); ?>" class="img-profile-post">
-                                        <a href="profile.php?p=<?php echo htmlspecialchars($key); ?>">
+                                        <a href="profile.php?p=<?php echo htmlspecialchars($userId); ?>">
                                             <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($post['username']); ?></h4>
                                         </a>
                                     </div>
@@ -209,7 +208,6 @@ if (!isset($_SESSION['id'])) {
                             <?php endforeach; ?>
                             </div>
                             <div class="d-flex justify-content-between align-items-center pt-2">
-                               
                                 <?php if ($_SESSION['id'] === $userId) : ?>
                                     <?php if (!$isSmashed) : ?>
                                         <a href="#" id="smashed" name="smashed" class="btn btn-smash" data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id'] ?>"> Smash </a>

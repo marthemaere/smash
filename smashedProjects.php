@@ -37,6 +37,12 @@ if (empty($posts)) {
     <?php include_once('header.php'); ?>
 
     <div class="container">
+        <?php if (isset($_SESSION['id'])): ?>
+            <?php if ($_SESSION['id'] == $key): ?>
+                <div class="alert alert-info mt-4" role="alert"><strong>Smash your projects and show them to the world!</strong> Copy the url of this page and send it to possible internships, businesses or even your friends. FYI, this message is only visible for you.</div>
+            <?php endif; ?>
+         <?php endif; ?>
+        
         <div class="row d-flex align-items-center justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 text-center">
                 <img src="<?php echo htmlspecialchars($userData['profile_pic']); ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">

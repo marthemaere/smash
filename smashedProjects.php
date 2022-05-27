@@ -39,7 +39,7 @@ if (empty($posts)) {
     <div class="container">
         <?php if (isset($_SESSION['id'])): ?>
             <?php if ($_SESSION['id'] == $key): ?>
-                <div class="alert alert-info mt-4" role="alert"><strong>Smash your projects and show them to the world!</strong> Copy the url of this page and send it to possible internships, businesses or even your friends. FYI, this message is only visible for you.</div>
+                <div class="alert alert-info mt-4" role="alert"><strong>Smash your projects and show them to the world!</strong> Copy the url of this page and send it to possible internships, businesses or even your friends. FYI, this message is only visible to you.</div>
             <?php endif; ?>
          <?php endif; ?>
         

@@ -6,10 +6,6 @@ likes.forEach(function(like) {
 let postId= like.dataset.postid;
 
 like.addEventListener("click", function(e){
-    
-    console.log(postId);
-    console.log(userId);
-    console.log("we are liking");
 
     let data= new FormData();
     data.append("postId", postId);

@@ -4,15 +4,10 @@ console.log(smashed);
 smashed.forEach(function (smash) {
   smash.addEventListener("click", function (e) {
     let smashedPost = smash.dataset.postid;
-    console.log(smashedPost);
-    let smashedUser = smash.dataset.userid;
-    console.log(smashedUser);
 
     //post naar database AJAX
     let formData = new FormData();
     formData.append("postid", smashedPost);
-    formData.append("userid", smashedUser);
-    console.log(smashedPost);
 
     fetch("ajax/smash_project.php", {
       method: "POST",

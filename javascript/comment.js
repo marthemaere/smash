@@ -3,18 +3,15 @@ document.querySelector("#btnSubmit").addEventListener("click", function (e) {
 
     e.preventDefault();
     let postId = e.target.dataset.postid;
-    let userId = e.target.dataset.userid;
     let text = document.querySelector("#comment").value;
 
     console.log(postId);
-    console.log(userId);
     console.log(text);
 
     //ajax
     let data = new FormData();
     data.append("text", text);
     data.append("postid", postId);
-    data.append("userid", userId);
 
     fetch("ajax/save_comment.php", {
         method: "POST",

@@ -1,13 +1,13 @@
 <?php
 include_once(__DIR__ . '/../bootstrap.php');
-
+session_start();
 
 if (!empty($_POST)) {
     try {
 
         //new smashed project
         $postId = intval(($_POST['postid']));
-        $userId = intval(($_POST['userid']));
+        $userId = $_SESSION['id'];
 
         $posts = new Post();
         $posts->setPostId($postId);

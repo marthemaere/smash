@@ -18,7 +18,7 @@
 
         $userDataFromId = User::getUserDataFromId($userId);
 
-        // Check if user is moderator 
+        // Check if user is moderator
         if ($userDataFromId['is_moderator'] == 1) {
             $isModerator = true;
         } else {
@@ -56,7 +56,7 @@
                 $countReports = Report::getCountReportedPost($postId);
                 $count = intval($countReports['count']);
                 
-                if($count == 0){
+                if ($count == 0) {
                     Post::deleteProjectWithoutReport($postId);
                 } else {
                     Post::deleteProjectWithReport($postId);
@@ -134,7 +134,7 @@
             <!-- are you sure alert -->
 
              <!-- are you sure alert for deleting a post -->
-             <?php if($_SESSION['id'] == $projectData['user_id'] || $isModerator === true || $isAdmin === true): ?>
+             <?php if ($_SESSION['id'] == $projectData['user_id'] || $isModerator === true || $isAdmin === true): ?>
              <div class="modal fade" id="deleteProject" aria-hidden="true" aria-labelledby="deleteProjectLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
@@ -196,7 +196,7 @@
                                 <?php endif; ?>
                             <?php endif; ?>
                             <?php if ($_SESSION['id'] == $projectData['user_id'] || $isModerator === true || $isAdmin === true): ?>
-                            <a class="btn btn-outline-danger ms-2" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
+                            <a class="btn btn-outline-danger" data-bs-toggle="modal" href="#deleteProject" role="button">Delete</a>
                             <?php endif; ?>
                         </form>
                         <?php if ($_SESSION['id'] == $projectData['user_id']): ?>

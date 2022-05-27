@@ -68,8 +68,8 @@
 
         public function countFollowers(){
             $conn = Db::getInstance();
-            $statement = $conn->prepare('SELECT COUNT(id) FROM followers WHERE followers.follower_id = :followerId');
-            $statement->bindValue(":followerId", $_GET['p']);
+            $statement = $conn->prepare('SELECT COUNT(id) FROM followers WHERE followers.following_id = :followingId');
+            $statement->bindValue(":followingId", $this->getFollowingId());
             $statement->execute();
             $count = $statement->fetch();
             return $count;

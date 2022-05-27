@@ -12,7 +12,7 @@
         $countReports = intval($reports['count']);
         $userIsWarned = $userDataFromId['is_warned'];
         
-        if($countReports >= 5 && $userIsWarned == false) {
+        if ($countReports >= 5 && $userIsWarned == false) {
             $giveWarning = true;
         } else {
             $giveWarning = false;
@@ -53,7 +53,7 @@
         $filtered = true;
     }
 
-    if(!empty($_POST['warning'])){
+    if (!empty($_POST['warning'])) {
         User::UserAddWarned($_SESSION['id']);
         header("Location: index.php");
     }
@@ -111,7 +111,7 @@
                 <div class="filter-tags">
                     <a href="index.php" class="px-2 btn btn-light">All</a>
                     <?php foreach ($sortPopularTags as $pTag): ?>
-                        <a href="index.php?tag=<?php echo str_replace("#", "", htmlspecialchars($pTag['tag'])); ?>" class="px-2 btn btn-light"><?php echo htmlspecialchars($pTag['tag']); ?></a>
+                        <a href="index.php?tag=<?php echo str_replace("#", "", htmlspecialchars($pTag['tag'])); ?>" class="px-2 btn"><?php echo htmlspecialchars($pTag['tag']); ?></a>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>

@@ -91,7 +91,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
     <link rel="stylesheet" href="./styles/custom.css">
-    <title>Smash Post - <?php echo $projectData['title']; ?></title>
+    <title>Smash Post - <?php echo htmlspecialchars($projectData['title']); ?></title>
     <script type="text/javascript"></script>
 </head>
 
@@ -247,7 +247,7 @@
                         <form class="p-3" action="" method="post">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Place a comment" aria-label="Place a comment" aria-describedby="button-addon2" id="comment" name="text">
-                                <input type="submit" name="text" id="btnSubmit" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >
+                                <input type="submit" name="text" id="btnSubmit" data-postid="<?php echo $postId ?>" value=">" class="btn btn-outline-primary btn-icon-search" >
                             </div>
                         </form>
                     </div>

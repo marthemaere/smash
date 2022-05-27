@@ -31,7 +31,7 @@ if (empty($posts)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
     <link rel="stylesheet" href="styles/custom.css">
-    <title>Smash - Showcase <?php echo $userData['username']; ?></title>
+    <title>Smash - Showcase <?php echo htmlspecialchars($userData['username']); ?></title>
 </head>
 <body>
     <?php include_once('header.php'); ?>
@@ -39,7 +39,7 @@ if (empty($posts)) {
     <div class="container">
         <div class="row d-flex align-items-center justify-content-center">
             <div class="col-sm-12 col-md-12 col-lg-6 text-center">
-                <img src="<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
+                <img src="<?php echo htmlspecialchars($userData['profile_pic']); ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
                 <p class="username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?></p>
                 <p class="biography mb-1"><?php echo htmlspecialchars($userData['bio']); ?></p>
                 <p class="education"><?php echo htmlspecialchars($userData['education']); ?></p>
@@ -98,7 +98,7 @@ if (empty($posts)) {
                                 </p>
 
                             </div>
-                            <img src="<?php echo $p['image']; ?>" width="100%" height="" class="img-project-post"
+                            <img src="<?php echo htmlspecialchars($p['image']); ?>" width="100%" height="" class="img-project-post"
                                 style="object-fit:cover">
                         </div>
                     <?php endforeach; ?>

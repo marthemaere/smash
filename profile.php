@@ -40,7 +40,7 @@ if (!isset($_SESSION['id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
     <link rel="stylesheet" href="styles/custom.css">
-    <title>Smash Profile - <?php echo $userData['username']; ?></title>
+    <title>Smash Profile - <?php echo htmlspecialchars($userData['username']); ?></title>
 </head>
 
 <body>
@@ -57,7 +57,7 @@ if (!isset($_SESSION['id'])) {
         <?php endif; ?>
         <div class="row d-flex align-items-center pt-4">
             <div class="col-sm-12 col-md-12 col-lg-6">
-                <img src="<?php echo $userData['profile_pic']; ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
+                <img src="<?php echo htmlspecialchars($userData['profile_pic']); ?>" class="img-thumbnail rounded-circle mt-5" alt="profile picture">
                 <p class="d-flex align-items-center username mt-3 mb-1"><?php echo htmlspecialchars($userData['username']); ?> • 
                     <?php if (($_SESSION['id'])): ?>
                         <?php if ($countFollowers["COUNT(id)"] === 0): ?>
@@ -98,7 +98,7 @@ if (!isset($_SESSION['id'])) {
                                     <div class="modal-footer">
                                         <button class="btn btn-outline-primary"
                                             data-bs-toggle="modal">No</button>
-                                        <input id="report-user" data-userid="<?php echo $userId ?>" data-report_userid="<?php echo $_SESSION['id'] ?>"  type="submit" value="Yes" name="report" class="btn btn-primary"
+                                        <input id="report-user" data-userid="<?php echo $userId ?>"  type="submit" value="Yes" name="report" class="btn btn-primary"
                                             data-bs-toggle="modal">
                                     </div>
                                 </form>
@@ -142,7 +142,7 @@ if (!isset($_SESSION['id'])) {
             <div class="col-sm-12 col-md-12 col-lg-6 project--item--latest">
                 <?php if (empty($emptyState)) : ?>
                     <a href="post.php?p=<?php echo $userPosts[0]['id']?>">
-                        <img class="" src="<?php echo $userPosts[0]['image']; ?>" alt="latest posts">
+                        <img class="" src="<?php echo htmlspecialchars($userPosts[0]['image']); ?>" alt="latest posts">
                     </a>
                 <?php else: ?>
                     <img class="profile-empty-state d-flex justify-content-center" src="assets/images/empty-state-weareimd.png" alt="latest posts">
@@ -187,14 +187,14 @@ if (!isset($_SESSION['id'])) {
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <?php if (!$isLiked) : ?>
-                                            <img src="assets/images/empty-heart.svg" name="like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $post['id'] ?>">
+                                            <img src="assets/images/empty-heart.svg" name="like" class="like notLiked" id="likePost" data-postid="<?php echo $post['id'] ?>">
                                             <?php if ($count['COUNT(id)'] === 0) : ?>
                                                 <p class="num-of-likes" data-postid="<?php echo $post['id'] ?>"><?php ?></p>
                                             <?php else : ?>
                                                 <p class="num-of-likes" data-postid="<?php echo $post['id'] ?>"><?php echo $count['COUNT(id)'] ?></p>
                                             <?php endif; ?>
                                         <?php else : ?>
-                                            <img src="assets/images/liked-heart.svg" name="like" class="like notLiked" id="likePost" data-userid="<?php echo $_SESSION['id'] ?>" data-postid="<?php echo $post['id'] ?>">
+                                            <img src="assets/images/liked-heart.svg" name="like" class="like notLiked" id="likePost" data-postid="<?php echo $post['id'] ?>">
                                             <p class="num-of-likes" data-postid="<?php echo $post['id'] ?>"><?php echo $count['COUNT(id)'] ?></p>
                                         <?php endif; ?>
                                     </div>
@@ -204,7 +204,7 @@ if (!isset($_SESSION['id'])) {
                                 </a>
                                 <p class="pe-4 mb-0 max-num-of-lines"><?php echo htmlspecialchars($post['description']); ?></p>
                                 <?php foreach ($tags as $tag): ?>
-                                <a href="index.php?tag=<?php echo str_replace("#", "", $tag['tag']); ?>" class="link-primary bg-transparent border-0 p-0"><?php echo $tag['tag']; ?></a>
+                                <a href="index.php?tag=<?php echo str_replace("#", "", htmlspecialchars($tag['tag'])); ?>" class="link-primary bg-transparent border-0 p-0"><?php echo htmlspecialchars($tag['tag']); ?></a>
                             <?php endforeach; ?>
                             </div>
                             <div class="d-flex justify-content-between align-items-center pt-2">
@@ -212,9 +212,9 @@ if (!isset($_SESSION['id'])) {
 
                                 <?php if (intval($_SESSION['id']) === intval($userId)) : ?>
                                     <?php if (!$isSmashed) : ?>
-                                        <a href="#" id="smashed" name="smashed" class="btn btn-smash" data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id'] ?>"> Smash </a>
+                                        <a href="#" id="smashed" name="smashed" class="btn btn-smash" data-postid="<?php echo $post['id']; ?>" > Smash </a>
                                     <?php else : ?>
-                                        <a href="#" id="smashed" name="smashed" class="btn btn-smash active" data-postid="<?php echo $post['id']; ?>" data-userid="<?php echo $_SESSION['id'] ?>"> Smashed 💥</a>
+                                        <a href="#" id="smashed" name="smashed" class="btn btn-smash active" data-postid="<?php echo $post['id']; ?>" > Smashed 💥</a>
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </div>

@@ -49,8 +49,8 @@
                 ?>
                 <tr>
                     <th scope="row"><?php echo $user['id']; ?></th>
-                    <td><?php echo $user['username']; ?></td>
-                    <td><?php echo $user['email']; ?></td>
+                    <td><?php echo htmlspecialchars($user['username']); ?></td>
+                    <td><?php echo htmlspecialchars($user['email']); ?></td>
                     <td>
                         <?php if ($user['is_moderator'] == false): ?>
                             <form action="" method="POST">

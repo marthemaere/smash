@@ -42,7 +42,7 @@ if (!empty($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <?php include_once('style.php'); ?>
-    <title>Smash Post - Edit <?php echo $projectData['title']; ?> </title>
+    <title>Smash Post - Edit <?php echo htmlspecialchars($projectData['title']); ?> </title>
 </head>
 <body>
     <?php require_once("header.php"); ?>
@@ -65,16 +65,16 @@ if (!empty($_POST['submit'])) {
             <form class="uploadzone" action="#" method="POST" enctype="multipart/form-data">
                 <fieldset>
                     <!-- <label for="floatingInput">Edit the title of your project</label> -->
-                    <input type="text" class="form-control" id="floatingInput" name="title" value="<?php echo $projectData['title'] ?>">
+                    <input type="text" class="form-control" id="floatingInput" name="title" value="<?php echo htmlspecialchars($projectData['title']) ?>">
                 </fieldset>
 
                 <fieldset>
-                    <input type="text" class="form-control" id="floatingInput" name="description" value="<?php echo $projectData['description'] ?>">
+                    <input type="text" class="form-control" id="floatingInput" name="description" value="<?php echo htmlspecialchars($projectData['description']) ?>">
                 </fieldset>
 
                 <fieldset>
                     <!-- <label for="tags">Edit your tags</label> -->
-                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Give it some tags like #branding" value="<?php foreach ($tags as $tag): ?><?php echo $tag['tag']; ?> <?php endforeach; ?>">
+                    <input type="text" class="form-control" id="tags" name="tags" placeholder="Give it some tags like #branding" value="<?php foreach ($tags as $tag): ?><?php echo htmlspecialchars($tag['tag']); ?> <?php endforeach; ?>">
                     <div class="form-text">Don't forget the famous '#' before your tag</div>
                 </fieldset>
                 <input class="btn btn-primary col-12" type="submit" value="Save changes" name="submit">

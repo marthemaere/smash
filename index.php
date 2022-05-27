@@ -78,7 +78,7 @@
         <div class="d-flex flex-wrap justify-content-between align-items-center m-3">
             <div class="btn-group">
                 <button type="button" class="btn btn-primary sort-title">
-                    <?php echo $sort; ?>
+                    <?php echo htmlspecialchars($sort); ?>
                 </button>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="visually-hidden">Toggle Dropdown</span>
@@ -111,7 +111,7 @@
                 <div class="filter-tags">
                     <a href="index.php" class="px-2 btn btn-light">All</a>
                     <?php foreach ($sortPopularTags as $pTag): ?>
-                        <a href="index.php?tag=<?php echo str_replace("#", "", $pTag['tag']); ?>" class="px-2 btn btn-light"><?php echo $pTag['tag']; ?></a>
+                        <a href="index.php?tag=<?php echo str_replace("#", "", htmlspecialchars($pTag['tag'])); ?>" class="px-2 btn btn-light"><?php echo htmlspecialchars($pTag['tag']); ?></a>
                     <?php endforeach; ?>
                 </div>
             <?php endif; ?>
@@ -123,19 +123,19 @@
 
         <?php if (!empty($searched)): ?>
             <div class="d-flex mt-5 ms-3 me-3 alert alert-dark bg-light">
-                <p class="m-0">Search results for: <span class="fw-bold"><?php echo $search; ?></span></p>
+                <p class="m-0">Search results for: <span class="fw-bold"><?php echo htmlspecialchars($search); ?></span></p>
             </div>
         <?php endif; ?>
 
         <?php if (!empty($filtered)): ?>
             <div class="d-flex mt-5 ms-3 me-3 alert alert-dark bg-light">
-                <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo $filteredTag; ?></span></p>
+                <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo htmlspecialchars($filteredTag); ?></span></p>
             </div>
         <?php endif; ?>
 
         <?php if (!empty($filteredPopularTag)): ?>
             <div class="d-flex mt-5 ms-3 me-3 alert alert-dark bg-light">
-                <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo $popularTag; ?></span></p>
+                <p class="m-0">Filter by tag: <span class="fw-bold"><?php echo htmlspecialchars($popularTag); ?></span></p>
             </div>
         <?php endif; ?>
 
@@ -159,15 +159,15 @@
                     <div class="col-12 col-md-6 col-lg-4 p-4">
 
                         <a href="register.php">
-                            <img src="<?php echo $p['image_thumb'];?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
+                            <img src="<?php echo htmlspecialchars($p['image_thumb']);?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                         </a>
 
                         <div class="">
                             <div class="d-flex justify-content-between align-items-center py-2">
                                 <div class="d-flex align-items-center justify-content-start">
-                                    <img src="<?php echo $p['profile_pic']; ?>" class="img-profile-post">
+                                    <img src="<?php echo htmlspecialchars($p['profile_pic']); ?>" class="img-profile-post">
                                     <a href="register.php">
-                                        <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
+                                        <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($p['username']);?></h4>
                                     </a>
                                 </div>
 
@@ -181,12 +181,12 @@
                                 </div>
                             </div>
                             <a href="register.php">
-                                <h2><?php echo $p['title']; ?></h2>
+                                <h2><?php echo htmlspecialchars($p['title']); ?></h2>
                             </a>
-                            <p class="pe-4 mb-1 max-num-of-lines"><?php echo $p['description']; ?></p>
+                            <p class="pe-4 mb-1 max-num-of-lines"><?php echo htmlspecialchars($p['description']); ?></p>
                             <?php foreach ($tags as $tag): ?>
                                 <a href="register.php">
-                                    <span class="link-primary"><?php echo $tag['tag']; ?></span>
+                                    <span class="link-primary"><?php echo htmlspecialchars($tag['tag']); ?></span>
                                 </a>
                             <?php endforeach; ?>
                         </div>
@@ -240,15 +240,15 @@
                     <div class="col-12 col-md-6 col-lg-4 p-4">
 
                         <a href="post.php?p=<?php echo $p[0]?>">
-                            <img src="<?php echo $p['image_thumb'];?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
+                            <img src="<?php echo htmlspecialchars($p['image_thumb']);?>" width="100%" height="250px" class="img-project-post" style="object-fit:cover">
                         </a>
 
                         <div>
                             <div class="d-flex justify-content-between align-items-center py-2">
                                 <div class="d-flex align-items-center justify-content-start">
-                                    <img src="<?php echo $p['profile_pic']; ?>" class="img-profile-post">
+                                    <img src="<?php echo htmlspecialchars($p['profile_pic']); ?>" class="img-profile-post">
                                     <a href="profile.php?p=<?php echo $p['user_id'];?>">
-                                        <h4 class="pt-2 ps-2"><?php echo $p['username'];?></h4>
+                                        <h4 class="pt-2 ps-2"><?php echo htmlspecialchars($p['username']);?></h4>
                                     </a>
                                 </div>
                                 <form class="" action="" method="post">
@@ -270,11 +270,11 @@
                                 </form>
                             </div>
                             <a href="post.php?p=<?php echo $p[0]?>">
-                                <h2><?php echo $p['title']; ?></h2>
+                                <h2><?php echo htmlspecialchars($p['title']); ?></h2>
                             </a>
-                            <p class="pe-4 mb-1 max-num-of-lines"><?php echo $p['description']; ?></p>
+                            <p class="pe-4 mb-1 max-num-of-lines"><?php echo htmlspecialchars($p['description']); ?></p>
                             <?php foreach ($tags as $tag): ?>
-                                <a href="index.php?tag=<?php echo str_replace("#", "", $tag['tag']); ?>" class="link-primary bg-transparent border-0 p-0"><?php echo $tag['tag']; ?></a>
+                                <a href="index.php?tag=<?php echo str_replace("#", "", htmlspecialchars($tag['tag'])); ?>" class="link-primary bg-transparent border-0 p-0"><?php echo htmlspecialchars($tag['tag']); ?></a>
                             <?php endforeach; ?>
                         </div>
                     </div>

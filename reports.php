@@ -53,8 +53,8 @@
                 ?>
                 <tr>
                     <th scope="row"><?php echo $userReport['reported_user_id']; ?></th>
-                    <td><?php echo $userReport['username']; ?></td>
-                    <td><?php echo $userReport['count']; ?></td>
+                    <td><?php echo htmlspecialchars($userReport['username']); ?></td>
+                    <td><?php echo htmlspecialchars($userReport['count']); ?></td>
                     <td>
                         <?php if (($user['is_blocked'] == false)): ?>
                             <form action="" method="POST">
@@ -88,9 +88,9 @@
                 ?>
                 <tr>
                     <th scope="row"><?php echo $postReport['post_id']; ?></th>
-                    <td><?php echo $postReport['title']; ?></td>
+                    <td><?php echo htmlspecialchars($postReport['title']); ?></td>
                     <td>
-                        <a href="<?php echo $postReport['link']; ?>"><?php echo $postReport['link']; ?></a>
+                        <a href="<?php echo htmlspecialchars($postReport['link']); ?>"><?php echo htmlspecialchars($postReport['link']); ?></a>
                     </td>
                     <td><?php echo $postReport['count']; ?></td>
                     <td>
